@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Adab</string>
+    <string name="adab_app_name">Adab</string>
+    <string name="toolbar_title">All Classes</string>
 </resources>
