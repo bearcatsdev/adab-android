@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item android:title="All Classes"></item>
+        <item android:title="Topics"></item>
+        <item android:title="Calendar"></item>
+        <item android:title="Forum"></item>
+        <item android:title="Help"></item>
+        <item android:title="Setting"></item>
+    </group>
+</menu>

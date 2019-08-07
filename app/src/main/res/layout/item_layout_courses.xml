@@ -34,12 +34,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yesterday"
-                    android:id="@+id/tv_coursesTime"/>
+                    android:id="@+id/tv_classTime"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Storage"
-                    android:id="@+id/tv_coursesTitle"/>
+                    android:id="@+id/tv_classTitle"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Meeting"
-                    android:id="@+id/tv_coursesMeeting"/>
+                    android:id="@+id/tv_classMeeting"/>
             </LinearLayout>
 
             <LinearLayout
@@ -92,53 +92,6 @@
                         style="@style/Widget.MaterialComponents.Chip.Action"
                     />
                 </com.google.android.material.chip.ChipGroup>
-                <!--<com.google.android.material.card.MaterialCardView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--app:strokeWidth="1dp"-->
-                    <!--app:strokeColor="#E1E1E1"-->
-                    <!--app:cardElevation="0dp"-->
-                    <!--app:cardCornerRadius="15dp">-->
-                    <!--<TextView-->
-                        <!--android:id="@+id/tv_coursesCode"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="MOBI6002"-->
-                        <!--android:layout_margin="8dp"/>-->
-
-                <!--</com.google.android.material.card.MaterialCardView>-->
-
-                <!--<com.google.android.material.card.MaterialCardView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--app:strokeWidth="1dp"-->
-                    <!--app:strokeColor="#E1E1E1"-->
-                    <!--app:cardElevation="0dp"-->
-                    <!--app:cardCornerRadius="15dp">-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:id="@+id/tv_classCode"-->
-                        <!--android:text="LB03"-->
-                        <!--android:layout_margin="8dp"/>-->
-
-                <!--</com.google.android.material.card.MaterialCardView>-->
-
-                <!--<com.google.android.material.card.MaterialCardView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--app:strokeWidth="1dp"-->
-                    <!--app:strokeColor="#E1E1E1"-->
-                    <!--app:cardElevation="0dp"-->
-                    <!--app:cardCornerRadius="15dp">-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:id="@+id/tv_classType"-->
-                        <!--android:text="LEC"-->
-                        <!--android:layout_margin="8dp"/>-->
-
-                <!--</com.google.android.material.card.MaterialCardView>-->
             </LinearLayout>
 
         </LinearLayout>
