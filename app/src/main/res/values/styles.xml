@@ -8,6 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:fontFamily">@font/interstate</item>
+        <item name="fontFamily">@font/interstate</item>
     </style>
 
     <!--Toolbar-->
@@ -22,8 +24,5 @@
     <style name="TextAppearance.Adab.Toolbar" parent="TextAppearance.MaterialComponents.Button">
         <item name="android:textSize">16sp</item>
     </style>
-
-
-
 
 </resources>

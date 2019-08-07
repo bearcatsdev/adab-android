@@ -1,6 +1,7 @@
 package com.ambinusian.adab.MainActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -46,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
         coursesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         //set list data for recycler view
-        coursesList.add(new CourseModel("Yesterday", "Storage", "MOOP","Meeting 11","MOBI009","LA03","LEC"));
+        coursesList.add(new CourseModel(0,"Yesterday", "Storage", "MOOP","Meeting 11","MOBI009","LA03","LEC"));
 
-        coursesList.add(new CourseModel("Yesterday", "Storage", "MOOP","Meeting 11","MOBI009","LA03","LEC"));
-        coursesList.add(new CourseModel("Yesterday", "Storage", "MOOP","Meeting 11","MOBI009","LA03","LEC"));
+        coursesList.add(new CourseModel(0,"Yesterday", "Storage", "MOOP","Meeting 11","MOBI009","LA03","LEC"));
+        coursesList.add(new CourseModel(0,"Yesterday", "Storage", "MOOP","Meeting 11","MOBI009","LA03","LEC"));
 
         //set adapter for recycler view
         coursesRecyclerView.setAdapter(new CourseAdapter(this,coursesList));
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
             }
         });
+
 
     }
 

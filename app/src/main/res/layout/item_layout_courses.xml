@@ -16,6 +16,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="75dp"
                 android:layout_height="75dp"
+                android:id="@+id/classIcon"
                 android:src="@drawable/ic_launcher_background"
                 />
         </LinearLayout>
@@ -66,6 +67,7 @@
                         android:layout_height="wrap_content"
                         android:text="Test"
                         android:id="@+id/chip_coursesCode"
+                        android:fontFamily="@font/interstate"
                         app:chipStrokeWidth="1dp"
                         app:chipStrokeColor="#E1E1E1"
                         app:chipBackgroundColor="#ffffff"
@@ -75,7 +77,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Test1"
-                        android:id="@+id/chip_classCode"
+                        android:id="@+id/chip_classCode"                                                                   android:fontFamily="@font/interstate"
                         app:chipStrokeWidth="1dp"
                         app:chipStrokeColor="#E1E1E1"
                         app:chipBackgroundColor="#ffffff"
@@ -86,6 +88,7 @@
                         android:layout_height="wrap_content"
                         android:text="Test2"
                         android:id="@+id/chip_classType"
+                        android:fontFamily="@font/interstate"
                         app:chipStrokeWidth="1dp"
                         app:chipStrokeColor="#E1E1E1"
                         app:chipBackgroundColor="#ffffff"

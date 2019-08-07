@@ -1,6 +1,7 @@
 package com.ambinusian.adab.MainActivity.CourseRecyclerView;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,7 +11,7 @@ import com.google.android.material.chip.Chip;
 public class CourseHolder extends RecyclerView.ViewHolder {
     TextView classTime, classTitle, courses,classMeeting;
     Chip courseCode, classCode, classType;
-
+    ImageView classIcon;
 
     public CourseHolder(@NonNull View itemView) {
         super(itemView);
@@ -21,5 +22,6 @@ public class CourseHolder extends RecyclerView.ViewHolder {
         courseCode = itemView.findViewById(R.id.chip_coursesCode);
         classCode = itemView.findViewById(R.id.chip_classCode);
         classType = itemView.findViewById(R.id.chip_classType);
+        classIcon = itemView.findViewById(R.id.classIcon);
     }
 }

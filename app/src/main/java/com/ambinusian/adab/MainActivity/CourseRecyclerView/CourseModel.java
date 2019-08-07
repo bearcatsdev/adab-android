@@ -9,8 +9,10 @@ public class CourseModel {
         private String courseCode;
         private String classCode;
         private String classType;
+        private int classIcon;
 
-    public CourseModel(String classTime, String classTitle, String course, String classMeeting, String courseCode, String classCode,String classType) {
+    public CourseModel(int classIcon, String classTime, String classTitle, String course, String classMeeting, String courseCode, String classCode,String classType) {
+        this.classIcon = classIcon;
         this.classTime = classTime;
         this.classTitle = classTitle;
         this.course = course;
@@ -20,6 +22,13 @@ public class CourseModel {
         this.classType = classType;
     }
 
+    public int getClassIcon() {
+        return classIcon;
+    }
+
+    public void setClassIcon(int classIcon) {
+        this.classIcon = classIcon;
+    }
 
     public String getClassTime() {
         return classTime;
