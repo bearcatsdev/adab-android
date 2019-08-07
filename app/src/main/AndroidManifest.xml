@@ -9,6 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Adab">
+        <activity android:name=".Setting.SettingActivity"></activity>
+        <activity android:name=".Help.HelpActivity" />
+        <activity android:name=".Calendar.CalendarActivity" />
+        <activity android:name=".Forum.ForumActivity" />
+        <activity android:name=".Topics.TopicsActivity" />
         <activity android:name=".MainActivity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
