@@ -50,11 +50,16 @@ public class NetworkManager {
                     try {
                         callback.onResponse(response);
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        Log.e(TAG, e.getLocalizedMessage());
                     }
                 },
                 error -> {
-                    Log.e(TAG, error.getMessage());
+                    if (error.networkResponse.statusCode == 404) {
+                        Log.e(TAG, "Not found????");
+
+                    } else if (error.networkResponse.statusCode == 403) {
+
+                    }
 
                 });
 
