@@ -10,7 +10,7 @@ import com.google.android.material.chip.Chip;
 
 public class CourseHolder extends RecyclerView.ViewHolder {
     TextView classTime, classTitle, courses,classMeeting;
-    Chip courseCode, classCode, classType;
+//    Chip courseCode, classCode, classType;
     ImageView classIcon;
 
     public CourseHolder(@NonNull View itemView) {
@@ -19,9 +19,12 @@ public class CourseHolder extends RecyclerView.ViewHolder {
         classTitle = itemView.findViewById(R.id.tv_classTitle);
         courses = itemView.findViewById(R.id.tv_courses);
         classMeeting = itemView.findViewById(R.id.tv_classMeeting);
-        courseCode = itemView.findViewById(R.id.chip_coursesCode);
-        classCode = itemView.findViewById(R.id.chip_classCode);
-        classType = itemView.findViewById(R.id.chip_classType);
+
         classIcon = itemView.findViewById(R.id.classIcon);
+
+//        Chip
+//        courseCode = itemView.findViewById(R.id.chip_coursesCode);
+//        classCode = itemView.findViewById(R.id.chip_classCode);
+//        classType = itemView.findViewById(R.id.chip_classType);
     }
 }

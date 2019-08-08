@@ -59,42 +59,34 @@
                 android:layout_weight="2"
                 android:orientation="horizontal">
 
-                <com.google.android.material.chip.ChipGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Test"
-                        android:id="@+id/chip_coursesCode"
-                        android:fontFamily="@font/interstate"
-                        app:chipStrokeWidth="1dp"
-                        app:chipStrokeColor="#E1E1E1"
-                        app:chipBackgroundColor="#ffffff"
-                        style="@style/Widget.MaterialComponents.Chip.Action"/>
+                <!--<com.google.android.material.chip.ChipGroup-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content">-->
 
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Test1"
-                        android:id="@+id/chip_classCode"                                                                   android:fontFamily="@font/interstate"
-                        app:chipStrokeWidth="1dp"
-                        app:chipStrokeColor="#E1E1E1"
-                        app:chipBackgroundColor="#ffffff"
-                        style="@style/Widget.MaterialComponents.Chip.Action"
-                        />
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Test2"
-                        android:id="@+id/chip_classType"
-                        android:fontFamily="@font/interstate"
-                        app:chipStrokeWidth="1dp"
-                        app:chipStrokeColor="#E1E1E1"
-                        app:chipBackgroundColor="#ffffff"
-                        style="@style/Widget.MaterialComponents.Chip.Action"
-                    />
-                </com.google.android.material.chip.ChipGroup>
+                    <!--<com.google.android.material.chip.Chip-->
+                        <!--android:id="@+id/chip_coursesCode"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:fontFamily="@font/interstate"-->
+                        <!--android:text="Test"-->
+                        <!--app:chipBackgroundColor="#ffffff"-->
+                        <!--app:chipStrokeColor="#E1E1E1"-->
+                        <!--app:chipStrokeWidth="1dp" />-->
+
+                    <!--<com.google.android.material.chip.Chip-->
+                        <!--android:id="@+id/chip_classCode"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:fontFamily="@font/interstate"-->
+                        <!--android:text="Test1" />-->
+
+                    <!--<com.google.android.material.chip.Chip-->
+                        <!--android:id="@+id/chip_classType"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:fontFamily="@font/interstate"-->
+                        <!--android:text="Test2" />-->
+                <!--</com.google.android.material.chip.ChipGroup>-->
             </LinearLayout>
 
         </LinearLayout>

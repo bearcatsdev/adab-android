@@ -40,9 +40,11 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseHolder> {
         holder.classTitle.setText(item.getClassTitle());
         holder.courses.setText(item.getCourse());
         holder.classMeeting.setText(item.getClassMeeting());
-        holder.courseCode.setText(item.getCourseCode());
-        holder.classCode.setText(item.getClassCode());
-        holder.classType.setText(item.getClassType());
+
+        //Chip
+//        holder.courseCode.setText(item.getCourseCode());
+//        holder.classCode.setText(item.getClassCode());
+//        holder.classType.setText(item.getClassType());
 
         int classIcon = item.getClassIcon();
         //set classIcon
