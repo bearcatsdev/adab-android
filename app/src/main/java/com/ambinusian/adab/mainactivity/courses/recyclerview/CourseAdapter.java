@@ -1,4 +1,4 @@
-package com.ambinusian.adab.main_activity.course_recycler_view;
+package com.ambinusian.adab.mainactivity.courses.recyclerview;
 
 import android.content.Context;
 import android.view.LayoutInflater;

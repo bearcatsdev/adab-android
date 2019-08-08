@@ -1,4 +1,4 @@
-package com.ambinusian.adab.main_activity;
+package com.ambinusian.adab.mainactivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import com.ambinusian.adab.all_classes.AllClassesFragment;
+import com.ambinusian.adab.allclasses.AllClassesFragment;
 import com.ambinusian.adab.calendar.CalendarFragment;
 import com.ambinusian.adab.forum.ForumFragment;
 import com.ambinusian.adab.help.HelpFragment;
