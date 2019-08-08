@@ -4,12 +4,15 @@
     <style name="Theme.Adab" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:fontFamily">@font/interstate</item>
         <item name="fontFamily">@font/interstate</item>
+
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+        <item name="android:statusBarColor" tools:targetApi="27">#ffffff</item>
+        <item name="android:navigationBarColor" tools:targetApi="27">#ffffff</item>
     </style>
 
     <!--Toolbar-->
@@ -18,6 +21,7 @@
         <item name="android:theme">@style/Theme.AppCompat.Light</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
+
 
 
 </resources>

@@ -6,9 +6,9 @@
     tools:context=".ui.allclasses.AllClassesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_courses"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rv_courses">
-    </androidx.recyclerview.widget.RecyclerView>
+        tools:listitem="@layout/recycler_view_item"></androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>
