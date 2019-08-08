@@ -1,32 +1,23 @@
-package com.ambinusian.adab.MainActivity;
+package com.ambinusian.adab.main_activity;
 
-import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import com.ambinusian.adab.AllClasses.AllClassesFragment;
-import com.ambinusian.adab.Calendar.CalendarFragment;
-import com.ambinusian.adab.Forum.ForumFragment;
-import com.ambinusian.adab.Help.HelpFragment;
-import com.ambinusian.adab.MainActivity.CourseRecyclerView.CourseAdapter;
-import com.ambinusian.adab.MainActivity.CourseRecyclerView.CourseModel;
+import com.ambinusian.adab.all_classes.AllClassesFragment;
+import com.ambinusian.adab.calendar.CalendarFragment;
+import com.ambinusian.adab.forum.ForumFragment;
+import com.ambinusian.adab.help.HelpFragment;
 import com.ambinusian.adab.R;
-import com.ambinusian.adab.Setting.SettingFragment;
-import com.ambinusian.adab.Topics.TopicsFragment;
+import com.ambinusian.adab.setting.SettingFragment;
+import com.ambinusian.adab.topics.TopicsFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;

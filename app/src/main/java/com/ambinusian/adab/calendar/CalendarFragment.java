@@ -1,7 +1,5 @@
-package com.ambinusian.adab.Calendar;
+package com.ambinusian.adab.calendar;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

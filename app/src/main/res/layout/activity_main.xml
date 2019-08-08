@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/mDrawerLayout"
-    tools:context=".MainActivity.MainActivity">
+    tools:context=".main_activity.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

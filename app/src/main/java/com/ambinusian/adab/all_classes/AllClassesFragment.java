@@ -1,7 +1,5 @@
-package com.ambinusian.adab.AllClasses;
+package com.ambinusian.adab.all_classes;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,8 +10,8 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.ambinusian.adab.MainActivity.CourseRecyclerView.CourseAdapter;
-import com.ambinusian.adab.MainActivity.CourseRecyclerView.CourseModel;
+import com.ambinusian.adab.main_activity.course_recycler_view.CourseAdapter;
+import com.ambinusian.adab.main_activity.course_recycler_view.CourseModel;
 import com.ambinusian.adab.R;
 
 import java.util.ArrayList;
