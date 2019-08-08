@@ -21,23 +21,12 @@
                 android:layout_height="?attr/actionBarSize"
                 style="@style/Widget.Adab.Toolbar"
                 app:navigationIcon="@drawable/ic_icon_menu">
-                <LinearLayout
+                <TextView
+                    android:textSize="20sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/adab_app_name_binus"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="@string/adab_app_name_adab"
-                        />
-                </LinearLayout>
-
+                    android:layout_gravity="center"
+                    android:text="@string/home_title"/>
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>

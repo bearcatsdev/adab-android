@@ -1,6 +1,22 @@
 <resources>
-    <string name="adab_app_name_binus">BINUS</string>
-    <string name="adab_app_name_adab">Adab</string>
-    <string name="toolbar_title">All Classes</string>
+    <!--Home-->
+    <string name="home_title"><b>BINUS</b> Adab</string>
+    <string name="home_category_live">Live Now</string>
+    <string name="home_category_all">All Classes</string>
+
+    <!--Toolbar-->
+    <string name="toolbar_all_classes">All Classes</string>
+    <string name="toolbar_topics">Topics</string>
+    <string name="toolbar_calendar">Calendar</string>
+    <string name="toolbar_discussion">Discussion</string>
+    <string name="toolbar_help">Help</string>
+    <string name="toolbar_settings">Settings</string>
+
+    <!--Place Holder-->
+    <string name="placeholder_date">00:00</string>
+    <string name="placeholder_title">Title</string>
+    <string name="placeholder_subtitle">Subtitle</string>
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

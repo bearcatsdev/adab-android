@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="175dp">
+        android:layout_height="150dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -30,33 +30,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_weight="1">
+                >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Yesterday"
+                    android:text="@string/placeholder_date"
                     android:id="@+id/tv_classTime"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Storage"
+                    android:text="@string/placeholder_title"
                     android:id="@+id/tv_classTitle"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="MOOP"
+                    android:text="@string/placeholder_subtitle"
                     android:id="@+id/tv_courses"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Meeting"
+                    android:text="@string/placeholder_subtitle"
+                    android:gravity="bottom"
+                    android:layout_gravity="bottom"
                     android:id="@+id/tv_classMeeting"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
                 android:orientation="horizontal">
 
                 <!--<com.google.android.material.chip.ChipGroup-->

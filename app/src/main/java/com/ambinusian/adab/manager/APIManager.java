@@ -37,8 +37,12 @@ public class APIManager {
                 userProfile.put("picture", userJson.getString("picture"));
 
                 callback.onResponse(true, userProfile);
-            }
 
+            } else {
+                // Not OK
+                
+                callback.onResponse(false, null);
+            }
         }));
     }
 
