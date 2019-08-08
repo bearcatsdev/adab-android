@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> listSemester;
     Toolbar toolbar;
     DrawerLayout mDrawerLayout;
-    Spinner SpinnerlistSemester;
+    Spinner SpinnerListSemester;
     NavigationView mNavigationView;
 
     @Override
@@ -43,12 +43,12 @@ public class MainActivity extends AppCompatActivity {
         listSemester = new ArrayList<>();
 
         //set up spinner
-        SpinnerlistSemester = mNavigationView.getHeaderView(0).findViewById(R.id.spinner_list_semesters);
+        SpinnerListSemester = mNavigationView.getHeaderView(0).findViewById(R.id.spinner_list_semesters);
 
         listSemester.add("2018 Semester 1");
         listSemester.add("2018 Semester 2");
 
-        SpinnerlistSemester.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,listSemester));
+        SpinnerListSemester.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,listSemester));
 
         //icon menu clicked
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
