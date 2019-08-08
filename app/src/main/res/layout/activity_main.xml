@@ -58,6 +58,9 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/adab_nav_header_layout"
         app:menu="@menu/adab_navigation_drawer_menu"
+        app:itemIconTint="@color/drawer_icon_text_effect"
+        app:itemTextColor="@color/drawer_icon_text_effect"
+        app:itemBackground="@drawable/drawer_background_effect"
         android:id="@+id/nv_adab"
         >
 
