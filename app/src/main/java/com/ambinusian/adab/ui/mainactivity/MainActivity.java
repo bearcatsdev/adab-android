@@ -46,10 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
         //set up spinner
         SpinnerListSemester = mNavigationView.getHeaderView(0).findViewById(R.id.spinner_list_semesters);
-
         listSemester.add("2018 Semester 1");
         listSemester.add("2018 Semester 2");
-
         SpinnerListSemester.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,listSemester));
 
         //icon menu clicked
@@ -62,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         //set first fragment launched
         getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new AllClassesFragment()).commit();
+        mNavigationView.setCheckedItem(R.id.menu_allClasses);
 
         //navigation item clicked
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+//        startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
 
 }
