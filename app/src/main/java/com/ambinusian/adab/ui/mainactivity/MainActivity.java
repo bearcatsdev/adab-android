@@ -1,5 +1,6 @@
 package com.ambinusian.adab.ui.mainactivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.ambinusian.adab.ui.calendar.CalendarFragment;
 import com.ambinusian.adab.ui.forum.ForumFragment;
 import com.ambinusian.adab.ui.help.HelpFragment;
 import com.ambinusian.adab.R;
+import com.ambinusian.adab.ui.login.LoginActivity;
 import com.ambinusian.adab.ui.setting.SettingFragment;
 import com.ambinusian.adab.ui.topics.TopicsFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -88,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
 
 }
