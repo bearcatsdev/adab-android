@@ -20,16 +20,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 style="@style/Widget.Adab.Toolbar"
-                app:title="@string/toolbar_title"
-                app:navigationIcon="@drawable/ic_icon_menu"/>
+                app:navigationIcon="@drawable/ic_icon_menu">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/adab_app_name_binus"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="@string/adab_app_name_adab"
+                        />
+                </LinearLayout>
+
+            </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/rv_courses">
-        </androidx.recyclerview.widget.RecyclerView>
+            android:id="@+id/adab_fragment">
+        </FrameLayout>
+
     </LinearLayout>
 
 
