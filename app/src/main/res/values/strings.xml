@@ -17,6 +17,10 @@
     <string name="placeholder_title">Title</string>
     <string name="placeholder_subtitle">Subtitle</string>
 
+    <!--Tag in all classes fragment-->
+    <string name="tag_live_now">Live Now</string>
+    <string name="tag_lastest_class">Lastest Class</string>
+
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

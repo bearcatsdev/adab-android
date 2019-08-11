@@ -3,12 +3,114 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.allclasses.AllClassesFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_courses"
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/recycler_view_item"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:orientation="vertical"
+                android:id="@+id/liveLayout"
+                android:gravity="center"
+                android:visibility="gone"
+                android:padding="15dp">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorAccent"
+                    app:cardCornerRadius="15dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="5dp"
+                        android:text="@string/tag_live_now"
+                        android:textColor="#ffffff" />
+                </androidx.cardview.widget.CardView>
+                
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/liveClassIcon"
+                    android:layout_width="85dp"
+                    android:layout_height="88dp"
+                    android:src="@drawable/ic_launcher_background" />
+
+                <TextView
+                    android:id="@+id/tv_liveClassTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="@string/placeholder_title" />
+
+                <TextView
+                    android:id="@+id/tv_liveCourse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder_subtitle" />
+
+                <TextView
+                    android:id="@+id/tv_liveClassMeeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder_subtitle" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="15dp"
+                android:orientation="vertical"
+                android:background="@color/colorPrimary">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/colorAccent"
+                    app:cardCornerRadius="15dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="5dp"
+                        android:text="@string/tag_lastest_class"
+                        android:textColor="#ffffff" />
+                </androidx.cardview.widget.CardView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="15dp"
+                    android:background="#F5F5F5"
+                    />
+                
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_courses"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/recycler_view_item">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+            
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
 
 </FrameLayout>
