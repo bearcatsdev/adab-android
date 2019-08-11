@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.Adab" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.Adab" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!--Color-->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -18,12 +18,20 @@
     </style>
 
     <!--Toolbar-->
-    <style name = "Widget.Adab.Toolbar" parent="Widget.AppCompat.Toolbar">
+    <style name = "Widget.Adab.Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:theme">@style/Theme.AppCompat.Light</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
-
+    <!-- Theme for splash screen -->
+    <style name="Theme.Adab.Launcher">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:fitsSystemWindows">false</item>
+        <item name="colorPrimaryDark">@android:color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
 
 </resources>

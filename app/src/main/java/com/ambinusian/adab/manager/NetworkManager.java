@@ -15,7 +15,7 @@ import java.util.Map;
 public class NetworkManager {
     private static NetworkManager instance = null;
     private static final String TAG = "NetworkManager";
-    private static final String SERVER_URL = "https://adab.bancet.cf";
+    private static final String SERVER_URL = "https://adabapi.bancet.cf";
 
     private RequestQueue requestQueue;
 
@@ -54,11 +54,19 @@ public class NetworkManager {
                     }
                 },
                 error -> {
-                    if (error.networkResponse.statusCode == 404) {
-                        Log.e(TAG, "Not found????");
+                    Log.e(TAG, error.toString());
+                    if (error.networkResponse != null) {
+                        if (error.networkResponse.statusCode == 404) {
+                            Log.e(TAG, "Not found????");
 
-                    } else if (error.networkResponse.statusCode == 403) {
-
+                        } else if (error.networkResponse.statusCode == 403) {
+                            Log.e(TAG, "Unauthorized");
+                            try {
+                                callback.onResponse(new JSONObject(new String(error.networkResponse.data)));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
 
                 });

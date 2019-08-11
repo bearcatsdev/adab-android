@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.setting;
+package com.ambinusian.adab.ui.settings;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
