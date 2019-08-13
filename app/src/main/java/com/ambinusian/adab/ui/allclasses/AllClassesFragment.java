@@ -96,7 +96,7 @@ public class AllClassesFragment extends Fragment {
             liveClassIcon.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.ic_class_59_pencilpaper));
             liveClassTitle.setText("Design");
             liveCourse.setText("Design");
-            liveClassMeeting.setText("Meeting 99999");
+            liveClassMeeting.setText("Meeting 99");
         }
 
 

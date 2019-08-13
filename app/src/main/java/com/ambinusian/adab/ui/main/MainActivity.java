@@ -1,6 +1,7 @@
 package com.ambinusian.adab.ui.main;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -23,7 +24,6 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
 
     ArrayList<String> listSemester;
     Toolbar toolbar;

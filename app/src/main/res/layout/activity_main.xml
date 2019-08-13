@@ -20,13 +20,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 style="@style/Widget.Adab.Toolbar"
-                app:navigationIcon="@drawable/ic_icon_menu">
+                app:navigationIcon="@drawable/ic_icon_menu"
+                app:menu="@menu/option_menu">
                 <TextView
                     android:textSize="20sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/home_title"/>
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:layout_gravity="right"
+                    android:src="@drawable/ic_round_search_24px"/>
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
