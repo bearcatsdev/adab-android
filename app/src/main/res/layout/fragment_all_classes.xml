@@ -68,9 +68,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="15dp"
                 android:orientation="vertical"
                 android:background="@color/white_background">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp" />
 
                 <com.ambinusian.adab.customcomponent.Tag
                     android:layout_width="wrap_content"
@@ -78,17 +81,11 @@
                     android:layout_gravity="center"
                     app:tagText="@string/tag_lastest_class"></com.ambinusian.adab.customcomponent.Tag>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="15dp"
-                    android:background="#F5F5F5"
-                    />
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_courses"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:scrollbars="none"
                     tools:listitem="@layout/recycler_view_item">
 
                 </androidx.recyclerview.widget.RecyclerView>
