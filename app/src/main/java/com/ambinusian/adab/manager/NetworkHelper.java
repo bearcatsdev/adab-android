@@ -6,6 +6,7 @@ public class NetworkHelper {
 
     public interface authenticateUser {
         void onResponse(Boolean success, Map<String, Object> userProfile);
+        void onError(int errorCode, String errorReason);
     }
 
 }

@@ -8,6 +8,7 @@
     android:id="@+id/mDrawerLayout"
     tools:context=".ui.mainactivity.MainActivity"
     android:background="@color/colorPrimary">
+    tools:context=".ui.main.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

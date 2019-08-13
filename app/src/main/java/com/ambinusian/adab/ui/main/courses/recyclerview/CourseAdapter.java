@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.mainactivity.courses.recyclerview;
+package com.ambinusian.adab.ui.main.courses.recyclerview;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -42,9 +42,9 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseHolder> {
         holder.classMeeting.setText(item.getClassMeeting());
 
         //Chip
-//        holder.courseCode.setText(item.getCourseCode());
-//        holder.classCode.setText(item.getClassCode());
-//        holder.classType.setText(item.getClassType());
+        holder.courseCode.setText(item.getCourseCode());
+        holder.classCode.setText(item.getClassCode());
+        holder.classType.setText(item.getClassType());
 
         int classIcon = item.getClassIcon();
         //set classIcon

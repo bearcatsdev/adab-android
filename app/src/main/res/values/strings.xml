@@ -17,6 +17,18 @@
     <string name="placeholder_title">Title</string>
     <string name="placeholder_subtitle">Subtitle</string>
 
+    <!--Tag in all classes fragment-->
+    <string name="tag_live_now">Live Now</string>
+    <string name="tag_lastest_class">Lastest Class</string>
+
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hint_username">NIM</string>
+    <string name="hint_password">Password</string>
+    <string name="action_login">Login</string>
+    <string name="error_nim_invalid">NIM format invalid</string>
+    <string name="error_password_invalid">Please enter password</string>
+    <string name="error_password_empty">Please enter password</string>
+    <string name="username_or_password_invalid">NIM or password is wrong.</string>
+    <string name="unknown_error">Unknown error</string>
 </resources>

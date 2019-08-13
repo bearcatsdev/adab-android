@@ -1,8 +1,12 @@
 package com.ambinusian.adab.ui.allclasses;
 
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +15,8 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.ambinusian.adab.ui.mainactivity.courses.recyclerview.CourseAdapter;
-import com.ambinusian.adab.ui.mainactivity.courses.recyclerview.CourseModel;
+import com.ambinusian.adab.ui.main.courses.recyclerview.CourseAdapter;
+import com.ambinusian.adab.ui.main.courses.recyclerview.CourseModel;
 import com.ambinusian.adab.R;
 
 import java.util.ArrayList;
@@ -21,6 +25,9 @@ public class AllClassesFragment extends Fragment {
 
     RecyclerView coursesRecyclerView;
     ArrayList<CourseModel> coursesList;
+    LinearLayout liveLayout;
+    ImageView liveClassIcon;
+    TextView liveClassTitle, liveCourse, liveClassMeeting;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,6 +41,11 @@ public class AllClassesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         coursesRecyclerView = view.findViewById(R.id.rv_courses);
+        liveLayout = view.findViewById(R.id.liveLayout);
+        liveClassIcon = view.findViewById(R.id.liveClassIcon);
+        liveClassTitle  = view.findViewById(R.id.tv_liveClassTitle);
+        liveCourse = view.findViewById(R.id.tv_liveCourse);
+        liveClassMeeting = view.findViewById(R.id.tv_liveClassMeeting);
         coursesList = new ArrayList<>();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -42,6 +54,15 @@ public class AllClassesFragment extends Fragment {
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(coursesRecyclerView.getContext(),
                     linearLayoutManager.getOrientation());
             coursesRecyclerView.addItemDecoration(dividerItemDecoration);
+        //if live class is starting
+        if(true){
+            liveLayout.setVisibility(View.VISIBLE);
+            liveClassIcon.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.ic_class_59_pencilpaper));
+            liveClassTitle.setText("Design");
+            liveCourse.setText("Design");
+            liveClassMeeting.setText("Meeting 99999");
+        }
+
 
         //set layout manager for recycler view
         coursesRecyclerView.setLayoutManager(linearLayoutManager);

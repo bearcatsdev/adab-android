@@ -47,4 +47,7 @@ dependencies {
 
     // volley
     implementation 'com.android.volley:volley:1.1.1'
+
+    //calendar
+    implementation 'com.github.applikeysolutions:cosmocalendar:1.0.4'
 }
