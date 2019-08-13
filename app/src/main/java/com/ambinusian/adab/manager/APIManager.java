@@ -1,10 +1,12 @@
 package com.ambinusian.adab.manager;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Network;
 import android.util.Log;
 import android.widget.Toast;
+import androidx.core.app.ActivityCompat;
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.ui.login.LoginActivity;
@@ -109,6 +111,7 @@ public class APIManager {
         Intent intent = new Intent(context, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(intent);
+        ActivityCompat.finishAffinity((Activity) context);
     }
 
 }
