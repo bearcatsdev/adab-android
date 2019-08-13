@@ -93,7 +93,7 @@ public class APIManager {
                     userPreferences.clearLoggedInUser();
                     Toast.makeText(context, context.getString(R.string.session_expired), Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(context, LoginActivity.class);
-                    //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     context.startActivity(intent);
 
                 } else if (response.getString("status").equals("400")) {
