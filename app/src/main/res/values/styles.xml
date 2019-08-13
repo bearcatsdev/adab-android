@@ -19,7 +19,7 @@
 
     <!--Toolbar-->
     <style name = "Widget.Adab.Toolbar" parent="Widget.MaterialComponents.Toolbar">
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:background">@color/white_background</item>
         <item name="android:theme">@style/Theme.AppCompat.Light</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
