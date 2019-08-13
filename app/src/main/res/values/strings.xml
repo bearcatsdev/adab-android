@@ -31,4 +31,5 @@
     <string name="error_password_empty">Please enter password</string>
     <string name="username_or_password_invalid">NIM or password is wrong.</string>
     <string name="unknown_error">Unknown error</string>
+    <string name="session_expired">Session expired, please log in again.</string>
 </resources>

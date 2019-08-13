@@ -14,11 +14,16 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.ambinusian.adab.manager.APIManager;
+import com.ambinusian.adab.manager.NetworkHelper;
+import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.ui.main.courses.recyclerview.CourseAdapter;
 import com.ambinusian.adab.ui.main.courses.recyclerview.CourseModel;
 import com.ambinusian.adab.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AllClassesFragment extends Fragment {
 
@@ -47,6 +52,41 @@ public class AllClassesFragment extends Fragment {
         liveClassMeeting = view.findViewById(R.id.tv_liveClassMeeting);
         coursesList = new ArrayList<>();
 
+        // get classes data
+        APIManager apiManager = new APIManager(getContext());
+        UserPreferences userPreferences = new UserPreferences(getContext());
+        apiManager.getUserClasses(userPreferences.getUserToken(), new NetworkHelper.getUserClasses() {
+            @Override
+            public void onResponse(Boolean success, Map<String, Object>[] userClasses) {
+                if (success) {
+                    //set layout manager for recycler view
+                    coursesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                    for (Map<String, Object> userClass: userClasses) {
+                        //set list data for recycler view
+                        coursesList.add(new CourseModel(
+                                0,
+                                (String) userClass.get("transaction_date"),
+                                (String) userClass.get("topic"),
+                                (String) userClass.get("course_name"),
+                                "Meeting " + userClass.get("session"),
+                                (String) userClass.get("course_code"),
+                                "LA03",
+                                "LEC"
+                        ));
+                    }
+
+                    //set adapter for recycler view
+                    coursesRecyclerView.setAdapter(new CourseAdapter(getContext(),coursesList));
+                }
+            }
+
+            @Override
+            public void onError(int errorCode, String errorReason) {
+
+            }
+        });
+
         //if live class is starting
         if(true){
             liveLayout.setVisibility(View.VISIBLE);
@@ -55,18 +95,6 @@ public class AllClassesFragment extends Fragment {
             liveCourse.setText("Design");
             liveClassMeeting.setText("Meeting 99999");
         }
-
-
-        //set layout manager for recycler view
-        coursesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        //set list data for recycler view
-        coursesList.add(new CourseModel(0,"Yesterday", "Storage", "MOOP","Meeting 11","MOBI009","LA03","LEC"));
-        coursesList.add(new CourseModel(0,"Yesterday", "Storage", "MOOP","Meeting 11","MOBI009","LA03","LEC"));
-        coursesList.add(new CourseModel(0,"Yesterday", "Storage", "MOOP","Meeting 11","MOBI009","LA03","LEC"));
-
-        //set adapter for recycler view
-        coursesRecyclerView.setAdapter(new CourseAdapter(getContext(),coursesList));
 
 
     }

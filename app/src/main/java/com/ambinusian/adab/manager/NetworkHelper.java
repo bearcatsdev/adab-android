@@ -9,4 +9,9 @@ public class NetworkHelper {
         void onError(int errorCode, String errorReason);
     }
 
+    public interface getUserClasses {
+        void onResponse(Boolean success, Map<String, Object>[] userClasses);
+        void onError(int errorCode, String errorReason);
+    }
+
 }
