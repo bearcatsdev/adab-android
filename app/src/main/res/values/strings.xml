@@ -14,7 +14,7 @@
 
     <!--Place Holder-->
     <string name="placeholder_date">00:00</string>
-    <string name="placeholder_title">Title</string>
+    <string name="placeholder_title">Embedded System and Internet of Things</string>
     <string name="placeholder_subtitle">Subtitle</string>
 
     <!--Tag in all classes fragment-->

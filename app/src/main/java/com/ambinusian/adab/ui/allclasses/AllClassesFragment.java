@@ -31,6 +31,7 @@ public class AllClassesFragment extends Fragment {
     ArrayList<CourseModel> coursesList;
     LinearLayout liveLayout;
     ImageView liveClassIcon;
+    LinearLayoutManager linearLayoutManager;
     TextView liveClassTitle, liveCourse, liveClassMeeting;
 
     @Override
@@ -60,7 +61,9 @@ public class AllClassesFragment extends Fragment {
             public void onResponse(Boolean success, Map<String, Object>[] userClasses) {
                 if (success) {
                     //set layout manager for recycler view
-                    coursesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    linearLayoutManager = new LinearLayoutManager(getContext());
+                    linearLayoutManager.setReverseLayout(true);
+                    coursesRecyclerView.setLayoutManager(linearLayoutManager);
 
                     for (Map<String, Object> userClass: userClasses) {
                         //set list data for recycler view

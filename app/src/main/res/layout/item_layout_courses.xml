@@ -41,7 +41,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/placeholder_title"
-                    android:id="@+id/tv_classTitle"/>
+                    android:id="@+id/tv_classTitle"
+                    android:textSize="@dimen/text_title"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -72,6 +73,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/interstate"
                         android:text="Test"
+                        android:textSize="@dimen/text_chip"
                         android:gravity="center"
                         android:padding="10dp"
                         app:chipBackgroundColor="#ffffff"
