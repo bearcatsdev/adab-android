@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        style="@style/TextTitle"
+        android:id="@+id/section_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        tools:text="Lastest Class" />
+
+    <TextView
+        android:id="@+id/section_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/section_title"
+        android:textSize="@dimen/text_body"
+        tools:text="See what you've missing so far" />
+
+    <View
+        style="@style/Divider"
+        android:layout_below="@id/section_subtitle"
+        android:layout_alignStart="@id/section_title"
+        android:layout_alignEnd="@id/section_title"
+        android:layout_marginTop="8dp" />
+
+    <Space
+        android:id="@+id/section_space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/section_button"
+        android:layout_toEndOf="@id/section_title" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Button"
+        android:id="@+id/section_button"
+        android:layout_alignParentEnd="true"
+
+        tools:text="See All" />
+
+</RelativeLayout>
