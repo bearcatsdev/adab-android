@@ -2,6 +2,8 @@ package com.ambinusian.adab.ui.calendar;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,17 +14,9 @@ import android.view.ViewGroup;
 
 import com.ambinusian.adab.R;
 
-import com.applikeysolutions.cosmocalendar.dialog.CalendarDialog;
-import com.applikeysolutions.cosmocalendar.dialog.OnDaysSelectionListener;
-import com.applikeysolutions.cosmocalendar.model.Day;
-import com.applikeysolutions.cosmocalendar.selection.BaseSelectionManager;
-import com.applikeysolutions.cosmocalendar.selection.MultipleSelectionManager;
-import com.applikeysolutions.cosmocalendar.selection.RangeSelectionManager;
-import com.applikeysolutions.cosmocalendar.selection.SingleSelectionManager;
-import com.applikeysolutions.cosmocalendar.settings.appearance.ConnectedDayIconPosition;
-import com.applikeysolutions.cosmocalendar.settings.lists.connected_days.ConnectedDays;
-import com.applikeysolutions.cosmocalendar.utils.SelectionType;
-import com.applikeysolutions.cosmocalendar.view.CalendarView;
+import com.applandeo.materialcalendarview.CalendarView;
+import com.applandeo.materialcalendarview.EventDay;
+import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 
 import java.util.*;
 
@@ -40,50 +34,34 @@ public class CalendarFragment extends Fragment {
     }
 
     CalendarView calendarView;
+    TextView currentDate;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        calendarView = view.findViewById(R.id.cosmo_calendar);
+        calendarView = view.findViewById(R.id.calendarView);
+        currentDate = view.findViewById(R.id.tv_currentDate);
 
-        //Set Orientation 0 = Horizontal | 1 = Vertical
-        calendarView.setCalendarOrientation(0);
-        calendarView.isSelected();
-        calendarView.onDaySelected();
-        Toast.makeText(getContext(), calendarView.getSelectedDates()+"", Toast.LENGTH_SHORT).show();
+        List<EventDay> events = new ArrayList<>();
 
-        //set weekend
-        calendarView.setWeekendDays(new HashSet(){{
-            add(Calendar.SUNDAY);
-        }});
-
-        //set holday to red
-        calendarView.setWeekendDayTextColor( Color.parseColor("#ff0000"));
-
-        //set selected day background color
-        calendarView.setSelectedDayBackgroundColor(getResources().getColor(R.color.colorAccent));
-
-        //Range Selection
-        calendarView.setSelectionType(SelectionType.SINGLE);
-
-
-        //Set days you want to connect
         Calendar calendar = Calendar.getInstance();
-        Set<Long> days = new TreeSet<>();
-        days.add(calendar.getTimeInMillis());
-        days.add(calendar.getTimeInMillis()+100000000);
+        calendar.add(Calendar.DAY_OF_YEAR, 10);
+        Log.e("tommorow",calendar+"");
+        events.add(new EventDay(calendar, R.drawable.ic_fiber_manual_record_black_24dp));
+        calendarView.setEvents(events);
 
-        //Define colors
-        int textColor = Color.parseColor("#000000");
-        int selectedTextColor = Color.parseColor("#ffffff");
-        int disabledTextColor = Color.parseColor("#ff8000");
-        ConnectedDays connectedDays = new ConnectedDays(days, textColor, selectedTextColor, disabledTextColor);
-
-        //Connect days to calendar
-        calendarView.addConnectedDays(connectedDays);
-        calendarView.setConnectedDayIconPosition(ConnectedDayIconPosition.BOTTOM);
-        calendarView.setConnectedDayIconRes(R.drawable.ic_icon_menu);
+        calendarView.setOnDayClickListener(new OnDayClickListener() {
+            @Override
+            public void onDayClick(EventDay eventDay) {
+                Calendar clickedDayCalendar = eventDay.getCalendar();
+                int day = clickedDayCalendar.get(Calendar.DAY_OF_WEEK);
+                int date = clickedDayCalendar.get(Calendar.DATE);
+                int month = clickedDayCalendar.get(Calendar.MONTH);
+                int year = clickedDayCalendar.get(Calendar.YEAR);
+                currentDate.setText(date+" "+day+" "+month+" "+year);
+            }
+        });
 
     }
 }
