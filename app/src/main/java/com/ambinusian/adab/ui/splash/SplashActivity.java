@@ -36,13 +36,13 @@ public class SplashActivity extends AppCompatActivity {
                 public void onResponse(Boolean success, Map<String, Object> userProfile) {
                     if (success) {
                         int privilege = (int) userProfile.get("privilege");
-                        String departement = (String) userProfile.get("departement");
+                        String department = (String) userProfile.get("department");
                         String username = (String) userProfile.get("username");
                         String name = (String) userProfile.get("name");
 
                         userPreferences.setUserUsername(username);
                         userPreferences.setUserName(name);
-                        userPreferences.setUserDepartement(departement);
+                        userPreferences.setUserDepartement(department);
                         userPreferences.setUserPrivilege(privilege);
 
                         if (privilege == 2) {

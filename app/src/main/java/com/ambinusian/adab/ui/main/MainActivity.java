@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationView mNavigationView;
     TextView textUserName;
     TextView textUserNIM;
+    TextView textUserDepartment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +47,12 @@ public class MainActivity extends AppCompatActivity {
 
         textUserName = mNavigationView.getHeaderView(0).findViewById(R.id.text_user_name);
         textUserNIM = mNavigationView.getHeaderView(0).findViewById(R.id.text_user_nim);
+        textUserDepartment = mNavigationView.getHeaderView(0).findViewById(R.id.text_user_department);
 
         UserPreferences userPreferences = new UserPreferences(this);
         textUserName.setText(userPreferences.getUserName());
         textUserNIM.setText(userPreferences.getUserUsername());
+        textUserDepartment.setText(userPreferences.getUserDepartement());
 
         listSemester = new ArrayList<>();
 
