@@ -41,7 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:maxLength="10"/>
+                android:maxLength="10"
+                android:autofillHints="username"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,7 +58,8 @@
                 android:id="@+id/input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:autofillHints="password"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
