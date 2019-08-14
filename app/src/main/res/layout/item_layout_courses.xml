@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+   >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,53 +22,67 @@
         android:layout_height="150dp"
         android:layout_marginHorizontal="15dp">
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="6"
             android:gravity="center">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="75dp"
                 android:layout_height="75dp"
+                android:layout_gravity="center"
                 android:id="@+id/classIcon"
-                android:src="@drawable/ic_launcher_background"
-                />
-        </LinearLayout>
+                android:src="@drawable/ic_launcher_background"/>
+
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="match_parent" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:orientation="vertical">
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="5"
                 >
                 <TextView
+                    android:layout_alignParentTop="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/placeholder_date"
+                    android:textSize="@dimen/text_body"
                     android:id="@+id/tv_classTime"/>
                 <TextView
+                    android:layout_below="@id/tv_classTime"
+                    android:textStyle="bold"
+                    android:textColor="@color/textColorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/placeholder_title"
                     android:id="@+id/tv_classTitle"
                     android:textSize="@dimen/text_title"/>
                 <TextView
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/text_body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/placeholder_subtitle"
-                    android:id="@+id/tv_courses"/>
+                    android:id="@+id/tv_courses"
+                    android:layout_below
+                        ="@id/tv_classTitle" />
                 <TextView
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/text_body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/placeholder_subtitle"
-                    android:gravity="bottom"
-                    android:layout_gravity="bottom"
+                    android:layout_below="@id/tv_courses"
+                    android:layout_alignParentBottom="true"
                     android:id="@+id/tv_classMeeting"/>
-            </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -121,4 +136,5 @@
         </LinearLayout>
     </LinearLayout>
 
+</LinearLayout>
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.ambinusian.adab.ui.allclasses;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ambinusian.adab.manager.APIManager;
@@ -21,8 +23,11 @@ import com.ambinusian.adab.ui.main.courses.recyclerview.CourseAdapter;
 import com.ambinusian.adab.ui.main.courses.recyclerview.CourseModel;
 import com.ambinusian.adab.R;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.Map;
 
 public class AllClassesFragment extends Fragment {
@@ -57,6 +62,7 @@ public class AllClassesFragment extends Fragment {
         APIManager apiManager = new APIManager(getContext());
         UserPreferences userPreferences = new UserPreferences(getContext());
         apiManager.getUserClasses(userPreferences.getUserToken(), new NetworkHelper.getUserClasses() {
+            @SuppressLint("SimpleDateFormat")
             @Override
             public void onResponse(Boolean success, Map<String, Object>[] userClasses) {
                 if (success) {
@@ -66,16 +72,32 @@ public class AllClassesFragment extends Fragment {
                     coursesRecyclerView.setLayoutManager(linearLayoutManager);
 
                     for (Map<String, Object> userClass: userClasses) {
+                        // parse date
+                        String classDate = "";
+                        String classTime = "";
+                        try {
+                            Date startDate = new SimpleDateFormat("yyyy-MM-dd")
+                                    .parse((String) userClass.get("transaction_date"));
+                            classDate = new SimpleDateFormat("EEEE, d MMMM yyyy")
+                                    .format(startDate);
+
+                            Date startTime = new SimpleDateFormat("hh:mm:ss")
+                                    .parse((String) userClass.get("transaction_time"));
+                            classTime = new SimpleDateFormat("hh:mm")
+                                    .format(startTime);
+
+                        } catch (ParseException e) { e.printStackTrace(); }
+
                         //set list data for recycler view
                         coursesList.add(new CourseModel(
-                                0,
-                                (String) userClass.get("transaction_date"),
+                                (int) userClass.get("class_icon"),
+                                classDate + " " + classTime,
                                 (String) userClass.get("topic"),
                                 (String) userClass.get("course_name"),
                                 "Meeting " + userClass.get("session"),
                                 (String) userClass.get("course_code"),
-                                "LA03",
-                                "LEC"
+                                (String) userClass.get("class_code"),
+                                (String) userClass.get("class_type")
                         ));
                     }
 

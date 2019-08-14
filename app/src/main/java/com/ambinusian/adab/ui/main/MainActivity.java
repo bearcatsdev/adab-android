@@ -7,11 +7,13 @@ import android.view.View;
 
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.ui.allclasses.AllClassesFragment;
 import com.ambinusian.adab.ui.calendar.CalendarFragment;
 import com.ambinusian.adab.ui.forum.ForumFragment;
@@ -30,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     Spinner SpinnerListSemester;
     NavigationView mNavigationView;
+    TextView textUserName;
+    TextView textUserNIM;
+    TextView textUserDepartment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +43,17 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.tool_bar);
         mDrawerLayout = findViewById(R.id.mDrawerLayout);
-
         mNavigationView = findViewById(R.id.nv_adab);
+
+        textUserName = mNavigationView.getHeaderView(0).findViewById(R.id.text_user_name);
+        textUserNIM = mNavigationView.getHeaderView(0).findViewById(R.id.text_user_nim);
+        textUserDepartment = mNavigationView.getHeaderView(0).findViewById(R.id.text_user_department);
+
+        UserPreferences userPreferences = new UserPreferences(this);
+        textUserName.setText(userPreferences.getUserName());
+        textUserNIM.setText(userPreferences.getUserUsername());
+        textUserDepartment.setText(userPreferences.getUserDepartement());
+
         listSemester = new ArrayList<>();
 
         //set up spinner

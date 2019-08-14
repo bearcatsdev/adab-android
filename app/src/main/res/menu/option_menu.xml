@@ -3,4 +3,5 @@
     <item android:title="How to use"></item>
     <item android:title="About"></item>
     <item android:title="Need Help? Ask us here!"></item>
+    <item android:title="@string/action_logout"></item>
 </menu>
