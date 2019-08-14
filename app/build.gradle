@@ -49,5 +49,5 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.1'
 
     //calendar
-    implementation 'com.applandeo:material-calendar-view:1.6.0'
+    implementation 'com.prolificinteractive:material-calendarview:1.4.2'
 }

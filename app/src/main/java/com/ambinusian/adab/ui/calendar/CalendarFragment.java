@@ -13,10 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ambinusian.adab.R;
-
-import com.applandeo.materialcalendarview.CalendarView;
-import com.applandeo.materialcalendarview.EventDay;
-import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import java.util.*;
 
@@ -33,35 +32,41 @@ public class CalendarFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_calendar, container, false);
     }
 
-    CalendarView calendarView;
-    TextView currentDate;
+    MaterialCalendarView calendarView;
+    TextView selectedDate;
+    String[] days = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+    String[] months = {"January","Februabry","March","April","May","June","July","August","September","October","November","December"};
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         calendarView = view.findViewById(R.id.calendarView);
-        currentDate = view.findViewById(R.id.tv_currentDate);
+        selectedDate = view.findViewById(R.id.tv_selectedDate);
 
-        List<EventDay> events = new ArrayList<>();
+        //information needed = date, classType, classTitle, courseCode, classRoom, classTime
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, 10);
-        Log.e("tommorow",calendar+"");
-        events.add(new EventDay(calendar, R.drawable.ic_fiber_manual_record_black_24dp));
-        calendarView.setEvents(events);
+        //add all class Schedule to calendar
+        List<CalendarDay> classSchedule = new ArrayList<>();
+        classSchedule.add(CalendarDay.today());
+        classSchedule.add(CalendarDay.from(Calendar.getInstance().getTime()));
+        calendarView.setSelectedDate(CalendarDay.today());
+        calendarView.addDecorator(new EventDecorator(Color.parseColor("#c0c0c0"),classSchedule));
 
-        calendarView.setOnDayClickListener(new OnDayClickListener() {
+        calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
-            public void onDayClick(EventDay eventDay) {
-                Calendar clickedDayCalendar = eventDay.getCalendar();
-                int day = clickedDayCalendar.get(Calendar.DAY_OF_WEEK);
-                int date = clickedDayCalendar.get(Calendar.DATE);
-                int month = clickedDayCalendar.get(Calendar.MONTH);
-                int year = clickedDayCalendar.get(Calendar.YEAR);
-                currentDate.setText(date+" "+day+" "+month+" "+year);
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                Calendar calendar = date.getCalendar();
+                int currentDay= calendar.getTime().getDay();
+                int currentDate = calendar.getTime().getDate();
+                int currentMonth = calendar.getTime().getMonth();
+                int currentYear = calendar.getTime().getYear()+1900;
+
+                selectedDate.setText(days[currentDay]+", "+currentDate+" "+months[currentMonth]+" "+currentYear);
             }
         });
+
+
 
     }
 }

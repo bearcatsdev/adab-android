@@ -9,16 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <com.applandeo.materialcalendarview.CalendarView
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:type="one_day_picker"
-            app:selectionColor="@color/colorPrimary"
-            app:selectionLabelColor="@color/white_background"
-            app:eventsEnabled="true"
-            app:headerColor="@color/colorPrimary"
-            />
+            app:mcv_showOtherDates="all"
+            app:mcv_selectionColor="#00F"
+            app:mcv_tileHeight="40dp"
+            app:mcv_firstDayOfWeek="monday"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -27,7 +25,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_currentDate"/>
+                android:id="@+id/tv_selectedDate"/>
         </LinearLayout>
     </LinearLayout>
 
