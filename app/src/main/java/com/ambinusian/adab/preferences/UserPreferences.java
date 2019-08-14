@@ -6,7 +6,8 @@ import android.preference.PreferenceManager;
 
 public class UserPreferences {
 
-    private static final String KEY_USERNAME = "user_name";
+    private static final String KEY_USER_USERNAME = "user_username";
+    private static final String KEY_USER_NAME = "user_name";
     private static final String KEY_USER_TOKEN = "user_token";
     private static final String KEY_USER_LOGGED_IN = "user_logged_in";
     private static final String KEY_USER_PRIVILEGE = "user_privilege";
@@ -22,14 +23,24 @@ public class UserPreferences {
         return PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public void setUsername(String userid){
+    public void setUserUsername(String userid){
         SharedPreferences.Editor editor = getSharedPreference().edit();
-        editor.putString(KEY_USERNAME, userid);
+        editor.putString(KEY_USER_USERNAME, userid);
         editor.apply();
     }
 
-    public String getUsername(){
-        return getSharedPreference().getString(KEY_USERNAME,"");
+    public String getUserUsername(){
+        return getSharedPreference().getString(KEY_USER_USERNAME,"");
+    }
+
+    public void setUserName(String userName){
+        SharedPreferences.Editor editor = getSharedPreference().edit();
+        editor.putString(KEY_USER_NAME, userName);
+        editor.apply();
+    }
+
+    public String getUserName(){
+        return getSharedPreference().getString(KEY_USER_NAME,"");
     }
 
     public void setUserToken(String usertoken){
@@ -74,7 +85,8 @@ public class UserPreferences {
 
     public void clearLoggedInUser() {
         SharedPreferences.Editor editor = getSharedPreference().edit();
-        editor.remove(KEY_USERNAME);
+        editor.remove(KEY_USER_USERNAME);
+        editor.remove(KEY_USER_NAME);
         editor.remove(KEY_USER_TOKEN);
         editor.remove(KEY_USER_LOGGED_IN);
         editor.remove(KEY_USER_PRIVILEGE);
