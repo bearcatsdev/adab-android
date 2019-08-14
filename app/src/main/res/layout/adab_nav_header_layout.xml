@@ -22,13 +22,13 @@
             android:layout_gravity="center">
 
             <TextView
+                android:id="@+id/text_user_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="chandra" />
+                android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/text_user_nim"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="chandra@binus.ac.id"/>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
 

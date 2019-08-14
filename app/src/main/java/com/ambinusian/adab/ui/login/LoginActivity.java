@@ -12,6 +12,7 @@ import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.ui.main.MainActivity;
+import com.ambinusian.adab.ui.splash.SplashActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -62,9 +63,9 @@ public class LoginActivity extends AppCompatActivity {
                     if (success) {
                         UserPreferences userPreferences = new UserPreferences(context);
                         userPreferences.setUserLoggedIn(true);
-                        userPreferences.setUsername((String) userProfile.get("username"));
+                        userPreferences.setUserUsername((String) userProfile.get("username"));
                         userPreferences.setUserToken((String) userProfile.get("token_id"));
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        startActivity(new Intent(LoginActivity.this, SplashActivity.class));
                         finish();
                     }
                 }

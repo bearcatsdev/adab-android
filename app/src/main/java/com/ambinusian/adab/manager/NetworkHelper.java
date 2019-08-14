@@ -14,4 +14,9 @@ public class NetworkHelper {
         void onError(int errorCode, String errorReason);
     }
 
+    public interface getUserProfile {
+        void onResponse(Boolean success, Map<String, Object> userProfile);
+        void onError(int errorCode, String errorReason);
+    }
+
 }
