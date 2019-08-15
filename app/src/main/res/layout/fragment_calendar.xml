@@ -13,18 +13,27 @@
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
+            app:mcv_headerTextAppearance="@font/interstate"
+            app:mcv_weekDayLabels="@font/interstate"
             app:mcv_showOtherDates="all"
             app:mcv_selectionColor="#00F"
             app:mcv_tileHeight="40dp"
             app:mcv_firstDayOfWeek="monday"/>
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_selectedDate"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/rv_schedule"></androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
     </LinearLayout>
 

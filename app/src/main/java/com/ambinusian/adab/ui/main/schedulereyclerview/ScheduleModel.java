@@ -2,23 +2,24 @@ package com.ambinusian.adab.ui.main.schedulereyclerview;
 
 public class ScheduleModel {
     //information needed = date, classType, classTitle, courseCode, classRoom, classTime
-    private String date,classType,classTitle,courseCode, classRoom, classTime;
+    private String classDate,classType,classTitle,course, courseCode, classRoom, classTime;
 
-    public ScheduleModel(String date, String classType, String classTitle, String courseCode, String classRoom, String classTime) {
-        this.date = date;
+    public ScheduleModel(String classDate, String classType, String classTitle,String course, String courseCode, String classRoom, String classTime) {
+        this.classDate = classDate;
         this.classType = classType;
         this.classTitle = classTitle;
+        this.course = course;
         this.courseCode = courseCode;
         this.classRoom = classRoom;
         this.classTime = classTime;
     }
 
-    public String getDate() {
-        return date;
+    public String getClassDate() {
+        return classDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setClassDate(String classDate) {
+        this.classDate = classDate;
     }
 
     public String getClassType() {
@@ -31,6 +32,14 @@ public class ScheduleModel {
 
     public String getClassTitle() {
         return classTitle;
+    }
+
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
     }
 
     public void setClassTitle(String classTitle) {

@@ -12,11 +12,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.ambinusian.adab.R;
+import com.ambinusian.adab.ui.main.schedulereyclerview.ScheduleAdapter;
+import com.ambinusian.adab.ui.main.schedulereyclerview.ScheduleModel;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import java.util.Calendar;
@@ -36,6 +42,9 @@ public class CalendarFragment extends Fragment {
     TextView selectedDate;
     String[] days = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
     String[] months = {"January","Februabry","March","April","May","June","July","August","September","October","November","December"};
+    ArrayList<ScheduleModel> allClassSchedule;
+    SimpleDateFormat dateFormat;
+    RecyclerView scheduleList;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -43,14 +52,38 @@ public class CalendarFragment extends Fragment {
 
         calendarView = view.findViewById(R.id.calendarView);
         selectedDate = view.findViewById(R.id.tv_selectedDate);
+        scheduleList = view.findViewById(R.id.rv_schedule);
+        allClassSchedule = new ArrayList<>();
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        //information needed = date, classType, classTitle, courseCode, classRoom, classTime
+        configureCalendar();
+
+        //set recycler view layout manager
+        scheduleList.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        //information needed = classDate, classType, classTitle, course, courseCode, classRoom, classTime
+        //add all class schedule dummy data
+        allClassSchedule.add(new ScheduleModel("2019-09-16","LEC","Java","MOOP","MOBI009","711A","11:20-13:00"));
+        allClassSchedule.add(new ScheduleModel("2019-09-17","LEC","Kalimat Efektif","Bahasa Indonesia","ID1010","711A","11:20-13:00"));
+        allClassSchedule.add(new ScheduleModel("2019-09-17","LEC","Storage","MOOP","MOBI009","711A","11:20-13:00"));
+        allClassSchedule.add(new ScheduleModel("2019-09-19","LEC","Java","MOOP","MOBI009","711A","11:20-13:00"));
 
         //add all class Schedule to calendar
         List<CalendarDay> classSchedule = new ArrayList<>();
-        classSchedule.add(CalendarDay.today());
-        classSchedule.add(CalendarDay.from(Calendar.getInstance().getTime()));
-        calendarView.setSelectedDate(CalendarDay.today());
+        for(int i=0;i<allClassSchedule.size();i++){
+            //add date to calendae object
+            Calendar calendar = Calendar.getInstance();
+            try {
+                calendar.setTime(dateFormat.parse(allClassSchedule.get(i).getClassDate()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            //add calendar object to classSchedule list
+            classSchedule.add(CalendarDay.from(calendar.getTime()));
+            Log.e("calendar", calendar.getTime()+"");
+        }
+
         calendarView.addDecorator(new EventDecorator(Color.parseColor("#c0c0c0"),classSchedule));
 
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
@@ -63,10 +96,32 @@ public class CalendarFragment extends Fragment {
                 int currentYear = calendar.getTime().getYear()+1900;
 
                 selectedDate.setText(days[currentDay]+", "+currentDate+" "+months[currentMonth]+" "+currentYear);
+
+                //Searching the classes at selected date
+                ArrayList<ScheduleModel> selectedDateClasses = new ArrayList<>();
+                for(int i=0;i<allClassSchedule.size();i++){
+                    Calendar selectedDateCalendar = Calendar.getInstance();
+                    try {
+                        selectedDateCalendar.setTime(dateFormat.parse(allClassSchedule.get(i).getClassDate()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    if(selectedDateCalendar.equals(calendar)){
+                        ScheduleModel item  = allClassSchedule.get(i);
+                        selectedDateClasses.add(item);
+                    }
+                }
+
+                //set recycler view adapter
+                ScheduleAdapter adapter = new ScheduleAdapter(getContext(),selectedDateClasses);
+                scheduleList.setAdapter(adapter);
             }
         });
+    }
 
-
-
+    public void configureCalendar(){
+        calendarView.setSelectedDate(CalendarDay.today());
+        calendarView.setSelectionColor(R.color.colorPrimary);
     }
 }

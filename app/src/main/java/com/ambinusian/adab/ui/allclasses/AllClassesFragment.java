@@ -32,12 +32,12 @@ import java.util.Map;
 
 public class AllClassesFragment extends Fragment {
 
-    RecyclerView coursesRecyclerView;
-    ArrayList<CourseModel> coursesList;
-    LinearLayout liveLayout;
-    ImageView liveClassIcon;
-    LinearLayoutManager linearLayoutManager;
-    TextView liveClassTitle, liveCourse, liveClassMeeting;
+    private RecyclerView coursesRecyclerView;
+    private ArrayList<CourseModel> coursesList;
+    private LinearLayout liveLayout;
+    private ImageView liveClassIcon;
+    private LinearLayoutManager linearLayoutManager;
+    private TextView liveClassTitle, liveCourse, liveClassMeeting;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,6 +57,9 @@ public class AllClassesFragment extends Fragment {
         liveCourse = view.findViewById(R.id.tv_liveCourse);
         liveClassMeeting = view.findViewById(R.id.tv_liveClassMeeting);
         coursesList = new ArrayList<>();
+
+        // set visibility gone
+        coursesRecyclerView.setVisibility(View.GONE);
 
         // get classes data
         APIManager apiManager = new APIManager(getContext());
@@ -81,9 +84,9 @@ public class AllClassesFragment extends Fragment {
                             classDate = new SimpleDateFormat("EEEE, d MMMM yyyy")
                                     .format(startDate);
 
-                            Date startTime = new SimpleDateFormat("hh:mm:ss")
+                            Date startTime = new SimpleDateFormat("HH:mm:ss")
                                     .parse((String) userClass.get("transaction_time"));
-                            classTime = new SimpleDateFormat("hh:mm")
+                            classTime = new SimpleDateFormat("HH:mm")
                                     .format(startTime);
 
                         } catch (ParseException e) { e.printStackTrace(); }
@@ -94,7 +97,7 @@ public class AllClassesFragment extends Fragment {
                                 classDate + " " + classTime,
                                 (String) userClass.get("topic"),
                                 (String) userClass.get("course_name"),
-                                "Meeting " + userClass.get("session"),
+                                getString(R.string.class_session) + " " + userClass.get("session"),
                                 (String) userClass.get("course_code"),
                                 (String) userClass.get("class_code"),
                                 (String) userClass.get("class_type")
@@ -103,6 +106,9 @@ public class AllClassesFragment extends Fragment {
 
                     //set adapter for recycler view
                     coursesRecyclerView.setAdapter(new CourseAdapter(getContext(),coursesList));
+
+                    //set visible
+                    coursesRecyclerView.setVisibility(View.VISIBLE);
                 }
             }
 

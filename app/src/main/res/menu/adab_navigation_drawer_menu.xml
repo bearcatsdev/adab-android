@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-        <item android:title="All Classes" android:id="@+id/menu_allClasses" android:icon="@drawable/round_view_stream_24px"></item>
-        <item android:title="Topics" android:id="@+id/menu_topics" android:icon="@drawable/round_book_24px"></item>
-        <item android:title="Calendar" android:id="@+id/menu_calendar" android:icon="@drawable/round_today_24px"></item>
-        <item android:title="Forum" android:id="@+id/menu_forum" android:icon="@drawable/round_forum_24px"></item>
-        <item android:title="Help" android:id="@+id/menu_help" android:icon="@drawable/round_help_24px"></item>
-        <item android:title="Setting" android:id="@+id/menu_setting" android:icon="@drawable/round_settings_24px"></item>
+        <item android:title="@string/nav_home" android:id="@+id/menu_allClasses" android:icon="@drawable/round_view_stream_24px"/>
+        <item android:title="@string/nav_topics" android:id="@+id/menu_topics" android:icon="@drawable/round_book_24px"/>
+        <item android:title="@string/nav_calendar" android:id="@+id/menu_calendar" android:icon="@drawable/round_today_24px"/>
+        <item android:title="@string/nav_discussion" android:id="@+id/menu_forum" android:icon="@drawable/round_forum_24px"/>
+        <item android:title="@string/nav_help" android:id="@+id/menu_help" android:icon="@drawable/round_help_24px"/>
+        <item android:title="@string/nav_setting" android:id="@+id/menu_setting" android:icon="@drawable/round_settings_24px"/>
     </group>
 </menu>
