@@ -40,8 +40,6 @@ public class CalendarFragment extends Fragment {
 
     MaterialCalendarView calendarView;
     TextView selectedDate;
-    String[] days = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
-    String[] months = {"January","Februabry","March","April","May","June","July","August","September","October","November","December"};
     ArrayList<ScheduleModel> allClassSchedule;
     SimpleDateFormat dateFormat;
     RecyclerView scheduleList;
@@ -95,7 +93,13 @@ public class CalendarFragment extends Fragment {
                 int currentMonth = calendar.getTime().getMonth();
                 int currentYear = calendar.getTime().getYear()+1900;
 
-                selectedDate.setText(days[currentDay]+", "+currentDate+" "+months[currentMonth]+" "+currentYear);
+                Date date2 = null;
+                try {
+                    date2 = new SimpleDateFormat("yyyy-MM-dd").parse(currentYear+"-"+currentMonth+"-"+currentDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                selectedDate.setText(new SimpleDateFormat("EEEE, d MMMM yyyy").format(date2));
 
                 //Searching the classes at selected date
                 ArrayList<ScheduleModel> selectedDateClasses = new ArrayList<>();
