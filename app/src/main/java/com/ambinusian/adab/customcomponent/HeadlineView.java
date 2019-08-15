@@ -4,37 +4,38 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import com.ambinusian.adab.R;
 
-public class Tag extends LinearLayout {
+public class HeadlineView extends RelativeLayout {
 
-    TextView tagText;
-    public Tag(@NonNull Context context, @Nullable AttributeSet attrs) {
+    TextView headlineTitle;
+
+    public HeadlineView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context,attrs);
     }
 
     public void init(Context context, AttributeSet attrs){
-        inflate(context, R.layout.layout_tag, this);
-        int[] sets = {R.attr.tagText};
+        inflate(context, R.layout.headline_view, this);
+        int[] sets = {R.attr.headlineTitle};
         TypedArray typedArray = context.obtainStyledAttributes(attrs, sets);
-        CharSequence tag_text = typedArray.getText(typedArray.getIndex(0));
+        CharSequence headline_title = typedArray.getText(typedArray.getIndex(0));
         typedArray.recycle();
 
         initComponents();
 
-        setTagText(tag_text);
+        setHeadlineTitle(headline_title);
     }
 
     private void initComponents() {
-        tagText = findViewById(R.id.tag_text);
+        headlineTitle = findViewById(R.id.headline_title);
     }
 
-    private void setTagText(CharSequence value){
-        tagText.setText(value);
+    private void setHeadlineTitle(CharSequence value){
+        headlineTitle.setText(value);
     }
 }

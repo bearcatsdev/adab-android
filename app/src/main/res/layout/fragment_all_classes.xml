@@ -1,97 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white_background"
     tools:context=".ui.allclasses.AllClassesFragment">
-
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
+
 
             <LinearLayout
                 android:id="@+id/liveLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white_background"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:padding="15dp"
-                android:visibility="gone">
+                android:orientation="vertical">
 
-                <com.ambinusian.adab.customcomponent.Tag
+
+                <com.ambinusian.adab.customcomponent.HeadlineView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    app:tagText="@string/tag_live_now" />
+                    app:headlineTitle="Ongoing Class" />
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="15dp" />
+                    android:layout_height="16dp" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/liveClassIcon"
-                    android:layout_width="85dp"
-                    android:layout_height="88dp"
-                    android:src="@drawable/ic_launcher_background" />
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    tools:src="@tools:sample/avatars" />
 
                 <TextView
                     android:id="@+id/tv_liveClassTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="@string/placeholder_title" />
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/text_caption"
+                    android:textStyle="bold"
+                    tools:text="@tools:sample/lorem" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
 
                 <TextView
                     android:id="@+id/tv_liveCourse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/placeholder_subtitle" />
+                    tools:text="Mobile Creative Design" />
 
                 <TextView
                     android:id="@+id/tv_liveClassMeeting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/placeholder_subtitle" />
+                    tools:text="Session 12" />
             </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="15dp" />
-            
+                android:layout_height="40dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@color/white_background"
-                android:animateLayoutChanges="true">
+                android:animateLayoutChanges="true"
+                android:orientation="vertical">
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp" />
 
-                <com.ambinusian.adab.customcomponent.Tag
+                <com.ambinusian.adab.customcomponent.SectionView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    app:tagText="@string/tag_lastest_class" />
+                    app:sectionSubtitle="@string/home_latest_subtitle"
+                    app:sectionTitle="@string/home_latest_title" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_courses"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:overScrollMode="never"
                     android:scrollbars="none"
-                    tools:listitem="@layout/recycler_view_item">
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_layout_courses" />
 
-                </androidx.recyclerview.widget.RecyclerView>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+                <com.ambinusian.adab.customcomponent.SectionView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:sectionSubtitle="@string/home_discussion_subtitle"
+                    app:sectionTitle="@string/home_discussion_title" />
+
+
             </LinearLayout>
-            
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

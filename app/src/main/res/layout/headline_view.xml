@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/headline_text"
+        android:id="@+id/headline_title"
         style="@style/TextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,9 +15,9 @@
     <View
         style="@style/Divider"
         android:layout_width="wrap_content"
-        android:layout_below="@+id/headline_text"
-        android:layout_alignStart="@id/headline_text"
-        android:layout_alignEnd="@id/headline_text"
+        android:layout_below="@id/headline_title"
+        android:layout_alignStart="@id/headline_title"
+        android:layout_alignEnd="@id/headline_title"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp" />

@@ -1,140 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-   >
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/classIcon"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_gravity="center"
+            tools:src="@tools:sample/avatars" />
+
+        <Space
+            android:layout_width="24dp"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_classTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_body"
+                tools:text="@tools:sample/date/ddmmyy" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
+            <TextView
+                android:id="@+id/tv_classTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_caption"
+                android:textStyle="bold"
+                tools:text="@tools:sample/lorem" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
+            <TextView
+                android:id="@+id/tv_courses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_body"
+                tools:text="Mobile Object Oriented Programming" />
+
+            <TextView
+                android:id="@+id/tv_classMeeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_body"
+                tools:text="Session 11" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_coursesCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:fontFamily="@font/interstate"
+                    android:gravity="center"
+                    android:textSize="@dimen/text_chip"
+                    app:chipBackgroundColor="#ffffff"
+                    app:chipStrokeColor="#E1E1E1"
+                    app:chipStrokeWidth="1dp"
+                    tools:text="MOBI6002" />
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_classCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:fontFamily="@font/interstate"
+                    android:gravity="center"
+                    app:chipBackgroundColor="#ffffff"
+                    app:chipStrokeColor="#E1E1E1"
+                    app:chipStrokeWidth="1dp"
+                    tools:text="LB03" />
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_classType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:fontFamily="@font/interstate"
+                    android:gravity="center"
+                    app:chipBackgroundColor="#ffffff"
+                    app:chipStrokeColor="#E1E1E1"
+                    app:chipStrokeWidth="1dp"
+                    tools:text="LEC" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#F5F5F5"
-            android:layout_marginVertical="15dp"
-            />
+            android:layout_marginTop="16sp"
+            android:layout_marginBottom="16sp"
+            android:background="#F5F5F5" />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginHorizontal="15dp">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="6"
-            android:gravity="center">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:layout_gravity="center"
-                android:id="@+id/classIcon"
-                android:src="@drawable/ic_launcher_background"/>
-
-        <Space
-            android:layout_width="20dp"
-            android:layout_height="match_parent" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:orientation="vertical">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="5"
-                >
-                <TextView
-                    android:layout_alignParentTop="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/placeholder_date"
-                    android:textSize="@dimen/text_body"
-                    android:id="@+id/tv_classTime"/>
-                <TextView
-                    android:layout_below="@id/tv_classTime"
-                    android:textStyle="bold"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/placeholder_title"
-                    android:id="@+id/tv_classTitle"
-                    android:textSize="@dimen/text_title"/>
-                <TextView
-                    android:textColor="@color/textColorPrimary"
-                    android:textSize="@dimen/text_body"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/placeholder_subtitle"
-                    android:id="@+id/tv_courses"
-                    android:layout_below
-                        ="@id/tv_classTitle" />
-                <TextView
-                    android:textColor="@color/textColorPrimary"
-                    android:textSize="@dimen/text_body"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/placeholder_subtitle"
-                    android:layout_below="@id/tv_courses"
-                    android:layout_alignParentBottom="true"
-                    android:id="@+id/tv_classMeeting"/>
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <com.google.android.material.chip.ChipGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_coursesCode"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/interstate"
-                        android:text="Test"
-                        android:textSize="@dimen/text_chip"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        app:chipBackgroundColor="#ffffff"
-                        app:chipStrokeColor="#E1E1E1"
-                        app:chipStrokeWidth="1dp" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_classCode"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/interstate"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        app:chipBackgroundColor="#ffffff"
-                        app:chipStrokeColor="#E1E1E1"
-                        app:chipStrokeWidth="1dp"
-                        android:text="Test1" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_classType"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/interstate"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        app:chipBackgroundColor="#ffffff"
-                        app:chipStrokeColor="#E1E1E1"
-                        app:chipStrokeWidth="1dp"
-                        android:text="Test2" />
-                </com.google.android.material.chip.ChipGroup>
-            </LinearLayout>
-
-        </LinearLayout>
-    </LinearLayout>
-
-</LinearLayout>
 </LinearLayout>
