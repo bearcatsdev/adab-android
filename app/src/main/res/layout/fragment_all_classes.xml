@@ -29,7 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    app:tagText="@string/tag_live_now"></com.ambinusian.adab.customcomponent.Tag>
+                    app:tagText="@string/tag_live_now" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -69,7 +69,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="@color/white_background">
+                android:background="@color/white_background"
+                android:animateLayoutChanges="true">
 
                 <Space
                     android:layout_width="match_parent"
@@ -79,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    app:tagText="@string/tag_lastest_class"></com.ambinusian.adab.customcomponent.Tag>
+                    app:tagText="@string/tag_lastest_class" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_courses"

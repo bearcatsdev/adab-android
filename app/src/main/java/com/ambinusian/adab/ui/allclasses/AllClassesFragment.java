@@ -58,6 +58,9 @@ public class AllClassesFragment extends Fragment {
         liveClassMeeting = view.findViewById(R.id.tv_liveClassMeeting);
         coursesList = new ArrayList<>();
 
+        // set visibility gone
+        coursesRecyclerView.setVisibility(View.GONE);
+
         // get classes data
         APIManager apiManager = new APIManager(getContext());
         UserPreferences userPreferences = new UserPreferences(getContext());
@@ -103,6 +106,9 @@ public class AllClassesFragment extends Fragment {
 
                     //set adapter for recycler view
                     coursesRecyclerView.setAdapter(new CourseAdapter(getContext(),coursesList));
+
+                    //set visible
+                    coursesRecyclerView.setVisibility(View.VISIBLE);
                 }
             }
 
