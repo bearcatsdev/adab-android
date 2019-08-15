@@ -17,7 +17,6 @@
             app:mcv_selectionColor="#00F"
             app:mcv_tileHeight="40dp"
             app:mcv_firstDayOfWeek="monday"/>
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
