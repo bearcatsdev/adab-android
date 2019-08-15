@@ -65,10 +65,9 @@
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimary"
             android:text="@string/action_login"
             android:textColor="@color/white_background"
-            style="@style/Widget.MaterialComponents.Button.TextButton"/>
+            style="@style/Widget.MaterialComponents.Button"/>
     </LinearLayout>
 
 </LinearLayout>
