@@ -32,12 +32,12 @@ import java.util.Map;
 
 public class AllClassesFragment extends Fragment {
 
-    RecyclerView coursesRecyclerView;
-    ArrayList<CourseModel> coursesList;
-    LinearLayout liveLayout;
-    ImageView liveClassIcon;
-    LinearLayoutManager linearLayoutManager;
-    TextView liveClassTitle, liveCourse, liveClassMeeting;
+    private RecyclerView coursesRecyclerView;
+    private ArrayList<CourseModel> coursesList;
+    private LinearLayout liveLayout;
+    private ImageView liveClassIcon;
+    private LinearLayoutManager linearLayoutManager;
+    private TextView liveClassTitle, liveCourse, liveClassMeeting;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
