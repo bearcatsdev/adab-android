@@ -94,7 +94,7 @@ public class AllClassesFragment extends Fragment {
                                 classDate + " " + classTime,
                                 (String) userClass.get("topic"),
                                 (String) userClass.get("course_name"),
-                                "Meeting " + userClass.get("session"),
+                                getString(R.string.class_session) + " " + userClass.get("session"),
                                 (String) userClass.get("course_code"),
                                 (String) userClass.get("class_code"),
                                 (String) userClass.get("class_type")

@@ -41,4 +41,5 @@
     <string name="unknown_error">Unknown error</string>
     <string name="session_expired">Session expired, please log in again.</string>
     <string name="action_logout">Logout</string>
+    <string name="class_session">Session</string>
 </resources>
