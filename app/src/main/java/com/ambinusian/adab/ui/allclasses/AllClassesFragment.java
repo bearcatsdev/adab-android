@@ -81,9 +81,9 @@ public class AllClassesFragment extends Fragment {
                             classDate = new SimpleDateFormat("EEEE, d MMMM yyyy")
                                     .format(startDate);
 
-                            Date startTime = new SimpleDateFormat("hh:mm:ss")
+                            Date startTime = new SimpleDateFormat("HH:mm:ss")
                                     .parse((String) userClass.get("transaction_time"));
-                            classTime = new SimpleDateFormat("hh:mm")
+                            classTime = new SimpleDateFormat("HH:mm")
                                     .format(startTime);
 
                         } catch (ParseException e) { e.printStackTrace(); }
