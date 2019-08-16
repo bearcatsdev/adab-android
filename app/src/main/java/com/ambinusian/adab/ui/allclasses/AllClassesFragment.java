@@ -93,6 +93,7 @@ public class AllClassesFragment extends Fragment {
 
                         //set list data for recycler view
                         coursesList.add(new CourseModel(
+                                (int) Integer.parseInt((String) userClass.get("session")),
                                 (int) userClass.get("class_icon"),
                                 classDate + " " + classTime,
                                 (String) userClass.get("topic"),

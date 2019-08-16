@@ -2,16 +2,18 @@ package com.ambinusian.adab.ui.main.courses.recyclerview;
 
 
 public class CourseModel {
-        private String classTime;
-        private String classTitle;
-        private String course;
-        private String classMeeting;
-        private String courseCode;
-        private String classCode;
-        private String classType;
-        private int classIcon;
+    private String classTime;
+    private String classTitle;
+    private String course;
+    private String classMeeting;
+    private String courseCode;
+    private String classCode;
+    private String classType;
+    private int classIcon;
+    private int classId;
 
-    public CourseModel(int classIcon, String classTime, String classTitle, String course, String classMeeting, String courseCode, String classCode,String classType) {
+    public CourseModel(int classId, int classIcon, String classTime, String classTitle, String course, String classMeeting, String courseCode, String classCode,String classType) {
+        this.classId = classId;
         this.classIcon = classIcon;
         this.classTime = classTime;
         this.classTitle = classTitle;
@@ -85,5 +87,13 @@ public class CourseModel {
 
     public void setClassType(String classType) {
         this.classType = classType;
+    }
+
+    public int getClassId() {
+        return classId;
+    }
+
+    public void setClassId(int classId) {
+        this.classId = classId;
     }
 }

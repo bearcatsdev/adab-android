@@ -1,6 +1,8 @@
 package com.ambinusian.adab.ui.main.courses.recyclerview;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ambinusian.adab.R;
+import com.ambinusian.adab.ui.livesession.LiveSessionActivity;
 
 import java.util.ArrayList;
 
@@ -236,5 +239,21 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseHolder> {
                 holder.classIcon.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.ic_class_61_shopping));
                 break;
         }
+
+        //set onclick listener
+        holder.mainLinearLayout.setOnClickListener(view -> {
+            Intent intent = new Intent(holder.itemView.getContext(), LiveSessionActivity.class);
+            int classId = item.getClassId();
+
+            //set all data to bundle
+            Bundle bundle = new Bundle();
+            bundle.putInt("class_id", classId);
+
+            //set bundle to the intent
+            intent.putExtras(bundle);
+
+            //go to LiveSessionActivity
+            holder.itemView.getContext().startActivity(intent);
+        });
     }
 }
