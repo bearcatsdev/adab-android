@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.allclasses;
+package com.ambinusian.adab.ui.student.allclasses;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -13,17 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
-import com.ambinusian.adab.ui.main.courses.recyclerview.CourseAdapter;
-import com.ambinusian.adab.ui.main.courses.recyclerview.CourseModel;
+import com.ambinusian.adab.ui.student.main.courses.recyclerview.CourseAdapter;
+import com.ambinusian.adab.ui.student.main.courses.recyclerview.CourseModel;
 import com.ambinusian.adab.R;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

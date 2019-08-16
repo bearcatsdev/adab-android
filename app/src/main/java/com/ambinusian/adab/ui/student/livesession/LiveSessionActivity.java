@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.livesession;
+package com.ambinusian.adab.ui.student.livesession;
 
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;

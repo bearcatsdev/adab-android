@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.main.courses.recyclerview;
+package com.ambinusian.adab.ui.student.main.courses.recyclerview;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ambinusian.adab.R;
-import com.ambinusian.adab.ui.livesession.LiveSessionActivity;
+import com.ambinusian.adab.ui.student.livesession.LiveSessionActivity;
 
 import java.util.ArrayList;
 

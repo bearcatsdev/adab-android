@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.calendar;
+package com.ambinusian.adab.ui.student.calendar;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;

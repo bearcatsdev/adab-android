@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.help;
+package com.ambinusian.adab.ui.student.topics;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -8,12 +8,13 @@ import android.view.ViewGroup;
 
 import com.ambinusian.adab.R;
 
-public class HelpFragment extends Fragment {
+public class TopicsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_help, container, false);
+        return inflater.inflate(R.layout.fragment_topics, container, false);
     }
+
 }

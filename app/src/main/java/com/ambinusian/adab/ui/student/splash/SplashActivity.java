@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.splash;
+package com.ambinusian.adab.ui.student.splash;
 
 import android.content.Intent;
 import android.widget.Toast;
@@ -9,7 +9,7 @@ import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.ui.login.LoginActivity;
-import com.ambinusian.adab.ui.main.MainActivity;
+import com.ambinusian.adab.ui.student.main.MainActivity;
 
 import java.util.Map;
 
