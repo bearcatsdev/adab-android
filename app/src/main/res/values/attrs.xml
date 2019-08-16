@@ -4,8 +4,8 @@
         <attr name="tagText" format="string"/>
     </declare-styleable>
     <declare-styleable name="SectionView">
-        <attr name="sectionTitle" format="string"/>
-        <attr name="sectionSubtitle" format="string"/>
+        <attr name="sectionTitle" format="reference|string"/>
+        <attr name="sectionSubtitle" format="reference|string"/>
     </declare-styleable>
     <declare-styleable name="HeadlineView">
         <attr name="headlineTitle" format="string"/>
