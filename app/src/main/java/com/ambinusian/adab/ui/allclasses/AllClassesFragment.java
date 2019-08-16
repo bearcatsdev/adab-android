@@ -120,7 +120,7 @@ public class AllClassesFragment extends Fragment {
         });
 
         //if live class is starting
-        if(true){
+        if(false){
             liveLayout.setVisibility(View.VISIBLE);
             liveClassIcon.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.ic_class_59_pencilpaper));
             liveClassTitle.setText("Design");
