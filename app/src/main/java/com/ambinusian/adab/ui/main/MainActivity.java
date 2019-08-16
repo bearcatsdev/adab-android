@@ -1,5 +1,6 @@
 package com.ambinusian.adab.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import com.ambinusian.adab.ui.calendar.CalendarFragment;
 import com.ambinusian.adab.ui.forum.ForumFragment;
 import com.ambinusian.adab.ui.help.HelpFragment;
 import com.ambinusian.adab.R;
+import com.ambinusian.adab.ui.login.LoginActivity;
 import com.ambinusian.adab.ui.settings.SettingFragment;
 import com.ambinusian.adab.ui.topics.TopicsFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -56,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
 
         listSemester = new ArrayList<>();
 
+        // set toolbar
+        setSupportActionBar(toolbar);
+
+        // remove title
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         //set up spinner
         SpinnerListSemester = mNavigationView.getHeaderView(0).findViewById(R.id.spinner_list_semesters);
         listSemester.add("2018 Semester 1");
@@ -63,46 +71,64 @@ public class MainActivity extends AppCompatActivity {
         SpinnerListSemester.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,listSemester));
 
         //icon menu clicked
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDrawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
+        toolbar.setNavigationOnClickListener(view -> mDrawerLayout.openDrawer(GravityCompat.START));
 
         //set first fragment launched
         getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new AllClassesFragment()).commit();
         mNavigationView.setCheckedItem(R.id.menu_allClasses);
 
         //navigation item clicked
-        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int id = menuItem.getItemId();
-                if(id == R.id.menu_allClasses){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new AllClassesFragment()).commit();
-                }
-                else if(id == R.id.menu_topics){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new TopicsFragment()).commit();
-                }
-                else if(id == R.id.menu_calendar){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new CalendarFragment()).commit();
-                }
-                else if(id == R.id.menu_forum){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new ForumFragment()).commit();
-                }
-                else if(id == R.id.menu_help){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new HelpFragment()).commit();
-                }
-                else if(id == R.id.menu_setting){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new SettingFragment()).commit();
-                }
-                mDrawerLayout.closeDrawer(GravityCompat.START);
-                return true;
+        mNavigationView.setNavigationItemSelectedListener(menuItem -> {
+            int id = menuItem.getItemId();
+            if(id == R.id.menu_allClasses){
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new AllClassesFragment()).commit();
             }
+            else if(id == R.id.menu_topics){
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new TopicsFragment()).commit();
+            }
+            else if(id == R.id.menu_calendar){
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new CalendarFragment()).commit();
+            }
+            else if(id == R.id.menu_forum){
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new ForumFragment()).commit();
+            }
+            else if(id == R.id.menu_help){
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new HelpFragment()).commit();
+            }
+            else if(id == R.id.menu_setting){
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new SettingFragment()).commit();
+            }
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+            return true;
         });
+    }
 
-//        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.option_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.menu_guide:
+                return true;
+            case R.id.menu_about:
+                return true;
+            case R.id.menu_help:
+                return true;
+            case R.id.menu_logout:
+                UserPreferences userPreferences = new UserPreferences(this);
+                userPreferences.clearLoggedInUser();
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }
