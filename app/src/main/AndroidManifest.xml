@@ -14,7 +14,7 @@
         <activity android:name=".ui.lecturer.main.MainActivity"></activity>
         <activity android:name=".ui.student.livesession.LiveSessionActivity" />
         <activity
-            android:name=".ui.student.splash.SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:theme="@style/Theme.Adab.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

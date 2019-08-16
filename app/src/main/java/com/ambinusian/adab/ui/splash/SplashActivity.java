@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.student.splash;
+package com.ambinusian.adab.ui.splash;
 
 import android.content.Intent;
 import android.widget.Toast;
@@ -52,7 +52,8 @@ public class SplashActivity extends AppCompatActivity {
 
                         } else if (privilege == 1) {
                             // dosen
-                            Toast.makeText(SplashActivity.this, "Coming soon", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(SplashActivity.this, com.ambinusian.adab.ui.lecturer.main.MainActivity.class));
+                            finish();
 
                         }
                     }
