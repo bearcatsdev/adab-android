@@ -7,6 +7,11 @@
     <string name="home_latest_subtitle">See what you\'ve missing so far</string>
     <string name="home_discussion_title">Discussion</string>
     <string name="home_discussion_subtitle">Discussion subtitle</string>
+
+    <!--Topics-->
+    <string name="topic_next_class">Next Class</string>
+    <string name="topic_class_schedule">Class Schedule</string>
+
     <!--Toolbar-->
     <string name="toolbar_all_classes">All Classes</string>
     <string name="toolbar_topics">Topics</string>

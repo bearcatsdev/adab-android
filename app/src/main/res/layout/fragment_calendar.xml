@@ -13,11 +13,11 @@
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="30dp"
             app:mcv_headerTextAppearance="@font/interstate"
-            app:mcv_weekDayLabels="@font/interstate"
+            app:mcv_weekDayTextAppearance="@font/interstate"
+            app:mcv_selectionColor="@color/colorPrimary"
             app:mcv_showOtherDates="all"
-            app:mcv_selectionColor="#00F"
             app:mcv_tileHeight="40dp"
             app:mcv_firstDayOfWeek="monday"/>
         <LinearLayout

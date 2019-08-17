@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import com.ambinusian.adab.expandablenavigationdrawer.ExpandableListAdapter;
 import com.ambinusian.adab.expandablenavigationdrawer.MenuModel;
 import com.ambinusian.adab.preferences.UserPreferences;
@@ -108,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
 
         //set first fragment launched
         getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new AllClassesFragment()).commit();
-        expandableListView.setItemChecked(0,true);
 
         //set expandable navigation drawer
         prepareMenuData();
@@ -134,6 +134,9 @@ public class MainActivity extends AppCompatActivity {
 
         expandableListAdapter = new ExpandableListAdapter(this, groupList,childList);
         expandableListView.setAdapter(expandableListAdapter);
+        expandableListView.setFocusable(true);
+        expandableListView.setFocusableInTouchMode(true);
+        expandableListView.setItemChecked(1,true);
 
         expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
@@ -186,8 +189,15 @@ public class MainActivity extends AppCompatActivity {
                 int index = parent.getFlatListPosition(ExpandableListView.getPackedPositionForChild(groupPosition,childPosition));
 
                 parent.setItemChecked(index,true);
-                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new TopicsFragment()).commit();
                 mDrawerLayout.closeDrawer(GravityCompat.START);
+
+                //send bundle to Topics Fragment
+                Bundle bundle = new Bundle();
+                bundle.putString("class_id","12");
+                bundle.putString("topic_title",childList.get(groupList.get(groupPosition)).get(childPosition).menuName);
+                TopicsFragment topicsFragment = new TopicsFragment();
+                topicsFragment.setArguments(bundle);
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,topicsFragment).commit();
 
                 return false;
             }

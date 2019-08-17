@@ -89,7 +89,7 @@ public class CalendarFragment extends Fragment {
                 Calendar calendar = date.getCalendar();
                 int currentDay= calendar.getTime().getDay();
                 int currentDate = calendar.getTime().getDate();
-                int currentMonth = calendar.getTime().getMonth();
+                int currentMonth = calendar.getTime().getMonth()+1;
                 int currentYear = calendar.getTime().getYear()+1900;
 
                 Date date2 = null;
@@ -125,6 +125,19 @@ public class CalendarFragment extends Fragment {
 
     public void configureCalendar(){
         calendarView.setSelectedDate(CalendarDay.today());
-        calendarView.setSelectionColor(R.color.colorPrimary);
+        Calendar calendar = Calendar.getInstance();
+        int currentDay= calendar.getTime().getDay();
+        int currentDate = calendar.getTime().getDate();
+        int currentMonth = calendar.getTime().getMonth()+1;
+        int currentYear = calendar.getTime().getYear()+1900;
+
+        Date date2 = null;
+        try {
+            date2 = new SimpleDateFormat("yyyy-MM-dd").parse(currentYear+"-"+currentMonth+"-"+currentDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        selectedDate.setText(new SimpleDateFormat("EEEE, d MMMM yyyy").format(date2));
+
     }
 }

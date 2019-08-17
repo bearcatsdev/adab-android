@@ -3,12 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/white_background"
+    xmlns:tool="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.student.topics.TopicsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_topicTitle"
+            android:textSize="@dimen/text_title"
+            tools:text="Mobile Object Oriented Programming"/>
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_caption"
+            android:text="@string/topic_next_class" />
+        
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rv_classTopic"
+            android:overScrollMode="never"
+            android:padding="16dp"
+            android:scrollbars="none">
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
 
 </FrameLayout>
