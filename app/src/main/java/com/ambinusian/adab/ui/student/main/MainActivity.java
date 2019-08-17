@@ -25,6 +25,7 @@ import com.ambinusian.adab.ui.student.calendar.CalendarFragment;
 import com.ambinusian.adab.ui.student.forum.ForumFragment;
 import com.ambinusian.adab.ui.student.help.HelpFragment;
 import com.ambinusian.adab.ui.student.settings.SettingFragment;
+import com.ambinusian.adab.ui.student.topics.TopicsFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -185,6 +186,9 @@ public class MainActivity extends AppCompatActivity {
                 int index = parent.getFlatListPosition(ExpandableListView.getPackedPositionForChild(groupPosition,childPosition));
 
                 parent.setItemChecked(index,true);
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new TopicsFragment()).commit();
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+
                 return false;
             }
         });
