@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.allclasses;
+package com.ambinusian.adab.ui.student.allclasses;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -13,17 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
-import com.ambinusian.adab.ui.main.courses.recyclerview.CourseAdapter;
-import com.ambinusian.adab.ui.main.courses.recyclerview.CourseModel;
+import com.ambinusian.adab.ui.student.main.courses.recyclerview.CourseAdapter;
+import com.ambinusian.adab.ui.student.main.courses.recyclerview.CourseModel;
 import com.ambinusian.adab.R;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -93,6 +91,7 @@ public class AllClassesFragment extends Fragment {
 
                         //set list data for recycler view
                         coursesList.add(new CourseModel(
+                                (int) Integer.parseInt((String) userClass.get("session")),
                                 (int) userClass.get("class_icon"),
                                 classDate + " " + classTime,
                                 (String) userClass.get("topic"),
@@ -119,7 +118,7 @@ public class AllClassesFragment extends Fragment {
         });
 
         //if live class is starting
-        if(true){
+        if(false){
             liveLayout.setVisibility(View.VISIBLE);
             liveClassIcon.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.ic_class_59_pencilpaper));
             liveClassTitle.setText("Design");

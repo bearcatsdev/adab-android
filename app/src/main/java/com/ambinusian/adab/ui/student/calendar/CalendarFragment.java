@@ -1,10 +1,9 @@
-package com.ambinusian.adab.ui.calendar;
+package com.ambinusian.adab.ui.student.calendar;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -15,8 +14,8 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ambinusian.adab.R;
-import com.ambinusian.adab.ui.main.schedulereyclerview.ScheduleAdapter;
-import com.ambinusian.adab.ui.main.schedulereyclerview.ScheduleModel;
+import com.ambinusian.adab.ui.student.main.schedulereyclerview.ScheduleAdapter;
+import com.ambinusian.adab.ui.student.main.schedulereyclerview.ScheduleModel;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;

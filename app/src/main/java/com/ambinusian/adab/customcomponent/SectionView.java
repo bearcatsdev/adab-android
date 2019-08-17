@@ -3,6 +3,8 @@ package com.ambinusian.adab.customcomponent;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -14,29 +16,55 @@ public class SectionView extends RelativeLayout {
     TextView sectionTitle;
     TextView sectionSubtitle;
 
-    public SectionView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public SectionView(Context context) {
+        super(context);
+        initView();
+
+    }
+
+    public SectionView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context,attrs);
+        initView();
+        getAttrs(attrs);
+
     }
 
-    public void init(Context context, AttributeSet attrs){
-        inflate(context, R.layout.section_view, this);
-        int[] sets = {R.attr.sectionTitle, R.attr.sectionTitle};
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, sets);
-        CharSequence title = typedArray.getText(typedArray.getIndex(0));
-        CharSequence subtitle = typedArray.getText(typedArray.getIndex(1));
+    public SectionView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs);
+        initView();
+        getAttrs(attrs, defStyle);
 
-        typedArray.recycle();
-
-        initComponents();
-
-        setSectionTitle(title);
-        setSectionSubtitle(subtitle);
     }
 
-    private void initComponents() {
+    private void initView() {
+        String infService = Context.LAYOUT_INFLATER_SERVICE;
+        LayoutInflater li = (LayoutInflater) getContext().getSystemService(infService);
+        View v = li.inflate(R.layout.section_view, this, false);
+        addView(v);
+
         sectionTitle = findViewById(R.id.section_title);
         sectionSubtitle = findViewById(R.id.section_subtitle);
+    }
+
+    private void getAttrs(AttributeSet attrs) {
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.SectionView);
+
+        setTypeArray(typedArray);
+    }
+
+
+    private void getAttrs(AttributeSet attrs, int defStyle) {
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.SectionView, defStyle, 0);
+        setTypeArray(typedArray);
+    }
+
+
+    private void setTypeArray(TypedArray typedArray) {
+        String sectionTitle = typedArray.getString(R.styleable.SectionView_sectionTitle);
+        String sectionSubtitle = typedArray.getString(R.styleable.SectionView_sectionSubtitle);
+        this.sectionTitle.setText(sectionTitle);
+        this.sectionSubtitle.setText(sectionSubtitle);
+        typedArray.recycle();
     }
 
     private void setSectionTitle(CharSequence value){

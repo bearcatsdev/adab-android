@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.main.schedulereyclerview;
+package com.ambinusian.adab.ui.student.main.schedulereyclerview;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ambinusian.adab.R;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleHolder> {
     private Context context;

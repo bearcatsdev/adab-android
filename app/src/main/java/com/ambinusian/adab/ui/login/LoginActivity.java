@@ -2,8 +2,6 @@ package com.ambinusian.adab.ui.login;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +9,6 @@ import com.ambinusian.adab.R;
 import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
-import com.ambinusian.adab.ui.main.MainActivity;
 import com.ambinusian.adab.ui.splash.SplashActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;

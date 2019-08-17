@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">\
-    <item android:title="How to use"></item>
-    <item android:title="About"></item>
-    <item android:title="Need Help? Ask us here!"></item>
-    <item android:title="@string/action_logout"></item>
+    <item
+        android:id="@+id/menu_guide"
+        android:title="@string/how_to_use"/>
+
+    <item
+        android:id="@+id/menu_about"
+        android:title="@string/about" />
+
+    <item
+        android:id="@+id/menu_help"
+        android:title="@string/need_help_ask_us_here" />
+
+    <item
+        android:id="@+id/menu_logout"
+        android:title="@string/action_logout"/>
 </menu>

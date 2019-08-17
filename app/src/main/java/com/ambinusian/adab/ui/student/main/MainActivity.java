@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.main;
+package com.ambinusian.adab.ui.student.main;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -19,13 +19,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.ambinusian.adab.expandablenavigationdrawer.ExpandableListAdapter;
 import com.ambinusian.adab.expandablenavigationdrawer.MenuModel;
 import com.ambinusian.adab.preferences.UserPreferences;
-import com.ambinusian.adab.ui.allclasses.AllClassesFragment;
-import com.ambinusian.adab.ui.calendar.CalendarFragment;
-import com.ambinusian.adab.ui.forum.ForumFragment;
-import com.ambinusian.adab.ui.help.HelpFragment;
 import com.ambinusian.adab.R;
-import com.ambinusian.adab.ui.settings.SettingFragment;
-import com.ambinusian.adab.ui.topics.TopicsFragment;
+import com.ambinusian.adab.ui.student.allclasses.AllClassesFragment;
+import com.ambinusian.adab.ui.student.calendar.CalendarFragment;
+import com.ambinusian.adab.ui.student.forum.ForumFragment;
+import com.ambinusian.adab.ui.student.help.HelpFragment;
+import com.ambinusian.adab.ui.student.settings.SettingFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white_background"
-    tools:context=".ui.allclasses.AllClassesFragment">
+    tools:context=".ui.student.allclasses.AllClassesFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -15,7 +15,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
 
             <LinearLayout
@@ -23,7 +25,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
 
                 <com.ambinusian.adab.customcomponent.HeadlineView
@@ -65,11 +68,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="Session 12" />
-            </LinearLayout>
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="40dp" />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -82,8 +85,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    app:sectionSubtitle="@string/home_latest_subtitle"
-                    app:sectionTitle="@string/home_latest_title" />
+                    app:sectionTitle="@string/home_latest_title"
+                    app:sectionSubtitle="@string/home_latest_subtitle"/>
 
                 <Space
                     android:layout_width="wrap_content"

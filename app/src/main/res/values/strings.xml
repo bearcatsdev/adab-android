@@ -45,4 +45,7 @@
     <string name="session_expired">Session expired, please log in again.</string>
     <string name="action_logout">Logout</string>
     <string name="class_session">Session</string>
+    <string name="how_to_use">How to use</string>
+    <string name="about">About</string>
+    <string name="need_help_ask_us_here">Need Help? Ask us here!</string>
 </resources>

@@ -8,8 +8,11 @@
 
 
     <LinearLayout
+        android:id="@+id/linear_layout_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:paddingTop="5dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/classIcon"

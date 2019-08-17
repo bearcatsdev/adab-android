@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.livesession;
+package com.ambinusian.adab.ui.student.livesession;
 
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,6 @@ public class LiveSessionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_live_session);
 
         Bundle bundle = getIntent().getExtras();
-        Toast.makeText(this, bundle.getString("courseid"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, String.valueOf(bundle.getInt("class_id")), Toast.LENGTH_SHORT).show();
     }
 }

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/mDrawerLayout"
-    tools:context=".ui.main.MainActivity"
+    tools:context=".ui.student.main.MainActivity"
     android:background="@color/slightlyWhite">
 
     <LinearLayout
@@ -22,7 +22,6 @@
                 android:layout_height="?attr/actionBarSize"
                 style="@style/Widget.Adab.Toolbar"
                 app:navigationIcon="@drawable/ic_icon_menu"
-                app:menu="@menu/option_menu"
                 android:elevation="0dp">
                 <TextView
                     android:textSize="20sp"
