@@ -43,19 +43,28 @@
     </LinearLayout>
 
 
+    <!--app:menu="@menu/adab_navigation_drawer_menu"-->
+    <!--app:itemIconTint="@drawable/drawer_icon_text_effect"-->
+    <!--app:itemTextColor="@drawable/drawer_icon_text_effect"-->
+    <!--app:itemBackground="@drawable/drawer_background_effect"-->
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:layout_gravity="start"
-        app:headerLayout="@layout/adab_nav_header_layout"
-        app:menu="@menu/adab_navigation_drawer_menu"
-        app:itemIconTint="@drawable/drawer_icon_text_effect"
-        app:itemTextColor="@drawable/drawer_icon_text_effect"
-        app:itemBackground="@drawable/drawer_background_effect"
         android:id="@+id/nv_adab"
         >
-
+        <ExpandableListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null"
+            android:groupIndicator="@drawable/expandable_group_indicator"
+            android:dividerHeight="8dp"
+            android:choiceMode="singleChoice"
+            android:listSelector="@android:color/transparent"
+            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+            android:focusable="true"
+            android:id="@+id/expandableListView"></ExpandableListView>
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>
