@@ -1,5 +1,6 @@
 package com.ambinusian.adab.ui.student.main;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -21,6 +22,7 @@ import com.ambinusian.adab.expandablenavigationdrawer.ExpandableListAdapter;
 import com.ambinusian.adab.expandablenavigationdrawer.MenuModel;
 import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.R;
+import com.ambinusian.adab.ui.login.LoginActivity;
 import com.ambinusian.adab.ui.student.allclasses.AllClassesFragment;
 import com.ambinusian.adab.ui.student.calendar.CalendarFragment;
 import com.ambinusian.adab.ui.student.forum.ForumFragment;
@@ -66,6 +68,12 @@ public class MainActivity extends AppCompatActivity {
         listSemester = new ArrayList<>();
         headerView = getLayoutInflater().inflate(R.layout.adab_nav_header_layout,null);
 
+        // set toolbar
+        setSupportActionBar(toolbar);
+
+        // remove title
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         textUserName = headerView.findViewById(R.id.text_user_name);
         textUserNIM = headerView.findViewById(R.id.text_user_nim);
         textUserDepartment = headerView.findViewById(R.id.text_user_department);
@@ -81,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         int width = metrics.widthPixels;
         expandableListView.setIndicatorBounds(width - GetPixelFromDips(50), width - GetPixelFromDips(10));
 
-        //add headerView to expadableListView
+        //add headerView to expandableListView
         expandableListView.addHeaderView(headerView);
 
         //set course Subject
@@ -100,12 +108,7 @@ public class MainActivity extends AppCompatActivity {
         SpinnerListSemester.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,listSemester));
 
         //icon menu clicked
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDrawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
+        toolbar.setNavigationOnClickListener(view -> mDrawerLayout.openDrawer(GravityCompat.START));
 
         //set first fragment launched
         getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new AllClassesFragment()).commit();
@@ -113,8 +116,6 @@ public class MainActivity extends AppCompatActivity {
         //set expandable navigation drawer
         prepareMenuData();
         populateExpandableList();
-
-//        startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
 
     public void prepareMenuData(){
@@ -138,69 +139,63 @@ public class MainActivity extends AppCompatActivity {
         expandableListView.setFocusableInTouchMode(true);
         expandableListView.setItemChecked(1,true);
 
-        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                if(groupPosition == 0){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new AllClassesFragment()).commit();
-                }
-                else if(groupPosition == 2){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new CalendarFragment()).commit();
-                }
-                else if(groupPosition == 3){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new ForumFragment()).commit();
-                }
-                else if(groupPosition == 4){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new HelpFragment()).commit();
-                }
-                else if(groupPosition == 5){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new SettingFragment()).commit();
-                }
-                else if(groupPosition == 1){
-                    if(!expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() > 2){
-                        parent.setItemChecked(expandableListView.getCheckedItemPosition()+7,true);
-                    }
-                    else
-                    if(expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() > 2){
-                        parent.setItemChecked(expandableListView.getCheckedItemPosition()-7,true);
-                    }
-                }
-
-                //don't close the drawer if selected Topics menu. Otherwise, just close it
-                if(groupPosition != 1){
-                    mDrawerLayout.closeDrawer(GravityCompat.START);
-                }
-
-                //for hightlight menu background
-                int index = parent.getFlatListPosition(ExpandableListView.getPackedPositionForGroup(groupPosition));
-                if(!(groupList.get(groupPosition).hasChildren) && parent.getCheckedItemPosition() != index){
-                    parent.setItemChecked(index,true);
-                    mDrawerLayout.closeDrawer(GravityCompat.START);
-                }
-
-                expandableListAdapter.notifyDataSetChanged();
-                return false;
+        expandableListView.setOnGroupClickListener((parent, v, groupPosition, id) -> {
+            if(groupPosition == 0){
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new AllClassesFragment()).commit();
             }
-        });
+            else if(groupPosition == 2){
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new CalendarFragment()).commit();
+            }
+            else if(groupPosition == 3){
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new ForumFragment()).commit();
+            }
+            else if(groupPosition == 4){
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new HelpFragment()).commit();
+            }
+            else if(groupPosition == 5){
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new SettingFragment()).commit();
+            }
+            else if(groupPosition == 1){
+                if(!expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() > 2){
+                    parent.setItemChecked(expandableListView.getCheckedItemPosition()+7,true);
+                }
+                else
+                if(expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() > 2){
+                    parent.setItemChecked(expandableListView.getCheckedItemPosition()-7,true);
+                }
+            }
 
-        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                int index = parent.getFlatListPosition(ExpandableListView.getPackedPositionForChild(groupPosition,childPosition));
+            //don't close the drawer if selected Topics menu. Otherwise, just close it
+            if(groupPosition != 1){
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+            }
 
+            //for highlight menu background
+            int index = parent.getFlatListPosition(ExpandableListView.getPackedPositionForGroup(groupPosition));
+            if(!(groupList.get(groupPosition).hasChildren) && parent.getCheckedItemPosition() != index){
                 parent.setItemChecked(index,true);
                 mDrawerLayout.closeDrawer(GravityCompat.START);
-
-                //send bundle to Topics Fragment
-                Bundle bundle = new Bundle();
-                bundle.putString("class_id","12");
-                bundle.putString("topic_title",childList.get(groupList.get(groupPosition)).get(childPosition).menuName);
-                TopicsFragment topicsFragment = new TopicsFragment();
-                topicsFragment.setArguments(bundle);
-                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,topicsFragment).commit();
-
-                return false;
             }
+
+            expandableListAdapter.notifyDataSetChanged();
+            return false;
+        });
+
+        expandableListView.setOnChildClickListener((parent, v, groupPosition, childPosition, id) -> {
+            int index = parent.getFlatListPosition(ExpandableListView.getPackedPositionForChild(groupPosition,childPosition));
+
+            parent.setItemChecked(index,true);
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+
+            //send bundle to Topics Fragment
+            Bundle bundle = new Bundle();
+            bundle.putString("class_id","12");
+            bundle.putString("topic_title",childList.get(groupList.get(groupPosition)).get(childPosition).menuName);
+            TopicsFragment topicsFragment = new TopicsFragment();
+            topicsFragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,topicsFragment).commit();
+
+            return false;
         });
     }
 
@@ -211,5 +206,32 @@ public class MainActivity extends AppCompatActivity {
         return (int) (pixels * scale + 0.5f);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.option_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.menu_guide:
+                return true;
+            case R.id.menu_about:
+                return true;
+            case R.id.menu_help:
+                return true;
+            case R.id.menu_logout:
+                UserPreferences userPreferences = new UserPreferences(this);
+                userPreferences.clearLoggedInUser();
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
 
