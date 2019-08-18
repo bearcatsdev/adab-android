@@ -158,9 +158,7 @@ public class MainActivity extends AppCompatActivity {
             else if(groupPosition == 1){
                 if(!expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() > 2){
                     parent.setItemChecked(expandableListView.getCheckedItemPosition()+7,true);
-                }
-                else
-                if(expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() > 2){
+                } else if(expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() > 2){
                     parent.setItemChecked(expandableListView.getCheckedItemPosition()-7,true);
                 }
             }
