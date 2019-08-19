@@ -4,7 +4,7 @@
     <string name="home_category_live">Live Now</string>
     <string name="home_category_all">All Classes</string>
     <string name="home_latest_title">Latest Class</string>
-    <string name="home_latest_subtitle">See what you\'ve missing so far</string>
+    <string name="home_latest_subtitle">See what classes you\'ve done so far</string>
     <string name="home_discussion_title">Discussion</string>
     <string name="home_discussion_subtitle">Discussion subtitle</string>
 

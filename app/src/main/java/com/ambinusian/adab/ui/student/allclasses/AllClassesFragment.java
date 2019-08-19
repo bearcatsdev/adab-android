@@ -1,6 +1,7 @@
 package com.ambinusian.adab.ui.student.allclasses;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
+import com.ambinusian.adab.ui.student.livesession.LiveSessionActivity;
 import com.ambinusian.adab.ui.student.main.courses.recyclerview.CourseAdapter;
 import com.ambinusian.adab.ui.student.main.courses.recyclerview.CourseModel;
 import com.ambinusian.adab.R;
@@ -73,34 +75,64 @@ public class AllClassesFragment extends Fragment {
                     coursesRecyclerView.setLayoutManager(linearLayoutManager);
 
                     for (Map<String, Object> userClass: userClasses) {
-                        // parse date
-                        String classDate = "";
-                        String classTime = "";
-                        try {
-                            Date startDate = new SimpleDateFormat("yyyy-MM-dd")
-                                    .parse((String) userClass.get("transaction_date"));
-                            classDate = new SimpleDateFormat("EEEE, d MMMM yyyy")
-                                    .format(startDate);
 
-                            Date startTime = new SimpleDateFormat("HH:mm:ss")
-                                    .parse((String) userClass.get("transaction_time"));
-                            classTime = new SimpleDateFormat("HH:mm")
-                                    .format(startTime);
+                        if ((int) userClass.get("is_done") == 1) {
 
-                        } catch (ParseException e) { e.printStackTrace(); }
+                            // parse date
+                            String classDate = "";
+                            String classTime = "";
+                            try {
+                                Date startDate = new SimpleDateFormat("yyyy-MM-dd")
+                                        .parse((String) userClass.get("transaction_date"));
+                                classDate = new SimpleDateFormat("EEEE, d MMMM yyyy")
+                                        .format(startDate);
 
-                        //set list data for recycler view
-                        coursesList.add(new CourseModel(
-                                (int) Integer.parseInt((String) userClass.get("session")),
-                                (int) userClass.get("class_icon"),
-                                classDate + " " + classTime,
-                                (String) userClass.get("topic"),
-                                (String) userClass.get("course_name"),
-                                getString(R.string.class_session) + " " + userClass.get("session"),
-                                (String) userClass.get("course_code"),
-                                (String) userClass.get("class_code"),
-                                (String) userClass.get("class_type")
-                        ));
+                                Date startTime = new SimpleDateFormat("HH:mm:ss")
+                                        .parse((String) userClass.get("transaction_time"));
+                                classTime = new SimpleDateFormat("HH:mm")
+                                        .format(startTime);
+
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            //set list data for recycler view
+                            coursesList.add(new CourseModel(
+                                    (int) userClass.get("transaction_Id"),
+                                    (int) userClass.get("class_icon"),
+                                    classDate + " " + classTime,
+                                    (String) userClass.get("topic"),
+                                    (String) userClass.get("course_name"),
+                                    getString(R.string.class_session) + " " + userClass.get("session"),
+                                    (String) userClass.get("course_code"),
+                                    (String) userClass.get("class_code"),
+                                    (String) userClass.get("class_type")
+                            ));
+                        }
+
+                        if ((int) userClass.get("is_live") == 1) {
+                                liveLayout.setVisibility(View.VISIBLE);
+                                liveClassIcon.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.ic_class_59_pencilpaper));
+                                liveClassTitle.setText((String) userClass.get("topic"));
+                                liveCourse.setText((String) userClass.get("course_name"));
+                                String meeting = getString(R.string.class_session) + " " + userClass.get("session");
+                                liveClassMeeting.setText(meeting);
+
+                                liveLayout.setOnClickListener(v -> {
+                                    Intent intent = new Intent(getContext(), LiveSessionActivity.class);
+                                    int classId = (int) userClass.get("transaction_Id");
+
+                                    //set all data to bundle
+                                    Bundle bundle = new Bundle();
+                                    bundle.putInt("class_id", classId);
+
+                                    //set bundle to the intent
+                                    intent.putExtras(bundle);
+
+                                    //go to LiveSessionActivity
+                                    startActivity(intent);
+                                });
+                        }
                     }
 
                     //set adapter for recycler view
@@ -116,16 +148,5 @@ public class AllClassesFragment extends Fragment {
 
             }
         });
-
-        //if live class is starting
-        if(false){
-            liveLayout.setVisibility(View.VISIBLE);
-            liveClassIcon.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.ic_class_59_pencilpaper));
-            liveClassTitle.setText("Design");
-            liveCourse.setText("Design");
-            liveClassMeeting.setText("Meeting 99");
-        }
-
-
     }
 }
