@@ -14,6 +14,9 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ambinusian.adab.R;
+import com.ambinusian.adab.manager.APIManager;
+import com.ambinusian.adab.manager.NetworkHelper;
+import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.ui.student.main.schedulereyclerview.ScheduleAdapter;
 import com.ambinusian.adab.ui.student.main.schedulereyclerview.ScheduleModel;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -58,12 +61,32 @@ public class CalendarFragment extends Fragment {
         //set recycler view layout manager
         scheduleList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        //information needed = classDate, classType, classTitle, course, courseCode, classRoom, classTime
-        //add all class schedule dummy data
-        allClassSchedule.add(new ScheduleModel("2019-09-16","LEC","Java","MOOP","MOBI009","711A","11:20-13:00"));
-        allClassSchedule.add(new ScheduleModel("2019-09-17","LEC","Kalimat Efektif","Bahasa Indonesia","ID1010","711A","11:20-13:00"));
-        allClassSchedule.add(new ScheduleModel("2019-09-17","LEC","Storage","MOOP","MOBI009","711A","11:20-13:00"));
-        allClassSchedule.add(new ScheduleModel("2019-09-19","LEC","Java","MOOP","MOBI009","711A","11:20-13:00"));
+        APIManager apiManager = new APIManager(getContext());
+        UserPreferences userPreferences = new UserPreferences(getContext());
+        apiManager.getUserClasses(userPreferences.getUserToken(), new NetworkHelper.getUserClasses() {
+                    @Override
+                    public void onResponse(Boolean success, Map<String, Object>[] userClasses) {
+                        //information needed = classDate, classType, classTitle, course, courseCode, classRoom, classTime
+                        //add all class schedule dummy data
+                        if (success) {
+                            for (Map<String, Object> userClass : userClasses) {
+                                allClassSchedule.add(new ScheduleModel(
+                                        (String) userClass.get("transaction_date"),
+                                        (String) userClass.get("class_type"),
+                                        (String) userClass.get("topic"),
+                                        (String) userClass.get("course_name"),
+                                        (String) userClass.get("course_code"),
+                                        (String) userClass.get("class_code"),
+                                        (String) userClass.get("transaction_time")));
+                            }
+                        }
+                        }
+
+                    @Override
+                    public void onError(int errorCode, String errorReason) {
+
+                    }
+                });
 
         //add all class Schedule to calendar
         List<CalendarDay> classSchedule = new ArrayList<>();
