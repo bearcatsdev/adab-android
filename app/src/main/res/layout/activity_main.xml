@@ -21,8 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 style="@style/Widget.Adab.Toolbar"
-                app:navigationIcon="@drawable/ic_icon_menu"
-                android:elevation="0dp">
+                app:navigationIcon="@drawable/ic_icon_menu">
                 <TextView
                     android:textSize="20sp"
                     android:layout_width="wrap_content"
