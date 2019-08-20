@@ -19,4 +19,9 @@ public class NetworkHelper {
         void onError(int errorCode, String errorReason);
     }
 
+    public interface getClassDetails {
+        void onResponse(Boolean success, Map<String, Object> classDetails);
+        void onError(int errorCode, String errorReason);
+    }
+
 }

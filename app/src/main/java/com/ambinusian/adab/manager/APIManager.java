@@ -63,7 +63,7 @@ public class APIManager {
     }
 
     public void getUserClasses(String tokenId, NetworkHelper.getUserClasses callback) {
-        String API_PATH = "/user/class";
+        String API_PATH = "/user/classes";
 
         NetworkManager networkManager = new NetworkManager(context);
 
@@ -122,6 +122,45 @@ public class APIManager {
                 Map<String, Object> userProfile = JsonHelper.toMap(userJson);
 
                 callback.onResponse(true, userProfile);
+
+            } else {
+                // Not OK
+
+                if (response.getString("status").equals("403")) {
+                    // unauthorized, tell user to re-login
+                    reLoginUser(context);
+                    callback.onError(403, "Unauthorized");
+
+                } else if (response.getString("status").equals("400")) {
+                    // server error
+                    callback.onError(response.getJSONObject("reason").getInt("error_code"),
+                            response.getJSONObject("reason").getString("error_message"));
+                }
+
+                callback.onResponse(false, null);
+            }
+        }));
+    }
+
+    public void getClassDetails(String tokenId, int transactionId, NetworkHelper.getClassDetails callback) {
+        String API_PATH = "/user/class/details";
+
+        NetworkManager networkManager = new NetworkManager(context);
+
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("token_id", tokenId);
+        params.put("transaction_id", transactionId);
+
+        JSONObject jsonBody = new JSONObject(params);
+
+        networkManager.doPostRequest(jsonBody, API_PATH, (response -> {
+            // OK
+            Log.d(TAG, response.toString());
+            if (response.getString("status").equals("200")) {
+                JSONObject userJson = response.getJSONObject("response");
+                Map<String, Object> classDetails = JsonHelper.toMap(userJson);
+
+                callback.onResponse(true, classDetails);
 
             } else {
                 // Not OK
