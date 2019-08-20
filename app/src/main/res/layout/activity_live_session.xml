@@ -20,10 +20,10 @@
             app:expandedTitleGravity="top"
             app:expandedTitleMarginTop="64dp"
             app:expandedTitleMarginStart="24dp"
+            app:expandedTitleMarginEnd="64dp"
             app:collapsedTitleGravity="start|center_vertical"
-            app:layout_scrollFlags="snap|scroll|exitUntilCollapsed"
-            app:contentScrim="@android:color/white"
-            app:expandedTitleTextAppearance="@style/expanded_toolbar_title">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="@android:color/white">
 
             <View
                 android:layout_width="match_parent"

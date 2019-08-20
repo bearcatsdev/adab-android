@@ -180,7 +180,7 @@
                     android:layout_height="match_parent"
                     android:overScrollMode="never"
                     android:scrollbars="none"
-                    tools:itemCount="3"
+                    tools:itemCount="5"
                     tools:listitem="@layout/item_layout_courses" />
 
                 <Space

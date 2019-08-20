@@ -9,6 +9,18 @@
     <string name="home_discussion_subtitle">Discussion subtitle</string>
     <string name="home_next_class_title">Your Next Class</string>
 
+
+    <!--Lecturer Home-->
+    <string name="lecturer_home_next_schedule_title">Your Next Schedule</string>
+    <string name="lecturer_home_next_schedule_subtitle">Never Missed yout class</string>
+    <string name="lecturer_discussion_title">Discussion</string>
+    <string name="lecturer_discussion_subtitle">See what you\'ve missing so far</string>
+
+    <!--Lectures Course Detail-->
+    <string name="lecturer_class_list_title">Class List</string>
+    <string name="lecturer_class_list_subtitle">Never missed yout class</string>
+    <string name="button_start_class">Start This Class Time</string>
+
     <!--Topics-->
     <string name="topic_next_class">Next Class</string>
     <string name="topic_class_schedule">Class Schedule</string>

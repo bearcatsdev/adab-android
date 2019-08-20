@@ -39,6 +39,7 @@ public class AllClassesFragment extends Fragment {
     private LinearLayoutManager linearLayoutManager;
     private TextView liveClassTitle, liveCourse, liveClassMeeting;
     private TextView welcomeTitle;
+    private Boolean hasLiveClass;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,6 +61,8 @@ public class AllClassesFragment extends Fragment {
         welcomeLayout = view.findViewById(R.id.welcomeLayout);
         welcomeTitle = view.findViewById(R.id.tv_welcomeTitle);
         coursesList = new ArrayList<>();
+        hasLiveClass = false;
+
 
         // set visibility gone
         coursesRecyclerView.setVisibility(View.GONE);
@@ -135,11 +138,8 @@ public class AllClassesFragment extends Fragment {
                                     //go to LiveSessionActivity
                                     startActivity(intent);
                                 });
-                        }
-                        else
-                        {
-                            welcomeLayout.setVisibility(View.VISIBLE);
-                            welcomeTitle.setText("Welcome Back, "+userPreferences.getUserName());
+
+                                hasLiveClass = true;
                         }
                     }
 
@@ -148,6 +148,13 @@ public class AllClassesFragment extends Fragment {
 
                     //set visible
                     coursesRecyclerView.setVisibility(View.VISIBLE);
+
+                    //show welcome page if no any class is live
+                    if(!hasLiveClass){
+                        welcomeLayout.setVisibility(View.VISIBLE);
+                        welcomeTitle.setText("Welcome Back, "+userPreferences.getUserName());
+                    }
+
                 }
             }
 

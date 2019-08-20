@@ -1,9 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.lecturer.main.MainActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/welcomeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="11dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackground"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                tools:src="@tools:sample/avatars" />
+
+            <androidx.slidingpanelayout.widget.SlidingPaneLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"></androidx.slidingpanelayout.widget.SlidingPaneLayout>
+
+            <TextView
+                android:id="@+id/tv_welcomeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_caption"
+                android:textStyle="bold"
+                tools:text="@string/welcome_title" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@string/welcome_subtitle" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="35dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.ambinusian.adab.customcomponent.SectionView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                app:sectionTitle="@string/lecturer_home_next_schedule_title"
+                app:sectionSubtitle="@string/lecturer_home_next_schedule_subtitle"/>
+            <com.ambinusian.adab.customcomponent.Tag
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                app:tagText="@string/see_all"></com.ambinusian.adab.customcomponent.Tag>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.ambinusian.adab.customcomponent.SectionView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                app:sectionTitle="@string/lecturer_discussion_title"
+                app:sectionSubtitle="@string/lecturer_discussion_subtitle"/>
+            <com.ambinusian.adab.customcomponent.Tag
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                app:tagText="@string/see_all"></com.ambinusian.adab.customcomponent.Tag>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
