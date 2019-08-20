@@ -48,4 +48,7 @@ dependencies {
 
     //calendar
     implementation 'com.prolificinteractive:material-calendarview:1.4.2'
+
+    //socket.io
+    implementation 'com.github.nkzawa:socket.io-client:0.6.0'
 }
