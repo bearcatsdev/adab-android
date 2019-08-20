@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="Tag">
-        <attr name="tagText" format="string"/>
+        <attr name="tagText" format="string" />
+        <attr name="tagOutlineColor" format="color"/>
+        <attr name="tagBackgroundColor" format="color"/>
     </declare-styleable>
     <declare-styleable name="SectionView">
         <attr name="sectionTitle" format="reference|string"/>

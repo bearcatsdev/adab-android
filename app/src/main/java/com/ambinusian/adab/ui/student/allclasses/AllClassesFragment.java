@@ -34,10 +34,11 @@ public class AllClassesFragment extends Fragment {
 
     private RecyclerView coursesRecyclerView;
     private ArrayList<CourseModel> coursesList;
-    private LinearLayout liveLayout;
+    private LinearLayout liveLayout,welcomeLayout;
     private ImageView liveClassIcon;
     private LinearLayoutManager linearLayoutManager;
     private TextView liveClassTitle, liveCourse, liveClassMeeting;
+    private TextView welcomeTitle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +57,8 @@ public class AllClassesFragment extends Fragment {
         liveClassTitle  = view.findViewById(R.id.tv_liveClassTitle);
         liveCourse = view.findViewById(R.id.tv_liveCourse);
         liveClassMeeting = view.findViewById(R.id.tv_liveClassMeeting);
+        welcomeLayout = view.findViewById(R.id.welcomeLayout);
+        welcomeTitle = view.findViewById(R.id.tv_welcomeTitle);
         coursesList = new ArrayList<>();
 
         // set visibility gone
@@ -132,6 +135,11 @@ public class AllClassesFragment extends Fragment {
                                     //go to LiveSessionActivity
                                     startActivity(intent);
                                 });
+                        }
+                        else
+                        {
+                            welcomeLayout.setVisibility(View.VISIBLE);
+                            welcomeTitle.setText("Welcome Back, "+userPreferences.getUserName());
                         }
                     }
 

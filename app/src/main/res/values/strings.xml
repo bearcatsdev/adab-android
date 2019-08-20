@@ -7,6 +7,7 @@
     <string name="home_latest_subtitle">See what classes you\'ve done so far</string>
     <string name="home_discussion_title">Discussion</string>
     <string name="home_discussion_subtitle">Discussion subtitle</string>
+    <string name="home_next_class_title">Your Next Class</string>
 
     <!--Topics-->
     <string name="topic_next_class">Next Class</string>
@@ -24,6 +25,10 @@
     <string name="placeholder_date">00:00</string>
     <string name="placeholder_title">Embedded System and Internet of Things</string>
     <string name="placeholder_subtitle">Subtitle</string>
+
+    <!--Welcome-->
+    <string name="welcome_title">Welcome Back, Name!</string>
+    <string name="welcome_subtitle">We happy to see you back</string>
 
     <!--Tag in all classes fragment-->
     <string name="tag_live_now">Live Now</string>
@@ -53,4 +58,10 @@
     <string name="how_to_use">How to use</string>
     <string name="about">About</string>
     <string name="need_help_ask_us_here">Need Help? Ask us here!</string>
+
+
+    <!--See All Button-->
+    <string name="see_all">See All</string>
+
+
 </resources>
