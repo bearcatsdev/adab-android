@@ -41,7 +41,7 @@
     <string name="placeholder_subtitle">Subtitle</string>
 
     <!--Welcome-->
-    <string name="welcome_title">Welcome Back, Name!</string>
+    <string name="welcome_title">Welcome back, %1s!</string>
     <string name="welcome_subtitle">We happy to see you back</string>
 
     <!--Tag in all classes fragment-->

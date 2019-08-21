@@ -152,7 +152,7 @@ public class AllClassesFragment extends Fragment {
                     //show welcome page if no any class is live
                     if(!hasLiveClass){
                         welcomeLayout.setVisibility(View.VISIBLE);
-                        welcomeTitle.setText("Welcome Back, "+userPreferences.getUserName());
+                        welcomeTitle.setText(getString(R.string.welcome_title, userPreferences.getUserName()));
                     }
 
                 }
