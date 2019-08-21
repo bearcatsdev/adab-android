@@ -108,21 +108,20 @@ public class LiveSessionActivity extends AppCompatActivity {
         }
         socket.on("kok lai liau", args -> {
            runOnUiThread(() -> {
-               Log.d("aksjdkasjdkjasdkasd", args[0].toString());
                textContent.append(args[0].toString() + "\n");
            });
         });
         socket.connect();
 
         while(!socket.connected()) {
-            Log.d("aksjdkasjdkjasdkasd", "connecting...");
+            Log.d("Socket.io", "connecting...");
         }
 
         if (socket.connected()) {
-            Log.d("aksjdkasjdkjasdkasd", "oke bang sudah konek");
+            Log.d("Socket.io", "oke bang sudah konek");
             contentLoadingLayout.setVisibility(View.GONE);
         } else {
-            Log.d("aksjdkasjdkjasdkasd", "bo huat");
+            Log.d("Socket.io", "error");
         }
 
 
