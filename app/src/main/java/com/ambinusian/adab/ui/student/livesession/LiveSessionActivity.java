@@ -2,6 +2,8 @@ package com.ambinusian.adab.ui.student.livesession;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +17,6 @@ import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-import org.w3c.dom.Text;
 
 import java.net.URISyntaxException;
 import java.util.Map;
@@ -27,8 +28,12 @@ public class LiveSessionActivity extends AppCompatActivity {
     private TextView classSession;
     private TextView textContent;
     private TextView textLiveNow;
+    private TextView courseTitle;
+    private TextView toolbarTitle;
     private Socket socket;
-    private CollapsingToolbarLayout ctl;
+    private RelativeLayout loadingLayout;
+    private RelativeLayout contentLoadingLayout;
+    private ScrollView scrollViewMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +47,23 @@ public class LiveSessionActivity extends AppCompatActivity {
             finish();
         }
 
-        ctl = findViewById(R.id.ctl);
         toolbar = findViewById(R.id.toolbar);
         className = findViewById(R.id.tv_class_name);
         classSession = findViewById(R.id.tv_class_session);
         textContent = findViewById(R.id.tv_content);
         textLiveNow = findViewById(R.id.tv_live_now);
+        courseTitle = findViewById(R.id.tv_course_title);
+        loadingLayout = findViewById(R.id.layout_loading);
+        toolbarTitle = findViewById(R.id.toolbar_title);
+        contentLoadingLayout = findViewById(R.id.layout_loading_content);
+        scrollViewMain = findViewById(R.id.scrollview_main);
 
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbarTitle.setVisibility(View.GONE);
+        scrollViewMain.setVisibility(View.GONE);
 
         APIManager apiManager = new APIManager(this);
         UserPreferences userPreferences = new UserPreferences(this);
@@ -64,14 +75,21 @@ public class LiveSessionActivity extends AppCompatActivity {
                     String classNameText = (String) classDetails.get("course_name");
                     String sessionText = getString(R.string.class_session) + " " + classDetails.get("session");
 
-                    ctl.setTitle(courseTitleText);
+                    courseTitle.setText(courseTitleText);
                     className.setText(classNameText);
                     classSession.setText(sessionText);
 
                     if ((int) classDetails.get("is_live") == 1) {
                         textLiveNow.setVisibility(View.VISIBLE);
                         connectSocket();
+                        toolbarTitle.setText(R.string.live_class_transcribe);
+                    } else {
+                        toolbarTitle.setText(R.string.class_transcribe_history);
                     }
+
+                    loadingLayout.setVisibility(View.GONE);
+                    toolbarTitle.setVisibility(View.VISIBLE);
+                    scrollViewMain.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -102,6 +120,7 @@ public class LiveSessionActivity extends AppCompatActivity {
 
         if (socket.connected()) {
             Log.d("aksjdkasjdkjasdkasd", "oke bang sudah konek");
+            contentLoadingLayout.setVisibility(View.GONE);
         } else {
             Log.d("aksjdkasjdkjasdkasd", "bo huat");
         }

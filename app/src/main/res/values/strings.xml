@@ -32,6 +32,8 @@
     <string name="toolbar_discussion">Discussion</string>
     <string name="toolbar_help">Help</string>
     <string name="toolbar_settings">Settings</string>
+    <string name="live_class_transcribe">Live Transcribe</string>
+    <string name="class_transcribe_history">Transcribe History</string>
 
     <!--Place Holder-->
     <string name="placeholder_date">00:00</string>
@@ -74,6 +76,7 @@
 
     <!--See All Button-->
     <string name="see_all">See All</string>
+    <string name="loading_getting_content">Getting content...</string>
 
 
 </resources>
