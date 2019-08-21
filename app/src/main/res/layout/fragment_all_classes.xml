@@ -45,11 +45,12 @@
                     <ImageView
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
-                        tools:src="@tools:sample/avatars" />
+                        tools:src="@tools:sample/avatars"
+                        android:src="@mipmap/splash_logo"/>
 
                     <androidx.slidingpanelayout.widget.SlidingPaneLayout
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"></androidx.slidingpanelayout.widget.SlidingPaneLayout>
+                        android:layout_height="20dp" />
 
                     <TextView
                         android:id="@+id/tv_welcomeTitle"
