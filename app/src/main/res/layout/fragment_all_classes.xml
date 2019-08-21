@@ -161,12 +161,13 @@
                         android:layout_weight="10"
                         app:sectionTitle="@string/home_latest_title"
                         app:sectionSubtitle="@string/home_latest_subtitle"/>
+
                     <com.ambinusian.adab.customcomponent.Tag
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_gravity="center"
-                        app:tagText="@string/see_all"></com.ambinusian.adab.customcomponent.Tag>
+                        app:tagText="@string/see_all" />
 
                 </LinearLayout>
 
