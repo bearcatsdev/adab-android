@@ -77,6 +77,8 @@
     <!--See All Button-->
     <string name="see_all">See All</string>
     <string name="loading_getting_content">Getting content...</string>
+    <string name="show_account_details">Show account details</string>
+    <string name="logout_body_message">All your edited notes remain synced to your account if you sign out.</string>
 
 
 </resources>

@@ -18,6 +18,8 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.ambinusian.adab.expandablenavigationdrawer.ExpandableListAdapter;
 import com.ambinusian.adab.expandablenavigationdrawer.MenuModel;
 import com.ambinusian.adab.preferences.UserPreferences;
@@ -29,12 +31,15 @@ import com.ambinusian.adab.ui.student.forum.ForumFragment;
 import com.ambinusian.adab.ui.student.help.HelpFragment;
 import com.ambinusian.adab.ui.student.settings.SettingFragment;
 import com.ambinusian.adab.ui.student.topics.TopicsFragment;
+import com.ambinusian.adab.ui.userprofile.UserProfileDialogFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.zip.Inflater;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     List<MenuModel> courseSubject;
     HashMap<MenuModel,List<MenuModel>> childList;
     View headerView;
+    CircleImageView profilePicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = findViewById(R.id.mDrawerLayout);
         mNavigationView = findViewById(R.id.nv_adab);
         expandableListView = findViewById(R.id.expandableListView);
+        profilePicture = findViewById(R.id.circle_image_profile_picture);
         groupList = new ArrayList<>();
         childList = new HashMap<>();
         courseSubject = new ArrayList<>();
@@ -73,6 +80,11 @@ public class MainActivity extends AppCompatActivity {
 
         // remove title
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        // profile picture onclick
+        profilePicture.setOnClickListener(v -> {
+            showUserProfileDialog();
+        });
 
         textUserName = headerView.findViewById(R.id.text_user_name);
         textUserNIM = headerView.findViewById(R.id.text_user_nim);
@@ -116,6 +128,12 @@ public class MainActivity extends AppCompatActivity {
         //set expandable navigation drawer
         prepareMenuData();
         populateExpandableList();
+    }
+
+    private void showUserProfileDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        UserProfileDialogFragment userProfileDialogFragment = new UserProfileDialogFragment();
+        userProfileDialogFragment.show(fm, "fragment_user_profile_dialog");
     }
 
     public void prepareMenuData(){
@@ -202,34 +220,6 @@ public class MainActivity extends AppCompatActivity {
         final float scale = getResources().getDisplayMetrics().density;
         // Convert the dps to pixels, based on density scale
         return (int) (pixels * scale + 0.5f);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.option_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.menu_guide:
-                return true;
-            case R.id.menu_about:
-                return true;
-            case R.id.menu_help:
-                return true;
-            case R.id.menu_logout:
-                UserPreferences userPreferences = new UserPreferences(this);
-                userPreferences.clearLoggedInUser();
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }
 
