@@ -1,105 +1,71 @@
 language: android
 sudo: required
 jdk: oraclejdk8
-
 before_cache:
- - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
- - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-
+    - 'rm -f $HOME/.gradle/caches/modules-2/modules-2.lock'
+    - 'rm -fr $HOME/.gradle/caches/*/plugin-resolution/'
 cache:
- directories:
- - $HOME/.gradle/caches/
- - $HOME/.gradle/wrapper/
-
+    directories:
+        - $HOME/.gradle/caches/
+        - $HOME/.gradle/wrapper/
 env:
- global:
- - ANDROID_API=28
- - EMULATOR_API=25
- - ANDROID_BUILD_TOOLS=28.0.3
- - ADB_INSTALL_TIMEOUT=5 # minutes
- - secure: "lOPVkwwXREU+FFzA1TUINigYgKbjcqPTK5wl/DWJgIUAcXkBZU4L/AkwsvUd53Y/4+ehV1JlShDLQ7nLunXr23dwy6slAUjYGR4Ljmy9oe2H/S4svEwca+hSYUqnFnwMVvSM1Mb5mD2JpceJVjIrXQ8Cdxz7NHk9qHepfy9A9sg6or4eoei/VNszGCUHyk8gmbCOAtfB6hHFE9TNcEhL8viMH05Uw3D+RksuRPdDBcx5DUA/Y+UpQ4eKmiOc9yUqaGFyHMI8S74ZfgGVdxViNtVPUOxAg1BG87C5hffKiqOM9wgEwXxqHvVreMIi3z/P57tcoUG+lvFIeAMLeyVl5daKfxtmF1+ss2HYw+Tmgu1f+FTghKxy2CtvgzY6MTV55CfdhrGQnS3ulJbdrSbrR+R+FlWjf4Nu51hxNa3HmDZbb9E4PgGXWll8Ohdlmw1ii11tjGPloCHp1m6RsZ5JOJlgpOlXYOQmZYw4CHVUkvxcrN9Ga12sdWdJc9KZbU7CgOZQyWGfxNvzPGxcbWmbihc9aOE4chjQNxEaf3wmcwLctGHn/Cyn57xyXTFle4BEcOrJ0XBWHgfDQIVH1aOvcOAe8EhB0r38322imCCVis6SNHMzVTvDQUephYVwpac8wOwB1rBFjzTdCtZDFp2zFr10z8A0vfCZZ2n8asoXhdA="
- 
- matrix:
-  #- API=10 ANDROID_ABI=armeabi-v7a ANDROID_TAG=default
-  #- API=10 ANDROID_ABI=armeabi-v7a ANDROID_TAG=google_apis     # currently no google apis needed
-  #- API=14 ANDROID_ABI=armeabi-v7a ANDROID_TAG=default         # emulator consistently times out
-  #- API=15 ANDROID_ABI=armeabi-v7a ANDROID_TAG=default         # https://github.com/osmdroid/osmdroid/issues/1066
-  #- API=15 ANDROID_ABI=armeabi-v7a ANDROID_TAG=google_apis     # currently no google apis needed
-  #- API=16 ANDROID_ABI=armeabi-v7a ANDROID_TAG=default
-  #- API=17 ANDROID_ABI=armeabi-v7a ANDROID_TAG=default
-  #- API=17 ANDROID_ABI=armeabi-v7a ANDROID_TAG=google_apis     # currently no google apis needed
-  #- API=18 ANDROID_ABI=armeabi-v7a ANDROID_TAG=default
-  #- API=18 ANDROID_ABI=armeabi-v7a ANDROID_TAG=google_apis     # currently no google apis needed
-  #- API=19 ANDROID_ABI=armeabi-v7a ANDROID_TAG=default
-  #- API=21 ANDROID_ABI=armeabi-v7a ANDROID_TAG=default
-  #- API=21 ANDROID_ABI=armeabi-v7a ANDROID_TAG=google_apis     # currently no google apis needed
-  #- API=22 ANDROID_ABI=armeabi-v7a ANDROID_TAG=default         # com.android.ddmlib.InstallException: Failed to finalize session : INSTALL_FAILED_DEXOPT: Package couldn't be installed in /data/app/org.osmdroid-2: scanPackageLI
-  #- API=22 ANDROID_ABI=armeabi-v7a ANDROID_TAG=google_apis     # currently no google apis needed
-  #- API=23 ANDROID_ABI=armeabi-v7a ANDROID_TAG=default         # sdkmanager --list reports this to be available, but image is not found during build
-  #- API=23 ANDROID_ABI=armeabi-v7a ANDROID_TAG=google_apis     # Unable to install /home/travis/build/cbalster/osmdroid/OpenStreetMapViewer/build/outputs/apk/OpenStreetMapViewer-6.0.2-SNAPSHOT-debug.apk com.android.ddmlib.InstallException: Failed to establish session
-  #- API=24 ANDROID_ABI=armeabi-v7a ANDROID_TAG=default         # "The command "adb shell ls /" failed and exited with 1 during." see line 108
-  #- API=24 ANDROID_ABI=armeabi-v7a ANDROID_TAG=google_apis     # emulator consistently times out
-  #- API=25 ANDROID_ABI=armeabi-v7a ANDROID_TAG=google_apis     # no addons available, so can't be used
-  - API=28 ANDROID_ABI=x86 ANDROID_TAG=google_apis
-
+    global:
+        - ANDROID_API=28
+        - EMULATOR_API=25
+        - ANDROID_BUILD_TOOLS=28.0.3
+        - ADB_INSTALL_TIMEOUT=5
+        -
+            secure: lOPVkwwXREU+FFzA1TUINigYgKbjcqPTK5wl/DWJgIUAcXkBZU4L/AkwsvUd53Y/4+ehV1JlShDLQ7nLunXr23dwy6slAUjYGR4Ljmy9oe2H/S4svEwca+hSYUqnFnwMVvSM1Mb5mD2JpceJVjIrXQ8Cdxz7NHk9qHepfy9A9sg6or4eoei/VNszGCUHyk8gmbCOAtfB6hHFE9TNcEhL8viMH05Uw3D+RksuRPdDBcx5DUA/Y+UpQ4eKmiOc9yUqaGFyHMI8S74ZfgGVdxViNtVPUOxAg1BG87C5hffKiqOM9wgEwXxqHvVreMIi3z/P57tcoUG+lvFIeAMLeyVl5daKfxtmF1+ss2HYw+Tmgu1f+FTghKxy2CtvgzY6MTV55CfdhrGQnS3ulJbdrSbrR+R+FlWjf4Nu51hxNa3HmDZbb9E4PgGXWll8Ohdlmw1ii11tjGPloCHp1m6RsZ5JOJlgpOlXYOQmZYw4CHVUkvxcrN9Ga12sdWdJc9KZbU7CgOZQyWGfxNvzPGxcbWmbihc9aOE4chjQNxEaf3wmcwLctGHn/Cyn57xyXTFle4BEcOrJ0XBWHgfDQIVH1aOvcOAe8EhB0r38322imCCVis6SNHMzVTvDQUephYVwpac8wOwB1rBFjzTdCtZDFp2zFr10z8A0vfCZZ2n8asoXhdA=
+    matrix:
+        - 'API=28 ANDROID_ABI=x86 ANDROID_TAG=google_apis'
 android:
- components:
- - tools
- - platform-tools
- - build-tools-$ANDROID_BUILD_TOOLS
- - android-$ANDROID_API
- - android-$EMULATOR_API
- - extra-google-m2repository
-
- licenses:
- - android-sdk-preview-license-.+
- - android-sdk-license-.+
- - google-gdk-license-.+
-
+    components:
+        - tools
+        - platform-tools
+        - build-tools-$ANDROID_BUILD_TOOLS
+        - android-$ANDROID_API
+        - android-$EMULATOR_API
+        - extra-google-m2repository
+    licenses:
+        - android-sdk-preview-license-.+
+        - android-sdk-license-.+
+        - google-gdk-license-.+
 before_install:
-# create and start emulators; automatically downloads required platform and - if necessary - the google api addons
-  - echo yes | sdkmanager "tools" "platforms;android-$API"
-  - if [ $ANDROID_TAG == "google_apis" ]; then echo yes | sdkmanager "add-ons;addon-google_apis-google-$API"; fi
-  - echo yes | sdkmanager "system-images;android-$API;$ANDROID_TAG;$ANDROID_ABI"
-  - avdmanager list
-  - echo avdmanager create avd -f -n test-api$API -k "system-images;android-$API;$ANDROID_TAG;$ANDROID_ABI" -c 200M
-  - echo no | avdmanager create avd -f -n test-api$API -k "system-images;android-$API;$ANDROID_TAG;$ANDROID_ABI" -c 200M
-  - $ANDROID_HOME/emulator/emulator -memory 1536 -avd test-api$API -no-window -no-audio&
-  
-- openssl aes-256-cbc -K $encrypted_510cbae6f134_key -iv $encrypted_510cbae6f134_iv -in default.jks.enc -out default.jks -d
-- mkdir "$ANDROID_HOME/licenses" || true
-- echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
-- echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
-- chmod +x gradlew
-- ./gradlew dependencies || true # DON'T ADD unless you are getting "Install missing components using SDK manager"
-#Source: https://medium.com/@oldergod/constraint-layout-and-circleci-travis-d50342696d2
-
+    # create and start emulators; automatically downloads required platform and - if necessary - the google api addons
+    - echo yes | sdkmanager "tools" "platforms;android-$API"
+    - if [ $ANDROID_TAG == "google_apis" ]; then echo yes | sdkmanager "add-ons;addon-google_apis-google-$API"; fi
+    - echo yes | sdkmanager "system-images;android-$API;$ANDROID_TAG;$ANDROID_ABI"
+    - avdmanager list
+    - echo avdmanager create avd -f -n test-api$API -k "system-images;android-$API;$ANDROID_TAG;$ANDROID_ABI" -c 200M
+    - echo no | avdmanager create avd -f -n test-api$API -k "system-images;android-$API;$ANDROID_TAG;$ANDROID_ABI" -c 200M
+    - $ANDROID_HOME/emulator/emulator -memory 1536 -avd test-api$API -no-window -no-audio&
+    
+    - 'openssl aes-256-cbc -K $encrypted_510cbae6f134_key -iv $encrypted_510cbae6f134_iv -in default.jks.enc -out default.jks -d'
+    - 'mkdir "$ANDROID_HOME/licenses" || true'
+    - 'echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"'
+    - 'echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"'
+    - 'chmod +x gradlew'
+    - './gradlew dependencies || true'
 before_script:
-- echo no | android create avd --force -n test -t android-28 --abi x86
-- emulator -avd test -no-skin -no-audio -no-window &
-- android-wait-for-emulator
-- adb shell input keyevent 82 &
-
+    - 'echo no | android create avd --force -n test -t android-28 --abi x86'
+    - 'emulator -avd test -no-skin -no-audio -no-window &'
+    - android-wait-for-emulator
+    - 'adb shell input keyevent 82 &'
 script:
-- "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
-
+    - './gradlew clean build connectedCheck -PdisablePreDex --stacktrace'
 before_deploy:
-- cp $TRAVIS_BUILD_DIR/example_keystore.jks $HOME
-- cd app/build/outputs/apk/
-- jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/default.jks -storepass $storepass -keypass $storepass app-release-unsigned.apk key0
-
-# Verification
-- jarsigner -verify app-release-unsigned.apk
-- "${ANDROID_HOME}/build-tools/28.0.3/zipalign -v 4 app-release-unsigned.apk AdabNightly.apk"
-
+    - 'cp $TRAVIS_BUILD_DIR/example_keystore.jks $HOME'
+    - 'cd app/build/outputs/apk/'
+    - 'jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/default.jks -storepass $storepass -keypass $storepass app-release-unsigned.apk key0'
+    - 'jarsigner -verify app-release-unsigned.apk'
+    - '${ANDROID_HOME}/build-tools/28.0.3/zipalign -v 4 app-release-unsigned.apk AdabNightly.apk'
 deploy:
-  provider: releases
-  file: AdabNightly.apk
-  skip_cleanup: true
-
-  on:
-    repo: ambinusian/adab
-    tags: true
-    jdk: oraclejdk8
-  api_key:
-    secure: "FWq7rPtxJ3ol+q5YpI5/b/6wWYjLRHjs5oyyynDLE+UjEsA5VMwVnhlVhFmz+G9TkXeQf3ukN0YTBhqWw02aM0Fd88z/t6j3SCJqGyj3UooJ5qVj0pCczU7IND83MHoC4pUNmH0EmJZ35ZqWhEhmLMkGEFpgdzYq5FPgedNsqxV24hvMZjCQ7bwmHE7IXLsSVPpCC9auYbzw3vYsuysmGS+nxdaBw2+fFk958VdZ7EEMdAxlyqiH1zKdMCOtFaiKBij5qIxCrzfa2UYHwTLhDezWnZRbZrunQHs6c7kyZGey4ihS7+eo2Gc3xYhXK2xtV5ziL0AbyVdbSkEufjeRCuxjurOGMMLzQARYZBWxH8XYK2PTO7K7FFAHZsz28VAgJH0CUG108xEIfMC+JlkNA+wk96Qrp+RE0iLE3GJhDSO4qUI+uJU0svbVom5w7F8dz9HrDv8oWX0EOTDepfoHArnw0sw2Do9vorGcP8bYhrlwMhM8AFfhkxq+67bDwAgQw/MucE6GQP+iYBfigyCxXPNKSbxZ5cJ9fTAUiYW/A1CVDpw8CWUZIRrBiDc/ay0fJ508ZwvwVJCnb19zCv1zP5RhjBaiXmyqQ77l9tIiJZOUac+kPJ5Fk44zcX6kChGwkIpOhKVlEhHwZP32aytIgMXsna/u2QS2422HLY5MViQ="
+    provider: releases
+    file: AdabNightly.apk
+    skip_cleanup: true
+    on:
+        repo: ambinusian/adab
+        tags: true
+        jdk: oraclejdk8
+    api_key:
+        secure: FWq7rPtxJ3ol+q5YpI5/b/6wWYjLRHjs5oyyynDLE+UjEsA5VMwVnhlVhFmz+G9TkXeQf3ukN0YTBhqWw02aM0Fd88z/t6j3SCJqGyj3UooJ5qVj0pCczU7IND83MHoC4pUNmH0EmJZ35ZqWhEhmLMkGEFpgdzYq5FPgedNsqxV24hvMZjCQ7bwmHE7IXLsSVPpCC9auYbzw3vYsuysmGS+nxdaBw2+fFk958VdZ7EEMdAxlyqiH1zKdMCOtFaiKBij5qIxCrzfa2UYHwTLhDezWnZRbZrunQHs6c7kyZGey4ihS7+eo2Gc3xYhXK2xtV5ziL0AbyVdbSkEufjeRCuxjurOGMMLzQARYZBWxH8XYK2PTO7K7FFAHZsz28VAgJH0CUG108xEIfMC+JlkNA+wk96Qrp+RE0iLE3GJhDSO4qUI+uJU0svbVom5w7F8dz9HrDv8oWX0EOTDepfoHArnw0sw2Do9vorGcP8bYhrlwMhM8AFfhkxq+67bDwAgQw/MucE6GQP+iYBfigyCxXPNKSbxZ5cJ9fTAUiYW/A1CVDpw8CWUZIRrBiDc/ay0fJ508ZwvwVJCnb19zCv1zP5RhjBaiXmyqQ77l9tIiJZOUac+kPJ5Fk44zcX6kChGwkIpOhKVlEhHwZP32aytIgMXsna/u2QS2422HLY5MViQ=
