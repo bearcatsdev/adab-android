@@ -14,7 +14,7 @@ cache:
 env:
  global:
  - ANDROID_API=28
- - EMULATOR_API=28
+ - EMULATOR_API=25
  - ANDROID_BUILD_TOOLS=28.0.3
  - ADB_INSTALL_TIMEOUT=5 # minutes
  - secure: "lOPVkwwXREU+FFzA1TUINigYgKbjcqPTK5wl/DWJgIUAcXkBZU4L/AkwsvUd53Y/4+ehV1JlShDLQ7nLunXr23dwy6slAUjYGR4Ljmy9oe2H/S4svEwca+hSYUqnFnwMVvSM1Mb5mD2JpceJVjIrXQ8Cdxz7NHk9qHepfy9A9sg6or4eoei/VNszGCUHyk8gmbCOAtfB6hHFE9TNcEhL8viMH05Uw3D+RksuRPdDBcx5DUA/Y+UpQ4eKmiOc9yUqaGFyHMI8S74ZfgGVdxViNtVPUOxAg1BG87C5hffKiqOM9wgEwXxqHvVreMIi3z/P57tcoUG+lvFIeAMLeyVl5daKfxtmF1+ss2HYw+Tmgu1f+FTghKxy2CtvgzY6MTV55CfdhrGQnS3ulJbdrSbrR+R+FlWjf4Nu51hxNa3HmDZbb9E4PgGXWll8Ohdlmw1ii11tjGPloCHp1m6RsZ5JOJlgpOlXYOQmZYw4CHVUkvxcrN9Ga12sdWdJc9KZbU7CgOZQyWGfxNvzPGxcbWmbihc9aOE4chjQNxEaf3wmcwLctGHn/Cyn57xyXTFle4BEcOrJ0XBWHgfDQIVH1aOvcOAe8EhB0r38322imCCVis6SNHMzVTvDQUephYVwpac8wOwB1rBFjzTdCtZDFp2zFr10z8A0vfCZZ2n8asoXhdA="
@@ -28,7 +28,7 @@ android:
  - android-$EMULATOR_API_LEVEL
  - extra-google-m2repository
  - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
- - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
+ - sys-img-x86-addon-google_apis-google-$EMULATOR_API_LEVEL
 
  licenses:
  - android-sdk-preview-license-.+
@@ -45,7 +45,7 @@ before_install:
 #Source: https://medium.com/@oldergod/constraint-layout-and-circleci-travis-d50342696d2
 
 before_script:
-- echo no | android create avd --force -n test -t android-28 --abi x86
+- echo no | android create avd --force -n test -t android-25 --abi x86
 - emulator -avd test -no-skin -no-audio -no-window &
 - android-wait-for-emulator
 - adb shell input keyevent 82 &
