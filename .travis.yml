@@ -25,10 +25,10 @@ android:
  - platform-tools
  - build-tools-$ANDROID_BUILD_TOOLS
  - android-$ANDROID_API
- - android-$EMULATOR_API_LEVEL
+ - android-$EMULATOR_API
  - extra-google-m2repository
- - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
- - sys-img-x86-addon-google_apis-google-$EMULATOR_API_LEVEL
+ - sys-img-x86-addon-google_apis-google-$ANDROID_API
+ - sys-img-x86-addon-google_apis-google-$EMULATOR_API
 
  licenses:
  - android-sdk-preview-license-.+
