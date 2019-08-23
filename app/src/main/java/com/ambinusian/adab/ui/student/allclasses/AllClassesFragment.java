@@ -3,6 +3,8 @@ package com.ambinusian.adab.ui.student.allclasses;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,6 +25,8 @@ import com.ambinusian.adab.ui.student.livesession.LiveSessionActivity;
 import com.ambinusian.adab.ui.student.main.courses.recyclerview.CourseAdapter;
 import com.ambinusian.adab.ui.student.main.courses.recyclerview.CourseModel;
 import com.ambinusian.adab.R;
+import com.ambinusian.adab.ui.student.main.discussionrecyclerview.DiscussionAdapter;
+import com.ambinusian.adab.ui.student.main.discussionrecyclerview.DiscussionModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,8 +36,9 @@ import java.util.Map;
 
 public class AllClassesFragment extends Fragment {
 
-    private RecyclerView coursesRecyclerView;
+    private RecyclerView coursesRecyclerView, discussionRecyclerView;
     private ArrayList<CourseModel> coursesList;
+    private ArrayList<DiscussionModel> discussionList;
     private LinearLayout liveLayout,welcomeLayout;
     private ImageView liveClassIcon;
     private LinearLayoutManager linearLayoutManager;
@@ -53,6 +58,7 @@ public class AllClassesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         coursesRecyclerView = view.findViewById(R.id.rv_courses);
+        discussionRecyclerView = view.findViewById(R.id.rv_discussions);
         liveLayout = view.findViewById(R.id.liveLayout);
         liveClassIcon = view.findViewById(R.id.liveClassIcon);
         liveClassTitle  = view.findViewById(R.id.tv_liveClassTitle);
@@ -61,6 +67,7 @@ public class AllClassesFragment extends Fragment {
         welcomeLayout = view.findViewById(R.id.welcomeLayout);
         welcomeTitle = view.findViewById(R.id.tv_welcomeTitle);
         coursesList = new ArrayList<>();
+        discussionList = new ArrayList<>();
         hasLiveClass = false;
 
 
@@ -163,5 +170,17 @@ public class AllClassesFragment extends Fragment {
 
             }
         });
+
+        //fiil dummy data
+        discussionList.add(new DiscussionModel("Thursday, 22 June 2019","Saya Binusian 2022","Chandra","on Storage(MOBI6009)"));
+        discussionList.add(new DiscussionModel("Thursday, 22 June 2019","Saya Binusian 2022","Chandra","on Storage(MOBI6009)"));
+        discussionList.add(new DiscussionModel("Thursday, 22 June 2019","Saya Binusian 2022","Chandra","on Storage(MOBI6009)"));
+
+        //set layout manager and adapter for discussionRecyclerView
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        discussionRecyclerView.setLayoutManager(linearLayoutManager);
+
+        DiscussionAdapter adapter = new DiscussionAdapter(getContext(),discussionList);
+        discussionRecyclerView.setAdapter(adapter);
     }
 }

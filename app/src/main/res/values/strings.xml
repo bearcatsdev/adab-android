@@ -9,7 +9,6 @@
     <string name="home_discussion_subtitle">Discussion subtitle</string>
     <string name="home_next_class_title">Your Next Class</string>
 
-
     <!--Lecturer Home-->
     <string name="lecturer_home_next_schedule_title">Your Next Schedule</string>
     <string name="lecturer_home_next_schedule_subtitle">Never Missed yout class</string>
@@ -18,8 +17,8 @@
 
     <!--Lectures Course Detail-->
     <string name="lecturer_class_list_title">Class List</string>
-    <string name="lecturer_class_list_subtitle">Never missed yout class</string>
-    <string name="button_start_class">Start This Class Time</string>
+    <string name="lecturer_class_list_subtitle">Never missed your class</string>
+    <string name="button_start_class">Start This Class Now</string>
 
     <!--Topics-->
     <string name="topic_next_class">Next Class</string>

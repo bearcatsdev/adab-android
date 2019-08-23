@@ -7,6 +7,15 @@
     android:orientation="vertical"
     tools:context=".ui.lecturer.coursedetail.CourseDetail">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            style="@style/Widget.Adab.Toolbar" />
+    </com.google.android.material.appbar.AppBarLayout>
+
     <LinearLayout
         android:id="@+id/liveLayout"
         android:layout_width="match_parent"
@@ -73,12 +82,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:elevation="4dp">
+        android:layout_margin="16dp"
+        android:elevation="1dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_margin="8dp">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -86,15 +96,16 @@
                 android:layout_weight="1"
                 android:gravity="center">
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
                     tools:src="@tools:sample/avatars" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_weight="5">
+                android:layout_weight="4">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -124,15 +135,32 @@
     <androidx.legacy.widget.Space
         android:layout_width="match_parent"
         android:layout_height="16dp" />
+
     <com.ambinusian.adab.customcomponent.SectionView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:sectionTitle="@string/home_latest_title"
-        app:sectionSubtitle="@string/home_latest_subtitle"/>
+        app:sectionTitle="@string/lecturer_class_list_title"
+        app:sectionSubtitle="@string/lecturer_class_list_subtitle"/>
 
-    <com.ambinusian.adab.customcomponent.Tag
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:tagText="@string/button_start_class"></com.ambinusian.adab.customcomponent.Tag>
+        android:layout_weight="10"
+        android:id="@+id/rv_classDetail"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:gravity="center">
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/RoundedMaterialButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/white"
+            android:text="@string/button_start_class"
+            android:textColor="@color/colorPrimary" />
+    </LinearLayout>
 </LinearLayout>

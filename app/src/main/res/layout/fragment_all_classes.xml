@@ -162,12 +162,15 @@
                         app:sectionTitle="@string/home_latest_title"
                         app:sectionSubtitle="@string/home_latest_subtitle"/>
 
-                    <com.ambinusian.adab.customcomponent.Tag
+                    <com.google.android.material.button.MaterialButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_gravity="center"
-                        app:tagText="@string/see_all" />
+                        android:text="@string/see_all"
+                        android:backgroundTint="@android:color/white"
+                        android:textColor="@color/colorPrimary"
+                        style="@style/RoundedMaterialButton"
+                        />
+
 
                 </LinearLayout>
 
@@ -181,7 +184,7 @@
                     android:layout_height="match_parent"
                     android:overScrollMode="never"
                     android:scrollbars="none"
-                    tools:itemCount="5"
+                    tools:itemCount="3"
                     tools:listitem="@layout/item_layout_courses" />
 
                 <Space
@@ -197,14 +200,25 @@
                         android:layout_weight="10"
                         app:sectionSubtitle="@string/home_discussion_subtitle"
                         app:sectionTitle="@string/home_discussion_title" />
-                    <com.ambinusian.adab.customcomponent.Tag
+                    <com.google.android.material.button.MaterialButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_gravity="center"
-                        app:tagText="@string/see_all"></com.ambinusian.adab.customcomponent.Tag>
+                        android:text="@string/see_all"
+                        android:backgroundTint="@android:color/white"
+                        android:textColor="@color/colorPrimary"
+                        style="@style/RoundedMaterialButton"
+                        />
 
                 </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_discussions"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never"
+                    android:scrollbars="none"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_layout_courses" />
 
 
                 <LinearLayout
