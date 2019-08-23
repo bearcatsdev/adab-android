@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void doLogin() {
-        Boolean valid = true;
+        boolean valid = true;
 
         if (inputPassword.length() < 1) {
             valid = false;
@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
             inputPassword.requestFocus();
         }
 
-        if (inputNim.length() < 10) {
+        if (inputNim.length() != 10 && inputNim.length() != 5) {
             valid = false;
             inputNim.setError(getString(R.string.error_nim_invalid));
             inputNim.requestFocus();
