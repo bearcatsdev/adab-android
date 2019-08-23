@@ -59,14 +59,16 @@ before_deploy:
     - '${ANDROID_HOME}/build-tools/$ANDROID_BUILD_TOOLS_VERSION/zipalign -v 4 app-release-unsigned.apk BINUSAdab-latest.apk'
 deploy:
     provider: releases
-    file: BINUSAdab-latest.apk
+    tag_name: latest
+    target_commitish: $TRAVIS_COMMIT
+    name: latest
+    overwrite: true
     skip_cleanup: true
+    api_key: $GH_TOKEN
+    file: BINUSAdab-latest.apk
     on:
+        branch: master
         repo: ambinusian/adab
-        tags: true
-        jdk: oraclejdk8
-    api_key:
-        secure: FWq7rPtxJ3ol+q5YpI5/b/6wWYjLRHjs5oyyynDLE+UjEsA5VMwVnhlVhFmz+G9TkXeQf3ukN0YTBhqWw02aM0Fd88z/t6j3SCJqGyj3UooJ5qVj0pCczU7IND83MHoC4pUNmH0EmJZ35ZqWhEhmLMkGEFpgdzYq5FPgedNsqxV24hvMZjCQ7bwmHE7IXLsSVPpCC9auYbzw3vYsuysmGS+nxdaBw2+fFk958VdZ7EEMdAxlyqiH1zKdMCOtFaiKBij5qIxCrzfa2UYHwTLhDezWnZRbZrunQHs6c7kyZGey4ihS7+eo2Gc3xYhXK2xtV5ziL0AbyVdbSkEufjeRCuxjurOGMMLzQARYZBWxH8XYK2PTO7K7FFAHZsz28VAgJH0CUG108xEIfMC+JlkNA+wk96Qrp+RE0iLE3GJhDSO4qUI+uJU0svbVom5w7F8dz9HrDv8oWX0EOTDepfoHArnw0sw2Do9vorGcP8bYhrlwMhM8AFfhkxq+67bDwAgQw/MucE6GQP+iYBfigyCxXPNKSbxZ5cJ9fTAUiYW/A1CVDpw8CWUZIRrBiDc/ay0fJ508ZwvwVJCnb19zCv1zP5RhjBaiXmyqQ77l9tIiJZOUac+kPJ5Fk44zcX6kChGwkIpOhKVlEhHwZP32aytIgMXsna/u2QS2422HLY5MViQ=
 
 after_failure:
   # dumps the log then exits
