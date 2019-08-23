@@ -13,9 +13,9 @@ android {
         targetSdkVersion 28
         versionCode 1
         if (isRunningOnCI) {
-            versionName "1.0"
+            versionName "1.0.1"
         } else {
-            versionName "1.0." + System.getenv("TRAVIS_COMMIT")
+            versionName "1.0.1." + System.getenv("TRAVIS_COMMIT")
         }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
