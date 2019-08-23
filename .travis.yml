@@ -1,69 +1,64 @@
 language: android
-sudo: required
 jdk: oraclejdk8
+dist: trusty
+
 before_cache:
-    - 'rm -f $HOME/.gradle/caches/modules-2/modules-2.lock'
-    - 'rm -fr $HOME/.gradle/caches/*/plugin-resolution/'
+    - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+    - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
+
 cache:
     directories:
         - $HOME/.gradle/caches/
         - $HOME/.gradle/wrapper/
+        - $HOME/.android/build-cache
+
 env:
     global:
-        - ANDROID_API=28
-        - EMULATOR_API=23
-        - ANDROID_BUILD_TOOLS=28.0.3
-        - ADB_INSTALL_TIMEOUT=8
+        - ANDROID_API_LEVEL=28
+        - ANDROID_BUILD_TOOLS_VERSION=28.0.3
         - secure: lOPVkwwXREU+FFzA1TUINigYgKbjcqPTK5wl/DWJgIUAcXkBZU4L/AkwsvUd53Y/4+ehV1JlShDLQ7nLunXr23dwy6slAUjYGR4Ljmy9oe2H/S4svEwca+hSYUqnFnwMVvSM1Mb5mD2JpceJVjIrXQ8Cdxz7NHk9qHepfy9A9sg6or4eoei/VNszGCUHyk8gmbCOAtfB6hHFE9TNcEhL8viMH05Uw3D+RksuRPdDBcx5DUA/Y+UpQ4eKmiOc9yUqaGFyHMI8S74ZfgGVdxViNtVPUOxAg1BG87C5hffKiqOM9wgEwXxqHvVreMIi3z/P57tcoUG+lvFIeAMLeyVl5daKfxtmF1+ss2HYw+Tmgu1f+FTghKxy2CtvgzY6MTV55CfdhrGQnS3ulJbdrSbrR+R+FlWjf4Nu51hxNa3HmDZbb9E4PgGXWll8Ohdlmw1ii11tjGPloCHp1m6RsZ5JOJlgpOlXYOQmZYw4CHVUkvxcrN9Ga12sdWdJc9KZbU7CgOZQyWGfxNvzPGxcbWmbihc9aOE4chjQNxEaf3wmcwLctGHn/Cyn57xyXTFle4BEcOrJ0XBWHgfDQIVH1aOvcOAe8EhB0r38322imCCVis6SNHMzVTvDQUephYVwpac8wOwB1rBFjzTdCtZDFp2zFr10z8A0vfCZZ2n8asoXhdA=
-    matrix:
-        - 'API=23 ANDROID_ABI=armeabi-v7a ANDROID_TAG=google_apis'
+        - secure: "BxVwdm7qQ3G6sJTDMzxCtMv1N/w9r+98TY8gFbLb+aNJdlykLTCMNNbS/HQASODqbOkmj31MH73boTsmZffJA794Z1C7O4xFt/JlIEZAqRK+6I1VSjzN5jDtyNhH+yiENvrDEVxpa3UHxtxIc63wqxas80gbpZF19Qt4MH/VD3puPxUHFt/Kk62Ze/q3KB3wQqO2V93RGc11Dy2Tbgw7UECuApH/nNTWUxZeOpEBInerGH7qBrdzJgPAqlUlr2/EYX+JgFpUl4mFFk2moRa7TX8bPvnpYetV81cvhhsn+IVl67I6XDlfQhLwwFFy9qbMQXh/2+FuiiG3VVrvxLDT04YYFcuKXCMaNNqWIaRExhJ030fIZ3G/y6XGJDMTiHBASA8uFNBFxjXLsmPPt72Hy3hLdiyegACOT0FwbBDIeY1c4kecZ94YjewbN6A0Lw5MdgEt1LPz9ADDfzJ3SHks/96fE2aMcXOnTiKAdkrMS1M1vL5lZS0xAL4jrXumzJFfw1NybrBwm2A692DnZ29xtmoieG4AJX7PGA2vybIy8eDWiW/sie7XiK1reX6gwTm79ALpYdpVxdEkrd/untcS4kA3H21oZRyBedWLb6BfmGwGy8LJ3G1vQGDulTt55F9APoyCeUVSjKnhaWpRMibLEbVQB6Jp14QH9FZ9HEC8cuM="
+        
 android:
     components:
         - tools
+        - tools
         - platform-tools
-        - build-tools-$ANDROID_BUILD_TOOLS
-        - android-$ANDROID_API
-        - android-$EMULATOR_API
+        # The BuildTools version used by your project
+        - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+        # The SDK version used to compile your project
+        - android-$ANDROID_API_LEVEL
+        # Additional components
+        - extra-google-google_play_services
         - extra-google-m2repository
-    licenses:
-        - android-sdk-preview-license-.+
-        - android-sdk-license-.+
-        - google-gdk-license-.+
-before_install:
-    # create and start emulators; automatically downloads required platform and - if necessary - the google api addons
-    - yes | sdkmanager "tools" "platforms;android-$API"
-    - if [ $ANDROID_TAG == "google_apis" ]; then yes | sdkmanager "system-images;android-$API;google_apis;$ANDROID_ABI"; fi
-    - yes | sdkmanager "system-images;android-$API;$ANDROID_TAG;$ANDROID_ABI"
-    - avdmanager list
-    - echo avdmanager create avd -f -n test-api$API -k "system-images;android-$API;$ANDROID_TAG;$ANDROID_ABI" -c 200M
-    - echo no | avdmanager create avd -f -n test-api$API -k "system-images;android-$API;$ANDROID_TAG;$ANDROID_ABI" -c 200M
-    - $ANDROID_HOME/emulator/emulator -memory 1536 -avd test-api$API -no-window -no-audio&
-    
-    - 'openssl aes-256-cbc -K $encrypted_510cbae6f134_key -iv $encrypted_510cbae6f134_iv -in default.jks.enc -out default.jks -d'
-    - 'mkdir "$ANDROID_HOME/licenses" || true'
+        - extra-android-m2repository
+        
+licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+
+before_script:    
+    - mkdir -p "$ANDROID_HOME/licenses"
     - 'echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"'
     - 'echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"'
+    - 'openssl aes-256-cbc -K $encrypted_510cbae6f134_key -iv $encrypted_510cbae6f134_iv -in default.jks.enc -out default.jks -d'
     - 'chmod +x gradlew'
-    - './gradlew dependencies || true'
-before_script:
-    - travis_wait 60 android-wait-for-emulator
-    - adb shell input keyevent 82 &
-  
-    # output date/time set on emulator for diagnostics
-    - adb shell date
+    # - './gradlew dependencies || true' 
     
-    - 'adb shell input keyevent 82 &'
 script:
-    - './gradlew clean build connectedCheck -PdisablePreDex --stacktrace'
+    - ./gradlew clean build
+    
 before_deploy:
-    - 'cp $TRAVIS_BUILD_DIR/example_keystore.jks $HOME'
-    - 'cd app/build/outputs/apk/'
+    - 'cp $TRAVIS_BUILD_DIR/default.jks $HOME'
+    - 'cd app/build/outputs/apk/release'
     - 'jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/default.jks -storepass $storepass -keypass $storepass app-release-unsigned.apk key0'
     - 'jarsigner -verify app-release-unsigned.apk'
-    - '${ANDROID_HOME}/build-tools/28.0.3/zipalign -v 4 app-release-unsigned.apk AdabNightly.apk'
+    - '${ANDROID_HOME}/build-tools/$ANDROID_BUILD_TOOLS_VERSION/zipalign -v 4 app-release-unsigned.apk BINUSAdab-latest.apk'
+    - scripts/tag.sh
 deploy:
     provider: releases
-    file: AdabNightly.apk
+    file: BINUSAdab-latest.apk
     skip_cleanup: true
     on:
         repo: ambinusian/adab
@@ -74,4 +69,4 @@ deploy:
 
 after_failure:
   # dumps the log then exits
-  - adb logcat -d
+  # - adb logcat -d
