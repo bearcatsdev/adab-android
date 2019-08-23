@@ -48,9 +48,6 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     Spinner SpinnerListSemester;
     NavigationView mNavigationView;
-    TextView textUserName;
-    TextView textUserNIM;
-    TextView textUserDepartment;
     ExpandableListView expandableListView;
     ExpandableListAdapter expandableListAdapter;
     List<MenuModel> groupList;
@@ -85,15 +82,6 @@ public class MainActivity extends AppCompatActivity {
         profilePicture.setOnClickListener(v -> {
             showUserProfileDialog();
         });
-
-        textUserName = headerView.findViewById(R.id.text_user_name);
-        textUserNIM = headerView.findViewById(R.id.text_user_nim);
-        textUserDepartment = headerView.findViewById(R.id.text_user_department);
-
-        UserPreferences userPreferences = new UserPreferences(this);
-        textUserName.setText(userPreferences.getUserName());
-        textUserNIM.setText(userPreferences.getUserUsername());
-        textUserDepartment.setText(userPreferences.getUserDepartement());
 
         //set expand indicator size
         DisplayMetrics metrics = new DisplayMetrics();

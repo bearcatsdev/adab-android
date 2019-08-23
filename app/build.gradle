@@ -9,13 +9,13 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.ambinusian.adab"
-        minSdkVersion 23
+        minSdkVersion 22
         targetSdkVersion 28
         versionCode 1
         if (!isRunningOnCI) {
             versionName "1.0.1"
         } else {
-            versionName "1.0.1." + System.getenv("TRAVIS_COMMIT")
+            versionName "1.0.1." + System.getenv("TRAVIS_COMMIT").subString(0,6)
         }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

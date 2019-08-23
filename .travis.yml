@@ -45,11 +45,11 @@ before_script:
     - 'openssl aes-256-cbc -K $encrypted_510cbae6f134_key -iv $encrypted_510cbae6f134_iv -in default.jks.enc -out default.jks -d'
     - 'chmod +x gradlew'
     - 'chmod +x scripts/tag.sh'
-    - scripts/tag.sh
     # - './gradlew dependencies || true' 
     
 script:
     - ./gradlew clean build
+    - scripts/tag.sh
     
 before_deploy:
     - 'cp $TRAVIS_BUILD_DIR/default.jks $HOME'
