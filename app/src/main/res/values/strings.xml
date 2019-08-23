@@ -1,5 +1,6 @@
 <resources>
     <!--Home-->
+    <string name="app_name">BINUS Adab</string>
     <string name="home_title"><b>BINUS</b> Adab</string>
     <string name="home_category_live">Live Now</string>
     <string name="home_category_all">All Classes</string>
