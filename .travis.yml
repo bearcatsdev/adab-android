@@ -44,6 +44,8 @@ before_script:
     - 'echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"'
     - 'openssl aes-256-cbc -K $encrypted_510cbae6f134_key -iv $encrypted_510cbae6f134_iv -in default.jks.enc -out default.jks -d'
     - 'chmod +x gradlew'
+    - 'chmod +x scripts/tag.sh'
+    - scripts/tag.sh
     # - './gradlew dependencies || true' 
     
 script:
@@ -55,7 +57,6 @@ before_deploy:
     - 'jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/default.jks -storepass $storepass -keypass $storepass app-release-unsigned.apk key0'
     - 'jarsigner -verify app-release-unsigned.apk'
     - '${ANDROID_HOME}/build-tools/$ANDROID_BUILD_TOOLS_VERSION/zipalign -v 4 app-release-unsigned.apk BINUSAdab-latest.apk'
-    - scripts/tag.sh
 deploy:
     provider: releases
     file: BINUSAdab-latest.apk
