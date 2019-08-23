@@ -12,7 +12,7 @@ android {
         minSdkVersion 23
         targetSdkVersion 28
         versionCode 1
-        if (isRunningOnCI) {
+        if (!isRunningOnCI) {
             versionName "1.0.1"
         } else {
             versionName "1.0.1." + System.getenv("TRAVIS_COMMIT")
