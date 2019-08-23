@@ -37,23 +37,23 @@ licenses:
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
 
-before_install:    
+before_script:    
     - mkdir -p "$ANDROID_HOME/licenses"
     - 'echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"'
     - 'echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"'
     - 'openssl aes-256-cbc -K $encrypted_510cbae6f134_key -iv $encrypted_510cbae6f134_iv -in default.jks.enc -out default.jks -d'
     - 'chmod +x gradlew'
-    - './gradlew dependencies || true' 
+    # - './gradlew dependencies || true' 
     
 script:
-    - ./gradlew clean test build
+    - ./gradlew clean build
     
 before_deploy:
     - 'cp $TRAVIS_BUILD_DIR/default.jks $HOME'
-    - 'cd app/build/outputs/apk/'
+    - 'cd app/build/outputs/apk/release'
     - 'jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/default.jks -storepass $storepass -keypass $storepass app-release-unsigned.apk key0'
     - 'jarsigner -verify app-release-unsigned.apk'
-    - '${ANDROID_HOME}/build-tools/28.0.3/zipalign -v 4 app-release-unsigned.apk AdabNightly.apk'
+    - '${ANDROID_HOME}/build-tools/$ANDROID_BUILD_TOOLS_VERSION/zipalign -v 4 app-release-unsigned.apk AdabNightly.apk'
 deploy:
     provider: releases
     file: AdabNightly.apk
