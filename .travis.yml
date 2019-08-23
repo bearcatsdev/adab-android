@@ -1,77 +1,31 @@
 language: android
-sudo: required
 jdk: oraclejdk8
-before_cache:
-    - 'rm -f $HOME/.gradle/caches/modules-2/modules-2.lock'
-    - 'rm -fr $HOME/.gradle/caches/*/plugin-resolution/'
-cache:
-    directories:
-        - $HOME/.gradle/caches/
-        - $HOME/.gradle/wrapper/
+dist: trusty
 env:
-    global:
-        - ANDROID_API=28
-        - EMULATOR_API=23
-        - ANDROID_BUILD_TOOLS=28.0.3
-        - ADB_INSTALL_TIMEOUT=8
-        - secure: lOPVkwwXREU+FFzA1TUINigYgKbjcqPTK5wl/DWJgIUAcXkBZU4L/AkwsvUd53Y/4+ehV1JlShDLQ7nLunXr23dwy6slAUjYGR4Ljmy9oe2H/S4svEwca+hSYUqnFnwMVvSM1Mb5mD2JpceJVjIrXQ8Cdxz7NHk9qHepfy9A9sg6or4eoei/VNszGCUHyk8gmbCOAtfB6hHFE9TNcEhL8viMH05Uw3D+RksuRPdDBcx5DUA/Y+UpQ4eKmiOc9yUqaGFyHMI8S74ZfgGVdxViNtVPUOxAg1BG87C5hffKiqOM9wgEwXxqHvVreMIi3z/P57tcoUG+lvFIeAMLeyVl5daKfxtmF1+ss2HYw+Tmgu1f+FTghKxy2CtvgzY6MTV55CfdhrGQnS3ulJbdrSbrR+R+FlWjf4Nu51hxNa3HmDZbb9E4PgGXWll8Ohdlmw1ii11tjGPloCHp1m6RsZ5JOJlgpOlXYOQmZYw4CHVUkvxcrN9Ga12sdWdJc9KZbU7CgOZQyWGfxNvzPGxcbWmbihc9aOE4chjQNxEaf3wmcwLctGHn/Cyn57xyXTFle4BEcOrJ0XBWHgfDQIVH1aOvcOAe8EhB0r38322imCCVis6SNHMzVTvDQUephYVwpac8wOwB1rBFjzTdCtZDFp2zFr10z8A0vfCZZ2n8asoXhdA=
-    matrix:
-        - 'API=23 ANDROID_ABI=armeabi-v7a ANDROID_TAG=google_apis'
+ global:
+    - ANDROID_API_LEVEL=28
+    - ANDROID_BUILD_TOOLS_VERSION=28.0.3
+    - API=28
 android:
-    components:
-        - tools
-        - platform-tools
-        - build-tools-$ANDROID_BUILD_TOOLS
-        - android-$ANDROID_API
-        - android-$EMULATOR_API
-        - extra-google-m2repository
-    licenses:
-        - android-sdk-preview-license-.+
-        - android-sdk-license-.+
-        - google-gdk-license-.+
-before_install:
-    # create and start emulators; automatically downloads required platform and - if necessary - the google api addons
-    - yes | sdkmanager "tools" "platforms;android-$API"
-    - if [ $ANDROID_TAG == "google_apis" ]; then yes | sdkmanager "system-images;android-$API;google_apis;$ANDROID_ABI"; fi
-    - yes | sdkmanager "system-images;android-$API;$ANDROID_TAG;$ANDROID_ABI"
-    - avdmanager list
-    - echo avdmanager create avd -f -n test-api$API -k "system-images;android-$API;$ANDROID_TAG;$ANDROID_ABI" -c 200M
-    - echo no | avdmanager create avd -f -n test-api$API -k "system-images;android-$API;$ANDROID_TAG;$ANDROID_ABI" -c 200M
-    - $ANDROID_HOME/emulator/emulator -memory 1536 -avd test-api$API -no-window -no-audio&
-    
-    - 'openssl aes-256-cbc -K $encrypted_510cbae6f134_key -iv $encrypted_510cbae6f134_iv -in default.jks.enc -out default.jks -d'
-    - 'mkdir "$ANDROID_HOME/licenses" || true'
-    - 'echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"'
-    - 'echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"'
-    - 'chmod +x gradlew'
-    - './gradlew dependencies || true'
+ licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+ components:
+    - tools
+    - platform-tools
+    # The BuildTools version used by your project
+    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+    # The SDK version used to compile your project
+    - android-$ANDROID_API_LEVEL
+    # Additional components
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - addon-google_apis-google-$ANDROID_API_LEVEL
 before_script:
-    - travis_wait 60 android-wait-for-emulator
-    - adb shell input keyevent 82 &
-  
-    # output date/time set on emulator for diagnostics
-    - adb shell date
-    
-    - 'adb shell input keyevent 82 &'
+    # Prepare pre-accepted licenses to not be promted at installation
+    - mkdir -p "$ANDROID_HOME/licenses"
+    # - cp ./google-licenses/* "$ANDROID_HOME/licenses/"
 script:
-    - './gradlew clean build connectedCheck -PdisablePreDex --stacktrace'
-before_deploy:
-    - 'cp $TRAVIS_BUILD_DIR/example_keystore.jks $HOME'
-    - 'cd app/build/outputs/apk/'
-    - 'jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/default.jks -storepass $storepass -keypass $storepass app-release-unsigned.apk key0'
-    - 'jarsigner -verify app-release-unsigned.apk'
-    - '${ANDROID_HOME}/build-tools/28.0.3/zipalign -v 4 app-release-unsigned.apk AdabNightly.apk'
-deploy:
-    provider: releases
-    file: AdabNightly.apk
-    skip_cleanup: true
-    on:
-        repo: ambinusian/adab
-        tags: true
-        jdk: oraclejdk8
-    api_key:
-        secure: FWq7rPtxJ3ol+q5YpI5/b/6wWYjLRHjs5oyyynDLE+UjEsA5VMwVnhlVhFmz+G9TkXeQf3ukN0YTBhqWw02aM0Fd88z/t6j3SCJqGyj3UooJ5qVj0pCczU7IND83MHoC4pUNmH0EmJZ35ZqWhEhmLMkGEFpgdzYq5FPgedNsqxV24hvMZjCQ7bwmHE7IXLsSVPpCC9auYbzw3vYsuysmGS+nxdaBw2+fFk958VdZ7EEMdAxlyqiH1zKdMCOtFaiKBij5qIxCrzfa2UYHwTLhDezWnZRbZrunQHs6c7kyZGey4ihS7+eo2Gc3xYhXK2xtV5ziL0AbyVdbSkEufjeRCuxjurOGMMLzQARYZBWxH8XYK2PTO7K7FFAHZsz28VAgJH0CUG108xEIfMC+JlkNA+wk96Qrp+RE0iLE3GJhDSO4qUI+uJU0svbVom5w7F8dz9HrDv8oWX0EOTDepfoHArnw0sw2Do9vorGcP8bYhrlwMhM8AFfhkxq+67bDwAgQw/MucE6GQP+iYBfigyCxXPNKSbxZ5cJ9fTAUiYW/A1CVDpw8CWUZIRrBiDc/ay0fJ508ZwvwVJCnb19zCv1zP5RhjBaiXmyqQ77l9tIiJZOUac+kPJ5Fk44zcX6kChGwkIpOhKVlEhHwZP32aytIgMXsna/u2QS2422HLY5MViQ=
-
-after_failure:
-  # dumps the log then exits
-  - adb logcat -d
+    - ./gradlew build check
