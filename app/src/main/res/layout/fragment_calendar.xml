@@ -9,17 +9,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="30dp"
+            app:mcv_firstDayOfWeek="monday"
             app:mcv_headerTextAppearance="@font/interstate"
-            app:mcv_weekDayTextAppearance="@font/interstate"
             app:mcv_selectionColor="@color/colorPrimary"
             app:mcv_showOtherDates="all"
             app:mcv_tileHeight="40dp"
-            app:mcv_firstDayOfWeek="monday"/>
+            app:mcv_weekDayTextAppearance="@font/interstate" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

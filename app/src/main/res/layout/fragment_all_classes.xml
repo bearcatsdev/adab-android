@@ -27,30 +27,20 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="11dp" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
+                    android:layout_margin="16dp"
                     android:background="?attr/selectableItemBackground"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp">
 
                     <ImageView
-                        android:layout_width="300dp"
-                        android:layout_height="wrap_content"
-                        tools:src="@tools:sample/avatars"
-                        android:src="@mipmap/splash_logo"/>
-
-                    <androidx.slidingpanelayout.widget.SlidingPaneLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp" />
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:src="@drawable/welcome" />
 
                     <TextView
                         android:id="@+id/tv_welcomeTitle"
@@ -61,19 +51,19 @@
                         android:textStyle="bold"
                         tools:text="@string/welcome_title" />
 
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="5dp" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tools:text="@string/welcome_subtitle" />
+                        android:text="@string/welcome_subtitle" />
+
+                    <androidx.slidingpanelayout.widget.SlidingPaneLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" />
                 </LinearLayout>
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="35dp" />
+                    android:layout_height="11dp" />
 
             </LinearLayout>
 
@@ -152,13 +142,12 @@
                 android:layout_height="match_parent"
                 android:animateLayoutChanges="true"
                 android:orientation="vertical">
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <com.ambinusian.adab.customcomponent.SectionView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="10"
                         app:sectionTitle="@string/home_latest_title"
                         app:sectionSubtitle="@string/home_latest_subtitle"/>
 
@@ -168,11 +157,11 @@
                         android:text="@string/see_all"
                         android:backgroundTint="@android:color/white"
                         android:textColor="@color/colorPrimary"
+                        android:layout_alignParentRight="true"
                         style="@style/RoundedMaterialButton"
                         />
 
-
-                </LinearLayout>
+                </RelativeLayout>
 
                 <Space
                     android:layout_width="wrap_content"
@@ -191,13 +180,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="16dp" />
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <com.ambinusian.adab.customcomponent.SectionView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="10"
+                        android:layout_weight="20"
                         app:sectionSubtitle="@string/home_discussion_subtitle"
                         app:sectionTitle="@string/home_discussion_title" />
                     <com.google.android.material.button.MaterialButton
@@ -206,10 +195,15 @@
                         android:text="@string/see_all"
                         android:backgroundTint="@android:color/white"
                         android:textColor="@color/colorPrimary"
+                        android:layout_weight="1"
+                        android:layout_alignParentRight="true"
                         style="@style/RoundedMaterialButton"
                         />
+                </RelativeLayout>
 
-                </LinearLayout>
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_discussions"
@@ -220,20 +214,155 @@
                     tools:itemCount="3"
                     tools:listitem="@layout/item_layout_courses" />
 
+                <com.ambinusian.adab.customcomponent.SectionView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    app:sectionSubtitle="@string/home_latest_subtitle"
+                    app:sectionTitle="@string/home_next_class_title" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <com.ambinusian.adab.customcomponent.SectionView
-                        android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/linear_layout_main"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="10"
-                        app:sectionSubtitle="@string/home_latest_subtitle"
-                        app:sectionTitle="@string/home_next_class_title" />
+                        android:background="?attr/selectableItemBackground"
+                        android:paddingTop="5dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/nextClassIcon"
+                            android:layout_width="72dp"
+                            android:layout_height="72dp"
+                            android:layout_gravity="center"
+                            tools:src="@tools:sample/avatars" />
+
+                        <Space
+                            android:layout_width="24dp"
+                            android:layout_height="match_parent" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_nextClassTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/text_body"
+                                tools:text="@tools:sample/date/ddmmyy" />
+
+                            <Space
+                                android:layout_width="match_parent"
+                                android:layout_height="8dp" />
+
+                            <TextView
+                                android:id="@+id/tv_nextClassTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/text_caption"
+                                android:textStyle="bold"
+                                tools:text="@tools:sample/lorem" />
+
+                            <Space
+                                android:layout_width="match_parent"
+                                android:layout_height="8dp" />
+
+                            <TextView
+                                android:id="@+id/tv_nextCourse"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/text_body"
+                                tools:text="Mobile Object Oriented Programming" />
+
+                            <TextView
+                                android:id="@+id/tv_nextClassSession"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/text_body"
+                                tools:text="Session 11" />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chip_nextCourseCode"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="48dp"
+                                    android:fontFamily="@font/interstate"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/text_chip"
+                                    android:clickable="false"
+                                    app:chipBackgroundColor="#ffffff"
+                                    app:chipStrokeColor="#E1E1E1"
+                                    app:chipStrokeWidth="1dp"
+                                    tools:text="MOBI6002" />
+
+                                <Space
+                                    android:layout_width="8dp"
+                                    android:layout_height="match_parent" />
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chip_nextClassCode"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="48dp"
+                                    android:fontFamily="@font/interstate"
+                                    android:gravity="center"
+                                    android:clickable="false"
+                                    app:chipBackgroundColor="#ffffff"
+                                    app:chipStrokeColor="#E1E1E1"
+                                    app:chipStrokeWidth="1dp"
+                                    tools:text="LB03" />
+
+                                <Space
+                                    android:layout_width="8dp"
+                                    android:layout_height="match_parent" />
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chip_nextClassType"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="48dp"
+                                    android:fontFamily="@font/interstate"
+                                    android:gravity="center"
+                                    android:clickable="false"
+                                    app:chipBackgroundColor="#ffffff"
+                                    app:chipStrokeColor="#E1E1E1"
+                                    app:chipStrokeWidth="1dp"
+                                    tools:text="LEC" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="16sp"
+                            android:layout_marginBottom="16sp"
+                            android:background="#F5F5F5" />
+                    </LinearLayout>
                 </LinearLayout>
+            </LinearLayout>/
 
-
-            </LinearLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

@@ -27,6 +27,7 @@ import com.ambinusian.adab.ui.student.main.courses.recyclerview.CourseModel;
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.ui.student.main.discussionrecyclerview.DiscussionAdapter;
 import com.ambinusian.adab.ui.student.main.discussionrecyclerview.DiscussionModel;
+import com.google.android.material.chip.Chip;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,6 +45,9 @@ public class AllClassesFragment extends Fragment {
     private LinearLayoutManager linearLayoutManager;
     private TextView liveClassTitle, liveCourse, liveClassMeeting;
     private TextView welcomeTitle;
+    private ImageView nextClassIcon;
+    private TextView nextClassTime, nextClassTitle, nextCourse, nextClassSession;
+    private Chip nextCourseCode, nextClassCode, nextClassType;
     private Boolean hasLiveClass;
 
     @Override
@@ -66,6 +70,15 @@ public class AllClassesFragment extends Fragment {
         liveClassMeeting = view.findViewById(R.id.tv_liveClassMeeting);
         welcomeLayout = view.findViewById(R.id.welcomeLayout);
         welcomeTitle = view.findViewById(R.id.tv_welcomeTitle);
+        nextClassIcon = view.findViewById(R.id.nextClassIcon);
+        nextClassTime = view.findViewById(R.id.tv_nextClassTime);
+        nextClassTitle = view.findViewById(R.id.tv_nextClassTitle);
+        nextCourse = view.findViewById(R.id.tv_nextCourse);
+        nextClassSession = view.findViewById(R.id.tv_nextClassSession);
+        nextCourseCode = view.findViewById(R.id.chip_nextCourseCode);
+        nextClassCode = view.findViewById(R.id.chip_nextClassCode);
+        nextClassType = view.findViewById(R.id.chip_nextClassType);
+        nextClassType = view.findViewById(R.id.chip_nextClassType);
         coursesList = new ArrayList<>();
         discussionList = new ArrayList<>();
         hasLiveClass = false;
@@ -171,7 +184,8 @@ public class AllClassesFragment extends Fragment {
             }
         });
 
-        //fiil dummy data
+        ////Dicussion
+        //fiil using dummy data
         discussionList.add(new DiscussionModel("Thursday, 22 June 2019","Saya Binusian 2022","Chandra","on Storage(MOBI6009)"));
         discussionList.add(new DiscussionModel("Thursday, 22 June 2019","Saya Binusian 2022","Chandra","on Storage(MOBI6009)"));
         discussionList.add(new DiscussionModel("Thursday, 22 June 2019","Saya Binusian 2022","Chandra","on Storage(MOBI6009)"));
@@ -182,5 +196,18 @@ public class AllClassesFragment extends Fragment {
 
         DiscussionAdapter adapter = new DiscussionAdapter(getContext(),discussionList);
         discussionRecyclerView.setAdapter(adapter);
+
+        ////Next Class
+        //fill using dummy data
+        nextClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_class_56_pencilnote));
+        nextClassTime.setText("Monday, 26 August 2019");
+        nextClassTitle.setText("Storage");
+        nextCourse.setText("Mobile Object Oriented Programming");
+        nextClassSession.setText("Session 9");
+        nextCourseCode.setText("MOBI6002");
+        nextClassCode.setText("LA03");
+        nextClassType.setText("LEC");
     }
+
+
 }
