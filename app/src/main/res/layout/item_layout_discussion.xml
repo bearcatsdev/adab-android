@@ -1,88 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
-        android:id="@+id/linear_layout_main"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp">
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:paddingTop="5dp">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/classIcon"
-            android:layout_width="@dimen/icon_small"
-            android:layout_height="@dimen/icon_small"
-            android:layout_gravity="center"
-            android:src="@mipmap/ic_launcher"
-            tools:src="@tools:sample/avatars" />
-
-        <Space
-            android:layout_width="24dp"
-            android:layout_height="match_parent" />
-
+        android:id="@+id/card_view_layout">
         <LinearLayout
+            android:id="@+id/linear_layout_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="?attr/selectableItemBackground"
+            android:layout_margin="8dp">
 
-            <TextView
-                android:id="@+id/tv_discussion_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_body"
-                tools:text="@tools:sample/date/ddmmyy" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="8dp" />
-
-            <TextView
-                android:id="@+id/tv_discussion_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/text_body"
-                tools:text="Saya Binusian" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/classIcon"
+                android:layout_width="@dimen/icon_small"
+                android:layout_height="@dimen/icon_small"
+                android:layout_gravity="center"
+                android:src="@mipmap/ic_launcher"
+                tools:src="@tools:sample/avatars" />
 
             <Space
+                android:layout_width="24dp"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="8dp" />
-
-            <TextView
-                android:id="@+id/tv_discussion_name"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/text_body"
-                android:textStyle="bold"
-                tools:text="Chandra" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_discussion_class"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/text_body"
-                tools:text="on Storage (MOBI6002)" />
+                <TextView
+                    android:id="@+id/tv_discussion_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_body"
+                    tools:text="@tools:sample/date/ddmmyy" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
+
+                <TextView
+                    android:id="@+id/tv_discussion_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_body"
+                    tools:text="Saya Binusian" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
+
+                <TextView
+                    android:id="@+id/tv_discussion_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_body"
+                    android:textStyle="bold"
+                    tools:text="Chandra" />
+
+                <TextView
+                    android:id="@+id/tv_discussion_class"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_body"
+                    tools:text="on Storage (MOBI6002)" />
+            </LinearLayout>
         </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="16sp"
-            android:layout_marginBottom="16sp"
-            android:background="#F5F5F5" />
-    </LinearLayout>
-</LinearLayout>
+</RelativeLayout>
