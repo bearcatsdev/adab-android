@@ -21,9 +21,6 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:visibility="visible">
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="11dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -77,6 +74,11 @@
                     android:layout_height="25dp" />
 
             </LinearLayout>
+
+            <com.ambinusian.adab.customcomponent.HeadlineView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:headlineTitle="@string/home_next_class_title"/>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"

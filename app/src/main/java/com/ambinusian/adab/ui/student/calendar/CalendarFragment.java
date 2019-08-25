@@ -19,15 +19,15 @@ import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.recyclerview.schedulereyclerview.ScheduleAdapter;
 import com.ambinusian.adab.recyclerview.schedulereyclerview.ScheduleModel;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 import java.util.Calendar;
+
+import devs.mulham.horizontalcalendar.HorizontalCalendar;
+import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
 
 public class CalendarFragment extends Fragment {
@@ -40,7 +40,6 @@ public class CalendarFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_calendar, container, false);
     }
 
-    MaterialCalendarView calendarView;
     TextView selectedDate;
     ArrayList<ScheduleModel> allClassSchedule;
     SimpleDateFormat dateFormat;
@@ -50,13 +49,63 @@ public class CalendarFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        calendarView = view.findViewById(R.id.calendarView);
+//        calendarView = view.findViewById(R.id.calendarView);
         selectedDate = view.findViewById(R.id.tv_selectedDate);
         scheduleList = view.findViewById(R.id.rv_schedule);
         allClassSchedule = new ArrayList<>();
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        configureCalendar();
+        /* starts before 1 month from now */
+        Calendar startDate = Calendar.getInstance();
+        startDate.add(Calendar.YEAR, -10);
+
+        /* ends after 1 month from now */
+        Calendar endDate = Calendar.getInstance();
+        endDate.add(Calendar.YEAR, 10);
+
+        HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(getActivity(), R.id.calendarView)
+                .range(startDate, endDate)
+                .datesNumberOnScreen(5)
+                .build();
+
+        horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
+            @Override
+            public void onDateSelected(Calendar date, int position) {
+                int currentDay = date.getTime().getDay();
+                int currentDate = date.getTime().getDate();
+                int currentMonth = date.getTime().getMonth() + 1;
+                int currentYear = date.getTime().getYear() + 1900;
+
+                Date date2 = null;
+                try {
+                    date2 = new SimpleDateFormat("yyyy-MM-dd").parse(currentYear + "-" + currentMonth + "-" + currentDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                selectedDate.setText(new SimpleDateFormat("EEEE, d MMMM yyyy").format(date2));
+
+                //Searching the classes at selected date
+                ArrayList<ScheduleModel> selectedDateClasses = new ArrayList<>();
+                for (int i = 0; i < allClassSchedule.size(); i++) {
+                    Calendar selectedDateCalendar = Calendar.getInstance();
+                    try {
+                        selectedDateCalendar.setTime(dateFormat.parse(allClassSchedule.get(i).getClassDate()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (selectedDateCalendar.equals(date)) {
+                        ScheduleModel item = allClassSchedule.get(i);
+                        selectedDateClasses.add(item);
+                    }
+                }
+
+                //set recycler view adapter
+                ScheduleAdapter adapter = new ScheduleAdapter(getContext(), selectedDateClasses);
+                scheduleList.setAdapter(adapter);
+
+            }
+        });
 
         //set recycler view layout manager
         scheduleList.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -64,33 +113,33 @@ public class CalendarFragment extends Fragment {
         APIManager apiManager = new APIManager(getContext());
         UserPreferences userPreferences = new UserPreferences(getContext());
         apiManager.getUserClasses(userPreferences.getUserToken(), new NetworkHelper.getUserClasses() {
-                    @Override
-                    public void onResponse(Boolean success, Map<String, Object>[] userClasses) {
-                        //information needed = classDate, classType, classTitle, course, courseCode, classRoom, classTime
-                        //add all class schedule dummy data
-                        if (success) {
-                            for (Map<String, Object> userClass : userClasses) {
-                                allClassSchedule.add(new ScheduleModel(
-                                        (String) userClass.get("transaction_date"),
-                                        (String) userClass.get("class_type"),
-                                        (String) userClass.get("topic"),
-                                        (String) userClass.get("course_name"),
-                                        (String) userClass.get("course_code"),
-                                        (String) userClass.get("class_code"),
-                                        (String) userClass.get("transaction_time")));
-                            }
-                        }
-                        }
-
-                    @Override
-                    public void onError(int errorCode, String errorReason) {
-
+            @Override
+            public void onResponse(Boolean success, Map<String, Object>[] userClasses) {
+                //information needed = classDate, classType, classTitle, course, courseCode, classRoom, classTime
+                //add all class schedule dummy data
+                if (success) {
+                    for (Map<String, Object> userClass : userClasses) {
+                        allClassSchedule.add(new ScheduleModel(
+                                (String) userClass.get("transaction_date"),
+                                (String) userClass.get("class_type"),
+                                (String) userClass.get("topic"),
+                                (String) userClass.get("course_name"),
+                                (String) userClass.get("course_code"),
+                                (String) userClass.get("class_code"),
+                                (String) userClass.get("transaction_time")));
                     }
-                });
+                }
+            }
+
+            @Override
+            public void onError(int errorCode, String errorReason) {
+
+            }
+        });
 
         //add all class Schedule to calendar
-        List<CalendarDay> classSchedule = new ArrayList<>();
-        for(int i=0;i<allClassSchedule.size();i++){
+        List<Calendar> classSchedule = new ArrayList<>();
+        for (int i = 0; i < allClassSchedule.size(); i++) {
             //add date to calendae object
             Calendar calendar = Calendar.getInstance();
             try {
@@ -100,67 +149,8 @@ public class CalendarFragment extends Fragment {
             }
 
             //add calendar object to classSchedule list
-            classSchedule.add(CalendarDay.from(calendar.getTime()));
-            Log.e("calendar", calendar.getTime()+"");
+            classSchedule.add(calendar);
         }
-
-        calendarView.addDecorator(new EventDecorator(Color.parseColor("#c0c0c0"),classSchedule));
-
-        calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
-            @Override
-            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-                Calendar calendar = date.getCalendar();
-                int currentDay= calendar.getTime().getDay();
-                int currentDate = calendar.getTime().getDate();
-                int currentMonth = calendar.getTime().getMonth()+1;
-                int currentYear = calendar.getTime().getYear()+1900;
-
-                Date date2 = null;
-                try {
-                    date2 = new SimpleDateFormat("yyyy-MM-dd").parse(currentYear+"-"+currentMonth+"-"+currentDate);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                selectedDate.setText(new SimpleDateFormat("EEEE, d MMMM yyyy").format(date2));
-
-                //Searching the classes at selected date
-                ArrayList<ScheduleModel> selectedDateClasses = new ArrayList<>();
-                for(int i=0;i<allClassSchedule.size();i++){
-                    Calendar selectedDateCalendar = Calendar.getInstance();
-                    try {
-                        selectedDateCalendar.setTime(dateFormat.parse(allClassSchedule.get(i).getClassDate()));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-
-                    if(selectedDateCalendar.equals(calendar)){
-                        ScheduleModel item  = allClassSchedule.get(i);
-                        selectedDateClasses.add(item);
-                    }
-                }
-
-                //set recycler view adapter
-                ScheduleAdapter adapter = new ScheduleAdapter(getContext(),selectedDateClasses);
-                scheduleList.setAdapter(adapter);
-            }
-        });
-    }
-
-    public void configureCalendar(){
-        calendarView.setSelectedDate(CalendarDay.today());
-        Calendar calendar = Calendar.getInstance();
-        int currentDay= calendar.getTime().getDay();
-        int currentDate = calendar.getTime().getDate();
-        int currentMonth = calendar.getTime().getMonth()+1;
-        int currentYear = calendar.getTime().getYear()+1900;
-
-        Date date2 = null;
-        try {
-            date2 = new SimpleDateFormat("yyyy-MM-dd").parse(currentYear+"-"+currentMonth+"-"+currentDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        selectedDate.setText(new SimpleDateFormat("EEEE, d MMMM yyyy").format(date2));
 
     }
 }
