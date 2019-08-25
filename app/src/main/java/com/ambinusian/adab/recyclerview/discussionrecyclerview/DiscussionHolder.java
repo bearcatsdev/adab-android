@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.student.main.discussionrecyclerview;
+package com.ambinusian.adab.recyclerview.discussionrecyclerview;
 
 import android.view.View;
 import android.widget.TextView;

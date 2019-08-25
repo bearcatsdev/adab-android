@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.preferences.UserPreferences;
-import com.ambinusian.adab.ui.student.main.discussionrecyclerview.DiscussionAdapter;
-import com.ambinusian.adab.ui.student.main.discussionrecyclerview.DiscussionModel;
+import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionAdapter;
+import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionModel;
 import com.ambinusian.adab.ui.userprofile.UserProfileDialogFragment;
 import com.google.android.material.chip.Chip;
 

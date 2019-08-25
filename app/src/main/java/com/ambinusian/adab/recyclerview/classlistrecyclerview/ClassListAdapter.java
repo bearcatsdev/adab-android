@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.lecturer.main.classlistrecyclerview;
+package com.ambinusian.adab.recyclerview.classlistrecyclerview;
 
 import android.content.Context;
 import android.view.LayoutInflater;

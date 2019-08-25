@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.student.main.discussionrecyclerview;
+package com.ambinusian.adab.recyclerview.discussionrecyclerview;
 
 import android.content.Context;
 import android.view.LayoutInflater;

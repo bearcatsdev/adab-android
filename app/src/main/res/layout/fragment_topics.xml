@@ -3,40 +3,162 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/white_background"
-    xmlns:tool="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.student.topics.TopicsFragment">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_topicTitle"
-            android:textSize="@dimen/text_title"
-            tools:text="Mobile Object Oriented Programming"/>
-        
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_caption"
-            android:text="@string/topic_next_class" />
-        
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="80dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/rv_classTopic"
-            android:overScrollMode="never"
-            android:padding="16dp"
-            android:scrollbars="none">
-        </androidx.recyclerview.widget.RecyclerView>
-    </LinearLayout>
+            android:orientation="vertical"
+            android:padding="16dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible">
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="11dp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp">
+
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/courseIcon"
+                        android:layout_width="96dp"
+                        android:layout_height="96dp"
+                        android:layout_margin="16dp"
+                        tools:src="@tools:sample/avatars" />
+
+                    <TextView
+                        android:id="@+id/tv_topic_course"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_caption"
+                        android:textStyle="bold"
+                        tools:text="Mobile Object Oriented Programming" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp" />
+
+                    <TextView
+                        android:id="@+id/tv_topic_CourseCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="Tuesday, Aug 20 2019" />
+
+                    <TextView
+                        android:id="@+id/tv_topic_ClassRoom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="507 - LA03" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp" />
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:layout_marginHorizontal="4dp"
+                android:elevation="1dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="8dp">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:gravity="center">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:id="@+id/topic_nextClassIcon"
+                            tools:src="@tools:sample/avatars" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="4">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_caption"
+                            android:textStyle="bold"
+                            android:id="@+id/tv_topic_nextClassTitle"
+                            tools:text="Storage" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tv_topic_nextClassSession"
+                            tools:text="Mobile Creative Design" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tv_topic_nextClassTime"
+                            tools:text="Session 12" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <com.ambinusian.adab.customcomponent.SectionView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:sectionTitle="@string/lecturer_class_list_title"
+                app:sectionSubtitle="@string/lecturer_class_list_subtitle"/>
+
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="28dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:id="@+id/rv_classList"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                tools:listitem="@layout/item_layout_courses"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>

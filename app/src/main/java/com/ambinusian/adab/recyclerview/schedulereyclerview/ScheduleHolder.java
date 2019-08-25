@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.student.main.schedulereyclerview;
+package com.ambinusian.adab.recyclerview.schedulereyclerview;
 
 import android.view.View;
 import android.widget.TextView;

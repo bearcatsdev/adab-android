@@ -214,6 +214,10 @@
                     tools:itemCount="3"
                     tools:listitem="@layout/item_layout_courses" />
 
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
                 <com.ambinusian.adab.customcomponent.SectionView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

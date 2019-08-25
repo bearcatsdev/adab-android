@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.student.main.discussionrecyclerview;
+package com.ambinusian.adab.recyclerview.discussionrecyclerview;
 
 public class DiscussionModel {
     private String time, content, name, discussion_class;

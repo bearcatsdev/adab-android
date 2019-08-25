@@ -15,7 +15,7 @@ android {
         if (!isRunningOnCI) {
             versionName "1.0.1"
         } else {
-            versionName "1.0.1." + System.getenv("TRAVIS_COMMIT").substring(0,6)
+            versionName "1.0.1." + System.getenv("TRAVIS_COMMIT").substring(0, 6)
         }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

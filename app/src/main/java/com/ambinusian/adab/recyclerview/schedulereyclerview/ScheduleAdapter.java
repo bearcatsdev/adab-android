@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.student.main.schedulereyclerview;
+package com.ambinusian.adab.recyclerview.schedulereyclerview;
 
 import android.content.Context;
 import android.view.LayoutInflater;
