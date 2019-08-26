@@ -151,6 +151,7 @@ public class CalendarFragment extends Fragment {
                                 (String) userClass.get("class_code"),
                                new SimpleDateFormat("K:mm a").format(time)));
                     }
+                    firstTimeLayout();
                 }
             }
 
@@ -175,5 +176,50 @@ public class CalendarFragment extends Fragment {
             classSchedule.add(calendar);
         }
 
+    }
+
+    public void firstTimeLayout(){
+        Calendar calendar = Calendar.getInstance();
+        int currentDate = calendar.getTime().getDate();
+        int currentMonth = calendar.getTime().getMonth() + 1;
+        int currentYear = calendar.getTime().getYear() + 1900;
+
+        Date date2 = null;
+
+        try {
+            date2 = new SimpleDateFormat("yyyy-MM-dd").parse(currentYear + "-" + currentMonth + "-" + currentDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        selectedDate.setText(new SimpleDateFormat("EEEE, d MMMM yyyy").format(date2));
+
+        //Searching the classes at selected date
+        ArrayList<ScheduleModel> selectedDateClasses = new ArrayList<>();
+        for (int i = 0; i < allClassSchedule.size(); i++) {
+            Calendar selectedDateCalendar = Calendar.getInstance();
+            try {
+                selectedDateCalendar.setTime(dateFormat.parse(allClassSchedule.get(i).getClassDate()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            if (selectedDateCalendar.equals(calendar)) {
+                ScheduleModel item = allClassSchedule.get(i);
+                selectedDateClasses.add(item);
+            }
+        }
+
+        if(selectedDateClasses.size() == 0){
+            emptyClass.setVisibility(View.VISIBLE);
+            scheduleList.setVisibility(View.GONE);
+        }
+        else {
+            emptyClass.setVisibility(View.GONE);
+            scheduleList.setVisibility(View.VISIBLE);
+            //set recycler view adapter
+            ScheduleAdapter adapter = new ScheduleAdapter(getContext(), selectedDateClasses);
+            scheduleList.setAdapter(adapter);
+        }
     }
 }
