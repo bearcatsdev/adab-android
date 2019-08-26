@@ -3,6 +3,7 @@ package com.ambinusian.adab.ui.student.calendar;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,6 +45,8 @@ public class CalendarFragment extends Fragment {
     ArrayList<ScheduleModel> allClassSchedule;
     SimpleDateFormat dateFormat;
     RecyclerView scheduleList;
+    Date time;
+    LinearLayout emptyClass;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class CalendarFragment extends Fragment {
 //        calendarView = view.findViewById(R.id.calendarView);
         selectedDate = view.findViewById(R.id.tv_selectedDate);
         scheduleList = view.findViewById(R.id.rv_schedule);
+        emptyClass = view.findViewById(R.id.empty_class_layout);
         allClassSchedule = new ArrayList<>();
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -77,11 +81,13 @@ public class CalendarFragment extends Fragment {
                 int currentYear = date.getTime().getYear() + 1900;
 
                 Date date2 = null;
+
                 try {
                     date2 = new SimpleDateFormat("yyyy-MM-dd").parse(currentYear + "-" + currentMonth + "-" + currentDate);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+
                 selectedDate.setText(new SimpleDateFormat("EEEE, d MMMM yyyy").format(date2));
 
                 //Searching the classes at selected date
@@ -100,9 +106,19 @@ public class CalendarFragment extends Fragment {
                     }
                 }
 
-                //set recycler view adapter
-                ScheduleAdapter adapter = new ScheduleAdapter(getContext(), selectedDateClasses);
-                scheduleList.setAdapter(adapter);
+                if(selectedDateClasses.size() == 0){
+                    emptyClass.setVisibility(View.VISIBLE);
+                    scheduleList.setVisibility(View.GONE);
+                }
+                else {
+                    emptyClass.setVisibility(View.GONE);
+                    scheduleList.setVisibility(View.VISIBLE);
+                    //set recycler view adapter
+                    ScheduleAdapter adapter = new ScheduleAdapter(getContext(), selectedDateClasses);
+                    scheduleList.setAdapter(adapter);
+                }
+
+
 
             }
         });
@@ -116,9 +132,16 @@ public class CalendarFragment extends Fragment {
             @Override
             public void onResponse(Boolean success, Map<String, Object>[] userClasses) {
                 //information needed = classDate, classType, classTitle, course, courseCode, classRoom, classTime
-                //add all class schedule dummy data
                 if (success) {
                     for (Map<String, Object> userClass : userClasses) {
+                       time = null;
+                        SimpleDateFormat format = new SimpleDateFormat("H:mm:ss");
+                        try {
+                            time = format.parse((String)userClass.get("transaction_time"));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
                         allClassSchedule.add(new ScheduleModel(
                                 (String) userClass.get("transaction_date"),
                                 (String) userClass.get("class_type"),
@@ -126,7 +149,7 @@ public class CalendarFragment extends Fragment {
                                 (String) userClass.get("course_name"),
                                 (String) userClass.get("course_code"),
                                 (String) userClass.get("class_code"),
-                                (String) userClass.get("transaction_time")));
+                               new SimpleDateFormat("K:mm a").format(time)));
                     }
                 }
             }

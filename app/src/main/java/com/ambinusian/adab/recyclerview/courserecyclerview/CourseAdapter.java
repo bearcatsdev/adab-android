@@ -1,4 +1,4 @@
-package com.ambinusian.adab.recyclerview.recyclerview;
+package com.ambinusian.adab.recyclerview.courserecyclerview;
 
 import android.content.Context;
 import android.content.Intent;

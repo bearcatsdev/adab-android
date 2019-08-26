@@ -65,8 +65,8 @@
                     android:paddingBottom="5dp">
 
                     <ImageView
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
+                        android:layout_width="@dimen/image_size"
+                        android:layout_height="@dimen/image_size"
                         android:src="@drawable/welcome" />
 
                     <TextView

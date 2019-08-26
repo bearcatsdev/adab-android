@@ -5,5 +5,7 @@
     <dimen name="text_caption">16sp</dimen>
     <dimen name="text_body">12sp</dimen>
     <dimen name="text_chip">10sp</dimen>
+    <dimen name="time">20sp</dimen>
     <dimen name="icon_small">64dp</dimen>
+    <dimen name="image_size">240dp</dimen>
 </resources>

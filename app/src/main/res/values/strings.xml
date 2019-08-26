@@ -80,5 +80,8 @@
     <string name="show_account_details">Show account details</string>
     <string name="logout_body_message">All your edited notes remain synced to your account if you sign out.</string>
 
+    <!--calendar-->
+    <string name="no_class_today">No class today</string>
+
 
 </resources>
