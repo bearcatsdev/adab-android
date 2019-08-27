@@ -2,11 +2,15 @@ package com.ambinusian.adab.ui.lecturer.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,8 +18,11 @@ import com.ambinusian.adab.R;
 import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionAdapter;
 import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionModel;
+import com.ambinusian.adab.ui.lecturer.home.LecturerHomeFragment;
+import com.ambinusian.adab.ui.student.allclasses.AllClassesFragment;
 import com.ambinusian.adab.ui.userprofile.UserProfileDialogFragment;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
@@ -26,15 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     CircleImageView profilePicture;
-    RecyclerView discussionRecyclerView;
-    ArrayList<DiscussionModel> discussionList;
-    LinearLayoutManager linearLayoutManager;
-    TextView welcomeTitle;
-    UserPreferences userPreferences;
-    ImageView nextScheduleIcon;
-    TextView nextScheduleTime,nextScheduleClassTitle, nextScheduleCourse, nextScheduleSession;
-    Chip nextScheduleCourseCode, nextScheduleClassCode, nextScheduleClassType;
-
+    NavigationView navigationLecturer;
+    DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.tool_bar);
         profilePicture = findViewById(R.id.circle_image_profile_picture);
-        discussionRecyclerView = findViewById(R.id.rv_discussions);
-        welcomeTitle = findViewById(R.id.tv_welcomeTitle);
-        nextScheduleIcon = findViewById(R.id.nextScheduleIcon);
-        nextScheduleTime = findViewById(R.id.tv_nextScheduleTime);
-        nextScheduleClassTitle = findViewById(R.id.tv_nextScheduleClassTitle);
-        nextScheduleCourse  = findViewById(R.id.tv_nextScheduleCourse);
-        nextScheduleSession = findViewById(R.id.tv_nextScheduleSession);
-        nextScheduleCourseCode = findViewById(R.id.chip_nextScheduleCourseCode);
-        nextScheduleClassCode = findViewById(R.id.chip_nextScheduleClassCode);
-        nextScheduleClassType = findViewById(R.id.chip_nextScheduleClassType);
-        discussionList = new ArrayList<>();
-        userPreferences = new UserPreferences(this);
-
+        navigationLecturer = findViewById(R.id.nv_adab_lecturer);
+        drawerLayout = findViewById(R.id.mDrawerLayoutLecturer);
 
         // set toolbar
         setSupportActionBar(toolbar);
@@ -68,32 +57,16 @@ public class MainActivity extends AppCompatActivity {
             showUserProfileDialog();
         });
 
-        ////Set Welcome Text
-        welcomeTitle.setText(getString(R.string.welcome_title, userPreferences.getUserName()));
+        //toolbar icon clickder
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
 
-        ////Your Next Schedule
-        //add Dummy data
-        nextScheduleIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_class_56_pencilnote));
-        nextScheduleTime.setText("Monday, 26 August 2019");
-        nextScheduleClassTitle.setText("Storage");
-        nextScheduleCourse.setText("Mobile Object Oriented Programming");
-        nextScheduleSession.setText("Session 9");
-        nextScheduleCourseCode.setText("MOBI6002");
-        nextScheduleClassCode.setText("LA03");
-        nextScheduleClassType.setText("LEC");
-
-        ////Discussion Recycler View
-        //add Dummy Data
-        discussionList.add(new DiscussionModel("Thursday, 22 June 2019","Saya Binusian 2022","Chandra","on Storage(MOBI6009)"));
-        discussionList.add(new DiscussionModel("Thursday, 22 June 2019","Saya Binusian 2022","Chandra","on Storage(MOBI6009)"));
-        discussionList.add(new DiscussionModel("Thursday, 22 June 2019","Saya Binusian 2022","Chandra","on Storage(MOBI6009)"));
-
-        //set layout manager and adapter for discussionRecyclerView
-        linearLayoutManager = new LinearLayoutManager(MainActivity.this);
-        discussionRecyclerView.setLayoutManager(linearLayoutManager);
-
-        DiscussionAdapter adapter = new DiscussionAdapter(MainActivity.this,discussionList);
-        discussionRecyclerView.setAdapter(adapter);
+        //set first fragment launched
+        getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new LecturerHomeFragment()).commit();
 
 
     }
