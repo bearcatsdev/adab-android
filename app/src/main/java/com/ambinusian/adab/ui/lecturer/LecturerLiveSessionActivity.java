@@ -3,6 +3,7 @@ package com.ambinusian.adab.ui.lecturer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -43,6 +44,8 @@ public class LecturerLiveSessionActivity extends AppCompatActivity {
         disconnectBtn = findViewById(R.id.button_disconnect);
 
         connectSocket();
+
+        hasil.setMovementMethod(new ScrollingMovementMethod());
 
         sendBtn.setOnClickListener(v -> {
             String textToSend = editTextMessage.getText().toString();
