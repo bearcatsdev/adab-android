@@ -196,7 +196,7 @@ public class AllClassesFragment extends Fragment {
         discussionRecyclerView.setAdapter(adapter);
 
         ////Next Class
-        //fill using dummy data
+        //TODO change this fill using dummy data
         nextClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_class_56_pencilnote));
         nextClassTime.setText("Monday, 26 August 2019");
         nextClassTitle.setText("Storage");

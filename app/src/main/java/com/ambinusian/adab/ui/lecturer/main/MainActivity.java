@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.ambinusian.adab.R;
 import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionAdapter;
 import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionModel;
+import com.ambinusian.adab.ui.lecturer.LecturerLiveSessionActivity;
 import com.ambinusian.adab.ui.lecturer.home.LecturerHomeFragment;
 import com.ambinusian.adab.ui.student.allclasses.AllClassesFragment;
 import com.ambinusian.adab.ui.userprofile.UserProfileDialogFragment;
@@ -68,6 +70,17 @@ public class MainActivity extends AppCompatActivity {
         //set first fragment launched
         getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new LecturerHomeFragment()).commit();
 
+        // TODO ntar diganti ya, ini hanya coba coba
+        Intent intent = new Intent(MainActivity.this, LecturerLiveSessionActivity.class);
+        //set all data to bundle
+        Bundle bundle = new Bundle();
+        bundle.putInt("class_id", 7); //TODO GANTI NANTI YA BOSKU
+
+        //set bundle to the intent
+        intent.putExtras(bundle);
+
+        //go to LiveSessionActivity
+        startActivity(intent);
 
     }
 
