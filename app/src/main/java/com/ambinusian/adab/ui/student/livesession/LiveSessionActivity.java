@@ -34,6 +34,8 @@ public class LiveSessionActivity extends AppCompatActivity {
     private RelativeLayout loadingLayout;
     private RelativeLayout contentLoadingLayout;
     private ScrollView scrollViewMain;
+    private UserPreferences userPreferences;
+    private Integer classId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class LiveSessionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_live_session);
 
         Bundle bundle = getIntent().getExtras();
-        Integer classId = bundle.getInt("class_id");
+        classId = bundle.getInt("class_id");
 
         if (classId == null) {
             finish();
@@ -66,7 +68,7 @@ public class LiveSessionActivity extends AppCompatActivity {
         scrollViewMain.setVisibility(View.GONE);
 
         APIManager apiManager = new APIManager(this);
-        UserPreferences userPreferences = new UserPreferences(this);
+        userPreferences = new UserPreferences(this);
         apiManager.getClassDetails(userPreferences.getUserToken(), classId, new NetworkHelper.getClassDetails() {
             @Override
             public void onResponse(Boolean success, Map<String, Object> classDetails) {
@@ -106,16 +108,14 @@ public class LiveSessionActivity extends AppCompatActivity {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        socket.on("kok lai liau", args -> {
-           runOnUiThread(() -> {
-               textContent.append(args[0].toString() + "\n");
-           });
-        });
         socket.connect();
 
         while(!socket.connected()) {
             Log.d("Socket.io", "connecting...");
         }
+
+        // ganti "1" jadi transactionId tapi convert ke string pake String.valueOf(transactionId)
+        socket.emit("join room", String.valueOf(classId));
 
         if (socket.connected()) {
             Log.d("Socket.io", "oke bang sudah konek");
@@ -124,8 +124,11 @@ public class LiveSessionActivity extends AppCompatActivity {
             Log.d("Socket.io", "error");
         }
 
-
-
+        socket.on("message", args -> {
+            runOnUiThread(() -> {
+                textContent.append(args[0].toString() + "\n");
+            });
+        });
     }
 
     @Override

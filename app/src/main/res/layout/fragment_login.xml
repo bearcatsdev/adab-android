@@ -57,7 +57,7 @@
                         android:inputType="text"
                         android:maxLength="10"
                         android:textAllCaps="true"
-                        android:autofillHints="NIM/Lecturer Code"/>
+                        android:autofillHints="username"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
