@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.login.WelcomeFragment">
 
     <LinearLayout
@@ -11,11 +12,15 @@
         android:orientation="vertical"
         android:gravity="center">
 
-
-        <ImageView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:src="@mipmap/splash_logo"/>
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            app:lottie_fileName="animation.json"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_speed="0.5"
+            tools:src="@mipmap/splash_logo"
+            tools:padding="40dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
