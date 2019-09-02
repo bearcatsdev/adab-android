@@ -28,16 +28,16 @@
         android:layout_marginTop="8dp"
         android:layout_width="wrap_content" />
 
-    <!--<Space-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_toStartOf="@id/section_button"-->
-        <!--android:layout_toEndOf="@id/section_title" />-->
+<!--    <Space-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_toStartOf="@id/section_button"-->
+<!--        android:layout_toEndOf="@id/section_title" />-->
 
-    <!--<Button-->
-        <!--style="@style/Button"-->
-        <!--android:id="@+id/section_button"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--tools:text="See All" />-->
+<!--    <Button-->
+<!--        style="@style/Button"-->
+<!--        android:id="@+id/section_button"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        tools:text="See All" />-->
 
 </RelativeLayout>

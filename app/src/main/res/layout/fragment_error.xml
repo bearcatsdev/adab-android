@@ -11,8 +11,8 @@
         android:orientation="vertical"
         android:gravity="center">
         <ImageView
-            android:layout_width="@dimen/image_size"
-            android:layout_height="@dimen/image_size"
+            android:layout_width="@dimen/artwork_width"
+            android:layout_height="@dimen/artwork_height"
             android:src="@drawable/dev" />
 
         <TextView
