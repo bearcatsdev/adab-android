@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingVertical="8dp"
-    android:paddingLeft="32dp"
+    android:paddingLeft="36dp"
     android:paddingRight="8dp"
     android:background="@drawable/drawer_background_effect"
     android:id="@+id/child_item_background"

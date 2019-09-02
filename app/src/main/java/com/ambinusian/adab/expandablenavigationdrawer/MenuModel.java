@@ -4,10 +4,10 @@ import android.graphics.drawable.Drawable;
 
 public class MenuModel {
     public String menuName;
-    public Drawable menuIcon;
+    public int menuIcon;
     public boolean hasChildren, isGroup;
 
-    public MenuModel(Drawable menuIcon, String menuName, boolean isGroup, boolean hasChildren) {
+    public MenuModel(int menuIcon, String menuName, boolean isGroup, boolean hasChildren) {
         this.menuIcon = menuIcon;
         this.menuName = menuName;
         this.isGroup = isGroup;
