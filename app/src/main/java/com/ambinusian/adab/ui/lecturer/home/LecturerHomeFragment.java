@@ -107,7 +107,7 @@ public class LecturerHomeFragment extends Fragment {
                             String courseCode = (String) userClass.get("course_code");
                             String classCode = (String) userClass.get("class_code");
                             String classType = (String) userClass.get("class_type");
-                            String classDate = classDate = new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm", Locale.getDefault())
+                            String classDate = new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm", Locale.getDefault())
                                     .format(startDate);
 
                             int classId = (int) userClass.get("transaction_Id");

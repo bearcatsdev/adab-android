@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--Text Size-->
+    <!--Text-->
     <dimen name="text_title">22sp</dimen>
     <dimen name="text_caption">18sp</dimen>
     <dimen name="text_body">14sp</dimen>
     <dimen name="text_chip">10sp</dimen>
     <dimen name="time">20sp</dimen>
     <dimen name="icon_small">64dp</dimen>
-    <dimen name="image_size">240dp</dimen>
+
+    <!--Image-->
+    <dimen name="artwork_height">180dp</dimen>
+    <dimen name="artwork_width">240dp</dimen>
+
 </resources>

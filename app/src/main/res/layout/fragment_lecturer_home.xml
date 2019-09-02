@@ -47,15 +47,15 @@
                             android:layout_height="wrap_content"
                             android:text="@string/welcome_subtitle" />
 
-                        <androidx.slidingpanelayout.widget.SlidingPaneLayout
+                        <Space
                             android:layout_width="match_parent"
-                            android:layout_height="20dp" />
+                            android:layout_height="16dp" />
                     </LinearLayout>
 
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+                    android:layout_height="16dp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -215,6 +215,7 @@
                             android:layout_marginTop="16sp"
                             android:layout_marginBottom="16sp"
                             android:background="#F5F5F5" />
+
                     </LinearLayout>
                 </LinearLayout>
 
@@ -233,9 +234,8 @@
                         android:text="@string/see_all"
                         android:backgroundTint="@android:color/white"
                         android:textColor="@color/colorPrimary"
-                        android:layout_alignParentRight="true"
-                        style="@style/RoundedMaterialButton"
-                        />
+                        android:layout_alignParentEnd="true"
+                        style="@style/RoundedMaterialButton"/>
                 </RelativeLayout>
 
                 <Space
