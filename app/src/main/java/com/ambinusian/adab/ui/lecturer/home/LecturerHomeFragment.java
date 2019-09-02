@@ -33,11 +33,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 
 public class LecturerHomeFragment extends Fragment {
 
-    RecyclerView discussionRecyclerView;
+    private RecyclerView discussionRecyclerView;
     ArrayList<DiscussionModel> discussionList;
     LinearLayoutManager linearLayoutManager;
     TextView welcomeTitle;
@@ -93,7 +94,7 @@ public class LecturerHomeFragment extends Fragment {
 
                         Date startDate = null;
                         try {
-                            startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                            startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
                                     .parse(userClass.get("transaction_date") + " " + userClass.get("transaction_time"));
                         } catch (ParseException e) {
                             e.printStackTrace();
@@ -106,7 +107,7 @@ public class LecturerHomeFragment extends Fragment {
                             String courseCode = (String) userClass.get("course_code");
                             String classCode = (String) userClass.get("class_code");
                             String classType = (String) userClass.get("class_type");
-                            String classDate = classDate = new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm")
+                            String classDate = classDate = new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm", Locale.getDefault())
                                     .format(startDate);
 
                             int classId = (int) userClass.get("transaction_Id");
@@ -133,7 +134,6 @@ public class LecturerHomeFragment extends Fragment {
                                 //go to LiveSessionActivity
                                 startActivity(intent);
                             });
-
                             break;
                         }
                     }
