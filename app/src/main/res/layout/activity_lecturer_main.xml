@@ -14,30 +14,28 @@
         android:orientation="vertical">
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:elevation="0dp">
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/tool_bar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 style="@style/Widget.Adab.Toolbar"
                 app:navigationIcon="@drawable/ic_icon_menu">
-                <TextView
-                    android:textSize="20sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/home_title"/>
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/circle_image_profile_picture"
-                    android:layout_width="50dp"
+                    android:layout_width="70dp"
                     android:layout_height="50dp"
-                    android:padding="8dp"
+                    android:scaleType="centerCrop"
                     android:layout_marginEnd="5dp"
                     android:layout_gravity="end"
-                    android:src="@drawable/ic_launcher_background"
-                    android:background="?attr/selectableItemBackgroundBorderless"/>
-
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:lottie_fileName="animation.json"
+                    app:lottie_autoPlay="true"
+                    tools:padding="12dp"
+                    tools:src="@mipmap/splash_logo"
+                    />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 

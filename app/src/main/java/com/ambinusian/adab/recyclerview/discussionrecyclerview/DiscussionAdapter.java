@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ambinusian.adab.R;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionHolder> {
@@ -22,6 +24,7 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionHolder> {
     }
 
     @Override
+    @NotNull
     public DiscussionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_layout_discussion,parent,false);
         return new DiscussionHolder(view);

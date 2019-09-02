@@ -1,30 +1,20 @@
 package com.ambinusian.adab.ui.student.main;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.*;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.ambinusian.adab.expandablenavigationdrawer.ExpandableListAdapter;
 import com.ambinusian.adab.expandablenavigationdrawer.MenuModel;
-import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.R;
-import com.ambinusian.adab.ui.login.LoginActivity;
 import com.ambinusian.adab.ui.student.allclasses.AllClassesFragment;
 import com.ambinusian.adab.ui.student.calendar.CalendarFragment;
 import com.ambinusian.adab.ui.student.forum.ForumFragment;
@@ -37,7 +27,6 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.zip.Inflater;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -59,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_student_main);
 
         toolbar = findViewById(R.id.tool_bar);
         mDrawerLayout = findViewById(R.id.mDrawerLayout);

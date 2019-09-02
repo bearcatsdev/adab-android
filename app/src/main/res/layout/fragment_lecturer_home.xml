@@ -17,31 +17,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="16dp"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:orientation="vertical">
-                <LinearLayout
-                    android:id="@+id/welcomeLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="16dp"
                         android:background="?attr/selectableItemBackground"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:paddingTop="5dp"
                         android:paddingBottom="5dp">
 
                         <ImageView
-                            android:layout_width="@dimen/image_size"
-                            android:layout_height="@dimen/image_size"
+                            android:layout_width="240dp"
+                            android:layout_height="180dp"
                             android:src="@drawable/welcome" />
 
                         <TextView
@@ -51,7 +41,7 @@
                             android:textAlignment="center"
                             android:textSize="@dimen/text_caption"
                             android:textStyle="bold"
-                            tools:text="@string/welcome_title" />
+                            tools:text="Welcome back, User!" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -63,12 +53,10 @@
                             android:layout_height="20dp" />
                     </LinearLayout>
 
-                </LinearLayout>
-
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="35dp" />
+                    android:layout_height="10dp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -262,7 +250,7 @@
                     android:overScrollMode="never"
                     android:scrollbars="none"
                     tools:itemCount="3"
-                    tools:listitem="@layout/item_layout_courses" />
+                    tools:listitem="@layout/item_layout_discussion" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>

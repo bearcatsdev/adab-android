@@ -8,7 +8,8 @@
     android:layout_gravity="center"
     android:orientation="vertical"
     android:padding="20dp"
-    android:background="@drawable/dialog_background">
+    android:background="@drawable/dialog_background"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -18,7 +19,8 @@
             android:id="@+id/circle_image_profile_picture"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/ic_launcher_background"/>
+            android:src="@drawable/ic_launcher_background"
+            tools:src="@tools:sample/avatars"/>
 
         <TextView
             android:id="@+id/tv_user_name"
@@ -29,7 +31,7 @@
             android:paddingEnd="15dp"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:text="John Doe Manurung"/>
+            tools:text="John Doe Manurung"/>
 
         <TextView
             android:id="@+id/tv_user_department"
@@ -41,7 +43,7 @@
             android:paddingEnd="15dp"
             android:paddingTop="8dp"
             android:textSize="12sp"
-            android:text="Mobile Application and Technology"/>
+            tools:text="Mobile Application and Technology"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_account_details"
@@ -49,7 +51,6 @@
             android:layout_alignStart="@id/tv_user_department"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/show_account_details"
