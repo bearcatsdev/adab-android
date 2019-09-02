@@ -3,7 +3,7 @@
     <color name="colorPrimary">#428DFC</color>
     <color name="colorAccent">#428DFC</color>
     <color name="white_background">#FFFFFF</color>
-    <color name="slightlyWhite">#080808</color>
+    <color name="slightlyWhite">#F7F7F7</color>
     <color name="textColorPrimary">#000000</color>
     <color name="textColorSecondary">#202020</color>
     <color name="dividerColorLight">#1a1a1a</color>

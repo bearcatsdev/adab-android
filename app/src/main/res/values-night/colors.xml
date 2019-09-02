@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="white_background">#000000</color>
-    <color name="slightlyWhite">#F7F7F7</color>
+    <color name="slightlyWhite">#080808</color>
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="textColorSecondary">#DFDFDF</color>
     <color name="dividerColorLight">#E5E5E5</color>

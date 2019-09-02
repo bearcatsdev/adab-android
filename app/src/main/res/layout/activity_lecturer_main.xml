@@ -35,6 +35,7 @@
                     app:lottie_autoPlay="true"
                     tools:padding="12dp"
                     tools:src="@mipmap/splash_logo"
+                    app:lottie_speed="0.5"
                     />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>

@@ -24,11 +24,10 @@
                 android:layout_height="28dp" />
 
             <ImageView
-                android:layout_width="@dimen/image_size"
-                android:layout_height="@dimen/image_size"
+                android:layout_width="@dimen/artwork_width"
+                android:layout_height="@dimen/artwork_height"
                 android:layout_gravity="center"
                 android:src="@drawable/login" />
-
 
             <TextView
                 android:layout_width="match_parent"
@@ -87,7 +86,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/action_login"
                     android:layout_gravity="center"
-                    android:paddingHorizontal="64dp"
+                    android:paddingStart="64dp"
+                    android:paddingEnd="64dp"
                     style="@style/RoundedMaterialButton"/>
             </LinearLayout>
 

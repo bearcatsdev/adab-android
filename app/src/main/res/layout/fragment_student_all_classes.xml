@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_background"
     tools:context=".ui.student.allclasses.AllClassesFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -24,14 +25,6 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingBottom="5dp">
-
                     <ImageView
                         android:layout_width="@dimen/artwork_width"
                         android:layout_height="@dimen/artwork_height"
@@ -46,19 +39,18 @@
                         android:textStyle="bold"
                         tools:text="Welcome back, Kyle Wisely!" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/welcome_subtitle" />
 
-                    <androidx.slidingpanelayout.widget.SlidingPaneLayout
+                <androidx.slidingpanelayout.widget.SlidingPaneLayout
                         android:layout_width="match_parent"
-                        android:layout_height="20dp" />
-                </LinearLayout>
+                        android:layout_height="16dp" />
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="11dp" />
+                    android:layout_height="16dp" />
 
             </LinearLayout>
 
