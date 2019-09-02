@@ -5,12 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.student.calendar.CalendarFragment">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <devs.mulham.horizontalcalendar.HorizontalCalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                app:selectedDateBackground="@color/colorPrimary"
+                app:sizeBottomText="14dp"
+                app:sizeMiddleText="16dp"
+                app:sizeTopText="12dp"
+                app:textColorSelected="#FFFF" />
+
+        </com.google.android.material.appbar.AppBarLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -57,22 +72,7 @@
                 android:visibility="gone" />
         </LinearLayout>
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <devs.mulham.horizontalcalendar.HorizontalCalendarView
-                android:id="@+id/calendarView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                app:selectedDateBackground="@color/colorPrimary"
-                app:sizeBottomText="14dp"
-                app:sizeMiddleText="16dp"
-                app:sizeTopText="12dp"
-                app:textColorSelected="#FFFF" />
-
-        </com.google.android.material.appbar.AppBarLayout>
     </LinearLayout>
 
 
