@@ -66,7 +66,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
-        Drawable menuIcon = groupList.get(i).menuIcon;
+        int menuIcon = groupList.get(i).menuIcon;
         String menuName = groupList.get(i).menuName;
 
         if (view == null) {
@@ -75,33 +75,55 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             view = infalInflater.inflate(R.layout.expandable_menu_group_item, null);
         }
 
-        ImageView mMenuIcon = view.findViewById(R.id.group_menu_icon);
-        ImageView indicatorIcon = view.findViewById(R.id.indicator);
-        TextView mMenuName = view.findViewById(R.id.group_menu_name);
+        ImageView mMenuIcon = (ImageView) view.findViewById(R.id.group_menu_icon);
+        ImageView indicatorIcon = (ImageView)
+                view.findViewById(R.id.indicator);
+        TextView mMenuName = (TextView) view.findViewById(R.id.group_menu_name);
 
-        mMenuIcon.setImageDrawable(menuIcon);
+
+        if(menuIcon == 0){
+            mMenuIcon.setImageResource(R.drawable.round_view_stream_24px);
+        }
+        else
+        if(menuIcon == 1){
+            mMenuIcon.setImageResource(R.drawable.round_book_24px);
+        }
+        else
+        if(menuIcon == 2){
+            mMenuIcon.setImageResource(R.drawable.round_today_24px);
+        }
+        else
+        if(menuIcon == 3){
+            mMenuIcon.setImageResource(R.drawable.round_forum_24px);
+        }
+        else
+        if(menuIcon == 4){
+            mMenuIcon.setImageResource(R.drawable.round_help_24px);
+        }
+        else
+        if(menuIcon == 5){
+            mMenuIcon.setImageResource(R.drawable.round_settings_24px);
+        }
         mMenuName.setText(menuName);
+
+        if(i != 1){
+            indicatorIcon.setVisibility(View.GONE);
+        }
+
+        if(b)
+            indicatorIcon.setImageDrawable(view.getContext().getResources().getDrawable(R.drawable.ic_round_keyboard_arrow_up_24px));
+        else
+            indicatorIcon.setImageDrawable(view.getContext().getResources().getDrawable(R.drawable.ic_round_keyboard_arrow_down_24px));
+
         TextView name = view.findViewById(R.id.group_menu_name);
         Log.e("debug",name.getText().toString());
-
-        //set condition for indicator arrow
-//        if(groupList.get(i).hasChildren){
-//            if(b){
-//                indicatorIcon.setImageDrawable(view.getContext().getResources().getDrawable(R.drawable.ic_round_keyboard_arrow_up_24px));
-//            }
-//            else
-//            {
-//                indicatorIcon.setImageDrawable(view.getContext().getResources().getDrawable(R.drawable.ic_round_keyboard_arrow_down_24px));
-//            }
-//        }
-
 
         return view;
     }
 
     @Override
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
-        Drawable menuIcon = childList.get(groupList.get(i)).get(i1).menuIcon;
+        int menuIcon = childList.get(groupList.get(i)).get(i1).menuIcon;
         String menuName = childList.get(groupList.get(i)).get(i1).menuName;
 
         if (view == null) {
@@ -113,7 +135,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         ImageView mMenuIcon = view.findViewById(R.id.child_menu_icon);
         TextView mMenuName = view.findViewById(R.id.child_menu_name);
 
-        mMenuIcon.setImageDrawable(menuIcon);
+        if(menuIcon == 6)
+        mMenuIcon.setImageResource(R.drawable.ic_outline_book_24px);
         mMenuName.setText(menuName);
         return view;
     }

@@ -10,7 +10,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:id="@+id/group_menu_icon"
-        android:tint="@drawable/drawer_icon_text_effect"/>
+        android:tint="@drawable/drawer_icon_text_effect" />
 
     <TextView
         android:layout_width="wrap_content"

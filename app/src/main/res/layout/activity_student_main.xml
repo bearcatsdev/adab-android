@@ -63,11 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@null"
-            android:groupIndicator="@drawable/expandable_group_indicator"
-            android:dividerHeight="8dp"
             android:choiceMode="singleChoice"
-            android:listSelector="@android:color/transparent"
-            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
             android:focusable="true"
             android:id="@+id/expandableListView"/>
     </com.google.android.material.navigation.NavigationView>

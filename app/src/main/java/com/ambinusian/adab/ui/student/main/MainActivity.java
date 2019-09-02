@@ -2,6 +2,7 @@ package com.ambinusian.adab.ui.student.main;
 
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 
 import android.widget.*;
@@ -83,13 +84,13 @@ public class MainActivity extends AppCompatActivity {
         expandableListView.addHeaderView(headerView);
 
         //set course Subject
-        courseSubject.add(new MenuModel(getResources().getDrawable(R.drawable.ic_outline_book_24px),"MOOP",false,false));
-        courseSubject.add(new MenuModel(getResources().getDrawable(R.drawable.ic_outline_book_24px),"Bahasa Indonesia",false,false));
-        courseSubject.add(new MenuModel(getResources().getDrawable(R.drawable.ic_outline_book_24px),"English Savvy",false,false));
-        courseSubject.add(new MenuModel(getResources().getDrawable(R.drawable.ic_outline_book_24px),"Calculus",false,false));
-        courseSubject.add(new MenuModel(getResources().getDrawable(R.drawable.ic_outline_book_24px),"Data Structure",false,false));
-        courseSubject.add(new MenuModel(getResources().getDrawable(R.drawable.ic_outline_book_24px),"Mobile Creative Design",false,false));
-        courseSubject.add(new MenuModel(getResources().getDrawable(R.drawable.ic_outline_book_24px),"CB - Kewanegaraan",false,false));
+        courseSubject.add(new MenuModel(6,"MOOP",false,false));
+        courseSubject.add(new MenuModel(6,"Bahasa Indonesia",false,false));
+        courseSubject.add(new MenuModel(6,"English Savvy",false,false));
+        courseSubject.add(new MenuModel(6,"Calculus",false,false));
+        courseSubject.add(new MenuModel(6,"Data Structure",false,false));
+        courseSubject.add(new MenuModel(6,"Mobile Creative Design",false,false));
+        courseSubject.add(new MenuModel(6,"CB - Kewanegaraan",false,false));
 
         //set up spinner
         SpinnerListSemester = headerView.findViewById(R.id.spinner_list_semesters);
@@ -116,12 +117,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void prepareMenuData(){
         //set group menu list
-        groupList.add(new MenuModel(getResources().getDrawable(R.drawable.round_view_stream_24px),"Home",false,false));
-        groupList.add(new MenuModel(getResources().getDrawable(R.drawable.round_book_24px),"Topics",true,true));
-        groupList.add(new MenuModel(getResources().getDrawable(R.drawable.round_today_24px),"Calendar",false,false));
-        groupList.add(new MenuModel(getResources().getDrawable(R.drawable.round_forum_24px),"Discussion",false,false));
-        groupList.add(new MenuModel(getResources().getDrawable(R.drawable.round_help_24px),"Help",false,false));
-        groupList.add(new MenuModel(getResources().getDrawable(R.drawable.round_settings_24px),"Setting",false,false));
+        groupList.add(new MenuModel(0,"Home",false,false));
+        groupList.add(new MenuModel(1,"Topics",true,true));
+        groupList.add(new MenuModel(2,"Calendar",false,false));
+        groupList.add(new MenuModel(3,"Discussion",false,false));
+        groupList.add(new MenuModel(4,"Help",false,false));
+        groupList.add(new MenuModel(5,"Setting",false,false));
 
         //set child menu list at topics menu, index == 1
         childList.put(groupList.get(1),courseSubject);
@@ -131,8 +132,6 @@ public class MainActivity extends AppCompatActivity {
 
         expandableListAdapter = new ExpandableListAdapter(this, groupList,childList);
         expandableListView.setAdapter(expandableListAdapter);
-        expandableListView.setFocusable(true);
-        expandableListView.setFocusableInTouchMode(true);
         expandableListView.setItemChecked(1,true);
 
         expandableListView.setOnGroupClickListener((parent, v, groupPosition, id) -> {
@@ -157,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if(expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() > 2){
                     parent.setItemChecked(expandableListView.getCheckedItemPosition()-7,true);
                 }
-            }
+            };
 
             //don't close the drawer if selected Topics menu. Otherwise, just close it
             if(groupPosition != 1){
@@ -166,7 +165,9 @@ public class MainActivity extends AppCompatActivity {
 
             //for highlight menu background
             int index = parent.getFlatListPosition(ExpandableListView.getPackedPositionForGroup(groupPosition));
-            if(!(groupList.get(groupPosition).hasChildren) && parent.getCheckedItemPosition() != index){
+            if(!(groupList.get(groupPosition).hasChildren)){
+                Log.e("debug2","text");
+                parent.setItemChecked(index-2,true);
                 parent.setItemChecked(index,true);
                 mDrawerLayout.closeDrawer(GravityCompat.START);
             }
