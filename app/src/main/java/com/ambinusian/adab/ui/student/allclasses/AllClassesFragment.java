@@ -3,20 +3,22 @@ package com.ambinusian.adab.ui.student.allclasses;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.TextKeyListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
@@ -26,6 +28,7 @@ import com.ambinusian.adab.recyclerview.courserecyclerview.CourseModel;
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionAdapter;
 import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionModel;
+import com.ambinusian.adab.utility.TextUtility;
 import com.google.android.material.chip.Chip;
 
 import java.text.ParseException;
@@ -39,7 +42,7 @@ public class AllClassesFragment extends Fragment {
     private RecyclerView coursesRecyclerView, discussionRecyclerView;
     private ArrayList<CourseModel> coursesList;
     private ArrayList<DiscussionModel> discussionList;
-    private LinearLayout liveLayout,welcomeLayout;
+    private LinearLayout liveLayout, welcomeLayout;
     private ImageView liveClassIcon;
     private LinearLayoutManager linearLayoutManager;
     private TextView liveClassTitle, liveCourse, liveClassMeeting;
@@ -65,7 +68,7 @@ public class AllClassesFragment extends Fragment {
         discussionRecyclerView = view.findViewById(R.id.rv_discussions);
         liveLayout = view.findViewById(R.id.liveLayout);
         liveClassIcon = view.findViewById(R.id.liveClassIcon);
-        liveClassTitle  = view.findViewById(R.id.tv_liveClassTitle);
+        liveClassTitle = view.findViewById(R.id.tv_liveClassTitle);
         liveCourse = view.findViewById(R.id.tv_liveCourse);
         liveClassMeeting = view.findViewById(R.id.tv_liveClassMeeting);
         welcomeLayout = view.findViewById(R.id.welcomeLayout);
@@ -83,7 +86,6 @@ public class AllClassesFragment extends Fragment {
         discussionList = new ArrayList<>();
         hasLiveClass = false;
 
-
         // set visibility gone
         coursesRecyclerView.setVisibility(View.GONE);
 
@@ -100,7 +102,7 @@ public class AllClassesFragment extends Fragment {
                     linearLayoutManager.setReverseLayout(true);
                     coursesRecyclerView.setLayoutManager(linearLayoutManager);
 
-                    for (Map<String, Object> userClass: userClasses) {
+                    for (Map<String, Object> userClass : userClasses) {
 
                         if ((int) userClass.get("is_done") == 1) {
 
@@ -137,47 +139,47 @@ public class AllClassesFragment extends Fragment {
                         }
 
                         if ((int) userClass.get("is_live") == 1) {
-                                liveLayout.setVisibility(View.VISIBLE);
-                                liveClassIcon.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.ic_class_59_pencilpaper));
-                                liveClassTitle.setText((String) userClass.get("topic"));
-                                liveCourse.setText((String) userClass.get("course_name"));
-                                String meeting = getString(R.string.class_session) + " " + userClass.get("session");
-                                liveClassMeeting.setText(meeting);
+                            liveLayout.setVisibility(View.VISIBLE);
+                            liveClassIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_class_59_pencilpaper));
+                            liveClassTitle.setText((String) userClass.get("topic"));
+                            liveCourse.setText((String) userClass.get("course_name"));
+                            String meeting = getString(R.string.class_session) + " " + userClass.get("session");
+                            liveClassMeeting.setText(meeting);
 
-                                liveLayout.setOnClickListener(v -> {
-                                    Intent intent = new Intent(getContext(), LiveSessionActivity.class);
-                                    int classId = (int) userClass.get("transaction_Id");
+                            liveLayout.setOnClickListener(v -> {
+                                Intent intent = new Intent(getContext(), LiveSessionActivity.class);
+                                int classId = (int) userClass.get("transaction_Id");
 
-                                    //set all data to bundle
-                                    Bundle bundle = new Bundle();
-                                    bundle.putInt("class_id", classId);
+                                //set all data to bundle
+                                Bundle bundle = new Bundle();
+                                bundle.putInt("class_id", classId);
 
-                                    //set bundle to the intent
-                                    intent.putExtras(bundle);
+                                //set bundle to the intent
+                                intent.putExtras(bundle);
 
-                                    //go to LiveSessionActivity
-                                    startActivity(intent);
-                                });
+                                //go to LiveSessionActivity
+                                startActivity(intent);
+                            });
 
-                                hasLiveClass = true;
+                            hasLiveClass = true;
                         }
                     }
 
                     //set adapter for recycler view
-                    coursesRecyclerView.setAdapter(new CourseAdapter(getContext(),coursesList));
+                    coursesRecyclerView.setAdapter(new CourseAdapter(getContext(), coursesList));
 
                     //set visible
                     coursesRecyclerView.setVisibility(View.VISIBLE);
 
                     //show welcome page if no any class is live
-                    if(!hasLiveClass){
+                    if (!hasLiveClass) {
                         welcomeLayout.setVisibility(View.VISIBLE);
-                        welcomeTitle.setText(getString(R.string.welcome_title, userPreferences.getUserName()));
-                        
+                        welcomeTitle.setText(getString(R.string.welcome_title, TextUtility.toTitleCase(userPreferences.getUserName().toUpperCase())));
                     }
 
                 }
             }
+
 
             @Override
             public void onError(int errorCode, String errorReason) {
@@ -190,15 +192,15 @@ public class AllClassesFragment extends Fragment {
         Fill using dummy data
         */
 
-        discussionList.add(new DiscussionModel("Thursday, 22 June 2019","Saya Binusian 2022","Chandra","on Storage(MOBI6009)"));
-        discussionList.add(new DiscussionModel("Thursday, 22 June 2019","Saya Binusian 2022","Chandra","on Storage(MOBI6009)"));
-        discussionList.add(new DiscussionModel("Thursday, 22 June 2019","Saya Binusian 2022","Chandra","on Storage(MOBI6009)"));
+        discussionList.add(new DiscussionModel("Thursday, 22 June 2019", "Saya Binusian 2022", "Chandra", "on Storage(MOBI6009)"));
+        discussionList.add(new DiscussionModel("Thursday, 22 June 2019", "Saya Binusian 2022", "Chandra", "on Storage(MOBI6009)"));
+        discussionList.add(new DiscussionModel("Thursday, 22 June 2019", "Saya Binusian 2022", "Chandra", "on Storage(MOBI6009)"));
 
         //Set layout manager and adapter for discussionRecyclerView
         linearLayoutManager = new LinearLayoutManager(getContext());
         discussionRecyclerView.setLayoutManager(linearLayoutManager);
 
-        DiscussionAdapter adapter = new DiscussionAdapter(getContext(),discussionList);
+        DiscussionAdapter adapter = new DiscussionAdapter(getContext(), discussionList);
         discussionRecyclerView.setAdapter(adapter);
 
         //Next Class
