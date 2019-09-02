@@ -28,7 +28,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/text_caption"
                     android:textStyle="bold"
                     android:id="@+id/tv_class_list_topic"

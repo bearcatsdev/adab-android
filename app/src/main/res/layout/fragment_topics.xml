@@ -46,7 +46,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/textColorPrimary"
                         android:textSize="@dimen/text_caption"
                         android:textStyle="bold"
                         tools:text="Mobile Object Oriented Programming" />
@@ -112,7 +112,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorBlack"
+                            android:textColor="@color/textColorPrimary"
                             android:textSize="@dimen/text_caption"
                             android:textStyle="bold"
                             android:id="@+id/tv_topic_nextClassTitle"
