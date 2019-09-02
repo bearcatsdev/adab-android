@@ -12,6 +12,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.ambinusian.adab.expandablenavigationdrawer.ExpandableListAdapter;
 import com.ambinusian.adab.expandablenavigationdrawer.MenuModel;
 import com.ambinusian.adab.R;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     List<MenuModel> courseSubject;
     HashMap<MenuModel,List<MenuModel>> childList;
     View headerView;
-    CircleImageView profilePicture;
+    LottieAnimationView profilePicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -24,8 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -49,7 +48,7 @@
                         android:textAlignment="center"
                         android:textSize="@dimen/text_caption"
                         android:textStyle="bold"
-                        tools:text="@string/welcome_title" />
+                        tools:text="Welcome back, Kyle Wisely!" />
 
                     <TextView
                         android:layout_width="wrap_content"

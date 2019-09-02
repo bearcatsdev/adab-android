@@ -22,34 +22,20 @@
                 android:layout_height="?attr/actionBarSize"
                 style="@style/Widget.Adab.Toolbar"
                 app:navigationIcon="@drawable/ic_icon_menu">
-                <TextView
-                    android:textSize="20sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/home_title"/>
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/circle_image_profile_picture"
-                    android:layout_width="50dp"
+                    android:layout_width="70dp"
                     android:layout_height="50dp"
-                    android:padding="8dp"
+                    android:scaleType="centerCrop"
                     android:layout_marginEnd="5dp"
                     android:layout_gravity="end"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     app:lottie_fileName="animation.json"
+                    app:lottie_autoPlay="true"
+                    tools:padding="12dp"
                     tools:src="@mipmap/splash_logo"
                     />
-
-<!--                <de.hdodenhof.circleimageview.CircleImageView-->
-<!--                    android:id="@+id/circle_image_profile_picture"-->
-<!--                    android:layout_width="50dp"-->
-<!--                    android:layout_height="50dp"-->
-<!--                    android:padding="8dp"-->
-<!--                    android:layout_marginEnd="5dp"-->
-<!--                    android:layout_gravity="end"-->
-<!--                    android:src="@drawable/ic_launcher_background"-->
-<!--                    android:background="?attr/selectableItemBackgroundBorderless"/>-->
-
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -72,8 +58,7 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:layout_gravity="start"
-        android:id="@+id/nv_adab"
-        >
+        android:id="@+id/nv_adab">
         <ExpandableListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,7 +69,7 @@
             android:listSelector="@android:color/transparent"
             android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
             android:focusable="true"
-            android:id="@+id/expandableListView"></ExpandableListView>
+            android:id="@+id/expandableListView"/>
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -3,6 +3,7 @@ package com.ambinusian.adab.ui.student.allclasses;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.TextKeyListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -52,7 +53,7 @@ public class AllClassesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_all_classes, container, false);
+        return inflater.inflate(R.layout.fragment_student_all_classes, container, false);
     }
 
     @SuppressLint("SetTextI18n")
@@ -172,6 +173,7 @@ public class AllClassesFragment extends Fragment {
                     if(!hasLiveClass){
                         welcomeLayout.setVisibility(View.VISIBLE);
                         welcomeTitle.setText(getString(R.string.welcome_title, userPreferences.getUserName()));
+                        
                     }
 
                 }
@@ -183,21 +185,24 @@ public class AllClassesFragment extends Fragment {
             }
         });
 
-        ////Dicussion
-        //fiil using dummy data
+        /*
+        Discussion
+        Fill using dummy data
+        */
+
         discussionList.add(new DiscussionModel("Thursday, 22 June 2019","Saya Binusian 2022","Chandra","on Storage(MOBI6009)"));
         discussionList.add(new DiscussionModel("Thursday, 22 June 2019","Saya Binusian 2022","Chandra","on Storage(MOBI6009)"));
         discussionList.add(new DiscussionModel("Thursday, 22 June 2019","Saya Binusian 2022","Chandra","on Storage(MOBI6009)"));
 
-        //set layout manager and adapter for discussionRecyclerView
+        //Set layout manager and adapter for discussionRecyclerView
         linearLayoutManager = new LinearLayoutManager(getContext());
         discussionRecyclerView.setLayoutManager(linearLayoutManager);
 
         DiscussionAdapter adapter = new DiscussionAdapter(getContext(),discussionList);
         discussionRecyclerView.setAdapter(adapter);
 
-        ////Next Class
-        //TODO change this fill using dummy data
+        //Next Class
+        //TODO: change this fill using dummy data
         nextClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_class_56_pencilnote));
         nextClassTime.setText("Monday, 26 August 2019");
         nextClassTitle.setText("Storage");
