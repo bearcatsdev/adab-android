@@ -5,28 +5,36 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowLightStatusBar" tools:targetApi="27">true</item>
-        <item name="android:textColorPrimary">@color/textColorPrimary</item>
-        <item name="android:textColorSecondary">@color/textColorSecondary</item>
+        <item name="android:textColorPrimary">@color/textPrimary</item>
+        <item name="android:textColorSecondary">@color/textPrimaryLight</item>
 
         <!--Font-->
         <item name="android:fontFamily">@font/interstate</item>
         <item name="fontFamily">@font/interstate</item>
 
-        <!--Navigation Bar-->
+        <!--System Navigation Bar-->
         <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
-        <item name="android:statusBarColor" tools:targetApi="27">#ffffff</item>
-        <item name="android:navigationBarColor" tools:targetApi="27">#ffffff</item>
+        <item name="android:statusBarColor" tools:targetApi="27">@color/background</item>
+        <item name="android:navigationBarColor" tools:targetApi="27">@color/background</item>
     </style>
 
     <!--Toolbar-->
     <style name="Widget.Adab.Toolbar" parent="Widget.MaterialComponents.Toolbar">
-        <item name="android:background">@color/white_background</item>
+        <item name="android:background">@color/background</item>
         <item name="android:theme">@style/Theme.AppCompat.Light</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
     <!--Divider-->
     <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/divider</item>
+    </style>
+
+    <!--Divider-->
+    <!-- TODO: Rename this with proper naming. -->
+    <style name="DividerThick">
         <item name="android:layout_height">3dp</item>
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:elevation">3dp</item>
@@ -36,7 +44,7 @@
     <style name="Button" parent="Widget.MaterialComponents.Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:backgroundTint">@color/white_background</item>
+        <item name="android:backgroundTint">@color/background</item>
         <item name="android:paddingStart">16dp</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingEnd">16dp</item>
@@ -82,13 +90,30 @@
         <item name="strokeColor">@color/colorPrimary</item>
         <item name="cornerRadius">20dp</item>
         <item name="strokeWidth">1.5dp</item>
-
     </style>
 
+    <!-- Chip -->
+    <!-- TODO: Rename this with proper naming. -->
     <style name="Chip" parent="Widget.MaterialComponents.Chip.Action">
-        <item name="chipBackgroundColor">@color/white_background</item>
+        <item name="chipBackgroundColor">@color/background</item>
         <item name="chipStrokeColor">#E1E1E1</item>
         <item name="chipStrokeWidth">1dp</item>
+    </style>
+
+    <!-- Nav Bar Item -->
+    <style name="NavBarItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+    </style>
+
+    <!-- Space -->
+    <style name="Space16">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">16dp</item>
     </style>
 
 </resources>

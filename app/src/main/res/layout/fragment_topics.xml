@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white_background"
+    android:background="@color/background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.student.topics.TopicsFragment">
 
@@ -46,7 +46,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:textColor="@color/textColorPrimary"
+                        android:textColor="@color/textPrimary"
                         android:textSize="@dimen/text_caption"
                         android:textStyle="bold"
                         tools:text="Mobile Object Oriented Programming" />
@@ -83,8 +83,10 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="16dp"
-                android:layout_marginHorizontal="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="16dp"
+                layout_marginBottom="16dp"
                 android:elevation="1dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -112,7 +114,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/textColorPrimary"
+                            android:textColor="@color/textPrimary"
                             android:textSize="@dimen/text_caption"
                             android:textStyle="bold"
                             android:id="@+id/tv_topic_nextClassTitle"

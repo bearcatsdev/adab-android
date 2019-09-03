@@ -29,11 +29,14 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="32dp"/>
+
         <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_letsgo"
             android:id="@+id/btn_letsgo"
+            android:paddingStart="64dp"
+            android:paddingEnd="64dp"
             style="@style/RoundedMaterialButton"/>
 
     </LinearLayout>

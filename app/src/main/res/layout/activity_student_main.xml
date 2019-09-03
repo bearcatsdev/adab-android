@@ -8,13 +8,23 @@
     android:id="@+id/mDrawerLayout"
     tools:context=".ui.student.main.MainActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <FrameLayout
+            android:paddingTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/adab_fragment"
+            tools:background="@color/background">
+        </FrameLayout>
+
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/tool_bar"
                 android:layout_width="match_parent"
@@ -40,13 +50,9 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/adab_fragment">
-        </FrameLayout>
 
-    </LinearLayout>
+
+    </RelativeLayout>
 
 
     <!--app:menu="@menu/adab_navigation_drawer_menu"-->

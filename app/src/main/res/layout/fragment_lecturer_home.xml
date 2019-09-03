@@ -124,7 +124,7 @@
                                 android:id="@+id/tv_nextScheduleClassTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/textColorPrimary"
+                                android:textColor="@color/textPrimary"
                                 android:textSize="@dimen/text_caption"
                                 android:textStyle="bold"
                                 tools:text="@tools:sample/lorem" />
@@ -137,7 +137,7 @@
                                 android:id="@+id/tv_nextScheduleCourse"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/textColorPrimary"
+                                android:textColor="@color/textPrimary"
                                 android:textSize="@dimen/text_body"
                                 tools:text="Mobile Object Oriented Programming" />
 
@@ -145,7 +145,7 @@
                                 android:id="@+id/tv_nextScheduleSession"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/textColorPrimary"
+                                android:textColor="@color/textPrimary"
                                 android:textSize="@dimen/text_body"
                                 tools:text="Session 11" />
 

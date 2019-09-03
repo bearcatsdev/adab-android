@@ -21,13 +21,14 @@
         tools:text="See what you've missing so far" />
 
     <View
-        style="@style/Divider"
+        style="@style/DividerThick"
         android:layout_below="@id/section_subtitle"
         android:layout_alignStart="@id/section_title"
         android:layout_alignEnd="@id/section_title"
         android:layout_marginTop="8dp"
         android:layout_width="wrap_content" />
 
+    <!-- TODO: Please use this for god's sake -->
 <!--    <Space-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->

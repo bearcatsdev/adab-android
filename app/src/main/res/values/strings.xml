@@ -54,6 +54,8 @@
     <string name="tag_lastest_class">Lastest Class</string>
 
     <!--Navigation Drawer-->
+    <string name="nav_head_build">Dev build 09.19</string>
+
     <string name="nav_home">Home</string>
     <string name="nav_topics">Topics</string>
     <string name="nav_calendar">Calendar</string>
