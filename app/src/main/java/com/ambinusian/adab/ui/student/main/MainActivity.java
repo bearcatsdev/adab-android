@@ -154,8 +154,12 @@ public class MainActivity extends AppCompatActivity {
             else if(groupPosition == 1){
                 if(!expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() > 2){
                     parent.setItemChecked(expandableListView.getCheckedItemPosition()+7,true);
-                } else if(expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() > 2){
-                    parent.setItemChecked(expandableListView.getCheckedItemPosition()-7,true);
+                } else if(!expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() < 0){
+                    parent.setItemChecked(expandableListView.getCheckedItemPosition()+100,true);
+                } else if(expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() > courseSubject.size()+2 ){
+                        parent.setItemChecked(expandableListView.getCheckedItemPosition()-7,true);
+                }  else if(expandableListView.isGroupExpanded(1) && (expandableListView.getCheckedItemPosition() >= 3 && expandableListView.getCheckedItemPosition() <= courseSubject.size()+2)) {
+                    parent.setItemChecked(expandableListView.getCheckedItemPosition()- 100, true);
                 }
             };
 
