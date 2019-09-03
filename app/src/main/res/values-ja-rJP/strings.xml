@@ -1,23 +1,23 @@
 <resources>
     <!--Login-->
-    <string name="login_welcome">Hi, there!\nWelcome to ADAB</string>
+    <string name="login_welcome">Konnichiwa!\nWerukamu tu ADABBU</string>
     <string name="login_input_credential">Before we move on,\n please input your credential below</string>
-    <string name="button_letsgo">Let\'s Go</string>
+    <string name="button_letsgo">Iku ayo</string>
 
     <!--Home-->
-    <string name="app_name">BINUS Adab</string>
-    <string name="home_title"><b>BINUS</b> Adab</string>
-    <string name="home_category_live">Live Now</string>
-    <string name="home_category_all">All Classes</string>
-    <string name="home_latest_title">Latest Class</string>
+    <string name="app_name">BINUSU Adabbu</string>
+    <string name="home_title"><b>BINUSU</b> Adabbu</string>
+    <string name="home_category_live">Laibu Nau</string>
+    <string name="home_category_all">Oru Kurasu</string>
+    <string name="home_latest_title">Saishin No Kurasu</string>
     <string name="home_latest_subtitle">See what classes you\'ve done so far</string>
-    <string name="home_discussion_title">Discussion</string>
+    <string name="home_discussion_title">討論</string>
     <string name="home_discussion_subtitle">Discussion subtitle</string>
     <string name="home_next_class_title">Your Next Class</string>
 
     <!--Lecturer Home-->
-    <string name="lecturer_home_next_schedule_title">Your Next Schedule</string>
-    <string name="lecturer_home_next_schedule_subtitle">Never Missed yout class</string>
+    <string name="lecturer_home_next_schedule_title">次のクラス</string>
+    <string name="lecturer_home_next_schedule_subtitle">クラスを見逃すことはありません</string>
     <string name="lecturer_discussion_title">Discussion</string>
     <string name="lecturer_discussion_subtitle">See what you\'ve missing so far</string>
 
@@ -51,7 +51,7 @@
 
     <!--Tag in all classes fragment-->
     <string name="tag_live_now">Live Now</string>
-    <string name="tag_lastest_class">Latest Class</string>
+    <string name="tag_lastest_class">Lastest Class</string>
 
     <!--Navigation Drawer-->
     <string name="nav_head_build">Dev build 09.19</string>
@@ -89,7 +89,7 @@
 
     <!--Calendar-->
     <string name="no_class_today">No class at the selected day</string>
-    
+
     <!--Error Fragment-->
     <string name="error_fragment_title">This Feature Will Be Available Soon</string>
     <string name="error_fragment_subtitle">Our developers are currently working so hard to make sure everything works perfectly</string>

@@ -86,7 +86,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginTop="16dp"
-                layout_marginBottom="16dp"
+                android:layout_marginBottom="16dp"
                 android:elevation="1dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -105,6 +105,7 @@
                             android:id="@+id/topic_nextClassIcon"
                             tools:src="@tools:sample/avatars" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -140,9 +141,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <androidx.legacy.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
+            <Space style="@style/Space16"/>
 
             <com.ambinusian.adab.customcomponent.SectionView
                 android:layout_width="wrap_content"
@@ -156,12 +155,12 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="10"
                 android:id="@+id/rv_classList"
                 android:overScrollMode="never"
                 android:scrollbars="none"
-                tools:listitem="@layout/item_layout_courses"/>
+                tools:listitem="@layout/item_layout_class_list"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

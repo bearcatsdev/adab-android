@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Login-->
+    <string name="login_welcome">Halo!\nSelamat datang di ADAB</string>
+    <string name="login_input_credential">Sebelum kita lanjut,\n please input your credential below</string>
+    <string name="button_letsgo">Let\'s Go</string>
+
+    <!--Home-->
+    <string name="app_name">BINUS Adab</string>
+    <string name="home_title"><b>BINUS</b> Adab</string>
+    <string name="home_category_live">Sedang Berlangsung</string>
+    <string name="home_category_all">Semua Kelas</string>
+    <string name="home_latest_title">Kelas Terbaru</string>
+    <string name="home_latest_subtitle">Lihat kelas-kelas sebelumnya</string>
+    <string name="home_discussion_title">Diskusi</string>
+    <string name="home_discussion_subtitle">Subtitle diskusi</string>
+    <string name="home_next_class_title">Kelas Selanjutnya</string>
+
+    <!--Lecturer Home-->
+    <string name="lecturer_home_next_schedule_title">Jadwal Selanjutnya</string>
+    <string name="lecturer_home_next_schedule_subtitle">Jangan sampai ketinggalan kelas</string>
+    <string name="lecturer_discussion_title">Diskusi</string>
+    <string name="lecturer_discussion_subtitle">Lihat apa yang Anda lewatkan sejauh ini</string>
+
+    <!--Lectures Course Detail-->
+    <string name="lecturer_class_list_title">Daftar Kelas</string>
+    <string name="lecturer_class_list_subtitle">Tidak pernah ketinggalan kelas Anda</string>
+    <string name="button_start_class">Mulai Kelas Ini Sekarang</string>
+
+    <!--Topik-->
+    <string name="topic_next_class"> Kelas Berikutnya</string>
+    <string name="topic_class_schedule">Jadwal Kelas</string>
+
+    <!--Toolbar-->
+    <string name="toolbar_all_classes">Semua Kelas</string>
+    <string name="toolbar_topics">Topik</string>
+    <string name="toolbar_calendar">Kalender</string>
+    <string name="toolbar_discussion">Diskusi</string>
+    <string name="toolbar_help">Bantuan</string>
+    <string name="toolbar_settings">Pengaturan</string>
+    <string name="live_class_transcribe">Live Transcribe</string>
+    <string name="class_transcribe_history">Transcribe History</string>
+
+    <!--Place Holder-->
+    <string name="placeholder_date">00:00</string>
+    <string name="placeholder_title">Sistem Tertanam dan Internet of Things</string>
+    <string name="placeholder_subtitle">Subtitle</string>
+
+    <!--Welcome-->
+    <string name="welcome_title">Selamat datang kembali, %1s!</string>
+    <string name="welcome_subtitle">Kami senang melihat Anda kembali</string>
+
+    <!--Tag in all classes fragment-->
+    <string name="tag_live_now">Sedang Berlangsung</string>
+    <string name="tag_lastest_class">Kelas Terbaru</string>
+
+    <!--Navigation Drawer-->
+    <string name="nav_head_build">Bangunan Devita 09.19</string>
+
+    <string name="nav_home">Beranda</string>
+    <string name="nav_topics">Topik</string>
+    <string name="nav_calendar">Kalender</string>
+    <string name="nav_discussion">Diskusi</string>
+    <string name="nav_help">Bantuan</string>
+    <string name="nav_setting">Pengaturan</string>
+
+    <!--Other-->
+    <string name="hello_blank_fragment">Halo fragment kosong</string>
+    <string name="hint_username">NIM / Kode Dosen</string>
+    <string name="hint_password">Kata Sandi</string>
+    <string name="action_login">Masuk</string>
+    <string name="error_nim_invalid">Format nama pengguna tidak valid</string>
+    <string name="error_password_invalid">Silakan masukkan kata sandi</string>
+    <string name="error_password_empty">Silakan masukan kata sandi</string>
+    <string name="username_or_password_invalid">Nama pengguna atau kata sandi salah.</string>
+    <string name="unknown_error">Kesalahan tidak dikenal</string>
+    <string name="session_expired">Sesi berakhir, silakan masuk lagi.</string>
+    <string name="action_logout">Keluar</string>
+    <string name="class_session">Sesi %d</string>
+    <string name="how_to_use">Cara penggunaan</string>
+    <string name="about">Tentang</string>
+    <string name="need_help_ask_us_here">Butuh bantuan? Tanya kami di sini!</string>
+
+
+    <!--See All Button-->
+    <string name="see_all">Lihat Semua</string>
+    <string name="loading_getting_content">Mengambil konten &#8230;</string>
+    <string name="show_account_details">Tampilkan detail akun</string>
+    <string name="logout_body_message">Semua catatan Anda yang diedit tetap disinkronkan ke akun Anda jika Anda keluar.</string>
+
+    <!--Calendar-->
+    <string name="no_class_today">Tidak ada kelas pada hari yang dipilih</string>
+
+    <!--Error Fragment-->
+    <string name="error_fragment_title">Fitur Ini Akan Segera Tersedia</string>
+    <string name="error_fragment_subtitle">Pengembang kami saat ini bekerja sangat keras untuk memastikan semuanya berjalan dengan baik</string>
+</resources>

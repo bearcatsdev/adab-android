@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.DialogFragment;
 
 import com.ambinusian.adab.R;
@@ -32,11 +33,13 @@ public class UserProfileDialogFragment extends DialogFragment {
     private TextView textUserDepartment;
     private MaterialButton buttonAccountDetails;
     private LinearLayout layoutLogout;
+    private LinearLayout layoutDark;
 
     public UserProfileDialogFragment() {
         // Constructor kosong diperlukan untuk DialogFragment.
         // Pastikan tidak memberikan argument/parameter apapun ke
         // constructor ini.
+        System.out.println("Siap bos");
     }
 
     @Override
@@ -60,6 +63,7 @@ public class UserProfileDialogFragment extends DialogFragment {
         textUserDepartment = getView().findViewById(R.id.tv_user_department);
         buttonAccountDetails = getView().findViewById(R.id.button_account_details);
         layoutLogout = getView().findViewById(R.id.layout_logout);
+        layoutDark = getView().findViewById(R.id.layout_profile_dialog_dark);
 
         textUserName.setText(userPreferences.getUserName());
         textUserDepartment.setText(userPreferences.getUserDepartement());
@@ -69,5 +73,7 @@ public class UserProfileDialogFragment extends DialogFragment {
             getActivity().startActivity(new Intent(getContext(), LoginActivity.class));
             getActivity().finish();
         });
+
+        layoutDark.setOnClickListener(v -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES));
     }
 }

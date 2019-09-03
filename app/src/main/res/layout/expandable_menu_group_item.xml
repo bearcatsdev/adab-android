@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:padding="12dp"
     android:background="@drawable/drawer_background_effect">
+
     <ImageView
         android:layout_width="24dp"
         android:layout_height="24dp"

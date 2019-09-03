@@ -93,7 +93,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
-                            android:textColor="@color/textColorPrimary"
+                            android:textColor="@color/textPrimary"
                             android:textSize="@dimen/text_caption"
                             android:textStyle="bold"
                             tools:text="@tools:sample/lorem" />
@@ -130,12 +130,13 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <com.ambinusian.adab.customcomponent.SectionView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="10"
                         app:sectionTitle="@string/lecturer_home_next_schedule_title"
                         app:sectionSubtitle="@string/lecturer_home_next_schedule_subtitle"/>
+
                     <com.google.android.material.button.MaterialButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -143,13 +144,11 @@
                         android:backgroundTint="@android:color/white"
                         android:textColor="@color/colorPrimary"
                         android:layout_alignParentRight="true"
-                        style="@style/RoundedMaterialButton"
-                        />
+                        style="@style/RoundedMaterialButton" />
+
                 </RelativeLayout>
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="16dp" />
+                <Space style="@style/Space16"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
