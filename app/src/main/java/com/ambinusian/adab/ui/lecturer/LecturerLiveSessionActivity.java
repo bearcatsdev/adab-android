@@ -1,8 +1,10 @@
 package com.ambinusian.adab.ui.lecturer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +27,7 @@ public class LecturerLiveSessionActivity extends AppCompatActivity {
     private MaterialButton disconnectBtn;
     private Integer classId;
     private Socket mSocket;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,12 @@ public class LecturerLiveSessionActivity extends AppCompatActivity {
         hasil = findViewById(R.id.textView);
         sendBtn = findViewById(R.id.button_send);
         disconnectBtn = findViewById(R.id.button_disconnect);
+        toolbar = findViewById(R.id.toolbar_lecturerLiveSession);
+
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         connectSocket();
 
@@ -50,6 +59,13 @@ public class LecturerLiveSessionActivity extends AppCompatActivity {
         sendBtn.setOnClickListener(v -> {
             String textToSend = editTextMessage.getText().toString();
             emitToSocket(textToSend);
+        });
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
         });
     }
 
@@ -70,7 +86,14 @@ public class LecturerLiveSessionActivity extends AppCompatActivity {
 
         mSocket.on("message", args -> {
             String msg = (String) args[0]; // msg itu dari dosen, coba tes tampilin aja kalo mau
-            runOnUiThread(() -> hasil.append(msg + "\n"));
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    String text = hasil.getText().toString().replace("Listening...","");
+                    String listening = "<font color='#EE0000'>Listening...</font>";
+                    hasil.setText(Html.fromHtml(text + " " + msg + " " + listening));
+                }
+            });
         });
     }
 

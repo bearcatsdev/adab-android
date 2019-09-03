@@ -53,6 +53,15 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:id="@+id/nv_adab_lecturer"/>
+        android:id="@+id/nv_adab_lecturer">
+        <ExpandableListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null"
+            android:choiceMode="singleChoice"
+            android:focusable="true"
+            android:groupIndicator="@null"
+            android:id="@+id/expandableListViewLecturer"/>
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

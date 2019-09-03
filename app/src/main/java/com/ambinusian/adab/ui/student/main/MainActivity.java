@@ -75,23 +75,9 @@ public class MainActivity extends AppCompatActivity {
             showUserProfileDialog();
         });
 
-        //set expand indicator size
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int width = metrics.widthPixels;
-        expandableListView.setIndicatorBounds(width - GetPixelFromDips(50), width - GetPixelFromDips(10));
 
         //add headerView to expandableListView
         expandableListView.addHeaderView(headerView);
-
-        //set course Subject
-        courseSubject.add(new MenuModel(6,"MOOP",false,false));
-        courseSubject.add(new MenuModel(6,"Bahasa Indonesia",false,false));
-        courseSubject.add(new MenuModel(6,"English Savvy",false,false));
-        courseSubject.add(new MenuModel(6,"Calculus",false,false));
-        courseSubject.add(new MenuModel(6,"Data Structure",false,false));
-        courseSubject.add(new MenuModel(6,"Mobile Creative Design",false,false));
-        courseSubject.add(new MenuModel(6,"CB - Kewanegaraan",false,false));
 
         //set up spinner
         SpinnerListSemester = headerView.findViewById(R.id.spinner_list_semesters);
@@ -117,6 +103,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void prepareMenuData(){
+        //set course Subject
+        courseSubject.add(new MenuModel(6,"MOOP",false,false));
+        courseSubject.add(new MenuModel(6,"Bahasa Indonesia",false,false));
+        courseSubject.add(new MenuModel(6,"English Savvy",false,false));
+        courseSubject.add(new MenuModel(6,"Calculus",false,false));
+        courseSubject.add(new MenuModel(6,"Data Structure",false,false));
+        courseSubject.add(new MenuModel(6,"Mobile Creative Design",false,false));
+        courseSubject.add(new MenuModel(6,"CB - Kewanegaraan",false,false));
+
         //set group menu list
         groupList.add(new MenuModel(0,"Home",false,false));
         groupList.add(new MenuModel(1,"Topics",true,true));
@@ -154,8 +149,12 @@ public class MainActivity extends AppCompatActivity {
             else if(groupPosition == 1){
                 if(!expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() > 2){
                     parent.setItemChecked(expandableListView.getCheckedItemPosition()+7,true);
-                } else if(expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() > 2){
-                    parent.setItemChecked(expandableListView.getCheckedItemPosition()-7,true);
+                } else if(!expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() < 0){
+                    parent.setItemChecked(expandableListView.getCheckedItemPosition()+100,true);
+                } else if(expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() > courseSubject.size()+2 ){
+                        parent.setItemChecked(expandableListView.getCheckedItemPosition()-7,true);
+                }  else if(expandableListView.isGroupExpanded(1) && (expandableListView.getCheckedItemPosition() >= 3 && expandableListView.getCheckedItemPosition() <= courseSubject.size()+2)) {
+                    parent.setItemChecked(expandableListView.getCheckedItemPosition()- 100, true);
                 }
             };
 
@@ -195,11 +194,5 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public int GetPixelFromDips(float pixels) {
-        // Get the screen's density scale
-        final float scale = getResources().getDisplayMetrics().density;
-        // Convert the dps to pixels, based on density scale
-        return (int) (pixels * scale + 0.5f);
-    }
 }
 

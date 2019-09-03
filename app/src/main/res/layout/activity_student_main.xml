@@ -54,11 +54,6 @@
 
     </RelativeLayout>
 
-
-    <!--app:menu="@menu/adab_navigation_drawer_menu"-->
-    <!--app:itemIconTint="@drawable/drawer_icon_text_effect"-->
-    <!--app:itemTextColor="@drawable/drawer_icon_text_effect"-->
-    <!--app:itemBackground="@drawable/drawer_background_effect"-->
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -71,6 +66,7 @@
             android:divider="@null"
             android:choiceMode="singleChoice"
             android:focusable="true"
+            android:groupIndicator="@null"
             android:id="@+id/expandableListView"/>
     </com.google.android.material.navigation.NavigationView>
 
