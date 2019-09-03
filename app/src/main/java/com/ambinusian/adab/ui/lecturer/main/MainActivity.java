@@ -90,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
         SpinnerListSemester = headerView.findViewById(R.id.spinner_list_semesters);
         listSemester.add("2018 Semester 1");
         listSemester.add("2018 Semester 2");
+        listSemester.add("2019 Semester 1");
+        listSemester.add("2019 Semester 2");
         SpinnerListSemester.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,listSemester));
 
 
@@ -138,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
         expandableListViewLecturer.setOnGroupClickListener((parent, v, groupPosition, id) -> {
             if(groupPosition == 0){
-                getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new AllClassesFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new LecturerHomeFragment()).commit();
             }
             else if(groupPosition == 2){
                 getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new CalendarFragment()).commit();

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionAdapter
 import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionModel;
 import com.ambinusian.adab.ui.lecturer.LecturerLiveSessionActivity;
 import com.ambinusian.adab.ui.lecturer.main.MainActivity;
+import com.ambinusian.adab.ui.student.livesession.LiveSessionActivity;
 import com.google.android.material.chip.Chip;
 
 import java.text.ParseException;
@@ -39,14 +41,16 @@ import java.util.Map;
 public class LecturerHomeFragment extends Fragment {
 
     private RecyclerView discussionRecyclerView;
-    ArrayList<DiscussionModel> discussionList;
-    LinearLayoutManager linearLayoutManager;
-    TextView welcomeTitle;
-    UserPreferences userPreferences;
-    ImageView nextScheduleIcon;
-    TextView nextScheduleTime,nextScheduleClassTitle, nextScheduleCourse, nextScheduleSession;
-    Chip nextScheduleCourseCode, nextScheduleClassCode, nextScheduleClassType;
-    LinearLayout linearLayoutNextClass;
+    private ArrayList<DiscussionModel> discussionList;
+    private LinearLayoutManager linearLayoutManager;
+    private TextView welcomeTitle;
+    private ImageView liveClassIcon;
+    private UserPreferences userPreferences;
+    private ImageView nextScheduleIcon;
+    private TextView nextScheduleTime,nextScheduleClassTitle, nextScheduleCourse, nextScheduleSession;
+    private Chip nextScheduleCourseCode, nextScheduleClassCode, nextScheduleClassType;
+    private LinearLayout linearLayoutNextClass, welcomeLayout, liveLayout;
+    private TextView liveClassTitle, liveCourse, liveClassMeeting;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,6 +74,12 @@ public class LecturerHomeFragment extends Fragment {
         nextScheduleClassCode = view.findViewById(R.id.chip_nextScheduleClassCode);
         nextScheduleClassType = view.findViewById(R.id.chip_nextScheduleClassType);
         linearLayoutNextClass = view.findViewById(R.id.linear_layout_main);
+        welcomeLayout = view.findViewById(R.id.lecturerWelcomeLayout);
+        liveClassIcon = view.findViewById(R.id.lecturerLiveClassIcon);
+        liveLayout = view.findViewById(R.id.lecturerLiveLayout);
+        liveClassTitle = view.findViewById(R.id.tv_lecturerLiveClassTitle);
+        liveCourse  = view.findViewById(R.id.tv_lecturerLiveCourse);
+        liveClassMeeting = view.findViewById(R.id.tv_lecturerLiveClassMeeting);
         discussionList = new ArrayList<>();
         userPreferences = new UserPreferences(getContext());
 
@@ -158,5 +168,24 @@ public class LecturerHomeFragment extends Fragment {
 
         DiscussionAdapter adapter = new DiscussionAdapter(getContext(),discussionList);
         discussionRecyclerView.setAdapter(adapter);
+
+        //show live layout
+        liveLayout.setVisibility(View.VISIBLE);
+        welcomeLayout.setVisibility(View.GONE);
+        liveClassIcon.setImageResource(R.drawable.ic_class_58_pencilbook);
+        liveClassTitle.setText("Storage");
+        liveCourse.setText("Mobile Object Oriented Programming");
+        liveClassMeeting.setText("Meeting 11");
+        liveLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("class_id","12");
+                Intent intent = new Intent(getActivity(),LecturerLiveSessionActivity.class);
+                intent.putExtras(bundle);
+                getActivity().startActivity(intent);
+            }
+        });
+
     }
 }

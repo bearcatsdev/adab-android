@@ -140,6 +140,7 @@ public class AllClassesFragment extends Fragment {
 
                         if ((int) userClass.get("is_live") == 1) {
                             liveLayout.setVisibility(View.VISIBLE);
+                            welcomeLayout.setVisibility(View.GONE);
                             liveClassIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_class_59_pencilpaper));
                             liveClassTitle.setText((String) userClass.get("topic"));
                             liveCourse.setText((String) userClass.get("course_name"));
@@ -174,6 +175,7 @@ public class AllClassesFragment extends Fragment {
                     //show welcome page if no any class is live
                     if (!hasLiveClass) {
                         welcomeLayout.setVisibility(View.VISIBLE);
+                        liveLayout.setVisibility(View.GONE);
                         welcomeTitle.setText(getString(R.string.welcome_title, TextUtility.toTitleCase(userPreferences.getUserName().toUpperCase())));
                     }
 
