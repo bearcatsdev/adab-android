@@ -19,7 +19,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.DialogFragment;
 
 import com.ambinusian.adab.R;
-import com.ambinusian.adab.customcomponent.Tag;
 import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.ui.login.LoginActivity;
 import com.google.android.material.button.MaterialButton;
@@ -74,6 +73,13 @@ public class UserProfileDialogFragment extends DialogFragment {
             getActivity().finish();
         });
 
-        layoutDark.setOnClickListener(v -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES));
+        layoutDark.setOnClickListener(v -> {
+            int mode;
+            mode = (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO)
+                    ? AppCompatDelegate.MODE_NIGHT_YES
+                    : AppCompatDelegate.MODE_NIGHT_NO;
+            userPreferences.setPrefNight(mode);
+            AppCompatDelegate.setDefaultNightMode(mode);
+        });
     }
 }

@@ -11,7 +11,8 @@ public class UserPreferences {
     private static final String KEY_USER_TOKEN = "user_token";
     private static final String KEY_USER_LOGGED_IN = "user_logged_in";
     private static final String KEY_USER_PRIVILEGE = "user_privilege";
-    private static final String KEY_USER_DEPARTMENT = "user_departement";
+    private static final String KEY_USER_DEPARTMENT = "user_departement"; //TODO: Bang, ini "department"
+    private static final String KEY_PREF_NIGHT = "pref_night";
 
     private static Context context = null;
 
@@ -39,9 +40,7 @@ public class UserPreferences {
         editor.apply();
     }
 
-    public String getUserName(){
-        return getSharedPreference().getString(KEY_USER_NAME,"");
-    }
+    public String getUserName() { return getSharedPreference().getString(KEY_USER_NAME,""); }
 
     public void setUserToken(String usertoken){
         SharedPreferences.Editor editor = getSharedPreference().edit();
@@ -92,5 +91,15 @@ public class UserPreferences {
         editor.remove(KEY_USER_PRIVILEGE);
         editor.remove(KEY_USER_DEPARTMENT);
         editor.apply();
+    }
+
+    public void setPrefNight(int mode){
+        SharedPreferences.Editor editor = getSharedPreference().edit();
+        editor.putInt(KEY_PREF_NIGHT, mode);
+        editor.apply();
+    }
+
+    public int getPrefNight() {
+        return getSharedPreference().getInt(KEY_PREF_NIGHT,0);
     }
 }
