@@ -1,8 +1,6 @@
 package com.ambinusian.adab.ui.lecturer.home;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +22,7 @@ import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionAdapter;
 import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionModel;
-import com.ambinusian.adab.ui.lecturer.LecturerLiveSessionActivity;
-import com.ambinusian.adab.ui.lecturer.main.MainActivity;
-import com.ambinusian.adab.ui.student.livesession.LiveSessionActivity;
+import com.ambinusian.adab.ui.lecturer.livesession.LecturerLiveSessionActivity;
 import com.google.android.material.chip.Chip;
 
 import java.text.ParseException;
