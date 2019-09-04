@@ -141,6 +141,6 @@
         </LinearLayout>
     </LinearLayout>
 
-<!--    <include layout="@layout/layout_bottom_sheet"/>-->
+    <include layout="@layout/layout_bottom_sheet"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
