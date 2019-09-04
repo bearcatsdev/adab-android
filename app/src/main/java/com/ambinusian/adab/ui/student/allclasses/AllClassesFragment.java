@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ambinusian.adab.all.NextClassActivity;
 import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
@@ -29,6 +30,7 @@ import com.ambinusian.adab.R;
 import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionAdapter;
 import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionModel;
 import com.ambinusian.adab.utility.TextUtility;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 
 import java.text.ParseException;
@@ -51,6 +53,7 @@ public class AllClassesFragment extends Fragment {
     private TextView nextClassTime, nextClassTitle, nextCourse, nextClassSession;
     private Chip nextCourseCode, nextClassCode, nextClassType;
     private Boolean hasLiveClass;
+    private MaterialButton seeAllLatestClass, seeAllNextClass, seeAllDiscussion;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,6 +85,9 @@ public class AllClassesFragment extends Fragment {
         nextClassCode = view.findViewById(R.id.chip_nextClassCode);
         nextClassType = view.findViewById(R.id.chip_nextClassType);
         nextClassType = view.findViewById(R.id.chip_nextClassType);
+        seeAllNextClass = view.findViewById(R.id.see_all_next_class);
+        seeAllLatestClass = view.findViewById(R.id.see_all_latest_class);
+        seeAllDiscussion = view.findViewById(R.id.see_all_discussion);
         coursesList = new ArrayList<>();
         discussionList = new ArrayList<>();
         hasLiveClass = false;
@@ -215,6 +221,32 @@ public class AllClassesFragment extends Fragment {
         nextCourseCode.setText("MOBI6002");
         nextClassCode.setText("LA03");
         nextClassType.setText("LEC");
+
+        // see all the next classes
+        seeAllNextClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), NextClassActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        //see all the latetest classes
+        seeAllLatestClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        seeAllDiscussion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // show fragment discussion
+            }
+        });
+
+
     }
 
 

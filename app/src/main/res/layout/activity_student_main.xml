@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
         <FrameLayout
-            android:paddingTop="50dp"
+            android:paddingTop="?android:actionBarSize"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/adab_fragment"

@@ -129,12 +129,25 @@
                 android:animateLayoutChanges="true"
                 android:orientation="vertical">
 
-                <com.ambinusian.adab.customcomponent.SectionView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    app:sectionSubtitle="@string/home_latest_subtitle"
-                    app:sectionTitle="@string/home_next_class_title" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.ambinusian.adab.customcomponent.SectionView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        app:sectionSubtitle="@string/home_latest_subtitle"
+                        app:sectionTitle="@string/home_next_class_title" />
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/see_all"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/see_all_next_class"
+                        style="@style/RoundedMaterialButton"/>
+
+                </RelativeLayout>
 
                 <Space
                     android:layout_width="match_parent"
@@ -287,6 +300,7 @@
                         android:text="@string/see_all"
                         android:textColor="@color/colorPrimary"
                         android:layout_alignParentEnd="true"
+                        android:id="@+id/see_all_latest_class"
                         style="@style/RoundedMaterialButton"/>
 
                 </RelativeLayout>
@@ -323,7 +337,7 @@
                         android:text="@string/see_all"
                         android:backgroundTint="@android:color/white"
                         android:textColor="@color/colorPrimary"
-                        android:layout_weight="1"
+                        android:id="@+id/see_all_discussion"
                         android:layout_alignParentRight="true"
                         style="@style/RoundedMaterialButton"
                         />

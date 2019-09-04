@@ -93,5 +93,8 @@
     <!--Error Fragment-->
     <string name="error_fragment_title">This Feature Will Be Available Soon</string>
     <string name="error_fragment_subtitle">Our developers are currently working so hard to make sure everything works perfectly</string>
+    
+    <!-- Next Class Activity-->
+    <string name="your_next_schedule">Your Next Schedule</string>
 
 </resources>
