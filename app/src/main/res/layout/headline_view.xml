@@ -13,7 +13,7 @@
         tools:text="Ongoing Class" />
 
     <View
-        style="@style/Divider"
+        style="@style/DividerThick"
         android:layout_width="wrap_content"
         android:layout_below="@id/headline_title"
         android:layout_alignStart="@id/headline_title"

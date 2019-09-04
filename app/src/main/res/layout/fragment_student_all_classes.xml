@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".ui.student.allclasses.AllClassesFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -95,7 +94,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:textColor="@color/textColorPrimary"
+                        android:textColor="@color/textPrimary"
                         android:textSize="@dimen/text_caption"
                         android:textStyle="bold"
                         tools:text="@tools:sample/lorem" />
@@ -184,7 +183,7 @@
                                  android:id="@+id/tv_nextClassTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/textColorPrimary"
+                                android:textColor="@color/textPrimary"
                                 android:textSize="@dimen/text_caption"
                                 android:textStyle="bold"
                                 tools:text="@tools:sample/lorem" />
@@ -197,7 +196,7 @@
                                 android:id="@+id/tv_nextCourse"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/textColorPrimary"
+                                android:textColor="@color/textPrimary"
                                 android:textSize="@dimen/text_body"
                                 tools:text="Mobile Object Oriented Programming" />
 
@@ -205,7 +204,7 @@
                                 android:id="@+id/tv_nextClassSession"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/textColorPrimary"
+                                android:textColor="@color/textPrimary"
                                 android:textSize="@dimen/text_body"
                                 tools:text="Session 11" />
 

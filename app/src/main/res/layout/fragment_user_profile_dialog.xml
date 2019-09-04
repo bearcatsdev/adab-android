@@ -81,6 +81,32 @@
         android:layout_height="20dp"/>
 
     <LinearLayout
+        android:id="@+id/layout_profile_dialog_dark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:background="?attr/selectableItemBackground">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_clock"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="Accessibility Mode"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/layout_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -101,6 +127,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:text="Sign out"/>
 
     </LinearLayout>

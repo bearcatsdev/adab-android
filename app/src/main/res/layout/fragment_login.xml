@@ -16,12 +16,11 @@
             android:id="@+id/toolbar">
         </androidx.appcompat.widget.Toolbar>
         <LinearLayout
+            android:layout_margin="24dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="28dp" />
+            android:orientation="vertical"
+            android:gravity="center">
 
             <ImageView
                 android:layout_width="@dimen/artwork_width"
@@ -35,10 +34,14 @@
                 android:text="@string/login_input_credential"
                 android:textAlignment="center" />
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="32dp"/>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="28dp"
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -46,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_username"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:boxStrokeColor="@color/colorAccent"
+                    app:boxStrokeColor="@color/colorPrimary"
                     >
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -56,29 +59,36 @@
                         android:inputType="text"
                         android:maxLength="10"
                         android:textAllCaps="true"
-                        android:autofillHints="username"/>
+                        android:autofillHints="username"
+                        tools:targetApi="26"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_password"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:boxStrokeColor="@color/colorAccent">
+                    app:boxStrokeColor="@color/colorPrimary">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
-                        android:autofillHints="password"/>
+                        android:maxLength="32"
+                        android:autofillHints="password"
+                        tools:targetApi="26"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="28dp" />
+                    android:layout_height="24dp"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_login"
@@ -89,6 +99,12 @@
                     android:paddingStart="64dp"
                     android:paddingEnd="64dp"
                     style="@style/RoundedMaterialButton"/>
+
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"/>
+
             </LinearLayout>
 
         </LinearLayout>
