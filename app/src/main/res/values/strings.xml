@@ -89,7 +89,7 @@
 
     <!--Calendar-->
     <string name="no_class_today">No class at the selected day</string>
-    
+
     <!--Error Fragment-->
     <string name="error_fragment_title">This Feature Will Be Available Soon</string>
     <string name="error_fragment_subtitle">Our developers are currently working so hard to make sure everything works perfectly</string>
