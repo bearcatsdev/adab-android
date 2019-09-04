@@ -93,7 +93,7 @@ public class CalendarFragment extends Fragment {
                         List<CalendarEvent> events = new ArrayList<>();
 
                         for(int i = 0; i < selectedDateClasses.size();i++){
-                            events.add(new CalendarEvent(getResources().getColor(R.color.colorPrimary)));
+                            events.add(new CalendarEvent(getResources().getColor(R.color.colorAccent)));
                         }
                         return events;
                     }
