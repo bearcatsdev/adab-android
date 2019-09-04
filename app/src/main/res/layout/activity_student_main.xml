@@ -14,11 +14,10 @@
         android:orientation="vertical">
 
         <FrameLayout
-            android:paddingTop="?android:actionBarSize"
+            android:paddingTop="?attr/actionBarSize"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/adab_fragment"
-            tools:background="@color/background">
+            android:id="@+id/adab_fragment">
         </FrameLayout>
 
         <com.google.android.material.appbar.AppBarLayout
@@ -49,8 +48,6 @@
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
-
-
 
     </RelativeLayout>
 

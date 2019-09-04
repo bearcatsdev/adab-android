@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -26,6 +27,7 @@ import com.ambinusian.adab.ui.student.settings.SettingFragment;
 import com.ambinusian.adab.ui.student.topics.TopicsFragment;
 import com.ambinusian.adab.ui.userprofile.UserProfileDialogFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.ambinusian.adab.preferences.UserPreferences;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
 
+//        UserPreferences userPreferences = new UserPreferences(this);
+//        AppCompatDelegate.setDefaultNightMode(userPreferences.getPrefNight());
+
         toolbar = findViewById(R.id.tool_bar);
         mDrawerLayout = findViewById(R.id.mDrawerLayout);
         mNavigationView = findViewById(R.id.nv_adab);
@@ -74,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
         profilePicture.setOnClickListener(v -> {
             showUserProfileDialog();
         });
-
 
         //add headerView to expandableListView
         expandableListView.addHeaderView(headerView);
