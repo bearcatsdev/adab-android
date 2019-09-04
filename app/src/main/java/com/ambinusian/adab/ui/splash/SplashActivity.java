@@ -1,7 +1,7 @@
 package com.ambinusian.adab.ui.splash;
 
 import android.content.Intent;
-import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.ambinusian.adab.R;
@@ -9,7 +9,7 @@ import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.ui.login.LoginActivity;
-import com.ambinusian.adab.ui.student.main.MainActivity;
+import com.ambinusian.adab.ui.student.MainActivity;
 
 import java.util.Map;
 
@@ -52,7 +52,7 @@ public class SplashActivity extends AppCompatActivity {
 
                         } else if (privilege == 1) {
                             // dosen
-                            startActivity(new Intent(SplashActivity.this, com.ambinusian.adab.ui.lecturer.main.MainActivity.class));
+                            startActivity(new Intent(SplashActivity.this, com.ambinusian.adab.ui.lecturer.MainActivity.class));
                             finish();
 
                         }

@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.lecturer.home;
+package com.ambinusian.adab.ui.lecturer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +22,6 @@ import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionAdapter;
 import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionModel;
-import com.ambinusian.adab.ui.lecturer.livesession.LecturerLiveSessionActivity;
 import com.google.android.material.chip.Chip;
 
 import java.text.ParseException;

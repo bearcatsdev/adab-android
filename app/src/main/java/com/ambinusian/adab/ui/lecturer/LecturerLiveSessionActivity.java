@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.lecturer.livesession;
+package com.ambinusian.adab.ui.lecturer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;

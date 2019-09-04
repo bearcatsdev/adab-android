@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.student.livesession;
+package com.ambinusian.adab.ui.student;
 
 import android.util.Log;
 import android.view.View;

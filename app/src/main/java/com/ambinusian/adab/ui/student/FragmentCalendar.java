@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.student.calendar;
+package com.ambinusian.adab.ui.student;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -33,7 +33,7 @@ import devs.mulham.horizontalcalendar.utils.CalendarEventsPredicate;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
 
-public class CalendarFragment extends Fragment {
+public class FragmentCalendar extends Fragment {
 
 
     @Override

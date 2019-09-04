@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.lecturer.discussion;
+package com.ambinusian.adab.ui.lecturer;
 
 import android.content.Context;
 import android.net.Uri;

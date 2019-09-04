@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,7 @@ public class UserProfileDialogFragment extends DialogFragment {
         // Constructor kosong diperlukan untuk DialogFragment.
         // Pastikan tidak memberikan argument/parameter apapun ke
         // constructor ini.
-        System.out.println("Siap bos");
+        System.out.println("Ashiap bosq");
     }
 
     @Override
@@ -69,8 +70,10 @@ public class UserProfileDialogFragment extends DialogFragment {
 
         layoutLogout.setOnClickListener(v -> {
             userPreferences.clearLoggedInUser();
-            getActivity().startActivity(new Intent(getContext(), LoginActivity.class));
-            getActivity().finish();
+            if(getActivity()!=null) {
+                getActivity().startActivity(new Intent(getContext(), LoginActivity.class));
+                getActivity().finish();
+            }
         });
 
         layoutDark.setOnClickListener(v -> {

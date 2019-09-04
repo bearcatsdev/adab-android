@@ -1,5 +1,6 @@
-package com.ambinusian.adab.ui.student.topics;
+package com.ambinusian.adab.ui.student;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,13 +19,7 @@ import com.ambinusian.adab.recyclerview.classlistrecyclerview.ClassListModel;
 
 import java.util.ArrayList;
 
-public class TopicsFragment extends Fragment {
-
-    RecyclerView classListRecyclerView;
-    ArrayList<ClassListModel> classList;
-    TextView course, courseCode, classRoom, nextClassTitle, nextClassSession, nextClassTime;
-    ImageView courseIcon, nextClassIcon;
-
+public class FragmentTopics extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -32,36 +27,38 @@ public class TopicsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_topics, container, false);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        classListRecyclerView = view.findViewById(R.id.rv_classList);
-        courseIcon = view.findViewById(R.id.courseIcon);
-        course = view.findViewById(R.id.tv_topic_course);
-        courseCode= view.findViewById(R.id.tv_topic_CourseCode);
-        classRoom = view.findViewById(R.id.tv_topic_ClassRoom);
-        nextClassIcon = view.findViewById(R.id.topic_nextClassIcon);
-        nextClassTitle = view.findViewById(R.id.tv_topic_nextClassTitle);
-        nextClassSession = view.findViewById(R.id.tv_topic_nextClassSession);
-        nextClassTime = view.findViewById(R.id.tv_topic_nextClassTime);
+        RecyclerView classListRecyclerView = view.findViewById(R.id.rv_classList);
+        TextView course = view.findViewById(R.id.tv_topic_course);
+        TextView courseCode= view.findViewById(R.id.tv_topic_CourseCode);
+        TextView classRoom = view.findViewById(R.id.tv_topic_ClassRoom);
+        TextView nextClassTitle = view.findViewById(R.id.tv_topic_nextClassTitle);
+        TextView nextClassSession = view.findViewById(R.id.tv_topic_nextClassSession);
+        TextView nextClassTime = view.findViewById(R.id.tv_topic_nextClassTime);
+        ImageView courseIcon = view.findViewById(R.id.courseIcon);
+        ImageView nextClassIcon = view.findViewById(R.id.topic_nextClassIcon);
 
-        classList = new ArrayList<>();
+        ArrayList<ClassListModel> classList = new ArrayList<>();
 
-        //set information about the course
+        //Set Information About the Course
         courseIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_class_56_pencilnote));
-        course.setText(getArguments().getString("topic_title"));
+        if(getArguments() != null) {
+            course.setText(getArguments().getString("topic_title"));
+        }
         courseCode.setText("MOBI0062");
         classRoom.setText("507 - LA03");
 
-        //set information about the next class
+        //Set Information About the Next Class
         nextClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_class_56_pencilnote));
         nextClassTitle.setText("Storage");
         nextClassSession.setText("Session 11");
         nextClassTime.setText("Sunday, 25 August 2019 11:00");
 
-
-        //show the sorted course
+        //Show The Sorted Course
         classList.add(new ClassListModel(1,1,"Introduction to Java","Session 11","Sunday, 25 August 2019 11:00"));
         classList.add(new ClassListModel(1,1,"Introduction to Java","Session 11","Sunday, 25 August 2019 11:00"));
         classList.add(new ClassListModel(1,1,"Introduction to Java","Session 11","Sunday, 25 August 2019 11:00"));
@@ -69,14 +66,11 @@ public class TopicsFragment extends Fragment {
         classList.add(new ClassListModel(1,1,"Introduction to Java","Session 11","Sunday, 25 August 2019 11:00"));
         classList.add(new ClassListModel(1,1,"Introduction to Java","Session 11","Sunday, 25 August 2019 11:00"));
 
-
-        //set layout manager for recycler view
+        //Set Layout Manager For Recycler View
         classListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        //set racycler view adapter
+        //Set Recycler View Adapter
         ClassListAdapter adapter = new ClassListAdapter(getContext(),classList);
         classListRecyclerView.setAdapter(adapter);
-
-
     }
 }

@@ -10,12 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Adab">
         <activity android:name=".all.NextClassActivity"></activity>
-        <activity android:name=".ui.lecturer.livesession.LecturerLiveSessionActivity" />
-        <activity android:name=".ui.student.coursedetail.CourseDetail" />
-        <activity android:name=".ui.lecturer.classstarted.ClassStartedActivity" />
-        <activity android:name=".ui.lecturer.coursedetail.CourseDetail" />
-        <activity android:name=".ui.lecturer.main.MainActivity" />
-        <activity android:name=".ui.student.livesession.LiveSessionActivity" />
+        <activity android:name=".ui.lecturer.LecturerLiveSessionActivity" />
+        <activity android:name=".ui.student.CourseDetail" />
+        <activity android:name=".ui.lecturer.ClassStartedActivity" />
+        <activity android:name=".ui.lecturer.CourseDetail" />
+        <activity android:name=".ui.lecturer.MainActivity" />
+        <activity android:name=".ui.student.LiveSessionActivity" />
         <activity
             android:name=".ui.splash.SplashActivity"
             android:theme="@style/Theme.Adab.Launcher">
@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.login.LoginActivity" />
-        <activity android:name=".ui.student.main.MainActivity" />
+        <activity android:name=".ui.student.MainActivity" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

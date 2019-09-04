@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.student.allclasses;
+package com.ambinusian.adab.ui.student;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -23,7 +23,6 @@ import com.ambinusian.adab.all.NextClassActivity;
 import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
-import com.ambinusian.adab.ui.student.livesession.LiveSessionActivity;
 import com.ambinusian.adab.recyclerview.courserecyclerview.CourseAdapter;
 import com.ambinusian.adab.recyclerview.courserecyclerview.CourseModel;
 import com.ambinusian.adab.R;
@@ -39,7 +38,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
-public class AllClassesFragment extends Fragment {
+public class FragmentHome extends Fragment {
 
     private RecyclerView coursesRecyclerView, discussionRecyclerView;
     private ArrayList<CourseModel> coursesList;

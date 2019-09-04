@@ -1,14 +1,12 @@
-package com.ambinusian.adab.ui.student.main;
+package com.ambinusian.adab.ui.student;
 
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 
 import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -19,21 +17,12 @@ import com.ambinusian.adab.all.ErrorFragment;
 import com.ambinusian.adab.expandablenavigationdrawer.ExpandableListAdapter;
 import com.ambinusian.adab.expandablenavigationdrawer.MenuModel;
 import com.ambinusian.adab.R;
-import com.ambinusian.adab.ui.student.allclasses.AllClassesFragment;
-import com.ambinusian.adab.ui.student.calendar.CalendarFragment;
-import com.ambinusian.adab.ui.student.forum.ForumFragment;
-import com.ambinusian.adab.ui.student.help.HelpFragment;
-import com.ambinusian.adab.ui.student.settings.SettingFragment;
-import com.ambinusian.adab.ui.student.topics.TopicsFragment;
 import com.ambinusian.adab.ui.userprofile.UserProfileDialogFragment;
 import com.google.android.material.navigation.NavigationView;
-import com.ambinusian.adab.preferences.UserPreferences;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -93,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(view -> mDrawerLayout.openDrawer(GravityCompat.START));
 
         //set first fragment launched
-        getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new AllClassesFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new FragmentHome()).commit();
 
         //set expandable navigation drawer
         prepareMenuData();
@@ -136,10 +125,10 @@ public class MainActivity extends AppCompatActivity {
 
         expandableListView.setOnGroupClickListener((parent, v, groupPosition, id) -> {
             if(groupPosition == 0){
-                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new AllClassesFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new FragmentHome()).commit();
             }
             else if(groupPosition == 2){
-                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new CalendarFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new FragmentCalendar()).commit();
             }
             else if(groupPosition == 3){
                 getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new ErrorFragment()).commit();
@@ -148,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new HelpFragment()).commit();
             }
             else if(groupPosition == 5){
-                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new SettingFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new FragmentSetting()).commit();
             }
             else if(groupPosition == 1){
                 if(!expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() > 2){
@@ -190,9 +179,9 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putString("class_id","12");
             bundle.putString("topic_title",childList.get(groupList.get(groupPosition)).get(childPosition).menuName);
-            TopicsFragment topicsFragment = new TopicsFragment();
-            topicsFragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,topicsFragment).commit();
+            FragmentTopics fragmentTopics = new FragmentTopics();
+            fragmentTopics.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment, fragmentTopics).commit();
 
             return false;
         });

@@ -9,7 +9,7 @@
     app:behavior_hideable="false"
     app:behavior_peekHeight="160dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-    tools:context=".ui.lecturer.livesession.BottomSheet">
+    tools:context=".ui.lecturer.BottomSheet">
 
     <View
         android:layout_width="match_parent"

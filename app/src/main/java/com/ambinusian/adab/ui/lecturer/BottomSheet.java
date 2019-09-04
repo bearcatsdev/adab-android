@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.lecturer.livesession;
+package com.ambinusian.adab.ui.lecturer;
 
 import android.os.Bundle;
 

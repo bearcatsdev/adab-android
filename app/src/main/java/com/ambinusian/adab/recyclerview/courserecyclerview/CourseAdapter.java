@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ambinusian.adab.R;
-import com.ambinusian.adab.ui.student.livesession.LiveSessionActivity;
+import com.ambinusian.adab.ui.student.LiveSessionActivity;
 
 import java.util.ArrayList;
 

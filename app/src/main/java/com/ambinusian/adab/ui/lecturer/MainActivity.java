@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.lecturer.main;
+package com.ambinusian.adab.ui.lecturer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -7,7 +7,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
@@ -18,22 +17,16 @@ import com.ambinusian.adab.R;
 import com.ambinusian.adab.all.ErrorFragment;
 import com.ambinusian.adab.expandablenavigationdrawer.ExpandableListAdapter;
 import com.ambinusian.adab.expandablenavigationdrawer.MenuModel;
-import com.ambinusian.adab.ui.lecturer.home.LecturerHomeFragment;
-import com.ambinusian.adab.ui.student.allclasses.AllClassesFragment;
-import com.ambinusian.adab.ui.student.calendar.CalendarFragment;
-import com.ambinusian.adab.ui.student.help.HelpFragment;
-import com.ambinusian.adab.ui.student.settings.SettingFragment;
-import com.ambinusian.adab.ui.student.topics.TopicsFragment;
+import com.ambinusian.adab.ui.student.FragmentCalendar;
+import com.ambinusian.adab.ui.student.HelpFragment;
+import com.ambinusian.adab.ui.student.FragmentSetting;
+import com.ambinusian.adab.ui.student.FragmentTopics;
 import com.ambinusian.adab.ui.userprofile.UserProfileDialogFragment;
 import com.google.android.material.navigation.NavigationView;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -143,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new LecturerHomeFragment()).commit();
             }
             else if(groupPosition == 2){
-                getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new CalendarFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new FragmentCalendar()).commit();
             }
             else if(groupPosition == 3){
                 getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new ErrorFragment()).commit();
@@ -152,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new HelpFragment()).commit();
             }
             else if(groupPosition == 5){
-                getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new SettingFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new FragmentSetting()).commit();
             }
             else if(groupPosition == 1){
                 if(!expandableListViewLecturer.isGroupExpanded(1) && expandableListViewLecturer.getCheckedItemPosition() > 2){
@@ -193,9 +186,9 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putString("class_id","12");
             bundle.putString("topic_title",childList.get(groupList.get(groupPosition)).get(childPosition).menuName);
-            TopicsFragment topicsFragment = new TopicsFragment();
-            topicsFragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,topicsFragment).commit();
+            FragmentTopics fragmentTopics = new FragmentTopics();
+            fragmentTopics.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment, fragmentTopics).commit();
 
             return false;
         });

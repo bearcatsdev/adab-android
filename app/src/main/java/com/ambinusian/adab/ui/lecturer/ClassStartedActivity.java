@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.lecturer.classstarted;
+package com.ambinusian.adab.ui.lecturer;
 
 import androidx.appcompat.app.AppCompatActivity;
 

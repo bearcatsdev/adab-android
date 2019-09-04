@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.student.coursedetail;
+package com.ambinusian.adab.ui.student;
 
 import android.os.Bundle;
 

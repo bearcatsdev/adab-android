@@ -1,4 +1,4 @@
-package com.ambinusian.adab.ui.lecturer.coursedetail;
+package com.ambinusian.adab.ui.lecturer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
