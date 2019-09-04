@@ -23,11 +23,11 @@ import com.ambinusian.adab.all.NextClassActivity;
 import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
-import com.ambinusian.adab.recyclerview.courserecyclerview.CourseAdapter;
-import com.ambinusian.adab.recyclerview.courserecyclerview.CourseModel;
+import com.ambinusian.adab.recyclerview.course.CourseAdapter;
+import com.ambinusian.adab.recyclerview.course.CourseModel;
 import com.ambinusian.adab.R;
-import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionAdapter;
-import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionModel;
+import com.ambinusian.adab.recyclerview.discussion.DiscussionAdapter;
+import com.ambinusian.adab.recyclerview.discussion.DiscussionModel;
 import com.ambinusian.adab.utility.TextUtility;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
@@ -153,7 +153,7 @@ public class FragmentHome extends Fragment {
                             liveClassMeeting.setText(meeting);
 
                             liveLayout.setOnClickListener(v -> {
-                                Intent intent = new Intent(getContext(), LiveSessionActivity.class);
+                                Intent intent = new Intent(getContext(), ActivityLive.class);
                                 int classId = (int) userClass.get("transaction_Id");
 
                                 //set all data to bundle
@@ -163,7 +163,7 @@ public class FragmentHome extends Fragment {
                                 //set bundle to the intent
                                 intent.putExtras(bundle);
 
-                                //go to LiveSessionActivity
+                                //go to ActivityLive
                                 startActivity(intent);
                             });
 

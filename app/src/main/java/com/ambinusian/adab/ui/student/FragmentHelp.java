@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.ambinusian.adab.R;
 
-public class HelpFragment extends Fragment {
+public class FragmentHelp extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

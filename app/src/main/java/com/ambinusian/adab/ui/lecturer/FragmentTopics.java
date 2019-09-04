@@ -15,12 +15,12 @@ import com.ambinusian.adab.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link LecturerSettingFragment.OnFragmentInteractionListener} interface
+ * {@link FragmentTopics.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link LecturerSettingFragment#newInstance} factory method to
+ * Use the {@link FragmentTopics#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LecturerSettingFragment extends Fragment {
+public class FragmentTopics extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,7 +32,7 @@ public class LecturerSettingFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public LecturerSettingFragment() {
+    public FragmentTopics() {
         // Required empty public constructor
     }
 
@@ -42,11 +42,11 @@ public class LecturerSettingFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment LecturerSettingFragment.
+     * @return A new instance of fragment FragmentTopics.
      */
     // TODO: Rename and change types and number of parameters
-    public static LecturerSettingFragment newInstance(String param1, String param2) {
-        LecturerSettingFragment fragment = new LecturerSettingFragment();
+    public static FragmentTopics newInstance(String param1, String param2) {
+        FragmentTopics fragment = new FragmentTopics();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -67,7 +67,7 @@ public class LecturerSettingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lecturer_setting, container, false);
+        return inflater.inflate(R.layout.fragment_lecturer_topics, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

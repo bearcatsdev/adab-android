@@ -1,46 +1,56 @@
-package com.ambinusian.adab.recyclerview.classlistrecyclerview;
+package com.ambinusian.adab.recyclerview.course;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.ambinusian.adab.R;
+import com.ambinusian.adab.ui.student.ActivityLive;
 
 import java.util.ArrayList;
 
+public class CourseAdapter extends RecyclerView.Adapter<CourseHolder> {
 
-public class ClassListAdapter extends RecyclerView.Adapter<ClasslListHolder> {
     private Context context;
-    private ArrayList<ClassListModel> lists;
+    private ArrayList<CourseModel> list;
 
+    public CourseAdapter(Context context, ArrayList<CourseModel> list){
+        this.context = context;
+        this.list = list;
+    }
 
-    public ClassListAdapter(Context context, ArrayList<ClassListModel> lists){
-            this.context = context;
-            this.lists = lists;
+    @Override
+    public int getItemCount() {
+        return list.size();
     }
 
     @NonNull
     @Override
-    public ClasslListHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_layout_class_list,parent,false);
-        return new ClasslListHolder(view);
+    public CourseHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_layout_courses,parent,false);
+        return new CourseHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ClasslListHolder holder, int position) {
-        ClassListModel item = lists.get(position);
+    public void onBindViewHolder(@NonNull CourseHolder holder, int position) {
+        CourseModel item = list.get(position);
+        holder.classTime.setText(item.getClassTime());
+        holder.classTitle.setText(item.getClassTitle());
+        holder.courses.setText(item.getCourse());
+        holder.classMeeting.setText(item.getClassMeeting());
 
-        holder.classTopic.setText(item.getClassTopic());
-        holder.meeting.setText(item.getMeeting());
-        holder.time.setText(item.getTime());
+        //Chip
+        holder.courseCode.setText(item.getCourseCode());
+        holder.classCode.setText(item.getClassCode());
+        holder.classType.setText(item.getClassType());
 
-        //set classIcon
         int classIcon = item.getClassIcon();
+        //set classIcon
         switch (classIcon){
             case 0:
                 holder.classIcon.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.ic_class_00_cube));
@@ -230,10 +240,20 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClasslListHolder> {
                 break;
         }
 
-    }
+        //set onclick listener
+        holder.mainLinearLayout.setOnClickListener(view -> {
+            Intent intent = new Intent(holder.itemView.getContext(), ActivityLive.class);
+            int classId = item.getClassId();
 
-    @Override
-    public int getItemCount() {
-        return lists.size();
+            //set all data to bundle
+            Bundle bundle = new Bundle();
+            bundle.putInt("class_id", classId);
+
+            //set bundle to the intent
+            intent.putExtras(bundle);
+
+            //go to ActivityLive
+            holder.itemView.getContext().startActivity(intent);
+        });
     }
 }

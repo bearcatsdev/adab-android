@@ -8,7 +8,7 @@ import com.ambinusian.adab.R;
 import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
-import com.ambinusian.adab.ui.login.LoginActivity;
+import com.ambinusian.adab.ui.login.ActivityLogin;
 import com.ambinusian.adab.ui.student.MainActivity;
 
 import java.util.Map;
@@ -65,7 +65,7 @@ public class SplashActivity extends AppCompatActivity {
                 }
             });
         } else {
-            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            startActivity(new Intent(SplashActivity.this, ActivityLogin.class));
             finish();
         }
 

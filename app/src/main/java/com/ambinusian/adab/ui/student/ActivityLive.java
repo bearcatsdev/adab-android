@@ -21,7 +21,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import java.net.URISyntaxException;
 import java.util.Map;
 
-public class LiveSessionActivity extends AppCompatActivity {
+public class ActivityLive extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TextView className;

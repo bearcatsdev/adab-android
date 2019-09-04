@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.ambinusian.adab.R;
 
-public class ClassStartedActivity extends AppCompatActivity {
+public class ActivityClassStarted extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

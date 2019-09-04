@@ -1,7 +1,6 @@
 package com.ambinusian.adab.ui.student;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -17,8 +16,8 @@ import com.ambinusian.adab.R;
 import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
-import com.ambinusian.adab.recyclerview.schedulereyclerview.ScheduleAdapter;
-import com.ambinusian.adab.recyclerview.schedulereyclerview.ScheduleModel;
+import com.ambinusian.adab.recyclerview.schedule.ScheduleAdapter;
+import com.ambinusian.adab.recyclerview.schedule.ScheduleModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

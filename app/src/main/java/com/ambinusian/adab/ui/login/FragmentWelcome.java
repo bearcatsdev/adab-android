@@ -1,7 +1,5 @@
 package com.ambinusian.adab.ui.login;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +13,7 @@ import com.ambinusian.adab.R;
 import com.ambinusian.adab.manager.FragmentChangeListener;
 import com.google.android.material.button.MaterialButton;
 
-public class WelcomeFragment extends Fragment {
+public class FragmentWelcome extends Fragment {
 
     MaterialButton letsgo;
 
@@ -36,7 +34,7 @@ public class WelcomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentChangeListener fc = (FragmentChangeListener) getActivity();
-                fc.replaceFragment(new LoginFragment());
+                fc.replaceFragment(new FragmentLogin());
             }
         });
 

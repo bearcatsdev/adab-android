@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new ErrorFragment()).commit();
             }
             else if(groupPosition == 4){
-                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new HelpFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new FragmentHelp()).commit();
             }
             else if(groupPosition == 5){
                 getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment,new FragmentSetting()).commit();

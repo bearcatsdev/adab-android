@@ -18,7 +18,7 @@ import com.ambinusian.adab.all.ErrorFragment;
 import com.ambinusian.adab.expandablenavigationdrawer.ExpandableListAdapter;
 import com.ambinusian.adab.expandablenavigationdrawer.MenuModel;
 import com.ambinusian.adab.ui.student.FragmentCalendar;
-import com.ambinusian.adab.ui.student.HelpFragment;
+import com.ambinusian.adab.ui.student.FragmentHelp;
 import com.ambinusian.adab.ui.student.FragmentSetting;
 import com.ambinusian.adab.ui.student.FragmentTopics;
 import com.ambinusian.adab.ui.userprofile.UserProfileDialogFragment;
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener((View view) -> drawerLayout.openDrawer(GravityCompat.START));
 
         //set first fragment launched
-        getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new LecturerHomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new FragmentHome()).commit();
 
         //add headerView to expandableListView
         expandableListViewLecturer.addHeaderView(headerView);
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //set first fragment launched
-        getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new LecturerHomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new FragmentHome()).commit();
 
         //set expandable navigation drawer
         prepareMenuData();
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
         expandableListViewLecturer.setOnGroupClickListener((parent, v, groupPosition, id) -> {
             if(groupPosition == 0){
-                getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new LecturerHomeFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new FragmentHome()).commit();
             }
             else if(groupPosition == 2){
                 getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new FragmentCalendar()).commit();
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new ErrorFragment()).commit();
             }
             else if(groupPosition == 4){
-                getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new HelpFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new FragmentHelp()).commit();
             }
             else if(groupPosition == 5){
                 getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new FragmentSetting()).commit();

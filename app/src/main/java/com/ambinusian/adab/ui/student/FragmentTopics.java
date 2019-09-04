@@ -14,8 +14,8 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ambinusian.adab.R;
-import com.ambinusian.adab.recyclerview.classlistrecyclerview.ClassListAdapter;
-import com.ambinusian.adab.recyclerview.classlistrecyclerview.ClassListModel;
+import com.ambinusian.adab.recyclerview.classlist.ClassListAdapter;
+import com.ambinusian.adab.recyclerview.classlist.ClassListModel;
 
 import java.util.ArrayList;
 

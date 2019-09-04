@@ -1,4 +1,4 @@
-package com.ambinusian.adab.recyclerview.classlistrecyclerview;
+package com.ambinusian.adab.recyclerview.classlist;
 
 public class ClassListModel {
     private int classIcon, classId;

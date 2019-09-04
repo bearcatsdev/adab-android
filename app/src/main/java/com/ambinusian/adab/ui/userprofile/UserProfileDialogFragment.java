@@ -1,17 +1,12 @@
 package com.ambinusian.adab.ui.userprofile;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,7 +16,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.preferences.UserPreferences;
-import com.ambinusian.adab.ui.login.LoginActivity;
+import com.ambinusian.adab.ui.login.ActivityLogin;
 import com.google.android.material.button.MaterialButton;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -71,7 +66,7 @@ public class UserProfileDialogFragment extends DialogFragment {
         layoutLogout.setOnClickListener(v -> {
             userPreferences.clearLoggedInUser();
             if(getActivity()!=null) {
-                getActivity().startActivity(new Intent(getContext(), LoginActivity.class));
+                getActivity().startActivity(new Intent(getContext(), ActivityLogin.class));
                 getActivity().finish();
             }
         });

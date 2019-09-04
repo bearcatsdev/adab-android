@@ -1,4 +1,4 @@
-package com.ambinusian.adab.recyclerview.courserecyclerview;
+package com.ambinusian.adab.recyclerview.course;
 
 
 public class CourseModel {

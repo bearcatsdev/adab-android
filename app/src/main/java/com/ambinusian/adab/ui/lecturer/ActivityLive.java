@@ -19,7 +19,7 @@ import com.google.android.material.button.MaterialButton;
 
 import java.net.URISyntaxException;
 
-public class LecturerLiveSessionActivity extends AppCompatActivity {
+public class ActivityLive extends AppCompatActivity {
 
     private EditText editTextMessage;
     private TextView hasil;

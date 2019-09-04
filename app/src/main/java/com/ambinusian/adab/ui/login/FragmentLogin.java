@@ -26,7 +26,7 @@ import com.ambinusian.adab.ui.splash.SplashActivity;
 
 import java.util.Map;
 
-public class LoginFragment extends Fragment {
+public class FragmentLogin extends Fragment {
 
     MaterialButton btnLogin;
     TextInputEditText inputNim;

@@ -20,8 +20,8 @@ import com.ambinusian.adab.R;
 import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
-import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionAdapter;
-import com.ambinusian.adab.recyclerview.discussionrecyclerview.DiscussionModel;
+import com.ambinusian.adab.recyclerview.discussion.DiscussionAdapter;
+import com.ambinusian.adab.recyclerview.discussion.DiscussionModel;
 import com.google.android.material.chip.Chip;
 
 import java.text.ParseException;
@@ -32,7 +32,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
-public class LecturerHomeFragment extends Fragment {
+public class FragmentHome extends Fragment {
 
     private RecyclerView discussionRecyclerView;
     private ArrayList<DiscussionModel> discussionList;
@@ -127,7 +127,7 @@ public class LecturerHomeFragment extends Fragment {
                             nextScheduleClassType.setText(classType);
 
                             linearLayoutNextClass.setOnClickListener(v -> {
-                                Intent intent = new Intent(getContext(), LecturerLiveSessionActivity.class);
+                                Intent intent = new Intent(getContext(), ActivityLive.class);
                                 //set all data to bundle
                                 Bundle bundle = new Bundle();
                                 bundle.putInt("class_id", classId);
@@ -135,7 +135,7 @@ public class LecturerHomeFragment extends Fragment {
                                 //set bundle to the intent
                                 intent.putExtras(bundle);
 
-                                //go to LiveSessionActivity
+                                //go to ActivityLive
                                 startActivity(intent);
                             });
                             break;
@@ -175,7 +175,7 @@ public class LecturerHomeFragment extends Fragment {
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putString("class_id","12");
-                Intent intent = new Intent(getActivity(),LecturerLiveSessionActivity.class);
+                Intent intent = new Intent(getActivity(), ActivityLive.class);
                 intent.putExtras(bundle);
                 getActivity().startActivity(intent);
             }

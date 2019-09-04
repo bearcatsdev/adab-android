@@ -1,4 +1,4 @@
-package com.ambinusian.adab.recyclerview.schedulereyclerview;
+package com.ambinusian.adab.recyclerview.schedule;
 
 public class ScheduleModel {
     //information needed = date, classType, classTitle, courseCode, classRoom, classTime

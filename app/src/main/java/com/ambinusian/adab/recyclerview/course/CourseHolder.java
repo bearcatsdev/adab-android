@@ -1,4 +1,4 @@
-package com.ambinusian.adab.recyclerview.courserecyclerview;
+package com.ambinusian.adab.recyclerview.course;
 
 import android.view.View;
 import android.widget.ImageView;
