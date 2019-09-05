@@ -3,13 +3,12 @@ package com.ambinusian.adab.manager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Network;
 import android.util.Log;
 import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.preferences.UserPreferences;
-import com.ambinusian.adab.ui.login.LoginActivity;
+import com.ambinusian.adab.ui.login.ActivityLogin;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -185,7 +184,7 @@ public class APIManager {
         UserPreferences userPreferences = new UserPreferences(context);
         userPreferences.clearLoggedInUser();
         Toast.makeText(context, context.getString(R.string.session_expired), Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(context, LoginActivity.class);
+        Intent intent = new Intent(context, ActivityLogin.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(intent);
         ActivityCompat.finishAffinity((Activity) context);
