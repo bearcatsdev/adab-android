@@ -98,6 +98,7 @@
         <item name="chipBackgroundColor">@color/background</item>
         <item name="chipStrokeColor">#E1E1E1</item>
         <item name="chipStrokeWidth">1dp</item>
+
     </style>
 
     <!-- Nav Bar Item -->
