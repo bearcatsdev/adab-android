@@ -59,6 +59,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         } else {
             finish();
         }
+        Log.e("debug",classId+"");
 
         editTextMessage = findViewById(R.id.editText_message);
         hasil = findViewById(R.id.textView);
@@ -132,7 +133,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
     private void emitToSocket(String text) {
         mSocket.emit("message", text); // ini nnt server socket bakalan terima variabel `text`, trus di emit lagi ke semua client yang konek ke room socket.io yang sama
     }
-    private void speechToText(){
+    private void setIntentandAudio(){
         intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"in_ID");
@@ -165,11 +166,6 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         return hasil;
     }
 
-
-    //Requesting run-time permissions
-
-    //Create placeholder for user's consent to record_audio permission.
-    //This will be used in handling callback
     private final int MY_PERMISSIONS_RECORD_AUDIO = 1;
 
     private void requestAudioPermissions() {
@@ -199,7 +195,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
                 == PackageManager.PERMISSION_GRANTED) {
 
             //Go ahead with recording audio now
-            speechToText();
+            setIntentandAudio();
         }
     }
 
@@ -211,7 +207,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
             case MY_PERMISSIONS_RECORD_AUDIO: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    speechToText();
+                    setIntentandAudio();
                 } else {
                     Toast.makeText(this, "Permissions Denied to record audio", Toast.LENGTH_LONG).show();
                 }
@@ -261,8 +257,8 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
     @Override
     public void onPartialResults(Bundle bundle) {
         ArrayList<String> matches =  bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-
         kalimatSementara = matches.get(0);
+        emitToSocket(kalimatSementara);
 
         if(matches != null){
             String listening = "<font color='#EE0000'>Listening...</font>";

@@ -1,5 +1,6 @@
 package com.ambinusian.adab.ui.lecturer;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,6 +86,7 @@ public class FragmentHome extends Fragment {
         ////Your Next Schedule
         APIManager apiManager = new APIManager(getContext());
         apiManager.getUserClasses(userPreferences.getUserToken(), new NetworkHelper.getUserClasses() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(Boolean success, Map<String, Object>[] userClasses) {
                 if (success) {
@@ -115,13 +118,13 @@ public class FragmentHome extends Fragment {
                                     .format(startDate);
 
                             int classId = (int) userClass.get("transaction_Id");
-                            int session = Integer.parseInt(((String) userClass.get("session")));
+                            String session = userClass.get("session") != null ? (String) userClass.get("session"): "null";
 
-                            nextScheduleIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_class_56_pencilnote));
+                            nextScheduleIcon.setImageResource(R.drawable.ic_class_55_pencilruler);
                             nextScheduleTime.setText(classDate);
                             nextScheduleClassTitle.setText(topic);
                             nextScheduleCourse.setText(courseName);
-                            nextScheduleSession.setText(getString(R.string.class_session, session));
+                            nextScheduleSession.setText("Sessions " + session);
                             nextScheduleCourseCode.setText(courseCode);
                             nextScheduleClassCode.setText(classCode);
                             nextScheduleClassType.setText(classType);

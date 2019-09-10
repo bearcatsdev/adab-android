@@ -3,6 +3,7 @@ package com.ambinusian.adab.ui.student;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -61,7 +62,6 @@ public class FragmentHome extends Fragment {
         return inflater.inflate(R.layout.fragment_student_all_classes, container, false);
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -222,27 +222,18 @@ public class FragmentHome extends Fragment {
         nextClassType.setText("LEC");
 
         // see all the next classes
-        seeAllNextClass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), NextClassActivity.class);
-                getActivity().startActivity(intent);
-            }
+        seeAllNextClass.setOnClickListener(view13 -> {
+            Intent intent = new Intent(getActivity(), NextClassActivity.class);
+            getActivity().startActivity(intent);
         });
 
         //see all the latetest classes
-        seeAllLatestClass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        seeAllLatestClass.setOnClickListener(view12 -> {
 
-            }
         });
 
-        seeAllDiscussion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // show fragment discussion
-            }
+        seeAllDiscussion.setOnClickListener(view1 -> {
+            // show fragment discussion
         });
 
 
