@@ -31,7 +31,7 @@ import com.google.android.material.button.MaterialButton;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-public class ActivityLive extends AppCompatActivity {
+public class ActivityLive extends AppCompatActivity implements RecognitionListener {
 
     private EditText editTextMessage;
     private TextView hasil;
@@ -94,6 +94,11 @@ public class ActivityLive extends AppCompatActivity {
         });
 
         requestAudioPermissions();
+
+        // start speech recogniser
+        resetSpeechRecognizer();
+
+        speechRecognizer.startListening(intent);
     }
 
     private void connectSocket() {
@@ -134,71 +139,24 @@ public class ActivityLive extends AppCompatActivity {
         intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
 
         AudioManager amanager=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
-        amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true);
-        amanager.setStreamMute(AudioManager.STREAM_ALARM, true);
         amanager.setStreamMute(AudioManager.STREAM_MUSIC, true);
-        amanager.setStreamMute(AudioManager.STREAM_RING, true);
-        amanager.setStreamMute(AudioManager.STREAM_SYSTEM, true);
+    }
 
-        speechRecognizer.setRecognitionListener(new RecognitionListener() {
-            @Override
-            public void onReadyForSpeech(Bundle bundle) {
+    private void resetSpeechRecognizer() {
 
-            }
-
-            @Override
-            public void onBeginningOfSpeech() {
-                kalimatSementara = "";
-            }
-
-            @Override
-            public void onRmsChanged(float v) {
-            }
-
-            @Override
-            public void onBufferReceived(byte[] bytes) {
-            }
-
-            @Override
-            public void onEndOfSpeech() {
-            }
-
-            @Override
-            public void onError(int i) {
-                speechRecognizer.startListening(intent);;
-
-            }
-
-            @Override
-            public void onResults(Bundle bundle) {
-                kalimat = Validasi( kalimat + " "+kalimatSementara) + " / ";
-                speechRecognizer.startListening(intent);;
-
-            }
-
-            @Override
-            public void onPartialResults(Bundle bundle) {
-                ArrayList<String> matches =  bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-
-                kalimatSementara = matches.get(0);
-
-                if(matches != null){
-                    String listening = "<font color='#EE0000'>Listening...</font>";
-                    hasil.setText(Html.fromHtml(kalimat + " " +kalimatSementara + " " + listening));
-                }
-            }
-
-            @Override
-            public void onEvent(int i, Bundle bundle) {
-            }
-        });
-        startVoiceInput();
+        if(speechRecognizer != null)
+            speechRecognizer.destroy();
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+        if(SpeechRecognizer.isRecognitionAvailable(this))
+            speechRecognizer.setRecognitionListener(this);
+        else
+            finish();
     }
 
     private String Validasi(String kalimat){
         String hasil = kalimat;
         if(kalimat.contains("Apa") || kalimat.contains("apa") || kalimat.contains("Bagaimana") || kalimat.contains("bagaimana") || kalimat.contains("Kenapa") || kalimat.contains("kenapa") || kalimat.contains("Kapan") || kalimat.contains("kapan") || kalimat.contains("Mengapa") || kalimat.contains("mengapa")|| kalimat.contains("Berapa") || kalimat.contains("berapa") || kalimat.contains("Kah") || kalimat.contains("kah")){
-            hasil = hasil + " ?";
+            hasil = hasil + "?";
         }
         else
         {
@@ -207,12 +165,6 @@ public class ActivityLive extends AppCompatActivity {
         return hasil;
     }
 
-    private void startVoiceInput() {
-        speechRecognizer.startListening(intent);
-
-
-
-    }
 
     //Requesting run-time permissions
 
@@ -259,11 +211,8 @@ public class ActivityLive extends AppCompatActivity {
             case MY_PERMISSIONS_RECORD_AUDIO: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay!
                     speechToText();
                 } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
                     Toast.makeText(this, "Permissions Denied to record audio", Toast.LENGTH_LONG).show();
                 }
                 return;
@@ -272,4 +221,57 @@ public class ActivityLive extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onReadyForSpeech(Bundle bundle) {
+
+    }
+
+    @Override
+    public void onBeginningOfSpeech() {
+        kalimatSementara = "";
+    }
+
+    @Override
+    public void onRmsChanged(float v) {
+
+    }
+
+    @Override
+    public void onBufferReceived(byte[] bytes) {
+
+    }
+
+    @Override
+    public void onEndOfSpeech() {
+        speechRecognizer.stopListening();
+    }
+
+    @Override
+    public void onError(int i) {
+        resetSpeechRecognizer();
+        speechRecognizer.startListening(intent);
+    }
+
+    @Override
+    public void onResults(Bundle bundle) {
+        kalimat = kalimat + " " + Validasi( kalimatSementara) + " / ";
+        speechRecognizer.startListening(intent);
+    }
+
+    @Override
+    public void onPartialResults(Bundle bundle) {
+        ArrayList<String> matches =  bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+
+        kalimatSementara = matches.get(0);
+
+        if(matches != null){
+            String listening = "<font color='#EE0000'>Listening...</font>";
+            hasil.setText(Html.fromHtml(kalimat + " " +kalimatSementara + " " + listening));
+        }
+    }
+
+    @Override
+    public void onEvent(int i, Bundle bundle) {
+
+    }
 }
