@@ -65,8 +65,6 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_schedule"
                 android:layout_width="match_parent"

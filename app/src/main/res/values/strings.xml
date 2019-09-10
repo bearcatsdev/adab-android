@@ -47,7 +47,7 @@
 
     <!--Welcome-->
     <string name="welcome_title">Welcome back, %1s!</string>
-    <string name="welcome_subtitle">We happy to see you back</string>
+    <string name="welcome_subtitle">We are happy to see you back</string>
 
     <!--Tag in all classes fragment-->
     <string name="tag_live_now">Live Now</string>

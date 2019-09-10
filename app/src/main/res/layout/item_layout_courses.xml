@@ -96,9 +96,7 @@
                     android:fontFamily="@font/interstate"
                     android:gravity="center"
                     android:clickable="false"
-                    app:chipBackgroundColor="#ffffff"
-                    app:chipStrokeColor="#E1E1E1"
-                    app:chipStrokeWidth="1dp"
+                    style="@style/Chip"
                     tools:text="LB03" />
 
                 <Space
@@ -112,9 +110,7 @@
                     android:fontFamily="@font/interstate"
                     android:gravity="center"
                     android:clickable="false"
-                    app:chipBackgroundColor="#ffffff"
-                    app:chipStrokeColor="#E1E1E1"
-                    app:chipStrokeWidth="1dp"
+                    style="@style/Chip"
                     tools:text="LEC" />
             </LinearLayout>
         </LinearLayout>
