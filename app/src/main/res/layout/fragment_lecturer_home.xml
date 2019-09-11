@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.lecturer.FragmentHome">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".ui.lecturer.FragmentHome"
         >
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -127,13 +126,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="16dp" />
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <com.ambinusian.adab.customcomponent.SectionView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
                         app:sectionTitle="@string/lecturer_home_next_schedule_title"
                         app:sectionSubtitle="@string/lecturer_home_next_schedule_subtitle"/>
 
@@ -141,12 +141,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/see_all"
-                        android:backgroundTint="@android:color/white"
                         android:textColor="@color/colorPrimary"
-                        android:layout_alignParentRight="true"
                         style="@style/RoundedMaterialButton" />
 
-                </RelativeLayout>
+                </LinearLayout>
 
                 <Space style="@style/Space16"/>
 
@@ -225,15 +223,13 @@
 
                                 <com.google.android.material.chip.Chip
                                     android:id="@+id/chip_nextScheduleCourseCode"
+                                    style="@style/Chip"
                                     android:layout_width="wrap_content"
                                     android:layout_height="48dp"
                                     android:fontFamily="@font/interstate"
                                     android:gravity="center"
                                     android:textSize="@dimen/text_chip"
                                     android:clickable="false"
-                                    app:chipBackgroundColor="#ffffff"
-                                    app:chipStrokeColor="#E1E1E1"
-                                    app:chipStrokeWidth="1dp"
                                     tools:text="MOBI6002" />
 
                                 <Space
@@ -242,14 +238,12 @@
 
                                 <com.google.android.material.chip.Chip
                                     android:id="@+id/chip_nextScheduleClassCode"
+                                    style="@style/Chip"
                                     android:layout_width="wrap_content"
                                     android:layout_height="48dp"
                                     android:fontFamily="@font/interstate"
                                     android:gravity="center"
                                     android:clickable="false"
-                                    app:chipBackgroundColor="#ffffff"
-                                    app:chipStrokeColor="#E1E1E1"
-                                    app:chipStrokeWidth="1dp"
                                     tools:text="LB03" />
 
                                 <Space
@@ -258,14 +252,12 @@
 
                                 <com.google.android.material.chip.Chip
                                     android:id="@+id/chip_nextScheduleClassType"
+                                    style="@style/Chip"
                                     android:layout_width="wrap_content"
                                     android:layout_height="48dp"
                                     android:fontFamily="@font/interstate"
                                     android:gravity="center"
                                     android:clickable="false"
-                                    app:chipBackgroundColor="#ffffff"
-                                    app:chipStrokeColor="#E1E1E1"
-                                    app:chipStrokeWidth="1dp"
                                     tools:text="LEC" />
                             </LinearLayout>
                         </LinearLayout>
@@ -288,24 +280,23 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <com.ambinusian.adab.customcomponent.SectionView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="10"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
                         app:sectionTitle="@string/lecturer_discussion_title"
                         app:sectionSubtitle="@string/lecturer_discussion_subtitle"/>
+
                     <com.google.android.material.button.MaterialButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/see_all"
-                        android:backgroundTint="@android:color/white"
                         android:textColor="@color/colorPrimary"
-                        android:layout_alignParentEnd="true"
                         style="@style/RoundedMaterialButton"/>
-                </RelativeLayout>
+                </LinearLayout>
 
                 <Space
                     android:layout_width="match_parent"
@@ -323,4 +314,3 @@
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
-</FrameLayout>
