@@ -25,13 +25,12 @@ import com.ambinusian.adab.ui.splash.SplashActivity;
 
 
 import java.util.Map;
+import java.util.Objects;
 
 public class FragmentLogin extends Fragment {
 
-    MaterialButton btnLogin;
-    TextInputEditText inputNim;
-    TextInputEditText inputPassword;
-    Toolbar toolbar;
+    private TextInputEditText inputNim;
+    private TextInputEditText inputPassword;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,29 +43,19 @@ public class FragmentLogin extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnLogin = view.findViewById(R.id.btn_login);
+        MaterialButton btnLogin = view.findViewById(R.id.btn_login);
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
         inputNim = view.findViewById(R.id.input_nim);
         inputPassword = view.findViewById(R.id.input_password);
-        toolbar = view.findViewById(R.id.toolbar);
 
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayShowHomeEnabled(true);
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(view1 -> Objects.requireNonNull(getActivity()).onBackPressed());
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                doLogin();
-            }
-        });
+        btnLogin.setOnClickListener(view12 -> doLogin());
     }
 
 
@@ -89,7 +78,7 @@ public class FragmentLogin extends Fragment {
             Context context = getContext();
             APIManager apiManager = new APIManager(context);
 
-            apiManager.authenticateUser(inputNim.getText().toString(), inputPassword.getText().toString(), new NetworkHelper.authenticateUser() {
+            apiManager.authenticateUser(Objects.requireNonNull(inputNim.getText()).toString(), Objects.requireNonNull(inputPassword.getText()).toString(), new NetworkHelper.authenticateUser() {
                 @Override
                 public void onResponse(Boolean success, Map<String, Object> userProfile) {
                     if (success) {
@@ -98,7 +87,7 @@ public class FragmentLogin extends Fragment {
                         userPreferences.setUserUsername((String) userProfile.get("username"));
                         userPreferences.setUserToken((String) userProfile.get("token_id"));
                         startActivity(new Intent(context, SplashActivity.class));
-                        getActivity().finish();
+                        Objects.requireNonNull(getActivity()).finish();
                     }
                 }
 

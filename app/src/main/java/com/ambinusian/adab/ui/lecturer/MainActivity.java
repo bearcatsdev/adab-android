@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
+
         // profile picture onclick
         profilePicture.setOnClickListener(v -> showUserProfileDialog());
 
@@ -86,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
         listSemester.add("2019 Semester 1");
         listSemester.add("2019 Semester 2");
         SpinnerListSemester.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,listSemester));
-
 
         //set first fragment launched
         getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new FragmentHome()).commit();

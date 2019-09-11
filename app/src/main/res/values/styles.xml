@@ -70,8 +70,11 @@
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:fitsSystemWindows">false</item>
-        <item name="colorPrimaryDark">@android:color/white</item>
+        <item name="colorPrimaryDark">@color/background</item>
+
         <item name="android:windowLightStatusBar" tools:targetApi="27">true</item>
+        <item name="android:statusBarColor" tools:targetApi="27">@color/background</item>
+        <item name="android:navigationBarColor" tools:targetApi="27">@color/background</item>
     </style>
 
     <style name="expanded_toolbar_title">
@@ -93,7 +96,6 @@
     </style>
 
     <!-- Chip -->
-    <!-- TODO: Rename this with proper naming. -->
     <style name="Chip" parent="Widget.MaterialComponents.Chip.Action">
         <item name="chipBackgroundColor">@color/background</item>
         <item name="chipStrokeColor">#E1E1E1</item>
