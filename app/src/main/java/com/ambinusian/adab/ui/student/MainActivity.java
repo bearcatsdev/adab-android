@@ -1,5 +1,6 @@
 package com.ambinusian.adab.ui.student;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     View headerView;
     LottieAnimationView profilePicture;
 
+    @SuppressLint("InflateParams")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // remove title
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
         // profile picture onclick
         profilePicture.setOnClickListener(v -> {
@@ -149,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 }  else if(expandableListView.isGroupExpanded(1) && (expandableListView.getCheckedItemPosition() >= 3 && expandableListView.getCheckedItemPosition() <= courseSubject.size()+2)) {
                     parent.setItemChecked(expandableListView.getCheckedItemPosition()- 100, true);
                 }
-            };
+            }
 
             //don't close the drawer if selected Topics menu. Otherwise, just close it
             if(groupPosition != 1){
