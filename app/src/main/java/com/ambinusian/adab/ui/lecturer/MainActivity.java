@@ -27,9 +27,9 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-
 
     Toolbar toolbar;
     LottieAnimationView profilePicture;
@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
+
         // profile picture onclick
         profilePicture.setOnClickListener(v -> showUserProfileDialog());
 
@@ -86,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
         listSemester.add("2019 Semester 1");
         listSemester.add("2019 Semester 2");
         SpinnerListSemester.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,listSemester));
-
 
         //set first fragment launched
         getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment,new FragmentHome()).commit();
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 }  else if(expandableListViewLecturer.isGroupExpanded(1) && (expandableListViewLecturer.getCheckedItemPosition() >= 3 && expandableListViewLecturer.getCheckedItemPosition() <= courseSubject.size()+2)) {
                     parent.setItemChecked(expandableListViewLecturer.getCheckedItemPosition()- 100, true);
                 }
-            };
+            }
 
             //don't close the drawer if selected Topics menu. Otherwise, just close it
             if(groupPosition != 1){
@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
             //send bundle to Topics Fragment
             Bundle bundle = new Bundle();
             bundle.putString("class_id","12");
-            bundle.putString("topic_title",childList.get(groupList.get(groupPosition)).get(childPosition).menuName);
+            bundle.putString("topic_title", Objects.requireNonNull(childList.get(groupList.get(groupPosition))).get(childPosition).menuName);
             FragmentTopics fragmentTopics = new FragmentTopics();
             fragmentTopics.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment, fragmentTopics).commit();

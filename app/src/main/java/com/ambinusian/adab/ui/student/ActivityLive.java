@@ -1,6 +1,7 @@
 package com.ambinusian.adab.ui.student;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -55,11 +56,10 @@ public class ActivityLive extends AppCompatActivity{
         setContentView(R.layout.activity_live_session);
 
         Bundle bundle = getIntent().getExtras();
+        assert bundle != null;
         classId = bundle.getInt("class_id");
 
-        if (classId == null) {
-            finish();
-        }
+        if (classId == null) finish();
 
         toolbar = findViewById(R.id.toolbar);
         className = findViewById(R.id.tv_class_name);

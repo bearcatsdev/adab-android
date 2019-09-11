@@ -15,8 +15,6 @@ import com.google.android.material.button.MaterialButton;
 
 public class FragmentWelcome extends Fragment {
 
-    MaterialButton letsgo;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -28,14 +26,12 @@ public class FragmentWelcome extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        letsgo = view.findViewById(R.id.btn_letsgo);
+        MaterialButton letsgo = view.findViewById(R.id.btn_letsgo);
 
-        letsgo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentChangeListener fc = (FragmentChangeListener) getActivity();
-                fc.replaceFragment(new FragmentLogin());
-            }
+        letsgo.setOnClickListener(view1 -> {
+            FragmentChangeListener fc = (FragmentChangeListener) getActivity();
+            assert fc != null;
+            fc.replaceFragment(new FragmentLogin());
         });
 
     }
