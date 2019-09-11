@@ -7,8 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import com.ambinusian.adab.R;
 
 public class SectionView extends RelativeLayout {
@@ -39,7 +38,7 @@ public class SectionView extends RelativeLayout {
     private void initView() {
         String infService = Context.LAYOUT_INFLATER_SERVICE;
         LayoutInflater li = (LayoutInflater) getContext().getSystemService(infService);
-        View v = li.inflate(R.layout.section_view, this, false);
+        View v = li.inflate(R.layout.view_section, this, false);
         addView(v);
 
         sectionTitle = findViewById(R.id.section_title);

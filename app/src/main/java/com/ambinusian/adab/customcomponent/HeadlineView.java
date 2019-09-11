@@ -3,7 +3,6 @@ package com.ambinusian.adab.customcomponent;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -20,7 +19,7 @@ public class HeadlineView extends RelativeLayout {
     }
 
     public void init(Context context, AttributeSet attrs){
-        inflate(context, R.layout.headline_view, this);
+        inflate(context, R.layout.view_headline, this);
         int[] sets = {R.attr.headlineTitle};
         TypedArray typedArray = context.obtainStyledAttributes(attrs, sets);
         CharSequence headline_title = typedArray.getText(typedArray.getIndex(0));
