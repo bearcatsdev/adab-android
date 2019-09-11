@@ -115,7 +115,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
             Log.d("Socket.io", "connecting...");
         }
 
-        mSocket.emit("join room", "7");
+        mSocket.emit("join room",classId);
 
         mSocket.on("message", args -> {
             String msg = (String) args[0]; // msg itu dari dosen, coba tes tampilin aja kalo mau
