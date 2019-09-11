@@ -136,7 +136,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="10"
-                        app:sectionSubtitle="@string/home_latest_subtitle"
                         app:sectionTitle="@string/home_next_class_title" />
                     <com.google.android.material.button.MaterialButton
                         android:layout_width="wrap_content"
@@ -149,9 +148,7 @@
 
                 </RelativeLayout>
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="16dp" />
+                <Space style="@style/Space8"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -278,35 +275,33 @@
                             android:layout_marginTop="16sp"
                             android:layout_marginBottom="16sp"
                             android:background="#F5F5F5" />
+
                     </LinearLayout>
                 </LinearLayout>
 
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="16dp" />
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <com.ambinusian.adab.customcomponent.SectionView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        app:sectionTitle="@string/home_latest_title"
-                        app:sectionSubtitle="@string/home_latest_subtitle"/>
+                        app:sectionTitle="@string/home_latest_title" />
 
                     <com.google.android.material.button.MaterialButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/see_all"
                         android:textColor="@color/colorPrimary"
-                        android:layout_alignParentEnd="true"
                         android:id="@+id/see_all_latest_class"
-                        style="@style/RoundedMaterialButton"/>
+                        style="@style/RoundedMaterialButton" />
 
-                </RelativeLayout>
+                </LinearLayout>
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="28dp" />
+                <Space style="@style/Space8"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_courses"
@@ -317,29 +312,39 @@
                     tools:itemCount="3"
                     tools:listitem="@layout/item_layout_courses" />
 
-                <Space
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="16dp" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                <RelativeLayout
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16sp"
+                        android:layout_marginBottom="16sp"
+                        android:background="#F5F5F5" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <com.ambinusian.adab.customcomponent.SectionView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="20"
-                        app:sectionSubtitle="@string/home_discussion_subtitle"
                         app:sectionTitle="@string/home_discussion_title" />
+
                     <com.google.android.material.button.MaterialButton
+                        style="@style/RoundedMaterialButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/see_all"
                         android:textColor="@color/colorPrimary"
                         android:id="@+id/see_all_discussion"
                         android:layout_alignParentRight="true"
-                        style="@style/RoundedMaterialButton"
-                        />
-                </RelativeLayout>
+                       />
+                </LinearLayout>
 
                 <Space
                     android:layout_width="wrap_content"

@@ -18,7 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/section_title"
         android:textSize="@dimen/text_body"
-        tools:text="See what you've missing so far" />
+        tools:text="See what you've missing so far"
+        android:visibility="gone"/>
 
     <View
         style="@style/DividerThick"

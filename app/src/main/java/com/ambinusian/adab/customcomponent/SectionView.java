@@ -63,15 +63,12 @@ public class SectionView extends RelativeLayout {
         String sectionTitle = typedArray.getString(R.styleable.SectionView_sectionTitle);
         String sectionSubtitle = typedArray.getString(R.styleable.SectionView_sectionSubtitle);
         this.sectionTitle.setText(sectionTitle);
-        this.sectionSubtitle.setText(sectionSubtitle);
+
+        if(sectionSubtitle!=null) {
+            this.sectionSubtitle.setText(sectionSubtitle);
+            this.sectionSubtitle.setVisibility(VISIBLE);
+        }
         typedArray.recycle();
     }
 
-    private void setSectionTitle(CharSequence value){
-        sectionTitle.setText(value);
-    }
-
-    public void setSectionSubtitle(CharSequence value) {
-        sectionSubtitle.setText(value);
-    }
 }

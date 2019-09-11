@@ -119,6 +119,11 @@
         <item name="android:layout_height">16dp</item>
     </style>
 
+    <style name="Space8">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">8dp</item>
+    </style>
+
 
 
 </resources>
