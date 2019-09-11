@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.manager.APIManager;
@@ -133,7 +134,7 @@ public class FragmentHome extends Fragment {
                                 Intent intent = new Intent(getContext(), ActivityLive.class);
                                 //set all data to bundle
                                 Bundle bundle = new Bundle();
-                                bundle.putInt("class_id", 8);
+                                bundle.putInt("class_id", classId);
 
                                 //set bundle to the intent
                                 intent.putExtras(bundle);

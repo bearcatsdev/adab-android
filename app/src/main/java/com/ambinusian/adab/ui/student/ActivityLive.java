@@ -140,6 +140,7 @@ public class ActivityLive extends AppCompatActivity{
         socket.on("message", args -> {
             runOnUiThread(() -> {
                 textContent.append(args[0].toString() + "\n");
+                Log.d("message",args[0].toString());
             });
         });
     }
