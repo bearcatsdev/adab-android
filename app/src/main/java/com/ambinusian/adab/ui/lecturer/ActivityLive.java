@@ -59,7 +59,8 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         } else {
             finish();
         }
-        Log.e("debug",classId+"");
+        Log.d("debug",classId+"");
+        Toast.makeText(this, classId+"", Toast.LENGTH_SHORT).show();
 
         editTextMessage = findViewById(R.id.editText_message);
         hasil = findViewById(R.id.textView);
@@ -115,7 +116,13 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
             Log.d("Socket.io", "connecting...");
         }
 
-        mSocket.emit("join room", "7");
+        mSocket.emit("join room",classId);
+
+        if (mSocket.connected()) {
+            Log.d("Socket.io", "oke bang sudah konek");
+        } else {
+            Log.d("Socket.io", "error");
+        }
 
         mSocket.on("message", args -> {
             String msg = (String) args[0]; // msg itu dari dosen, coba tes tampilin aja kalo mau
@@ -131,6 +138,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
     }
 
     private void emitToSocket(String text) {
+        Log.d("emit",text);
         mSocket.emit("message", text); // ini nnt server socket bakalan terima variabel `text`, trus di emit lagi ke semua client yang konek ke room socket.io yang sama
     }
     private void setIntentandAudio(){
@@ -257,8 +265,8 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
     @Override
     public void onPartialResults(Bundle bundle) {
         ArrayList<String> matches =  bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+        emitToSocket(matches.get(0).replace(kalimatSementara,""));
         kalimatSementara = matches.get(0);
-        emitToSocket(kalimatSementara);
 
         if(matches != null){
             String listening = "<font color='#EE0000'>Listening...</font>";

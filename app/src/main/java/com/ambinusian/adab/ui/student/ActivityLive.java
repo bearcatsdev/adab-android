@@ -1,6 +1,7 @@
 package com.ambinusian.adab.ui.student;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -32,7 +33,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import java.net.URISyntaxException;
 import java.util.Map;
 
-public class ActivityLive extends AppCompatActivity implements RecognitionListener {
+public class ActivityLive extends AppCompatActivity{
 
     private Toolbar toolbar;
     private TextView className;
@@ -48,8 +49,6 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
     private ScrollView scrollViewMain;
     private UserPreferences userPreferences;
     private Integer classId;
-    private SpeechRecognizer speechRecognizer;
-    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +56,10 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         setContentView(R.layout.activity_live_session);
 
         Bundle bundle = getIntent().getExtras();
+        assert bundle != null;
         classId = bundle.getInt("class_id");
 
-        if (classId == null) {
-            finish();
-        }
+        if (classId == null) finish();
 
         toolbar = findViewById(R.id.toolbar);
         className = findViewById(R.id.tv_class_name);
@@ -74,7 +72,6 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         contentLoadingLayout = findViewById(R.id.layout_loading_content);
         scrollViewMain = findViewById(R.id.scrollview_main);
         liveContent = findViewById(R.id.tv_content);
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 
         setSupportActionBar(toolbar);
 
@@ -116,13 +113,6 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
 
             }
         });
-
-        requestAudioPermissions();
-
-        // start speech recogniser
-        resetSpeechRecognizer();
-
-        speechRecognizer.startListening(intent);
     }
 
     private void connectSocket() {
@@ -133,7 +123,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         }
         socket.connect();
 
-        while(!socket.connected()) {
+        while (!socket.connected()) {
             Log.d("Socket.io", "connecting...");
         }
 
@@ -150,113 +140,8 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         socket.on("message", args -> {
             runOnUiThread(() -> {
                 textContent.append(args[0].toString() + "\n");
+                Log.d("message",args[0].toString());
             });
         });
-    }
-
-    private final int MY_PERMISSIONS_RECORD_AUDIO = 1;
-
-    private void requestAudioPermissions() {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.RECORD_AUDIO)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            //When permission is not granted by user, show them message why this permission is needed.
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.RECORD_AUDIO)) {
-
-                //Give user option to still opt-in the permissions
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.RECORD_AUDIO},
-                        MY_PERMISSIONS_RECORD_AUDIO);
-
-            } else {
-                // Show user dialog to grant permission to record audio
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.RECORD_AUDIO},
-                        MY_PERMISSIONS_RECORD_AUDIO);
-            }
-        }
-        //If permission is granted, then go ahead recording audio
-        else if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.RECORD_AUDIO)
-                == PackageManager.PERMISSION_GRANTED) {
-
-            //Go ahead with recording audio now
-            setIntentandAudio();
-        }
-    }
-
-    private void setIntentandAudio(){
-        intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"in_ID");
-        intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
-
-        AudioManager amanager=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
-        amanager.setStreamMute(AudioManager.STREAM_MUSIC, true);
-    }
-
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
-
-    private void resetSpeechRecognizer() {
-
-        if(speechRecognizer != null)
-            speechRecognizer.destroy();
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
-        if(SpeechRecognizer.isRecognitionAvailable(this))
-            speechRecognizer.setRecognitionListener(this);
-        else
-            finish();
-    }
-
-    @Override
-    public void onReadyForSpeech(Bundle params) {
-
-    }
-
-    @Override
-    public void onBeginningOfSpeech() {
-
-    }
-
-    @Override
-    public void onRmsChanged(float rmsdB) {
-
-    }
-
-    @Override
-    public void onBufferReceived(byte[] buffer) {
-
-    }
-
-    @Override
-    public void onEndOfSpeech() {
-
-    }
-
-    @Override
-    public void onError(int error) {
-
-    }
-
-    @Override
-    public void onResults(Bundle results) {
-
-    }
-
-    @Override
-    public void onPartialResults(Bundle partialResults) {
-
-    }
-
-    @Override
-    public void onEvent(int eventType, Bundle params) {
-
     }
 }

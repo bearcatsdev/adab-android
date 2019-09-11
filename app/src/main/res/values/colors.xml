@@ -17,5 +17,5 @@
     <color name="divider">#E5E5E5</color>
 
     <!-- Navigation Bar-->
-    <color name="navbar">#FFFFFF</color>
+    <color name="navigationbar">#FFFFFF</color>
 </resources>
