@@ -9,6 +9,7 @@ import android.media.AudioManager;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -79,6 +80,9 @@ public class ActivityLive extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbarTitle.setVisibility(View.GONE);
         scrollViewMain.setVisibility(View.GONE);
+
+        //scroll always to bottom
+        liveContent.setMovementMethod(new ScrollingMovementMethod());
 
         APIManager apiManager = new APIManager(this);
         userPreferences = new UserPreferences(this);

@@ -53,75 +53,84 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/liveLayout"
+           <com.google.android.material.card.MaterialCardView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               app:cardElevation="1dp"
+               app:cardBackgroundColor="@color/background"
+               android:backgroundTint="@color/background"
+               android:background="@color/background"
+               app:cardForegroundColor="@color/background" >
+
+               <LinearLayout
+                   android:id="@+id/liveLayout"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:gravity="center"
+                   android:orientation="vertical"
+                   android:visibility="visible">
+
+                   <com.ambinusian.adab.customcomponent.HeadlineView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       app:headlineTitle="Ongoing Class" />
+
+                   <Space
+                       android:layout_width="match_parent"
+                       android:layout_height="11dp" />
+
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:orientation="vertical"
+                       android:gravity="center"
+                       android:background="?attr/selectableItemBackground"
+                       android:layout_marginStart="16dp"
+                       android:layout_marginEnd="16dp"
+                       android:paddingTop="5dp"
+                       android:paddingBottom="5dp">
+
+
+                       <de.hdodenhof.circleimageview.CircleImageView
+                           android:id="@+id/liveClassIcon"
+                           android:layout_width="96dp"
+                           android:layout_height="96dp"
+                           tools:src="@tools:sample/avatars" />
+
+                       <TextView
+                           android:id="@+id/tv_liveClassTitle"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:textAlignment="center"
+                           android:textColor="@color/textPrimary"
+                           android:textSize="@dimen/text_caption"
+                           android:textStyle="bold"
+                           tools:text="@tools:sample/lorem" />
+
+                       <Space
+                           android:layout_width="match_parent"
+                           android:layout_height="8dp" />
+
+                       <TextView
+                           android:id="@+id/tv_liveCourse"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           tools:text="Mobile Creative Design" />
+
+                       <TextView
+                           android:id="@+id/tv_liveClassMeeting"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           tools:text="Session 12" />
+
+                   </LinearLayout>
+
+               </LinearLayout>
+           </com.google.android.material.card.MaterialCardView>
+
+            <Space
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-
-                <com.ambinusian.adab.customcomponent.HeadlineView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:headlineTitle="Ongoing Class" />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="11dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="?attr/selectableItemBackground"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp">
-
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/liveClassIcon"
-                        android:layout_width="96dp"
-                        android:layout_height="96dp"
-                        tools:src="@tools:sample/avatars" />
-
-                    <TextView
-                        android:id="@+id/tv_liveClassTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:textColor="@color/textPrimary"
-                        android:textSize="@dimen/text_caption"
-                        android:textStyle="bold"
-                        tools:text="@tools:sample/lorem" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="8dp" />
-
-                    <TextView
-                        android:id="@+id/tv_liveCourse"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="Mobile Creative Design" />
-
-                    <TextView
-                        android:id="@+id/tv_liveClassMeeting"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="Session 12" />
-
-                </LinearLayout>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp" />
-
-            </LinearLayout>
+                android:layout_height="35dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -129,24 +138,23 @@
                 android:animateLayoutChanges="true"
                 android:orientation="vertical">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <com.ambinusian.adab.customcomponent.SectionView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="10"
+                        android:layout_weight="1"
                         app:sectionTitle="@string/home_next_class_title" />
                     <com.google.android.material.button.MaterialButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/see_all"
                         android:textColor="@color/colorPrimary"
-                        android:layout_alignParentEnd="true"
                         android:id="@+id/see_all_next_class"
                         style="@style/RoundedMaterialButton"/>
 
-                </RelativeLayout>
+                </LinearLayout>
 
                 <Space style="@style/Space8"/>
 
