@@ -144,8 +144,20 @@ public class ActivityLive extends AppCompatActivity{
         socket.on("message", args -> {
             runOnUiThread(() -> {
                 textContent.append(args[0].toString());
+                scrollViewMain.fullScroll(View.FOCUS_DOWN);
                 Log.d("message",args[0].toString());
             });
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

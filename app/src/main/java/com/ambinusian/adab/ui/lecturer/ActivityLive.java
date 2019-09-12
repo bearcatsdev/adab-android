@@ -127,8 +127,6 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
             }
         });
 
-        hasil.setMovementMethod(new ScrollingMovementMethod());
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -173,7 +171,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if(hasil.getText().toString() == ""){
+                    if(hasil.getText().toString().equals("")){
                         Log.d("message", msg);
                         String listening = "<font color='#EE0000'>Listening...</font>";
                         kalimat = msg;
@@ -321,6 +319,8 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         Log.d("partial_word",matches.get(0).replace(kalimatSementara,""));
         kalimatSementara = matches.get(0);
 
+        scrollViewMain.fullScroll(View.FOCUS_DOWN);
+
         if(matches != null){
             String listening = "<font color='#EE0000'>Listening...</font>";
             hasil.setText(Html.fromHtml(kalimat + " " +kalimatSementara + " " + listening));
@@ -331,5 +331,11 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
     @Override
     public void onEvent(int i, Bundle bundle) {
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
