@@ -70,7 +70,7 @@ public class FragmentHome extends Fragment {
         nextScheduleCourseCode = view.findViewById(R.id.chip_nextScheduleCourseCode);
         nextScheduleClassCode = view.findViewById(R.id.chip_nextScheduleClassCode);
         nextScheduleClassType = view.findViewById(R.id.chip_nextScheduleClassType);
-        linearLayoutNextClass = view.findViewById(R.id.linear_layout_main);
+        linearLayoutNextClass =  view.findViewById(R.id.linear_layout_main);
         welcomeLayout = view.findViewById(R.id.lecturerWelcomeLayout);
         liveClassIcon = view.findViewById(R.id.lecturerLiveClassIcon);
         liveLayout = view.findViewById(R.id.lecturerLiveLayout);
@@ -167,9 +167,6 @@ public class FragmentHome extends Fragment {
         DiscussionAdapter adapter = new DiscussionAdapter(getContext(),discussionList);
         discussionRecyclerView.setAdapter(adapter);
 
-        //show live layout
-        liveLayout.setVisibility(View.VISIBLE);
-        welcomeLayout.setVisibility(View.GONE);
         liveClassIcon.setImageResource(R.drawable.ic_class_58_pencilbook);
         liveClassTitle.setText("Storage");
         liveCourse.setText("Mobile Object Oriented Programming");

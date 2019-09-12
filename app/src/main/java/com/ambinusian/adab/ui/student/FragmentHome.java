@@ -3,7 +3,6 @@ package com.ambinusian.adab.ui.student;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -59,7 +58,7 @@ public class FragmentHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_student_all_classes, container, false);
+        return inflater.inflate(R.layout.fragment_student_home, container, false);
     }
 
     @Override

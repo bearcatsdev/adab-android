@@ -1,16 +1,16 @@
 package com.ambinusian.adab.recyclerview.classlist;
 
 public class ClassListModel {
-    private int classIcon, classId;
-    private String classTopic,meeting,time;
+    private int classIcon = 0, classId = 0;
+    private String classTopic = "",meeting = "",time = "",day = "";
 
-
-    public ClassListModel(int classIcon, int classId, String classTopic, String meeting, String time) {
+    public ClassListModel(int classIcon, int classId, String classTopic, String meeting, String time, String day) {
         this.classIcon = classIcon;
         this.classId = classId;
         this.classTopic = classTopic;
         this.meeting = meeting;
         this.time = time;
+        this.day = day;
     }
 
     public int getClassIcon() {
@@ -51,5 +51,13 @@ public class ClassListModel {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 }

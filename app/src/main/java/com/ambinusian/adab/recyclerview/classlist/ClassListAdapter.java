@@ -27,8 +27,8 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClasslListHolder> {
     @NonNull
     @Override
     public ClasslListHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_layout_class_list,parent,false);
-        return new ClasslListHolder(view);
+            View view = LayoutInflater.from(context).inflate(R.layout.item_layout_class_list,parent,false);
+            return new ClasslListHolder(view);
     }
 
     @Override
@@ -230,6 +230,17 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClasslListHolder> {
                 break;
         }
 
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if(lists.get(position).getDay().isEmpty()){
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
     }
 
     @Override

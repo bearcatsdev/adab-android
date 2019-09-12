@@ -140,6 +140,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textIsSelectable="true"
+                    android:lineSpacingExtra="5dp"
                     android:scrollbars="vertical"
                     android:gravity="bottom"
                     android:text=""/>

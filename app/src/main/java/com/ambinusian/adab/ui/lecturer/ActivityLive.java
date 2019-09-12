@@ -19,10 +19,15 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ambinusian.adab.R;
+import com.ambinusian.adab.manager.APIManager;
+import com.ambinusian.adab.manager.NetworkHelper;
+import com.ambinusian.adab.preferences.UserPreferences;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
@@ -30,6 +35,7 @@ import com.google.android.material.button.MaterialButton;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ActivityLive extends AppCompatActivity implements RecognitionListener {
 
@@ -38,13 +44,20 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
     private Integer classId;
     private Socket mSocket;
     private Toolbar toolbar;
-
-    //semetara aja
+    private RelativeLayout loadingLayout;
+    private RelativeLayout contentLoadingLayout;
+    private TextView className;
+    private TextView classSession;
+    private TextView courseTitle;
+    private UserPreferences userPreferences;
     private static final int REQ_CODE_SPEECH_INPUT = 100;
     private SpeechRecognizer speechRecognizer;
     private String kalimat ="";
     private String kalimatSementara;
     private Intent intent;
+    private TextView toolbarTitle;
+    private ScrollView scrollViewMain;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +70,18 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         } else {
             finish();
         }
-        Log.d("debug",classId+"");
-        Toast.makeText(this, classId+"", Toast.LENGTH_SHORT).show();
 
         hasil = findViewById(R.id.textView);
         disconnectBtn = findViewById(R.id.button_disconnect);
         toolbar = findViewById(R.id.toolbar_lecturerLiveSession);
+        loadingLayout = findViewById(R.id.layout_loading);
+        contentLoadingLayout = findViewById(R.id.layout_loading_content);
+        className = findViewById(R.id.tv_class_name);
+        classSession = findViewById(R.id.tv_class_session);
+        courseTitle = findViewById(R.id.tv_course_title);
+        scrollViewMain = findViewById(R.id.scrollview_main);
+        toolbarTitle = findViewById(R.id.toolbar_title);
+
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 
         setSupportActionBar(toolbar);
@@ -70,8 +89,41 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        toolbarTitle.setVisibility(View.GONE);
+        scrollViewMain.setVisibility(View.GONE);
+
+        hasil.setMovementMethod(new ScrollingMovementMethod());
+
         connectSocket();
 
+        APIManager apiManager = new APIManager(this);
+        userPreferences = new UserPreferences(this);
+        apiManager.getClassDetails(userPreferences.getUserToken(), classId, new NetworkHelper.getClassDetails() {
+            @Override
+            public void onResponse(Boolean success, Map<String, Object> classDetails) {
+                if (success) {
+                    String courseTitleText = (String) classDetails.get("topic");
+                    String classNameText = (String) classDetails.get("course_name");
+                    String sessionText = getString(R.string.class_session) + " " + classDetails.get("session");
+
+                    courseTitle.setText(courseTitleText);
+                    className.setText(classNameText);
+                    classSession.setText(sessionText);
+
+                    //connect to the socket
+                    connectSocket();
+
+                    loadingLayout.setVisibility(View.GONE);
+                    toolbarTitle.setVisibility(View.VISIBLE);
+                    scrollViewMain.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onError(int errorCode, String errorReason) {
+
+            }
+        });
 
         hasil.setMovementMethod(new ScrollingMovementMethod());
 
@@ -82,12 +134,6 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
             }
         });
 
-        requestAudioPermissions();
-
-        // start speech recogniser
-        resetSpeechRecognizer();
-
-        speechRecognizer.startListening(intent);
     }
 
     private void connectSocket() {
@@ -107,6 +153,13 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
 
         if (mSocket.connected()) {
             Log.d("Socket.io", "oke bang sudah konek");
+            contentLoadingLayout.setVisibility(View.GONE);
+
+            // start speech recognizer
+            requestAudioPermissions();
+            resetSpeechRecognizer();
+            speechRecognizer.startListening(intent);
+
         } else {
             Log.d("Socket.io", "error");
         }
@@ -117,6 +170,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
                 @Override
                 public void run() {
                     String text = hasil.getText().toString().replace("Listening...","");
+                    Log.d("message", msg);
                     String listening = "<font color='#EE0000'>Listening...</font>";
                     hasil.setText(Html.fromHtml(text + " " + msg + " " + listening));
                 }
@@ -254,11 +308,6 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         ArrayList<String> matches =  bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
         emitToSocket(matches.get(0).replace(kalimatSementara,""));
         kalimatSementara = matches.get(0);
-
-        if(matches != null){
-            String listening = "<font color='#EE0000'>Listening...</font>";
-            hasil.setText(Html.fromHtml(kalimat + " " +kalimatSementara + " " + listening));
-        }
     }
 
     @Override

@@ -7,7 +7,8 @@
     tools:context=".all.NextClassActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/appbar">
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
@@ -20,4 +21,8 @@
                 android:text="@string/your_next_schedule"/>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_below="@id/appbar"
+        android:layout_height="match_parent"/>
 </RelativeLayout>
