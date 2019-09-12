@@ -33,6 +33,8 @@ import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 import com.google.android.material.button.MaterialButton;
 
+import org.json.HTTP;
+
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -164,15 +166,19 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
             Log.d("Socket.io", "error");
         }
 
+        boolean theFirstTime = true;
+
         mSocket.on("message", args -> {
             String msg = (String) args[0]; // msg itu dari dosen, coba tes tampilin aja kalo mau
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    String text = hasil.getText().toString().replace("Listening...","");
-                    Log.d("message", msg);
-                    String listening = "<font color='#EE0000'>Listening...</font>";
-                    hasil.setText(Html.fromHtml(text + " " + msg + " " + listening));
+                    if(hasil.getText().toString() == ""){
+                        Log.d("message", msg);
+                        String listening = "<font color='#EE0000'>Listening...</font>";
+                        kalimat = msg;
+                        hasil.setText(Html.fromHtml(  kalimat+ " " + listening));
+                    }
                 }
             });
         });
@@ -299,7 +305,12 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
 
     @Override
     public void onResults(Bundle bundle) {
-        emitToSocket(Validasi( kalimatSementara) + " / ");
+        String questionMark = Validasi( kalimatSementara);
+        emitToSocket(questionMark + " / ");
+        kalimat = kalimat + kalimatSementara + questionMark + " / ";
+        String listening = "<font color='#EE0000'>Listening...</font>";
+        hasil.setText(Html.fromHtml(kalimat+" "+listening));
+
         speechRecognizer.startListening(intent);
     }
 
@@ -307,7 +318,14 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
     public void onPartialResults(Bundle bundle) {
         ArrayList<String> matches =  bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
         emitToSocket(matches.get(0).replace(kalimatSementara,""));
+        Log.d("partial_word",matches.get(0).replace(kalimatSementara,""));
         kalimatSementara = matches.get(0);
+
+        if(matches != null){
+            String listening = "<font color='#EE0000'>Listening...</font>";
+            hasil.setText(Html.fromHtml(kalimat + " " +kalimatSementara + " " + listening));
+        }
+
     }
 
     @Override
