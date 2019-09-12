@@ -33,9 +33,7 @@ import java.util.ArrayList;
 
 public class ActivityLive extends AppCompatActivity implements RecognitionListener {
 
-    private EditText editTextMessage;
     private TextView hasil;
-    private MaterialButton sendBtn;
     private MaterialButton disconnectBtn;
     private Integer classId;
     private Socket mSocket;
@@ -62,9 +60,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         Log.d("debug",classId+"");
         Toast.makeText(this, classId+"", Toast.LENGTH_SHORT).show();
 
-        editTextMessage = findViewById(R.id.editText_message);
         hasil = findViewById(R.id.textView);
-        sendBtn = findViewById(R.id.button_send);
         disconnectBtn = findViewById(R.id.button_disconnect);
         toolbar = findViewById(R.id.toolbar_lecturerLiveSession);
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
@@ -77,16 +73,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         connectSocket();
 
 
-        //invisibility editTextMessage and sendBtn for a while
-        editTextMessage.setVisibility(View.GONE);
-        sendBtn.setVisibility(View.GONE);
-
         hasil.setMovementMethod(new ScrollingMovementMethod());
-
-        sendBtn.setOnClickListener(v -> {
-            String textToSend = editTextMessage.getText().toString();
-            emitToSocket(textToSend);
-        });
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +118,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
                 public void run() {
                     String text = hasil.getText().toString().replace("Listening...","");
                     String listening = "<font color='#EE0000'>Listening...</font>";
-//                    hasil.setText(Html.fromHtml(text + " " + msg + " " + listening));
+                    hasil.setText(Html.fromHtml(text + " " + msg + " " + listening));
                 }
             });
         });
@@ -165,11 +152,11 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
     private String Validasi(String kalimat){
         String hasil = kalimat;
         if(kalimat.contains("Apa") || kalimat.contains("apa") || kalimat.contains("Bagaimana") || kalimat.contains("bagaimana") || kalimat.contains("Kenapa") || kalimat.contains("kenapa") || kalimat.contains("Kapan") || kalimat.contains("kapan") || kalimat.contains("Mengapa") || kalimat.contains("mengapa")|| kalimat.contains("Berapa") || kalimat.contains("berapa") || kalimat.contains("Kah") || kalimat.contains("kah")){
-            hasil = hasil + "?";
+            hasil = "?";
         }
         else
         {
-            hasil = hasil + "";
+            hasil = "";
         }
         return hasil;
     }
@@ -258,7 +245,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
 
     @Override
     public void onResults(Bundle bundle) {
-        kalimat = kalimat + " " + Validasi( kalimatSementara) + " / ";
+        emitToSocket(Validasi( kalimatSementara) + " / ");
         speechRecognizer.startListening(intent);
     }
 

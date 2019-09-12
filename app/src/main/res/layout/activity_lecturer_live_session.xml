@@ -95,36 +95,38 @@
         <Space
             android:layout_width="wrap_content"
             android:layout_height="10dp" />
-        <EditText
-            android:id="@+id/editText_message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:text="Message"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="Send"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText_message" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="50">
+            android:layout_weight="50"
+            android:orientation="vertical">
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="vertical"
                 android:gravity="bottom"/>
+            <RelativeLayout
+                android:id="@+id/layout_loading_content"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <ProgressBar
+                    android:id="@+id/pb_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loading_getting_content"
+                    android:layout_below="@id/pb_content"
+                    android:layout_centerHorizontal="true"
+                    android:paddingTop="10dp"/>
+
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -140,6 +142,18 @@
                 style="@style/RoundedMaterialButton" />
         </LinearLayout>
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
 
 <!--    <include layout="@layout/layout_bottom_sheet"/>-->
 

@@ -109,7 +109,7 @@ public class FragmentHome extends Fragment {
                         }
 
 
-                        if (((int) userClass.get("is_done")) == 0 && dateNow.before(startDate)) {
+                        if (((int) userClass.get("is_done")) == 0) {
                             String courseName = (String) userClass.get("course_name");
                             String topic = (String) userClass.get("topic");
                             String courseCode = (String) userClass.get("course_code");
