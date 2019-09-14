@@ -1,4 +1,4 @@
-package com.ambinusian.adab.all;
+package com.ambinusian.adab.ui.student;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -6,9 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Adapter;
-import android.widget.Toast;
 
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.recyclerview.nextorlatestclass.NextOrLatestClassAdapter;
@@ -19,9 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.logging.SimpleFormatter;
 
-public class NextClassActivity extends AppCompatActivity {
+public class LatestClassActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private RecyclerView nextClassRecyclerView;
@@ -31,7 +27,7 @@ public class NextClassActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_next_class);
+        setContentView(R.layout.activity_student_latest_class);
 
         toolbar = findViewById(R.id.next_class_toolbar);
         nextClassRecyclerView  = findViewById(R.id.next_class_recycler_view);
@@ -56,7 +52,7 @@ public class NextClassActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                if(date2.before(date1)){
+                if(date1.before(date2)){
                     Collections.swap(nextClassList,i,j);
                 }
             }

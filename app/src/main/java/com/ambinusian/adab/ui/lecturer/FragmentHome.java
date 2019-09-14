@@ -25,6 +25,7 @@ import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.recyclerview.discussion.DiscussionAdapter;
 import com.ambinusian.adab.recyclerview.discussion.DiscussionModel;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 
 import java.text.ParseException;
@@ -48,6 +49,7 @@ public class FragmentHome extends Fragment {
     private Chip nextScheduleCourseCode, nextScheduleClassCode, nextScheduleClassType;
     private LinearLayout linearLayoutNextClass, welcomeLayout, liveLayout;
     private TextView liveClassTitle, liveCourse, liveClassMeeting;
+    private MaterialButton seeAllNextSchedule;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,6 +81,7 @@ public class FragmentHome extends Fragment {
         liveClassMeeting = view.findViewById(R.id.tv_lecturerLiveClassMeeting);
         discussionList = new ArrayList<>();
         userPreferences = new UserPreferences(getContext());
+        seeAllNextSchedule = view.findViewById(R.id.see_all_next_schedule);
 
 
         ////Set Welcome Text
@@ -178,6 +181,14 @@ public class FragmentHome extends Fragment {
                 bundle.putString("class_id","12");
                 Intent intent = new Intent(getActivity(), ActivityLive.class);
                 intent.putExtras(bundle);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        seeAllNextSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),NextScheduleActivity.class);
                 getActivity().startActivity(intent);
             }
         });

@@ -142,6 +142,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/see_all"
                         android:textColor="@color/colorPrimary"
+                        android:id="@+id/see_all_next_schedule"
                         style="@style/RoundedMaterialButton" />
 
                 </LinearLayout>

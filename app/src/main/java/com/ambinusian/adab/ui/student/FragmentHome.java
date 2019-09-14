@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ambinusian.adab.all.NextClassActivity;
 import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
@@ -228,7 +227,8 @@ public class FragmentHome extends Fragment {
 
         //see all the latetest classes
         seeAllLatestClass.setOnClickListener(view12 -> {
-
+            Intent intent = new Intent(getActivity(), LatestClassActivity.class);
+            getActivity().startActivity(intent);
         });
 
         seeAllDiscussion.setOnClickListener(view1 -> {
