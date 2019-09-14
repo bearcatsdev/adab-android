@@ -1,15 +1,17 @@
-package com.ambinusian.adab.recyclerview.classlist;
+package com.ambinusian.adab.recyclerview.nextorlatestclass;
 
-public class ClassListModel {
+public class NextOrLatestClassModel {
     private int classIcon = 0, classId = 0;
-    private String classTopic = "",meeting = "",time = "";
+    private String classTopic = "",session = "",room = "",time = "", date=" ";
 
-    public ClassListModel(int classIcon, int classId, String classTopic, String meeting, String time) {
+    public NextOrLatestClassModel(int classIcon, int classId, String classTopic, String session, String room, String time, String date) {
         this.classIcon = classIcon;
         this.classId = classId;
         this.classTopic = classTopic;
-        this.meeting = meeting;
+        this.session = session;
+        this.room = room;
         this.time = time;
+        this.date = date;
     }
 
     public int getClassIcon() {
@@ -36,12 +38,20 @@ public class ClassListModel {
         this.classTopic = classTopic;
     }
 
-    public String getMeeting() {
-        return meeting;
+    public String getSession() {
+        return session;
     }
 
-    public void setMeeting(String meeting) {
-        this.meeting = meeting;
+    public void setSession(String session) {
+        this.session = session;
+    }
+
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
     }
 
     public String getTime() {
@@ -52,4 +62,11 @@ public class ClassListModel {
         this.time = time;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }

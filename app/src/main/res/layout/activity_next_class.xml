@@ -21,8 +21,12 @@
                 android:text="@string/your_next_schedule"/>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_below="@id/appbar"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:id="@+id/next_class_recycler_view"
+        />
+
 </RelativeLayout>

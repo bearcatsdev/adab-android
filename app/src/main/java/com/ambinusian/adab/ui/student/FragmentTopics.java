@@ -59,12 +59,12 @@ public class FragmentTopics extends Fragment {
         nextClassTime.setText("Sunday, 25 August 2019 11:00");
 
         //Show The Sorted Course
-        classList.add(new ClassListModel(1,1,"Introduction to Java","Session 11","Sunday, 25 August 2019 11:00",""));
-        classList.add(new ClassListModel(1,1,"Introduction to Java","Session 11","Sunday, 25 August 2019 11:00",""));
-        classList.add(new ClassListModel(1,1,"Introduction to Java","Session 11","Sunday, 25 August 2019 11:00",""));
-        classList.add(new ClassListModel(1,1,"Introduction to Java","Session 11","Sunday, 25 August 2019 11:00",""));
-        classList.add(new ClassListModel(1,1,"Introduction to Java","Session 11","Sunday, 25 August 2019 11:00",""));
-        classList.add(new ClassListModel(1,1,"Introduction to Java","Session 11","Sunday, 25 August 2019 11:00",""));
+        classList.add(new ClassListModel(1,1,"Introduction to Java","Session 11","Sunday, 25 August 2019 11:00"));
+        classList.add(new ClassListModel(1,1,"Introduction to Java","Session 11","Sunday, 25 August 2019 11:00"));
+        classList.add(new ClassListModel(1,1,"Introduction to Java","Session 11","Sunday, 25 August 2019 11:00"));
+        classList.add(new ClassListModel(1,1,"Introduction to Java","Session 11","Sunday, 25 August 2019 11:00"));
+        classList.add(new ClassListModel(1,1,"Introduction to Java","Session 11","Sunday, 25 August 2019 11:00"));
+        classList.add(new ClassListModel(1,1,"Introduction to Java","Session 11","Sunday, 25 August 2019 11:00"));
 
         //Set Layout Manager For Recycler View
         classListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

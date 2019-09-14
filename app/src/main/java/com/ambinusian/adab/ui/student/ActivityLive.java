@@ -98,7 +98,7 @@ public class ActivityLive extends AppCompatActivity{
                     className.setText(classNameText);
                     classSession.setText(sessionText);
 
-                    if ((int) classDetails.get("is_live") == 1) {
+                    if ((int) classDetails.get("is_live") == 1 ) {
                         textLiveNow.setVisibility(View.VISIBLE);
                         connectSocket();
                         toolbarTitle.setText(R.string.live_class_transcribe);

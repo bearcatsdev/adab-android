@@ -176,6 +176,8 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
                         String listening = "<font color='#EE0000'>Listening...</font>";
                         kalimat = msg;
                         hasil.setText(Html.fromHtml(  kalimat+ " " + listening));
+
+                        scrollViewMain.fullScroll(View.FOCUS_DOWN);
                     }
                 }
             });

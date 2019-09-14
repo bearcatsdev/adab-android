@@ -233,17 +233,6 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClasslListHolder> {
     }
 
     @Override
-    public int getItemViewType(int position) {
-        if(lists.get(position).getDay().isEmpty()){
-            return 0;
-        }
-        else
-        {
-            return 1;
-        }
-    }
-
-    @Override
     public int getItemCount() {
         return lists.size();
     }
