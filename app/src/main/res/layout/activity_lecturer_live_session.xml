@@ -175,10 +175,21 @@
             android:layout_height="wrap_content"
             android:gravity="center">
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_disconnect"
+                android:id="@+id/button_pause_session"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="End This Class Now"
+                android:text="Pause Session"
+                style="@style/RoundedMaterialButton" />
+
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="match_parent"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_end_session"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End This Session Now"
                 style="@style/RoundedMaterialButton" />
         </LinearLayout>
     </LinearLayout>

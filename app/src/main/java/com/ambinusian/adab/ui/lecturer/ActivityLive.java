@@ -1,5 +1,6 @@
 package com.ambinusian.adab.ui.lecturer;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -7,6 +8,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
@@ -42,7 +44,7 @@ import java.util.Map;
 public class ActivityLive extends AppCompatActivity implements RecognitionListener {
 
     private TextView hasil;
-    private MaterialButton disconnectBtn;
+    private MaterialButton endSession,pauseSession;
     private Integer classId;
     private Socket mSocket;
     private Toolbar toolbar;
@@ -74,7 +76,8 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         }
 
         hasil = findViewById(R.id.textView);
-        disconnectBtn = findViewById(R.id.button_disconnect);
+        endSession = findViewById(R.id.button_end_session);
+        pauseSession = findViewById(R.id.button_pause_session);
         toolbar = findViewById(R.id.toolbar_lecturerLiveSession);
         loadingLayout = findViewById(R.id.layout_loading);
         contentLoadingLayout = findViewById(R.id.layout_loading_content);
@@ -131,6 +134,52 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+
+        pauseSession.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                builder.setMessage(R.string.dialog_pause_class_question)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                resetSpeechRecognizer();
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
+
+                builder.create();
+            }
+        });
+
+        endSession.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                builder.setMessage(R.string.dialog_end_class_question)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
+
+                builder.create();
             }
         });
 
@@ -306,11 +355,9 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
     @Override
     public void onResults(Bundle bundle) {
         String questionMark = Validasi( kalimatSementara);
-        emitToSocket(questionMark + " / ");
         kalimat = kalimat + kalimatSementara + questionMark + " / ";
         String listening = "<font color='#EE0000'>Listening...</font>";
         hasil.setText(Html.fromHtml(kalimat+" "+listening));
-
         speechRecognizer.startListening(intent);
     }
 
@@ -318,7 +365,6 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
     public void onPartialResults(Bundle bundle) {
         ArrayList<String> matches =  bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
         emitToSocket(matches.get(0).replace(kalimatSementara,""));
-        Log.d("partial_word",matches.get(0).replace(kalimatSementara,""));
         kalimatSementara = matches.get(0);
 
         scrollViewMain.fullScroll(View.FOCUS_DOWN);

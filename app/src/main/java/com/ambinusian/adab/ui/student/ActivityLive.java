@@ -151,11 +151,6 @@ public class ActivityLive extends AppCompatActivity{
     }
 
     @Override
-    public void onBackPressed() {
-
-    }
-
-    @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;

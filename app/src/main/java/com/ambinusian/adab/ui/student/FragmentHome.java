@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -42,7 +43,8 @@ public class FragmentHome extends Fragment {
     private RecyclerView coursesRecyclerView, discussionRecyclerView;
     private ArrayList<CourseModel> coursesList;
     private ArrayList<DiscussionModel> discussionList;
-    private LinearLayout liveLayout, welcomeLayout;
+    private LinearLayout welcomeLayout;
+    private CardView liveLayout;
     private ImageView liveClassIcon;
     private LinearLayoutManager linearLayoutManager;
     private TextView liveClassTitle, liveCourse, liveClassMeeting;

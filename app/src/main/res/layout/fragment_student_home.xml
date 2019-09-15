@@ -53,22 +53,24 @@
 
             </LinearLayout>
 
-           <com.google.android.material.card.MaterialCardView
+           <androidx.cardview.widget.CardView
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               app:cardElevation="1dp"
-               app:cardBackgroundColor="@color/background"
-               android:backgroundTint="@color/background"
-               android:background="@color/background"
-               app:cardForegroundColor="@color/background" >
+               app:cardCornerRadius="10dp"
+               app:cardElevation="2dp"
+               app:cardPreventCornerOverlap="false"
+               android:visibility="gone"
+               android:layout_marginHorizontal="2dp"
+               android:layout_marginTop="2dp"
+               android:id="@+id/liveLayout">
 
                <LinearLayout
-                   android:id="@+id/liveLayout"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:gravity="center"
+                   android:padding="8dp"
                    android:orientation="vertical"
-                   android:visibility="visible">
+                  >
 
                    <com.ambinusian.adab.customcomponent.HeadlineView
                        android:layout_width="wrap_content"
@@ -126,7 +128,7 @@
                    </LinearLayout>
 
                </LinearLayout>
-           </com.google.android.material.card.MaterialCardView>
+           </androidx.cardview.widget.CardView>
 
             <Space
                 android:layout_width="match_parent"
