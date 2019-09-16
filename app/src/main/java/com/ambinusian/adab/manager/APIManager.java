@@ -180,6 +180,41 @@ public class APIManager {
         }));
     }
 
+    public void endSession(String tokenId, int transactionId, NetworkHelper.endSession callback) {
+        String API_PATH = "/lecturer/endSession";
+
+        NetworkManager networkManager = new NetworkManager(context);
+
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("token_id", tokenId);
+        params.put("transaction_id", transactionId);
+
+        JSONObject jsonBody = new JSONObject(params);
+
+        networkManager.doPostRequest(jsonBody, API_PATH, (response -> {
+            // OK
+            Log.d(TAG, response.toString());
+            if (response.getString("status").equals("200")) {
+                callback.onResponse(true, null);
+
+            } else {
+                // Not OK
+
+                if (response.getString("status").equals("403")) {
+                    // unauthorized, tell user to re-login
+                    reLoginUser(context);
+                    callback.onError(403, "Unauthorized");
+
+                } else if (response.getString("status").equals("400")) {
+                    // server error
+                    callback.onError(response.getJSONObject("reason").getInt("error_code"),
+                            response.getJSONObject("reason").getString("error_message"));
+                }
+                callback.onResponse(false, null);
+            }
+        }));
+    }
+
     private void reLoginUser(Context context) {
         UserPreferences userPreferences = new UserPreferences(context);
         userPreferences.clearLoggedInUser();

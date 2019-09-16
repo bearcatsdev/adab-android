@@ -77,8 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         //set up spinner
         SpinnerListSemester = headerView.findViewById(R.id.spinner_list_semesters);
-        listSemester.add("2018 Semester 1");
-        listSemester.add("2018 Semester 2");
+        listSemester.add("2019 Semester 1");
         SpinnerListSemester.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,listSemester));
 
         //icon menu clicked

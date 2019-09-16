@@ -99,7 +99,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
@@ -117,8 +117,15 @@
                             android:id="@+id/tv_class_session"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Session"/>
-
+                            android:text="Session"
+                            android:layout_weight="1"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src ="@drawable/ic_pause"
+                            android:tint="@color/colorAccent"
+                            android:id="@+id/pause_status"
+                            android:visibility="gone"/>
                     </LinearLayout>
 
                     <Space
@@ -176,11 +183,20 @@
             android:layout_height="wrap_content"
             android:gravity="center">
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_pause_session"
+            android:id="@+id/button_pause_session"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pause Session"
+            style="@style/RoundedMaterialButton" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_resume_session"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pause Session"
-                style="@style/RoundedMaterialButton" />
+                android:text="Resume Session"
+                android:visibility="gone"
+                style="@style/RoundedMaterialButton"
+                />
 
             <Space
                 android:layout_width="16dp"

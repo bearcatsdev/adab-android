@@ -21,6 +21,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -44,7 +45,7 @@ import java.util.Map;
 public class ActivityLive extends AppCompatActivity implements RecognitionListener {
 
     private TextView hasil;
-    private MaterialButton endSession,pauseSession;
+    private MaterialButton endSession,pauseSession,resumeSession;
     private Integer classId;
     private Socket mSocket;
     private Toolbar toolbar;
@@ -57,11 +58,11 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
     private static final int REQ_CODE_SPEECH_INPUT = 100;
     private SpeechRecognizer speechRecognizer;
     private String kalimat ="";
-    private String kalimatSementara;
+    private String kalimatSementara="";
     private Intent intent;
     private TextView toolbarTitle;
     private ScrollView scrollViewMain;
-
+    private ImageView pauseStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +79,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         hasil = findViewById(R.id.textView);
         endSession = findViewById(R.id.button_end_session);
         pauseSession = findViewById(R.id.button_pause_session);
+        resumeSession = findViewById(R.id.button_resume_session);
         toolbar = findViewById(R.id.toolbar_lecturerLiveSession);
         loadingLayout = findViewById(R.id.layout_loading);
         contentLoadingLayout = findViewById(R.id.layout_loading_content);
@@ -86,6 +88,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         courseTitle = findViewById(R.id.tv_course_title);
         scrollViewMain = findViewById(R.id.scrollview_main);
         toolbarTitle = findViewById(R.id.toolbar_title);
+        pauseStatus = findViewById(R.id.pause_status);
 
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 
@@ -142,12 +145,16 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ActivityLive.this);
-                builder.setMessage(R.string.dialog_pause_class_question)
+                builder.setMessage(R.string.dialog_pause_session_question)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                kalimat = kalimat+kalimatSementara;
+                                hasil.setText(kalimat);
                                 resetSpeechRecognizer();
-                                finish();
+                                pauseStatus.setVisibility(View.VISIBLE);
+                                pauseSession.setVisibility(View.GONE);
+                                resumeSession.setVisibility(View.VISIBLE);
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -162,15 +169,42 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
             }
         });
 
+        resumeSession.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                speechRecognizer.startListening(intent);
+                pauseStatus.setVisibility(View.GONE);
+                pauseSession.setVisibility(View.VISIBLE);
+                resumeSession.setVisibility(View.GONE);
+
+                String listening = "<font color='#EE0000'>Listening...</font>";
+                hasil.setText(Html.fromHtml(kalimat+" "+listening));
+            }
+        });
+
         endSession.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ActivityLive.this);
-                builder.setMessage(R.string.dialog_end_class_question)
+                builder.setMessage(R.string.dialog_end_session_question)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                finish();
+                                apiManager.endSession(userPreferences.getUserToken(), classId, new NetworkHelper.endSession() {
+                                    @Override
+                                    public void onResponse(Boolean success, Map<String, Object> endSession) {
+                                        if (success) {
+                                            Intent intent = new Intent(ActivityLive.this, MainActivity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }
+                                    @Override
+                                    public void onError(int errorCode, String errorReason) {
+                                           //Give Alert to use internet to end session
+                                    }
+                                });
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -205,11 +239,13 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         if (mSocket.connected()) {
             Log.d("Socket.io", "oke bang sudah konek");
             contentLoadingLayout.setVisibility(View.GONE);
-
             // start speech recognizer
             requestAudioPermissions();
             resetSpeechRecognizer();
             speechRecognizer.startListening(intent);
+
+            String listening = "<font color='#EE0000'>Listening...</font>";
+            hasil.setText(Html.fromHtml(listening));
 
         } else {
             Log.d("Socket.io", "error");
@@ -357,7 +393,9 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
     @Override
     public void onResults(Bundle bundle) {
         String questionMark = Validasi( kalimatSementara);
+        emitToSocket(questionMark+" / ");
         kalimat = kalimat + kalimatSementara + questionMark + " / ";
+        kalimatSementara="";
         String listening = "<font color='#EE0000'>Listening...</font>";
         hasil.setText(Html.fromHtml(kalimat+" "+listening));
         speechRecognizer.startListening(intent);

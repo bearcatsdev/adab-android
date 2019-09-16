@@ -24,4 +24,9 @@ public class NetworkHelper {
         void onError(int errorCode, String errorReason);
     }
 
+    public interface endSession {
+        void onResponse(Boolean success, Map<String, Object> endSession);
+        void onError(int errorCode, String errorReason);
+    }
+
 }

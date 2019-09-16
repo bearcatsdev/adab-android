@@ -104,7 +104,7 @@
     <string name="your_next_schedule">Your Next Schedule</string>
 
     <!--Dialog-->
-    <string name="dialog_pause_class_question">Do you want to pause this class?</string>
-    <string name="dialog_end_class_question">Do you want to end this class?</string>
+    <string name="dialog_pause_session_question">Do you want to pause this session?</string>
+    <string name="dialog_end_session_question">Do you want to end this session?</string>
 
 </resources>
