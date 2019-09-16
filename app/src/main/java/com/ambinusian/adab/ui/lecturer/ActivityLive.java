@@ -141,7 +141,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         pauseSession.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(ActivityLive.this);
                 builder.setMessage(R.string.dialog_pause_class_question)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
@@ -153,18 +153,19 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
+                                dialogInterface.cancel();
                             }
                         });
 
-                builder.create();
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
 
         endSession.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(ActivityLive.this);
                 builder.setMessage(R.string.dialog_end_class_question)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
@@ -175,11 +176,12 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
+                                dialogInterface.cancel();
                             }
                         });
 
-                builder.create();
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
 

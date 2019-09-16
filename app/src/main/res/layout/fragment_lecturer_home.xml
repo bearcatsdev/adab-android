@@ -282,35 +282,42 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <com.ambinusian.adab.customcomponent.SectionView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        app:sectionTitle="@string/lecturer_discussion_title"
-                        app:sectionSubtitle="@string/lecturer_discussion_subtitle"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.ambinusian.adab.customcomponent.SectionView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:sectionTitle="@string/lecturer_discussion_title"
+                            app:sectionSubtitle="@string/lecturer_discussion_subtitle"/>
 
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/see_all"
-                        android:textColor="@color/colorPrimary"
-                        style="@style/RoundedMaterialButton"/>
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/see_all"
+                            android:textColor="@color/colorPrimary"
+                            style="@style/RoundedMaterialButton"/>
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_discussions"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:overScrollMode="never"
+                        android:scrollbars="none"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_layout_discussion" />
                 </LinearLayout>
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="16dp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_discussions"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:overScrollMode="never"
-                    android:scrollbars="none"
-                    tools:itemCount="3"
-                    tools:listitem="@layout/item_layout_discussion" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
