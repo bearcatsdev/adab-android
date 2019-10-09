@@ -3,6 +3,7 @@ package com.ambinusian.adab.ui.userprofile;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.preferences.UserPreferences;
+import com.ambinusian.adab.room.ClassDatabase;
 import com.ambinusian.adab.ui.login.ActivityLogin;
 import com.google.android.material.button.MaterialButton;
 
@@ -29,6 +31,7 @@ public class UserProfileDialogFragment extends DialogFragment {
     private MaterialButton buttonAccountDetails;
     private LinearLayout layoutLogout;
     private LinearLayout layoutDark;
+    private ClassDatabase db;
 
     public UserProfileDialogFragment() {
         // Constructor kosong diperlukan untuk DialogFragment.
@@ -59,13 +62,26 @@ public class UserProfileDialogFragment extends DialogFragment {
         buttonAccountDetails = getView().findViewById(R.id.button_account_details);
         layoutLogout = getView().findViewById(R.id.layout_logout);
         layoutDark = getView().findViewById(R.id.layout_profile_dialog_dark);
-
         textUserName.setText(userPreferences.getUserName());
         textUserDepartment.setText(userPreferences.getUserDepartement());
+        db = ClassDatabase.getDatabase(getContext());
 
         layoutLogout.setOnClickListener(v -> {
             userPreferences.clearLoggedInUser();
             if(getActivity()!=null) {
+                new AsyncTask<Void, Void, Long>(){
+                    @Override
+                    protected Long doInBackground(Void... voids) {
+                        // melakukan proses insert data
+                        db.classDAO().deleteAll();
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Long status) {
+
+                    }
+                }.execute();
                 getActivity().startActivity(new Intent(getContext(), ActivityLogin.class));
                 getActivity().finish();
             }

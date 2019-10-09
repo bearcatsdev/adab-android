@@ -12,7 +12,7 @@ import org.json.JSONObject;
 public class NetworkManager {
     private static NetworkManager instance = null;
     private static final String TAG = "NetworkManager";
-    private static final String SERVER_URL = "https://adabapi.bancet.cf";
+    private static final String SERVER_URL = "https://adabapi.bearcats.dev";
 
     private RequestQueue requestQueue;
 
