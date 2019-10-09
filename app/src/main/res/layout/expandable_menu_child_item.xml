@@ -23,12 +23,13 @@
         android:layout_height="match_parent"/>
 
     <TextView
-        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:textSize="12sp"
         tools:text="Menu"
+        android:gravity="left"
+        android:textAlignment="gravity"
         android:textColor="@drawable/drawer_icon_text_effect"
         android:id="@+id/child_menu_name"/>
 

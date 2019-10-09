@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +29,8 @@ import com.ambinusian.adab.recyclerview.course.CourseModel;
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.recyclerview.discussion.DiscussionAdapter;
 import com.ambinusian.adab.recyclerview.discussion.DiscussionModel;
+import com.ambinusian.adab.room.ClassDatabase;
+import com.ambinusian.adab.room.ClassEntity;
 import com.ambinusian.adab.utility.TextUtility;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
@@ -35,7 +38,9 @@ import com.google.android.material.chip.Chip;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public class FragmentHome extends Fragment {
@@ -54,6 +59,9 @@ public class FragmentHome extends Fragment {
     private Chip nextCourseCode, nextClassCode, nextClassType;
     private Boolean hasLiveClass;
     private MaterialButton seeAllLatestClass, seeAllNextClass, seeAllDiscussion;
+    private LinearLayout yourNextClassLayout;
+    private LinearLayout latestClassLayout;
+    private ClassDatabase db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,6 +95,9 @@ public class FragmentHome extends Fragment {
         seeAllNextClass = view.findViewById(R.id.see_all_next_class);
         seeAllLatestClass = view.findViewById(R.id.see_all_latest_class);
         seeAllDiscussion = view.findViewById(R.id.see_all_discussion);
+        yourNextClassLayout = view.findViewById(R.id.your_next_class_layout);
+        latestClassLayout = view.findViewById(R.id.latest_class);
+        db = ClassDatabase.getDatabase(getContext());
         coursesList = new ArrayList<>();
         discussionList = new ArrayList<>();
         hasLiveClass = false;
@@ -102,11 +113,6 @@ public class FragmentHome extends Fragment {
             @Override
             public void onResponse(Boolean success, Map<String, Object>[] userClasses) {
                 if (success) {
-                    //set layout manager for recycler view
-                    linearLayoutManager = new LinearLayoutManager(getContext());
-                    linearLayoutManager.setReverseLayout(true);
-                    coursesRecyclerView.setLayoutManager(linearLayoutManager);
-
                     for (Map<String, Object> userClass : userClasses) {
 
                         if ((int) userClass.get("is_done") == 1) {
@@ -129,18 +135,7 @@ public class FragmentHome extends Fragment {
                                 e.printStackTrace();
                             }
 
-                            //set list data for recycler view
-                            coursesList.add(new CourseModel(
-                                    (int) userClass.get("transaction_Id"),
-                                    (int) userClass.get("class_icon"),
-                                    classDate + " " + classTime,
-                                    (String) userClass.get("topic"),
-                                    (String) userClass.get("course_name"),
-                                    getString(R.string.class_session) + " " + userClass.get("session"),
-                                    (String) userClass.get("course_code"),
-                                    (String) userClass.get("class_code"),
-                                    (String) userClass.get("class_type")
-                            ));
+
                         }
 
                         if ((int) userClass.get("is_live") == 1) {
@@ -171,12 +166,6 @@ public class FragmentHome extends Fragment {
                         }
                     }
 
-                    //set adapter for recycler view
-                    coursesRecyclerView.setAdapter(new CourseAdapter(getContext(), coursesList));
-
-                    //set visible
-                    coursesRecyclerView.setVisibility(View.VISIBLE);
-
                     //show welcome page if no any class is live
                     if (!hasLiveClass) {
                         welcomeLayout.setVisibility(View.VISIBLE);
@@ -191,6 +180,77 @@ public class FragmentHome extends Fragment {
             @Override
             public void onError(int errorCode, String errorReason) {
 
+            }
+        });
+
+        //get class list data from ClassDatabase
+        db.classDAO().getAllClass().observe(getActivity(), new Observer<List<ClassEntity>>() {
+            @Override
+            public void onChanged(List<ClassEntity> classEntities) {
+                int nextClass;
+                Date currentDate  = Calendar.getInstance().getTime();
+
+                //set list data for recycler view
+                Date date = null;
+                for(nextClass=0;nextClass<classEntities.size();nextClass++){
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
+                    try {
+                        date = format.parse(classEntities.get(nextClass).getTransaction_date()+" "+classEntities.get(nextClass).getTransaction_time());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if(currentDate.before(date)) {
+                        break;
+                    }
+                }
+
+                //for next class layout
+                if(nextClass == classEntities.size()){
+                    yourNextClassLayout.setVisibility(View.GONE);
+                }
+                else {
+                    //Next Class
+                    ClassEntity next_class_info = classEntities.get(nextClass);
+                    nextClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_class_56_pencilnote));
+                    nextClassTime.setText(new SimpleDateFormat("EEEE, d MMMM YYYY H:MM").format(date));
+                    nextClassTitle.setText(next_class_info.getTopic());
+                    nextCourse.setText(next_class_info.getCourse_name());
+                    nextClassSession.setText("Session "+next_class_info.getSession());
+                    nextCourseCode.setText(next_class_info.getCourse_code());
+                    nextClassCode.setText(next_class_info.getClass_code());
+                    nextClassType.setText(next_class_info.getClass_type());
+                }
+
+                //for latest class layout
+                if(nextClass == 0){
+                    latestClassLayout.setVisibility(View.GONE);
+                }
+                else{
+                    for(int i=nextClass-1;i>=0;i--){
+                        Date class_date = null;
+                        try {
+                            class_date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(classEntities.get(i).getTransaction_date()+" "+classEntities.get(i).getTransaction_time());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        coursesList.add(new CourseModel(classEntities.get(i).getTransaction_id(),
+                                classEntities.get(i).getClass_icon(),
+                                new SimpleDateFormat("EEEE, d MMMM YYYY h:mm").format(class_date),
+                                classEntities.get(i).getTopic(),
+                                classEntities.get(i).getCourse_name(),
+                                getString(R.string.class_session) + " " + classEntities.get(i).getSession(),
+                                classEntities.get(i).getCourse_code(),
+                                classEntities.get(i).getClass_code(),
+                                classEntities.get(i).getClass_type()
+                        ));
+                    }
+
+                    //set adapter for recycler view
+                    coursesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    coursesRecyclerView.setAdapter(new CourseAdapter(getContext(), coursesList));
+                    //set visible
+                    coursesRecyclerView.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -209,17 +269,6 @@ public class FragmentHome extends Fragment {
 
         DiscussionAdapter adapter = new DiscussionAdapter(getContext(), discussionList);
         discussionRecyclerView.setAdapter(adapter);
-
-        //Next Class
-        //TODO: change this fill using dummy data
-        nextClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_class_56_pencilnote));
-        nextClassTime.setText("Monday, 26 August 2019");
-        nextClassTitle.setText("Storage");
-        nextCourse.setText("Mobile Object Oriented Programming");
-        nextClassSession.setText("Session 9");
-        nextCourseCode.setText("MOBI6002");
-        nextClassCode.setText("LA03");
-        nextClassType.setText("LEC");
 
         // see all the next classes
         seeAllNextClass.setOnClickListener(view13 -> {

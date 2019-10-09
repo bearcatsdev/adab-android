@@ -12,12 +12,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.ambinusian.adab.all.ErrorFragment;
 import com.ambinusian.adab.expandablenavigationdrawer.ExpandableListAdapter;
 import com.ambinusian.adab.expandablenavigationdrawer.MenuModel;
 import com.ambinusian.adab.R;
+import com.ambinusian.adab.room.ClassDatabase;
+import com.ambinusian.adab.room.ClassEntity;
 import com.ambinusian.adab.ui.userprofile.UserProfileDialogFragment;
 import com.google.android.material.navigation.NavigationView;
 
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     HashMap<MenuModel,List<MenuModel>> childList;
     View headerView;
     LottieAnimationView profilePicture;
+    ClassDatabase db;
+    List<ClassEntity> classList;
 
     @SuppressLint("InflateParams")
     @Override
@@ -59,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         childList = new HashMap<>();
         courseSubject = new ArrayList<>();
         listSemester = new ArrayList<>();
+        db = ClassDatabase.getDatabase(getApplicationContext());
         headerView = getLayoutInflater().inflate(R.layout.adab_nav_header_layout,null);
 
         // set toolbar
@@ -88,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
         //set expandable navigation drawer
         prepareMenuData();
-        populateExpandableList();
+
     }
 
     private void showUserProfileDialog() {
@@ -99,24 +105,39 @@ public class MainActivity extends AppCompatActivity {
 
     public void prepareMenuData(){
         //set course Subject
-        courseSubject.add(new MenuModel(6,"MOOP",false,false));
-        courseSubject.add(new MenuModel(6,"Bahasa Indonesia",false,false));
-        courseSubject.add(new MenuModel(6,"English Savvy",false,false));
-        courseSubject.add(new MenuModel(6,"Calculus",false,false));
-        courseSubject.add(new MenuModel(6,"Data Structure",false,false));
-        courseSubject.add(new MenuModel(6,"Mobile Creative Design",false,false));
-        courseSubject.add(new MenuModel(6,"CB - Kewanegaraan",false,false));
 
-        //set group menu list
-        groupList.add(new MenuModel(0,"Home",false,false));
-        groupList.add(new MenuModel(1,"Topics",true,true));
-        groupList.add(new MenuModel(2,"Calendar",false,false));
-        groupList.add(new MenuModel(3,"Discussion",false,false));
-        groupList.add(new MenuModel(4,"Help",false,false));
-        groupList.add(new MenuModel(5,"Setting",false,false));
+        db.classDAO().getAllClass().observe(MainActivity.this, new Observer<List<ClassEntity>>() {
+            @Override
+            public void onChanged(List<ClassEntity> classEntities) {
+                classList = classEntities;
 
-        //set child menu list at topics menu, index == 1
-        childList.put(groupList.get(1),courseSubject);
+                for(int i=0;i<classList.size();i++){
+                    int count = 0;
+                    for(int j=0;j<courseSubject.size();j++)
+                        if(classList.get(i).getCourse_name().equals(courseSubject.get(j).menuName) && i!= j){
+                            count++;
+                    }
+                    if(count == 0){
+                        courseSubject.add(new MenuModel(6,classList.get(i).getCourse_name(),false,false));
+                    }
+                }
+
+                //set group menu list
+                groupList.add(new MenuModel(0,"Home",false,false));
+                groupList.add(new MenuModel(1,"Topics",true,true));
+                groupList.add(new MenuModel(2,"Calendar",false,false));
+                groupList.add(new MenuModel(3,"Discussion",false,false));
+                groupList.add(new MenuModel(4,"Help",false,false));
+                groupList.add(new MenuModel(5,"Setting",false,false));
+
+                //set child menu list at topics menu, index == 1
+                childList.put(groupList.get(1),courseSubject);
+
+                populateExpandableList();
+            }
+        });
+
+
     }
 
     public void populateExpandableList(){
@@ -161,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
             //for highlight menu background
             int index = parent.getFlatListPosition(ExpandableListView.getPackedPositionForGroup(groupPosition));
             if(!(groupList.get(groupPosition).hasChildren)){
-                Log.e("debug2","text");
                 parent.setItemChecked(index-2,true);
                 parent.setItemChecked(index,true);
                 mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -179,8 +199,7 @@ public class MainActivity extends AppCompatActivity {
 
             //send bundle to Topics Fragment
             Bundle bundle = new Bundle();
-            bundle.putString("class_id","12");
-            bundle.putString("topic_title",childList.get(groupList.get(groupPosition)).get(childPosition).menuName);
+            bundle.putString("topic_name",courseSubject.get(childPosition).menuName);
             FragmentTopics fragmentTopics = new FragmentTopics();
             fragmentTopics.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.adab_fragment, fragmentTopics).commit();

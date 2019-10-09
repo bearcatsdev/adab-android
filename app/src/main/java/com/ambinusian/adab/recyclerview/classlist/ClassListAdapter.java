@@ -11,7 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ambinusian.adab.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class ClassListAdapter extends RecyclerView.Adapter<ClasslListHolder> {
@@ -34,6 +37,8 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClasslListHolder> {
     @Override
     public void onBindViewHolder(@NonNull ClasslListHolder holder, int position) {
         ClassListModel item = lists.get(position);
+
+
 
         holder.classTopic.setText(item.getClassTopic());
         holder.meeting.setText(item.getMeeting());

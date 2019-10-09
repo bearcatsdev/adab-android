@@ -4,12 +4,14 @@ import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
+import com.ambinusian.adab.ui.lecturer.MainActivity;
 import com.ambinusian.adab.ui.login.ActivityLogin;
-import com.ambinusian.adab.ui.student.MainActivity;
 
 import java.util.Map;
 
@@ -28,46 +30,63 @@ public class SplashActivity extends AppCompatActivity {
 
         UserPreferences userPreferences = new UserPreferences(this);
 
-        if (userPreferences.getUserLoggedIn()) {
-            APIManager apiManager = new APIManager(this);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (userPreferences.getUserLoggedIn()) {
+                    APIManager apiManager = new APIManager(SplashActivity.this);
 
-            apiManager.getUserProfile(userPreferences.getUserToken(), new NetworkHelper.getUserProfile() {
-                @Override
-                public void onResponse(Boolean success, Map<String, Object> userProfile) {
-                    if (success) {
-                        int privilege = (int) userProfile.get("privilege");
-                        String department = (String) userProfile.get("department");
-                        String username = (String) userProfile.get("username");
-                        String name = (String) userProfile.get("name");
-
-                        userPreferences.setUserUsername(username);
-                        userPreferences.setUserName(name);
-                        userPreferences.setUserDepartement(department);
-                        userPreferences.setUserPrivilege(privilege);
-
-                        if (privilege == 2) {
-                            // student
-                            startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                            finish();
-
-                        } else if (privilege == 1) {
-                            // dosen
-                            startActivity(new Intent(SplashActivity.this, com.ambinusian.adab.ui.lecturer.MainActivity.class));
-                            finish();
-
-                        }
+                    if(userPreferences.getUserPrivilege() == 1){
+                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        finish();
                     }
-                }
+                    else
+                    {
+                        startActivity(new Intent(SplashActivity.this, com.ambinusian.adab.ui.student.MainActivity.class));
+                        finish();
+                    }
 
-                @Override
-                public void onError(int errorCode, String errorReason) {
-
+//            apiManager.getUserProfile(userPreferences.getUserToken(), new NetworkHelper.getUserProfile() {
+//                @Override
+//                public void onResponse(Boolean success, Map<String, Object> userProfile) {
+//                    if (success) {
+//                        int privilege = (int) userProfile.get("privilege");
+//                        String department = (String) userProfile.get("department");
+//                        String username = (String) userProfile.get("username");
+//                        String name = (String) userProfile.get("name");
+//
+//                        userPreferences.setUserUsername(username);
+//                        userPreferences.setUserName(name);
+//                        userPreferences.setUserDepartement(department);
+//                        userPreferences.setUserPrivilege(privilege);
+//
+//                        if (privilege == 2) {
+//                            // student
+//                            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//                            finish();
+//
+//                        } else if (privilege == 1) {
+//                            // dosen
+//                            startActivity(new Intent(SplashActivity.this, com.ambinusian.adab.ui.lecturer.MainActivity.class));
+//                            finish();
+//
+//                        }
+//                    }
+//                }
+//
+//                @Override
+//                public void onError(int errorCode, String errorReason) {
+//
+//                }
+//            });
+                } else {
+                    startActivity(new Intent(SplashActivity.this, ActivityLogin.class));
+                    finish();
                 }
-            });
-        } else {
-            startActivity(new Intent(SplashActivity.this, ActivityLogin.class));
-            finish();
-        }
+            }
+        },1000);
+
 
     }
 }
