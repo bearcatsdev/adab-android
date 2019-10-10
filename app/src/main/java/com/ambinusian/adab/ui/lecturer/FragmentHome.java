@@ -181,7 +181,7 @@ public class FragmentHome extends Fragment {
                 bundle.putString("class_id","12");
                 Intent intent = new Intent(getActivity(), ActivityLive.class);
                 intent.putExtras(bundle);
-                getActivity().startActivity(intent);
+                startActivity(intent);
             }
         });
 
@@ -189,7 +189,7 @@ public class FragmentHome extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(),NextScheduleActivity.class);
-                getActivity().startActivity(intent);
+                startActivity(intent);
             }
         });
 
