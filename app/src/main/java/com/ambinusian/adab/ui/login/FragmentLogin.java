@@ -179,17 +179,17 @@ public class FragmentLogin extends Fragment {
     }
 
     private void insertData(final ClassEntity classList){
-        new AsyncTask<Void, Void, Long>(){
+        new AsyncTask<Void, Void, Void>(){
             @Override
-            protected Long doInBackground(Void... voids) {
+            protected Void doInBackground(Void... voids) {
                 // melakukan proses insert data
-                long status = db.classDAO().insertClass(classList);
-                return status;
+                db.classDAO().insertClass(classList);
+                return null;
             }
 
             @Override
-            protected void onPostExecute(Long status) {
-
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
             }
         }.execute();
     }

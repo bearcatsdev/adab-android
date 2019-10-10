@@ -12,7 +12,7 @@ import java.util.List;
 @Dao
 public interface ClassDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Long insertClass(ClassEntity entity);
+    void insertClass(ClassEntity entity);
 
     @Query("SELECT * FROM classentity")
     LiveData<List<ClassEntity>> getAllClass();
