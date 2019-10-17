@@ -174,23 +174,17 @@ public class FragmentHome extends Fragment {
         liveClassTitle.setText("Storage");
         liveCourse.setText("Mobile Object Oriented Programming");
         liveClassMeeting.setText("Meeting 11");
-        liveLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString("class_id","12");
-                Intent intent = new Intent(getActivity(), ActivityLive.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
+        liveLayout.setOnClickListener(view12 -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("class_id","12");
+            Intent intent = new Intent(getActivity(), ActivityLive.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
         });
 
-        seeAllNextSchedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),NextScheduleActivity.class);
-                startActivity(intent);
-            }
+        seeAllNextSchedule.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getActivity(),NextScheduleActivity.class);
+            startActivity(intent);
         });
 
     }
