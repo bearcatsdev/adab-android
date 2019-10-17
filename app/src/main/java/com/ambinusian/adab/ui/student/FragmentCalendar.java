@@ -10,14 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
+import com.ambinusian.adab.recyclerview.classlist.ClassListAdapter;
+import com.ambinusian.adab.recyclerview.classlist.ClassListModel;
 import com.ambinusian.adab.recyclerview.schedule.ScheduleAdapter;
 import com.ambinusian.adab.recyclerview.schedule.ScheduleModel;
+import com.ambinusian.adab.room.ClassDatabase;
+import com.ambinusian.adab.room.ClassEntity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -48,6 +53,7 @@ public class FragmentCalendar extends Fragment {
     Date time;
     LinearLayout emptyClass;
     HorizontalCalendar.Builder builder;
+    ClassDatabase db;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -58,19 +64,39 @@ public class FragmentCalendar extends Fragment {
         emptyClass = view.findViewById(R.id.empty_class_layout);
         allClassSchedule = new ArrayList<>();
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        db = ClassDatabase.getDatabase(getContext());
 
+        db.classDAO().getAllClass().observe(getActivity(), new Observer<List<ClassEntity>>() {
+            @Override
+            public void onChanged(List<ClassEntity> classEntities) {
+                Date temp = null;
+                for(ClassEntity classEntity : classEntities){
+                    try {
+                        temp = new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(classEntity.getSessionStartDate());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    allClassSchedule.add(new ScheduleModel(
+                            new SimpleDateFormat("yyyy-MM-dd hh:mm").format(temp),
+                            (String) classEntity.getSessionMode(),
+                            (String) classEntity.getTopicTitle(),
+                            (String) classEntity.getCourseName(),
+                            (String) classEntity.getCourseId(),
+                            (String) classEntity.getClassName(),
+                            new SimpleDateFormat("hh:mm").format(temp)));
+                }
 
-        /* starts before 1 month from now */
-        Calendar startDate = Calendar.getInstance();
-        startDate.add(Calendar.YEAR, -10);
+                /* starts before 1 month from now */
+                Calendar startDate = Calendar.getInstance();
+                startDate.add(Calendar.YEAR, -10);
 
-        /* ends after 1 month from now */
-        Calendar endDate = Calendar.getInstance();
-        endDate.add(Calendar.YEAR, 10);
+                /* ends after 1 month from now */
+                Calendar endDate = Calendar.getInstance();
+                endDate.add(Calendar.YEAR, 10);
 
-        builder = new HorizontalCalendar.Builder(getActivity(), R.id.calendarView).range(startDate, endDate)
-                .datesNumberOnScreen(5);
-        HorizontalCalendar horizontalCalendar = builder.addEvents(new CalendarEventsPredicate() {
+                builder = new HorizontalCalendar.Builder(getActivity(), R.id.calendarView).range(startDate, endDate)
+                        .datesNumberOnScreen(5);
+                HorizontalCalendar horizontalCalendar = builder.addEvents(new CalendarEventsPredicate() {
                     @Override
                     public List<CalendarEvent> events(Calendar date) {
                         //Searching the classes at selected date
@@ -97,117 +123,85 @@ public class FragmentCalendar extends Fragment {
                         return events;
                     }
                 })
-                .build();
+                        .build();
 
 
-        horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
-            @Override
-            public void onDateSelected(Calendar date, int position) {
-                int currentDay = date.getTime().getDay();
-                int currentDate = date.getTime().getDate();
-                int currentMonth = date.getTime().getMonth() + 1;
-                int currentYear = date.getTime().getYear() + 1900;
+                horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
+                    @Override
+                    public void onDateSelected(Calendar date, int position) {
+                        int currentDay = date.getTime().getDay();
+                        int currentDate = date.getTime().getDate();
+                        int currentMonth = date.getTime().getMonth() + 1;
+                        int currentYear = date.getTime().getYear() + 1900;
 
-                Date date2 = null;
+                        Date date2 = null;
 
-                try {
-                    date2 = new SimpleDateFormat("yyyy-MM-dd").parse(currentYear + "-" + currentMonth + "-" + currentDate);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-                selectedDate.setText(new SimpleDateFormat("EEEE, d MMMM yyyy").format(date2));
-
-                //Searching the classes at selected date
-                ArrayList<ScheduleModel> selectedDateClasses = new ArrayList<>();
-                for (int i = 0; i < allClassSchedule.size(); i++) {
-                    Calendar selectedDateCalendar = Calendar.getInstance();
-                    try {
-                        selectedDateCalendar.setTime(dateFormat.parse(allClassSchedule.get(i).getClassDate()));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-
-                    if (selectedDateCalendar.equals(date)) {
-                        ScheduleModel item = allClassSchedule.get(i);
-                        selectedDateClasses.add(item);
-                    }
-                }
-
-                if(selectedDateClasses.size() == 0){
-                    emptyClass.setVisibility(View.VISIBLE);
-                    scheduleList.setVisibility(View.GONE);
-                }
-                else {
-                    emptyClass.setVisibility(View.GONE);
-                    scheduleList.setVisibility(View.VISIBLE);
-                    //set recycler view adapter
-                    ScheduleAdapter adapter = new ScheduleAdapter(getContext(), selectedDateClasses);
-                    scheduleList.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onCalendarScroll(HorizontalCalendarView calendarView, int dx, int dy) {
-
-            }
-        });
-
-        //set recycler view layout manager
-        scheduleList.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        APIManager apiManager = new APIManager(getContext());
-        UserPreferences userPreferences = new UserPreferences(getContext());
-        apiManager.getUserClasses(userPreferences.getUserToken(), new NetworkHelper.getUserClasses() {
-            @Override
-            public void onResponse(Boolean success, Map<String, Object>[] userClasses) {
-                //information needed = classDate, classType, classTitle, course, courseCode, classRoom, classTime
-                if (success) {
-                    for (Map<String, Object> userClass : userClasses) {
-                       time = null;
-                        SimpleDateFormat format = new SimpleDateFormat("H:mm:ss");
                         try {
-                            time = format.parse((String)userClass.get("transaction_time"));
+                            date2 = new SimpleDateFormat("yyyy-MM-dd").parse(currentYear + "-" + currentMonth + "-" + currentDate);
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
 
-                        allClassSchedule.add(new ScheduleModel(
-                                (String) userClass.get("transaction_date"),
-                                (String) userClass.get("class_type"),
-                                (String) userClass.get("topic"),
-                                (String) userClass.get("course_name"),
-                                (String) userClass.get("course_code"),
-                                (String) userClass.get("class_code"),
-                               new SimpleDateFormat("K:mm a").format(time)));
+                        selectedDate.setText(new SimpleDateFormat("EEEE, d MMMM yyyy").format(date2));
+
+                        //Searching the classes at selected date
+                        ArrayList<ScheduleModel> selectedDateClasses = new ArrayList<>();
+                        for (int i = 0; i < allClassSchedule.size(); i++) {
+                            Calendar selectedDateCalendar = Calendar.getInstance();
+                            try {
+                                selectedDateCalendar.setTime(dateFormat.parse(allClassSchedule.get(i).getClassDate()));
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            if (selectedDateCalendar.equals(date)) {
+                                ScheduleModel item = allClassSchedule.get(i);
+                                selectedDateClasses.add(item);
+                            }
+                        }
+
+                        if(selectedDateClasses.size() == 0){
+                            emptyClass.setVisibility(View.VISIBLE);
+                            scheduleList.setVisibility(View.GONE);
+                        }
+                        else {
+                            emptyClass.setVisibility(View.GONE);
+                            scheduleList.setVisibility(View.VISIBLE);
+                            //set recycler view adapter
+                            ScheduleAdapter adapter = new ScheduleAdapter(getContext(), selectedDateClasses);
+                            scheduleList.setAdapter(adapter);
+                        }
                     }
-                    firstTimeLayout();
+
+                    @Override
+                    public void onCalendarScroll(HorizontalCalendarView calendarView, int dx, int dy) {
+
+                    }
+                });
+
+                //set recycler view layout manager
+                scheduleList.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                //add all class Schedule to calendar
+                List<Calendar> classSchedule = new ArrayList<>();
+                for (int i = 0; i < allClassSchedule.size(); i++) {
+                    //add date to calendae object
+                    Calendar calendar = Calendar.getInstance();
+                    try {
+                        calendar.setTime(dateFormat.parse(allClassSchedule.get(i).getClassDate()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    //add calendar object to classSchedule list
+                    classSchedule.add(calendar);
                 }
-            }
 
-            @Override
-            public void onError(int errorCode, String errorReason) {
+                firstTimeLayout();
 
+                horizontalCalendar.refresh();
             }
         });
-
-        //add all class Schedule to calendar
-        List<Calendar> classSchedule = new ArrayList<>();
-        for (int i = 0; i < allClassSchedule.size(); i++) {
-            //add date to calendae object
-            Calendar calendar = Calendar.getInstance();
-            try {
-                calendar.setTime(dateFormat.parse(allClassSchedule.get(i).getClassDate()));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            //add calendar object to classSchedule list
-            classSchedule.add(calendar);
-        }
-
-        horizontalCalendar.refresh();
-
     }
 
     public void firstTimeLayout(){

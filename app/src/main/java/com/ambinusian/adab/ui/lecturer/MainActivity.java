@@ -197,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putString("class_id","12");
             bundle.putString("topic_title", Objects.requireNonNull(childList.get(groupList.get(groupPosition))).get(childPosition).menuName);
+            bundle.putString("topic_name",courseSubject.get(childPosition).menuName);
             FragmentTopics fragmentTopics = new FragmentTopics();
             fragmentTopics.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.adab_lecturer_fragment, fragmentTopics).commit();
