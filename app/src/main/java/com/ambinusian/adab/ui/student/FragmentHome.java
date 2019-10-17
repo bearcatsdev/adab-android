@@ -249,21 +249,21 @@ public class FragmentHome extends Fragment {
 //        DiscussionAdapter adapter = new DiscussionAdapter(getContext(), discussionList);
 //        discussionRecyclerView.setAdapter(adapter);
 //
-//        // see all the next classes
-//        seeAllNextClass.setOnClickListener(view13 -> {
-//            Intent intent = new Intent(getActivity(), NextClassActivity.class);
-//            getActivity().startActivity(intent);
-//        });
-//
-//        //see all the latetest classes
-//        seeAllLatestClass.setOnClickListener(view12 -> {
-//            Intent intent = new Intent(getActivity(), LatestClassActivity.class);
-//            getActivity().startActivity(intent);
-//        });
-//
-//        seeAllDiscussion.setOnClickListener(view1 -> {
-//            // show fragment discussion
-//        });
+        // see all the next classes
+        seeAllNextClass.setOnClickListener(view13 -> {
+            Intent intent = new Intent(getActivity(), NextClassActivity.class);
+            getActivity().startActivity(intent);
+        });
+
+        //see all the latetest classes
+        seeAllLatestClass.setOnClickListener(view12 -> {
+            Intent intent = new Intent(getActivity(), LatestClassActivity.class);
+            getActivity().startActivity(intent);
+        });
+
+        seeAllDiscussion.setOnClickListener(view1 -> {
+            // show fragment discussion
+        });
 
 
     }
