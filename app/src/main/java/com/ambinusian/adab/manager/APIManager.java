@@ -140,6 +140,7 @@ public class APIManager {
         params.put("session_id", sessionId);
 
         JSONObject jsonBody = new JSONObject(params);
+        Log.d("APIManager", jsonBody.toString());
 
         networkManager.doPostRequest(context, tokenId, jsonBody, API_PATH, (response -> {
             // OK

@@ -83,8 +83,9 @@ public class NetworkManager {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<>();
                 if (!userToken.isEmpty()) {
-                    headers.put("authorization", userToken);
+                    headers.put("authorization", "Bearer " + userToken);
                 }
+                Log.d("Headers", String.valueOf(headers));
                 return headers;
             }
         };
@@ -125,8 +126,9 @@ public class NetworkManager {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<>();
                 if (!userToken.isEmpty()) {
-                    headers.put("authorization", userToken);
+                    headers.put("authorization", "Bearer " + userToken);
                 }
+                Log.d("Headers", String.valueOf(headers));
                 return headers;
             }
         };
