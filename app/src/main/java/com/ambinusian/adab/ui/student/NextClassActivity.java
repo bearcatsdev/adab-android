@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.recyclerview.nextorlatestclass.NextOrLatestClassAdapter;
@@ -95,7 +96,9 @@ public class NextClassActivity extends AppCompatActivity {
                 if(i == 0 || !dateIterator.equals(dateTemp)){
                     dateIterator = dateTemp;
 
-                    nextClassList.add(i,new NextOrLatestClassModel(1,nextClassList.get(i).getClassId(),nextClassList.get(i).getClassTopic(),nextClassList.get(i).getSession(),nextClassList.get(i).getRoom(),nextClassList.get(i).getTime(), new SimpleDateFormat("EEEE, d MMMM yyyy").format(dateIterator)));
+                    if (dateIterator != null) {
+                        nextClassList.add(i, new NextOrLatestClassModel(1, nextClassList.get(i).getClassId(), nextClassList.get(i).getClassTopic(), nextClassList.get(i).getSession(), nextClassList.get(i).getRoom(), nextClassList.get(i).getTime(), new SimpleDateFormat("EEEE, d MM YYYY").format(dateIterator)));
+                    }
 
                     i+= 2;
                 }

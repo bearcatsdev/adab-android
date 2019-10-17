@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Adab"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.student.LatestClassActivity"></activity>
+        <activity android:name=".ui.student.LatestClassActivity" />
         <!-- IDK, but we need to work on Google App Index Warning -->
         <activity android:name=".ui.student.NextClassActivity" />
         <activity android:name=".ui.lecturer.ActivityLive" />
@@ -20,7 +20,6 @@
         <activity android:name=".ui.lecturer.CourseDetail" />
         <activity android:name=".ui.lecturer.MainActivity" />
         <activity android:name=".ui.student.ActivityLive" />
-        <activity android:name=".ui.lecturer.NextScheduleActivity" />
         <activity
             android:name=".ui.splash.SplashActivity"
             android:theme="@style/Theme.Adab.Launcher">
