@@ -25,6 +25,7 @@ import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.recyclerview.discussion.DiscussionAdapter;
 import com.ambinusian.adab.recyclerview.discussion.DiscussionModel;
+import com.ambinusian.adab.room.ClassDatabase;
 import com.ambinusian.adab.ui.student.NextClassActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
@@ -51,6 +52,7 @@ public class FragmentHome extends Fragment {
     private LinearLayout linearLayoutNextClass, welcomeLayout, liveLayout;
     private TextView liveClassTitle, liveCourse, liveClassMeeting;
     private MaterialButton seeAllNextSchedule;
+    private ClassDatabase db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,7 +85,7 @@ public class FragmentHome extends Fragment {
         discussionList = new ArrayList<>();
         userPreferences = new UserPreferences(getContext());
         seeAllNextSchedule = view.findViewById(R.id.see_all_next_schedule);
-
+        db = ClassDatabase.getDatabase(getContext());
 
         ////Set Welcome Text
         welcomeTitle.setText(getString(R.string.welcome_title, userPreferences.getUserName()));

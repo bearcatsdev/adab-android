@@ -56,7 +56,7 @@ public class NextClassActivity extends AppCompatActivity {
                                 classEntity.getTopicTitle(),
                                 "Session "+classEntity.getSessionTh(),
                                 classEntity.getSessionRoom(),
-                                (new SimpleDateFormat("yy-MM-dd HH:mm").parse(classEntity.getSessionStartDate())).toString(),
+                                (new SimpleDateFormat("yy-MM-dd HH:mm").format(classEntity.getSessionStartDate())),
                                ""
                         ));
                     } catch (Exception e) {}
@@ -69,8 +69,8 @@ public class NextClassActivity extends AppCompatActivity {
             for(int i = 0; i<listSize-1;i++){
                 for(int j = i+1; j<listSize;j++){
                     try {
-                        date1 = new SimpleDateFormat("yy-MM-dd HH:mm").parse(nextClassList.get(i).getTime());
-                        date2 = new SimpleDateFormat("yy-MM-dd HH:mm").parse(nextClassList.get(j).getTime());
+                        date1 = new SimpleDateFormat("yy-MM-dd HH:mm").parse(nextClassList.get(i).getDateTime());
+                        date2 = new SimpleDateFormat("yy-MM-dd HH:mm").parse(nextClassList.get(j).getDateTime());
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -86,7 +86,7 @@ public class NextClassActivity extends AppCompatActivity {
             Date dateIterator = null;
             while(i < nextClassList.size()){
                 try {
-                    dateTemp = new SimpleDateFormat("yy-MM-dd").parse(nextClassList.get(i).getTime());
+                    dateTemp = new SimpleDateFormat("yy-MM-dd").parse(nextClassList.get(i).getDateTime());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -95,7 +95,7 @@ public class NextClassActivity extends AppCompatActivity {
                 if(i == 0 || !dateIterator.equals(dateTemp)){
                     dateIterator = dateTemp;
 
-                    nextClassList.add(i,new NextOrLatestClassModel(1,nextClassList.get(i).getClassId(),nextClassList.get(i).getClassTopic(),nextClassList.get(i).getSession(),nextClassList.get(i).getRoom(),nextClassList.get(i).getTime(), new SimpleDateFormat("EEEE, d MMMM yyyy").format(dateIterator)));
+                    nextClassList.add(i,new NextOrLatestClassModel(1,nextClassList.get(i).getClassId(),nextClassList.get(i).getClassTopic(),"Session "+nextClassList.get(i).getSession(),nextClassList.get(i).getRoom(),nextClassList.get(i).getDateTime(), new SimpleDateFormat("EEEE, d MMMM yyyy").format(dateIterator)));
 
                     i+= 2;
                 }
