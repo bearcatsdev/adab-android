@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
 
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,8 @@ import com.ambinusian.adab.R;
 import com.ambinusian.adab.all.ErrorFragment;
 import com.ambinusian.adab.expandablenavigationdrawer.ExpandableListAdapter;
 import com.ambinusian.adab.expandablenavigationdrawer.MenuModel;
+import com.ambinusian.adab.room.ClassDatabase;
+import com.ambinusian.adab.room.ClassEntity;
 import com.ambinusian.adab.ui.student.FragmentCalendar;
 import com.ambinusian.adab.ui.student.FragmentHelp;
 import com.ambinusian.adab.ui.student.FragmentSetting;
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     List<MenuModel> courseSubject;
     HashMap<MenuModel,List<MenuModel>> childList;
     View headerView;
+    ClassDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         courseSubject = new ArrayList<>();
         childList = new HashMap<>();
         headerView = getLayoutInflater().inflate(R.layout.adab_nav_header_layout,null);
+        db = ClassDatabase.getDatabase(MainActivity.this);
 
         // set toolbar
         setSupportActionBar(toolbar);
@@ -101,25 +106,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void prepareMenuData(){
-        //set group menu list
-        groupList.add(new MenuModel(0,"Home",false,false));
-        groupList.add(new MenuModel(1,"Topics",true,true));
-        groupList.add(new MenuModel(2,"Calendar",false,false));
-        groupList.add(new MenuModel(3,"Discussion",false,false));
-        groupList.add(new MenuModel(4,"Help",false,false));
-        groupList.add(new MenuModel(5,"Setting",false,false));
+        db.classDAO().getAllClass().observe(com.ambinusian.adab.ui.lecturer.MainActivity.this, new Observer<List<ClassEntity>>() {
+            @Override
+            public void onChanged(List<ClassEntity> classEntities) {
+                for(int i=0;i<classEntities.size();i++){
+                    int count = 0;
+                    for(int j=0;j<courseSubject.size();j++)
+                        if(classEntities.get(i).getCourseName().equals(courseSubject.get(j).menuName) && i!= j){
+                            count++;
+                        }
+                    if(count == 0){
+                        courseSubject.add(new MenuModel(6,classEntities.get(i).getCourseName(),false,false));
+                    }
+                }
 
-        //set course Subject
-        courseSubject.add(new MenuModel(6,"MOOP",false,false));
-        courseSubject.add(new MenuModel(6,"Bahasa Indonesia",false,false));
-        courseSubject.add(new MenuModel(6,"English Savvy",false,false));
-        courseSubject.add(new MenuModel(6,"Calculus",false,false));
-        courseSubject.add(new MenuModel(6,"Data Structure",false,false));
-        courseSubject.add(new MenuModel(6,"Mobile Creative Design",false,false));
-        courseSubject.add(new MenuModel(6,"CB - Kewanegaraan",false,false));
+                //set group menu list
+                groupList.add(new MenuModel(0,"Home",false,false));
+                groupList.add(new MenuModel(1,"Topics",true,true));
+                groupList.add(new MenuModel(2,"Calendar",false,false));
+                groupList.add(new MenuModel(3,"Discussion",false,false));
+                groupList.add(new MenuModel(4,"Help",false,false));
+                groupList.add(new MenuModel(5,"Setting",false,false));
 
-        //set child menu list at topics menu, index == 1
-        childList.put(groupList.get(1),courseSubject);
+                //set child menu list at topics menu, index == 1
+                childList.put(groupList.get(1),courseSubject);
+
+                populateExpandableList();
+            }
+        });
     }
 
     public void populateExpandableList(){

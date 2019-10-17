@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.recyclerview.nextorlatestclass.NextOrLatestClassAdapter;
@@ -56,7 +57,7 @@ public class NextClassActivity extends AppCompatActivity {
                                 classEntity.getTopicTitle(),
                                 "Session "+classEntity.getSessionTh(),
                                 classEntity.getSessionRoom(),
-                                (new SimpleDateFormat("yy-MM-dd HH:mm").format(classEntity.getSessionStartDate())),
+                                (new SimpleDateFormat("yy-MM-dd HH:mm").parse(classEntity.getSessionStartDate())).toString(),
                                ""
                         ));
                     } catch (Exception e) {}
@@ -69,8 +70,8 @@ public class NextClassActivity extends AppCompatActivity {
             for(int i = 0; i<listSize-1;i++){
                 for(int j = i+1; j<listSize;j++){
                     try {
-                        date1 = new SimpleDateFormat("yy-MM-dd HH:mm").parse(nextClassList.get(i).getDateTime());
-                        date2 = new SimpleDateFormat("yy-MM-dd HH:mm").parse(nextClassList.get(j).getDateTime());
+                        date1 = new SimpleDateFormat("yy-MM-dd HH:mm").parse(nextClassList.get(i).getTime());
+                        date2 = new SimpleDateFormat("yy-MM-dd HH:mm").parse(nextClassList.get(j).getTime());
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -81,33 +82,44 @@ public class NextClassActivity extends AppCompatActivity {
             }
 
             //grouping date
-            int i = 0;
+
             Date dateTemp = null;
             Date dateIterator = null;
-            while(i < nextClassList.size()){
-                try {
-                    dateTemp = new SimpleDateFormat("yy-MM-dd").parse(nextClassList.get(i).getDateTime());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
 
+            if(nextClassList.size() == 0){
+                //a
+            }
+            else{
+                int i = 0;
+                while(i < nextClassList.size()){
+                    try {
+                        dateTemp = new SimpleDateFormat("yy-MM-dd").parse(nextClassList.get(i).getTime());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    ;
+                    if(i == 0 || !dateIterator.equals(dateTemp)){
+                        dateIterator = dateTemp;
 
-                if(i == 0 || !dateIterator.equals(dateTemp)){
-                    dateIterator = dateTemp;
+                        if (dateIterator != null) {
+                            nextClassList.add(i, new NextOrLatestClassModel(1, nextClassList.get(i).getClassId(), nextClassList.get(i).getClassTopic(), nextClassList.get(i).getSession(), nextClassList.get(i).getRoom(), nextClassList.get(i).getTime(), new SimpleDateFormat("EEEE, d MM YYYY").format(dateIterator)));
+                        }
 
-                    nextClassList.add(i,new NextOrLatestClassModel(1,nextClassList.get(i).getClassId(),nextClassList.get(i).getClassTopic(),"Session "+nextClassList.get(i).getSession(),nextClassList.get(i).getRoom(),nextClassList.get(i).getDateTime(), new SimpleDateFormat("EEEE, d MMMM yyyy").format(dateIterator)));
+                        i+= 2;
+                    }
+                    else
+                    {
+                        i++;
+                    }
 
-                    i+= 2;
-                }
-                else
-                {
-                    i++;
+                    nextClassRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+                    NextOrLatestClassAdapter adapter = new NextOrLatestClassAdapter(this,nextClassList);
+                    nextClassRecyclerView.setAdapter(adapter);
                 }
             }
 
-            nextClassRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-            NextOrLatestClassAdapter adapter = new NextOrLatestClassAdapter(this,nextClassList);
-            nextClassRecyclerView.setAdapter(adapter);
+
+
         });
 
         //add dummies data

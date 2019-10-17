@@ -2,15 +2,15 @@ package com.ambinusian.adab.recyclerview.nextorlatestclass;
 
 public class NextOrLatestClassModel {
     private int classIcon = 0, classId = 0;
-    private String classTopic = "",session = "",room = "",datetime = "", date=" ";
+    private String classTopic = "",session = "",room = "",time = "", date=" ";
 
-    public NextOrLatestClassModel(int classIcon, int classId, String classTopic, String session, String room, String datetime, String date) {
+    public NextOrLatestClassModel(int classIcon, int classId, String classTopic, String session, String room, String time, String date) {
         this.classIcon = classIcon;
         this.classId = classId;
         this.classTopic = classTopic;
         this.session = session;
         this.room = room;
-        this.datetime= datetime;
+        this.time = time;
         this.date = date;
     }
 
@@ -54,12 +54,12 @@ public class NextOrLatestClassModel {
         this.room = room;
     }
 
-    public String getDateTime() {
-        return datetime;
+    public String getTime() {
+        return time;
     }
 
     public void setTime(String time) {
-        this.datetime = time;
+        this.time = time;
     }
 
     public String getDate() {

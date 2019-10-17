@@ -74,10 +74,10 @@ public class LatestClassActivity extends AppCompatActivity {
                 int listSize = latestClassList.size();
                 for(int i = 0; i<listSize-1;i++){
                     for(int j = i+1; j<listSize;j++){
-                        Log.d("datewkwkwk",latestClassList.get(i).getDateTime()+" "+latestClassList.get(j).getDateTime());
+                        Log.d("datewkwkwk",latestClassList.get(i).getTime()+" "+latestClassList.get(j).getTime());
                         try {
-                            date1 = new SimpleDateFormat("yy-MM-dd HH:mm").parse(latestClassList.get(i).getDateTime());
-                            date2 = new SimpleDateFormat("yy-MM-dd HH:mm").parse(latestClassList.get(j).getDateTime());
+                            date1 = new SimpleDateFormat("yy-MM-dd HH:mm").parse(latestClassList.get(i).getTime());
+                            date2 = new SimpleDateFormat("yy-MM-dd HH:mm").parse(latestClassList.get(j).getTime());
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
@@ -93,7 +93,7 @@ public class LatestClassActivity extends AppCompatActivity {
                 Date dateIterator = null;
                 while(i < latestClassList.size()){
                     try {
-                        dateTemp = new SimpleDateFormat("yy-MM-dd").parse(latestClassList.get(i).getDateTime());
+                        dateTemp = new SimpleDateFormat("yy-MM-dd").parse(latestClassList.get(i).getTime());
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -102,7 +102,7 @@ public class LatestClassActivity extends AppCompatActivity {
                     if(i == 0 || !dateIterator.equals(dateTemp)){
                         dateIterator = dateTemp;
 
-                        latestClassList.add(i,new NextOrLatestClassModel(1,latestClassList.get(i).getClassId(),latestClassList.get(i).getClassTopic(),latestClassList.get(i).getSession(),latestClassList.get(i).getRoom(),latestClassList.get(i).getDateTime(), new SimpleDateFormat("EEEE, d MMMM yyyy").format(dateIterator)));
+                        latestClassList.add(i,new NextOrLatestClassModel(1,latestClassList.get(i).getClassId(),latestClassList.get(i).getClassTopic(),latestClassList.get(i).getSession(),latestClassList.get(i).getRoom(),latestClassList.get(i).getTime(), new SimpleDateFormat("EEEE, d MMMM yyyy").format(dateIterator)));
 
                         i+= 2;
                     }
