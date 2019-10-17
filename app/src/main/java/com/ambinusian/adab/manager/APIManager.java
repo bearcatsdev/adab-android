@@ -24,21 +24,21 @@ public class APIManager {
     }
 
     public void authenticateUser(String username, String password, NetworkHelper.authenticateUser callback) {
-        String API_PATH = "/user/login";
+        String API_PATH = "api/v1/login";
 
         NetworkManager networkManager = new NetworkManager(context);
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("username", username);
-        params.put("password", password);
+        params.put("user_email", username);
+        params.put("user_password", password);
 
         JSONObject jsonBody = new JSONObject(params);
 
-        networkManager.doPostRequest(jsonBody, API_PATH, (response -> {
+        networkManager.doPostRequest(context, "", jsonBody, API_PATH, (response -> {
             // OK
             Log.d(TAG, response.toString());
             if (response.getString("status").equals("200")) {
-                JSONObject userJson = response.getJSONObject("response");
+                JSONObject userJson = response.getJSONObject("values");
                 Map<String, Object> userProfile = JsonHelper.toMap(userJson);
 
                 callback.onResponse(true, userProfile);
@@ -62,7 +62,7 @@ public class APIManager {
     }
 
     public void getUserClasses(String tokenId, NetworkHelper.getUserClasses callback) {
-        String API_PATH = "/user/classes";
+        String API_PATH = "api/v1/user/classes";
 
         NetworkManager networkManager = new NetworkManager(context);
 
@@ -71,7 +71,7 @@ public class APIManager {
 
         JSONObject jsonBody = new JSONObject(params);
 
-        networkManager.doPostRequest(jsonBody, API_PATH, (response -> {
+        networkManager.doPostRequest(context, tokenId, jsonBody, API_PATH, (response -> {
             // OK
             Log.d(TAG, response.toString());
             if (response.getString("status").equals("200")) {
@@ -104,20 +104,15 @@ public class APIManager {
     }
 
     public void getUserProfile(String tokenId, NetworkHelper.getUserProfile callback) {
-        String API_PATH = "/user/profile";
+        String API_PATH = "api/v1/user/profile";
 
         NetworkManager networkManager = new NetworkManager(context);
 
-        HashMap<String, String> params = new HashMap<>();
-        params.put("token_id", tokenId);
-
-        JSONObject jsonBody = new JSONObject(params);
-
-        networkManager.doPostRequest(jsonBody, API_PATH, (response -> {
+        networkManager.doGetRequest(context, tokenId, API_PATH, (response -> {
             // OK
             Log.d(TAG, response.toString());
             if (response.getString("status").equals("200")) {
-                JSONObject userJson = response.getJSONObject("response");
+                JSONObject userJson = response.getJSONObject("values");
                 Map<String, Object> userProfile = JsonHelper.toMap(userJson);
 
                 callback.onResponse(true, userProfile);
@@ -152,7 +147,7 @@ public class APIManager {
 
         JSONObject jsonBody = new JSONObject(params);
 
-        networkManager.doPostRequest(jsonBody, API_PATH, (response -> {
+        networkManager.doPostRequest(context, tokenId, jsonBody, API_PATH, (response -> {
             // OK
             Log.d(TAG, response.toString());
             if (response.getString("status").equals("200")) {
@@ -191,7 +186,7 @@ public class APIManager {
 
         JSONObject jsonBody = new JSONObject(params);
 
-        networkManager.doPostRequest(jsonBody, API_PATH, (response -> {
+        networkManager.doPostRequest(context, tokenId, jsonBody, API_PATH, (response -> {
             // OK
             Log.d(TAG, response.toString());
             if (response.getString("status").equals("200")) {

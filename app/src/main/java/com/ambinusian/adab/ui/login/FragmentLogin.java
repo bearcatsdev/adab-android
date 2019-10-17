@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,21 +82,14 @@ public class FragmentLogin extends Fragment {
             inputPassword.requestFocus();
         }
 
-        if (inputNim.length() != 10 && inputNim.length() != 5) {
-            valid = false;
-            inputNim.setError(getString(R.string.error_nim_invalid));
-            inputNim.requestFocus();
-        }
-
         if (valid) {
             apiManager.authenticateUser(Objects.requireNonNull(inputNim.getText()).toString(), Objects.requireNonNull(inputPassword.getText()).toString(), new NetworkHelper.authenticateUser() {
                 @Override
                 public void onResponse(Boolean success, Map<String, Object> userProfile) {
                     if (success) {
                         userPreferences.setUserLoggedIn(true);
-                        userPreferences.setUserUsername((String) userProfile.get("username"));
-                        userPreferences.setUserToken((String) userProfile.get("token_id"));
-
+                        userPreferences.setUserToken((String) userProfile.get("session_id"));
+                        Log.d("HORE", "CHAU");
                         getUserProfile();
 //                        startActivity(new Intent(context, SplashActivity.class));
 
@@ -121,17 +115,16 @@ public class FragmentLogin extends Fragment {
             @Override
             public void onResponse(Boolean success, Map<String, Object> userProfile) {
                 if (success) {
-                    int privilege = (int) userProfile.get("privilege");
-                    String department = (String) userProfile.get("department");
-                    String username = (String) userProfile.get("username");
-                    String name = (String) userProfile.get("name");
+                    Log.d("HORE", "CE");
+                    int privilege = (int) userProfile.get("is_staff");
+                    String username = (String) userProfile.get("user_id");
+                    String name = (String) userProfile.get("user_name");
 
                     userPreferences.setUserUsername(username);
                     userPreferences.setUserName(name);
-                    userPreferences.setUserDepartement(department);
                     userPreferences.setUserPrivilege(privilege);
 
-                    getUserClasses();
+//                    getUserClasses();
 
                     startActivity(new Intent(getContext(), SplashActivity.class));
                     Objects.requireNonNull(getActivity()).finish();
@@ -140,7 +133,7 @@ public class FragmentLogin extends Fragment {
 
             @Override
             public void onError(int errorCode, String errorReason) {
-
+                Log.d("HORE", errorReason);
             }
         });
     }
@@ -150,24 +143,25 @@ public class FragmentLogin extends Fragment {
                 @Override
             public void onResponse(Boolean success, Map<String, Object>[] userClasses) {
                 if(success){
-                    int len = userClasses.length;
-                    for(int i=0;i<len;i++){
-                        int transaction_id = Integer.valueOf(userClasses[i].get("transaction_Id").toString());
-                        String course_code = userClasses[i].get("course_code").toString();
-                        String course_name = userClasses[i].get("course_name").toString();
-                        String language = userClasses[i].get("language").toString();
-                        String class_code = userClasses[i].get("class_code").toString();
-                        String class_type = userClasses[i].get("class_type").toString();
-                        int class_icon = (int) userClasses[i].get("class_icon");
-                        String session = userClasses[i].get("session").toString();
-                        String topic = userClasses[i].get("topic").toString();
-                        String transaction_date = userClasses[i].get("transaction_date").toString();
-                        String transaction_time = userClasses[i].get("transaction_time").toString();
-                        int is_live = (int) userClasses[i].get("is_live");
-                        int is_done = (int) userClasses[i].get("is_done");
-
-                        insertData(new ClassEntity(transaction_id,course_code,course_name,language,class_code,class_type,class_icon,session, topic, transaction_date,transaction_time,is_live, is_done));
-                    }
+                    Log.d("HORE", "CELAN");
+//                    int len = userClasses.length;
+//                    for(int i=0;i<len;i++){
+//                        int transaction_id = Integer.valueOf(userClasses[i].get("transaction_Id").toString());
+//                        String course_code = userClasses[i].get("course_code").toString();
+//                        String course_name = userClasses[i].get("course_name").toString();
+//                        String language = userClasses[i].get("language").toString();
+//                        String class_code = userClasses[i].get("class_code").toString();
+//                        String class_type = userClasses[i].get("class_type").toString();
+//                        int class_icon = (int) userClasses[i].get("class_icon");
+//                        String session = userClasses[i].get("session").toString();
+//                        String topic = userClasses[i].get("topic").toString();
+//                        String transaction_date = userClasses[i].get("transaction_date").toString();
+//                        String transaction_time = userClasses[i].get("transaction_time").toString();
+//                        int is_live = (int) userClasses[i].get("is_live");
+//                        int is_done = (int) userClasses[i].get("is_done");
+//
+//                        insertData(new ClassEntity(transaction_id,course_code,course_name,language,class_code,class_type,class_icon,session, topic, transaction_date,transaction_time,is_live, is_done));
+//                    }
                 }
             }
 

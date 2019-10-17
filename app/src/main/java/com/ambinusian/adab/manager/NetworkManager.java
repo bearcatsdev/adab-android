@@ -2,17 +2,24 @@ package com.ambinusian.adab.manager;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.ambinusian.adab.preferences.UserPreferences;
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class NetworkManager {
     private static NetworkManager instance = null;
     private static final String TAG = "NetworkManager";
-    private static final String SERVER_URL = "https://adabapi.bearcats.dev";
+    private static final String SERVER_URL = "https://adab2.bearcats.dev/";
 
     private RequestQueue requestQueue;
 
@@ -37,7 +44,11 @@ public class NetworkManager {
         void onResponse(JSONObject response) throws JSONException;
     }
 
-    public void doPostRequest(JSONObject jsonBody, String apiPath, postCallback callback) {
+    public interface GetCallback {
+        void onResponse(JSONObject response) throws JSONException;
+    }
+
+    public void doPostRequest(Context context, String userToken, JSONObject jsonBody, String apiPath, postCallback callback) {
         String url = SERVER_URL + apiPath;
         Log.d(TAG, jsonBody.toString());
 
@@ -66,8 +77,59 @@ public class NetworkManager {
                         }
                     }
 
-                });
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+                if (!userToken.isEmpty()) {
+                    headers.put("authorization", userToken);
+                }
+                return headers;
+            }
+        };
 
         requestQueue.add(jsonObjReq);
+    }
+
+    public void doGetRequest(Context context, String userToken, String apiEndPoint, GetCallback callback) {
+        String url = SERVER_URL + apiEndPoint;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                response -> {
+                    Log.d(TAG, response.toString());
+                    try {
+                        callback.onResponse(response);
+                    } catch (JSONException e) {
+                        Log.e(TAG, e.getLocalizedMessage());
+                    }
+                },
+                error -> {
+                    Log.e(TAG, error.toString());
+                    if (error.networkResponse != null) {
+                        if (error.networkResponse.statusCode == 404) {
+                            Log.e(TAG, "Not found????");
+
+                        } else if (error.networkResponse.statusCode == 403) {
+                            Log.e(TAG, "Unauthorized");
+                            try {
+                                callback.onResponse(new JSONObject(new String(error.networkResponse.data)));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+                if (!userToken.isEmpty()) {
+                    headers.put("authorization", userToken);
+                }
+                return headers;
+            }
+        };
+
+        requestQueue.add(jsonObjectRequest);
     }
 }

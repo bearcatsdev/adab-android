@@ -56,8 +56,7 @@
                         android:id="@+id/input_nim"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:maxLength="10"
+                        android:inputType="textEmailAddress"
                         android:textAllCaps="true"
                         android:autofillHints="username"
                         tools:targetApi="26"/>
