@@ -69,18 +69,18 @@ public class FragmentTopics extends Fragment {
             @Override
             public void onChanged(List<ClassEntity> classEntities) {
                 for(int i=0;i<classEntities.size();i++){
-                    if(classEntities.get(i).getCourse_name().equals(course_name)){
+                    if(classEntities.get(i).getCourseName().equals(course_name)){
                         ClassEntity classEntity = classEntities.get(i);
-                        course_code = classEntity.getCourse_code();
+                        course_code = classEntity.getCourseId();
                         //format for date
                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
                         Date date = null;
                         try {
-                            date = format.parse(classEntity.getTransaction_date()+" "+classEntity.getTransaction_time());
+                            date = format.parse(classEntity.getSessionStartDate());
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        classList.add(new ClassListModel(classEntity.getClass_icon(),classEntity.getTransaction_id(), classEntity.getTopic(),"Session "+classEntity.getSession(),new SimpleDateFormat("EEEE, d MMMM YYYY H:mm").format(date)));
+                        classList.add(new ClassListModel(1,classEntity.getSessionId(), classEntity.getTopicTitle(),"Session "+classEntity.getSessionTh(),new SimpleDateFormat("EEEE, d MMMM YYYY H:mm").format(date)));
                     }
                 }
                 course.setText(course_name);

@@ -114,11 +114,11 @@ public class MainActivity extends AppCompatActivity {
                 for(int i=0;i<classList.size();i++){
                     int count = 0;
                     for(int j=0;j<courseSubject.size();j++)
-                        if(classList.get(i).getCourse_name().equals(courseSubject.get(j).menuName) && i!= j){
+                        if(classList.get(i).getCourseName().equals(courseSubject.get(j).menuName) && i!= j){
                             count++;
                     }
                     if(count == 0){
-                        courseSubject.add(new MenuModel(6,classList.get(i).getCourse_name(),false,false));
+                        courseSubject.add(new MenuModel(6,classList.get(i).getCourseName(),false,false));
                     }
                 }
 

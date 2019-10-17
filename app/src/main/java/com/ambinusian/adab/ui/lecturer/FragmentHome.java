@@ -25,6 +25,7 @@ import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.recyclerview.discussion.DiscussionAdapter;
 import com.ambinusian.adab.recyclerview.discussion.DiscussionModel;
+import com.ambinusian.adab.ui.student.NextClassActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 
@@ -183,7 +184,7 @@ public class FragmentHome extends Fragment {
         });
 
         seeAllNextSchedule.setOnClickListener(view1 -> {
-            Intent intent = new Intent(getActivity(),NextScheduleActivity.class);
+            Intent intent = new Intent(getActivity(), NextClassActivity.class);
             startActivity(intent);
         });
 

@@ -17,6 +17,7 @@ import com.ambinusian.adab.room.ClassEntity;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -39,17 +40,24 @@ public class NextClassActivity extends AppCompatActivity {
 
         ClassDatabase.getDatabase(this).classDAO().getAllClass().observe(this, classEntities -> {
             for (ClassEntity  classEntity : classEntities) {
-                if (classEntity.getIs_done() == 0) {
+                Date classDate = null;
+                try {
+                    classDate = new SimpleDateFormat("yy-MM-dd HH:mm").parse(classEntity.getSessionStartDate());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                if (Calendar.getInstance().getTime().before(classDate)) {
                     //int classIcon, int classId, String classTopic, String session, String room, String time, String date
                     try {
                         nextClassList.add(new NextOrLatestClassModel(
-                                classEntity.getClass_icon(),
-                                classEntity.getTransaction_id(),
-                                classEntity.getTopic(),
-                                classEntity.getSession(),
-                                classEntity.getClass_code(),
-                                (new SimpleDateFormat("yy-MM-dd HH:mm").parse(classEntity.getTransaction_date() + " " + classEntity.getTransaction_time())).toString(),
-                                (new SimpleDateFormat("yy-MM-dd HH:mm").parse(classEntity.getTransaction_date() + " " + classEntity.getTransaction_time())).toString()
+                                1,
+                                classEntity.getSessionId(),
+                                classEntity.getTopicTitle(),
+                                "Session "+classEntity.getSessionTh(),
+                                classEntity.getSessionRoom(),
+                                (new SimpleDateFormat("yy-MM-dd HH:mm").parse(classEntity.getSessionStartDate())).toString(),
+                               ""
                         ));
                     } catch (Exception e) {}
                 }
@@ -73,29 +81,29 @@ public class NextClassActivity extends AppCompatActivity {
             }
 
             //grouping date
-//            int i = 0;
-//            Date dateTemp = null;
-//            Date dateIterator = null;
-//            while(i < nextClassList.size()){
-//                try {
-//                    dateTemp = new SimpleDateFormat("yy-MM-dd").parse(nextClassList.get(i).getTime());
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//
-//
-//                if(i == 0 || !dateIterator.equals(dateTemp)){
-//                    dateIterator = dateTemp;
-//
-//                    nextClassList.add(i,new NextOrLatestClassModel(1,1,"Introduction to Ubiquitous","Session 11","501 - LB03","2019-09-29 16:00", new SimpleDateFormat("EEEE, d MMMM yyyy").format(dateIterator)));
-//
-//                    i+= 2;
-//                }
-//                else
-//                {
-//                    i++;
-//                }
-//            }
+            int i = 0;
+            Date dateTemp = null;
+            Date dateIterator = null;
+            while(i < nextClassList.size()){
+                try {
+                    dateTemp = new SimpleDateFormat("yy-MM-dd").parse(nextClassList.get(i).getTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+                if(i == 0 || !dateIterator.equals(dateTemp)){
+                    dateIterator = dateTemp;
+
+                    nextClassList.add(i,new NextOrLatestClassModel(1,nextClassList.get(i).getClassId(),nextClassList.get(i).getClassTopic(),nextClassList.get(i).getSession(),nextClassList.get(i).getRoom(),nextClassList.get(i).getTime(), new SimpleDateFormat("EEEE, d MMMM yyyy").format(dateIterator)));
+
+                    i+= 2;
+                }
+                else
+                {
+                    i++;
+                }
+            }
 
             nextClassRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             NextOrLatestClassAdapter adapter = new NextOrLatestClassAdapter(this,nextClassList);

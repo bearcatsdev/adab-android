@@ -124,7 +124,7 @@ public class FragmentLogin extends Fragment {
                     userPreferences.setUserName(name);
                     userPreferences.setUserPrivilege(privilege);
 
-//                    getUserClasses();
+                    getUserClasses();
 
                     startActivity(new Intent(getContext(), SplashActivity.class));
                     Objects.requireNonNull(getActivity()).finish();
@@ -174,7 +174,8 @@ public class FragmentLogin extends Fragment {
                         String sessionStartDate = (String) userClasses[i].get("session_startdate");
                         // session_enddate -> waktu selesai
                         String sessionEndDate = (String) userClasses[i].get("session_enddate");
-//                        insertData(new ClassEntity(transaction_id,course_code,course_name,language,class_code,class_type,class_icon,session, topic, transaction_date,transaction_time,is_live, is_done));
+
+                        insertData(new ClassEntity(sessionId,courseId,courseName,sessionTh,sessionMode,className,topicTitle,topicDescription,sessionCampus,sessionRoom,lecturerId,lecturerName,sessionStartDate,sessionEndDate));
                     }
                 }
             }

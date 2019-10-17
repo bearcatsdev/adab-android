@@ -6,164 +6,162 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class ClassEntity {
-    public ClassEntity(int transaction_id, String course_code, String course_name, String language, String class_code, String class_type, int class_icon, String session, String topic, String transaction_date, String transaction_time, int is_live, int is_done) {
-        this.transaction_id = transaction_id;
-        this.course_code = course_code;
-        this.course_name = course_name;
-        this.language = language;
-        this.class_code = class_code;
-        this.class_type = class_type;
-        this.class_icon = class_icon;
-        this.session = session;
-        this.topic = topic;
-        this.transaction_date = transaction_date;
-        this.transaction_time = transaction_time;
-        this.is_live = is_live;
-        this.is_done = is_done;
-    }
-
-    public int getTransaction_id() {
-        return transaction_id;
-    }
-
-    public void setTransaction_id(int transaction_id) {
-        this.transaction_id = transaction_id;
-    }
-
-    public String getCourse_code() {
-        return course_code;
-    }
-
-    public void setCourse_code(String course_code) {
-        this.course_code = course_code;
-    }
-
-    public String getCourse_name() {
-        return course_name;
-    }
-
-    public void setCourse_name(String course_name) {
-        this.course_name = course_name;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public String getClass_code() {
-        return class_code;
-    }
-
-    public void setClass_code(String class_code) {
-        this.class_code = class_code;
-    }
-
-    public String getClass_type() {
-        return class_type;
-    }
-
-    public void setClass_type(String class_type) {
-        this.class_type = class_type;
-    }
-
-    public int getClass_icon() {
-        return class_icon;
-    }
-
-    public void setClass_icon(int class_icon) {
-        this.class_icon = class_icon;
-    }
-
-    public String getSession() {
-        return session;
-    }
-
-    public void setSession(String session) {
-        this.session = session;
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
-    }
-
-    public String getTransaction_date() {
-        return transaction_date;
-    }
-
-    public void setTransaction_date(String transaction_date) {
-        this.transaction_date = transaction_date;
-    }
-
-    public String getTransaction_time() {
-        return transaction_time;
-    }
-
-    public void setTransaction_time(String transaction_time) {
-        this.transaction_time = transaction_time;
-    }
-
-    public int getIs_live() {
-        return is_live;
-    }
-
-    public void setIs_live(int is_live) {
-        this.is_live = is_live;
-    }
-
-    public int getIs_done() {
-        return is_done;
-    }
-
-    public void setIs_done(int is_done) {
-        this.is_done = is_done;
-    }
-
+    // untuk masuk ke live streaming pake session_id
     @PrimaryKey
-    private int transaction_id;
+    int sessionId;
+    // course_id -> EEEK2222
+    String courseId;
+    // course_name -> Introduction to Art of Manipulation
+    String courseName;
+    // session_th -> session ke berapa
+    int sessionTh;
+    // session_mode -> LEC, CL, LAB, blablabla
+    String sessionMode;
+    // class_name -> LA88
+    String className;
+    // topic_title -> How to manipulate someone's mind with ease
+    String topicTitle;
+    // topic_description -> deskripsi singkat tentang topik yang bersangkutan
+    String topicDescription;
+    // session_campus -> Anggrek, Kijang, Syahdan, blablabla
+    String sessionCampus;
+    // session_room -> 400
+    String sessionRoom;
+    // lecturer_id -> D8888
+    String lecturerId;
+    // lectuer_name -> Felik Orange
+    String lecturerName;
+    // session_startdate -> waktu mulai
+    String sessionStartDate;
+    // session_enddate -> waktu selesai
+    String sessionEndDate;
 
-    @ColumnInfo(name="course_code")
-    private String course_code;
+    public ClassEntity(int sessionId, String courseId, String courseName, int sessionTh, String sessionMode, String className, String topicTitle, String topicDescription, String sessionCampus, String sessionRoom, String lecturerId, String lecturerName, String sessionStartDate, String sessionEndDate) {
+        this.sessionId = sessionId;
+        this.courseId = courseId;
+        this.courseName = courseName;
+        this.sessionTh = sessionTh;
+        this.sessionMode = sessionMode;
+        this.className = className;
+        this.topicTitle = topicTitle;
+        this.topicDescription = topicDescription;
+        this.sessionCampus = sessionCampus;
+        this.sessionRoom = sessionRoom;
+        this.lecturerId = lecturerId;
+        this.lecturerName = lecturerName;
+        this.sessionStartDate = sessionStartDate;
+        this.sessionEndDate = sessionEndDate;
+    }
 
-    @ColumnInfo(name="course_name")
-    private String course_name;
+    public int getSessionId() {
+        return sessionId;
+    }
 
-    @ColumnInfo(name="language")
-    private String language;
+    public void setSessionId(int sessionId) {
+        this.sessionId = sessionId;
+    }
 
-    @ColumnInfo(name="class_code")
-    private String class_code;
+    public String getCourseId() {
+        return courseId;
+    }
 
-    @ColumnInfo(name="class_type")
-    private String class_type;
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
+    }
 
-    @ColumnInfo(name="class_icon")
-    private int class_icon;
+    public String getCourseName() {
+        return courseName;
+    }
 
-    @ColumnInfo(name="session")
-    private String session;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
 
-    @ColumnInfo(name="topic")
-    private String topic;
+    public int getSessionTh() {
+        return sessionTh;
+    }
 
-    @ColumnInfo(name="transaction_date")
-    private String transaction_date;
+    public void setSessionTh(int sessionTh) {
+        this.sessionTh = sessionTh;
+    }
 
-    @ColumnInfo(name="transaction_time")
-    private String transaction_time;
+    public String getSessionMode() {
+        return sessionMode;
+    }
 
-    @ColumnInfo(name="is_live")
-    private int is_live;
+    public void setSessionMode(String sessionMode) {
+        this.sessionMode = sessionMode;
+    }
 
-    @ColumnInfo(name="is_done")
-    private int is_done;
+    public String getClassName() {
+        return className;
+    }
 
+    public void setClassName(String className) {
+        this.className = className;
+    }
 
+    public String getTopicTitle() {
+        return topicTitle;
+    }
+
+    public void setTopicTitle(String topicTitle) {
+        this.topicTitle = topicTitle;
+    }
+
+    public String getTopicDescription() {
+        return topicDescription;
+    }
+
+    public void setTopicDescription(String topicDescription) {
+        this.topicDescription = topicDescription;
+    }
+
+    public String getSessionCampus() {
+        return sessionCampus;
+    }
+
+    public void setSessionCampus(String sessionCampus) {
+        this.sessionCampus = sessionCampus;
+    }
+
+    public String getSessionRoom() {
+        return sessionRoom;
+    }
+
+    public void setSessionRoom(String sessionRoom) {
+        this.sessionRoom = sessionRoom;
+    }
+
+    public String getLecturerId() {
+        return lecturerId;
+    }
+
+    public void setLecturerId(String lecturerId) {
+        this.lecturerId = lecturerId;
+    }
+
+    public String getLecturerName() {
+        return lecturerName;
+    }
+
+    public void setLecturerName(String lecturerName) {
+        this.lecturerName = lecturerName;
+    }
+
+    public String getSessionStartDate() {
+        return sessionStartDate;
+    }
+
+    public void setSessionStartDate(String sessionStartDate) {
+        this.sessionStartDate = sessionStartDate;
+    }
+
+    public String getSessionEndDate() {
+        return sessionEndDate;
+    }
+
+    public void setSessionEndDate(String sessionEndDate) {
+        this.sessionEndDate = sessionEndDate;
+    }
 }

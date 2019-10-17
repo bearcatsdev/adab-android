@@ -17,6 +17,6 @@ public interface ClassDAO {
     @Query("SELECT * FROM classentity")
     LiveData<List<ClassEntity>> getAllClass();
 
-    @Query("DELETE FROM ClassEntity")
+    @Query("DELETE FROM classentity")
     void deleteAll();
 }
