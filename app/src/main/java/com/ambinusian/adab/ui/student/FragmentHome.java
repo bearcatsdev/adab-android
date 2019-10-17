@@ -151,11 +151,11 @@ public class FragmentHome extends Fragment {
                         @Override
                         public void onClick(View view) {
                             Intent intent = new Intent(getContext(), ActivityLive.class);
-                            int classId = liveClass.getSessionId();
+                            int sessionId = liveClass.getSessionId();
 
                             //set all data to bundle
                             Bundle bundle = new Bundle();
-                            bundle.putInt("class_id", classId);
+                            bundle.putInt("session_id", sessionId);
 
                             //set bundle to the intent
                             intent.putExtras(bundle);
