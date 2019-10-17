@@ -32,6 +32,7 @@ public class NetworkManager {
             instance = new NetworkManager(context);
         return instance;
     }
+
     public static synchronized NetworkManager getInstance() {
         if (null == instance) {
             throw new IllegalStateException(NetworkManager.class.getSimpleName() +
