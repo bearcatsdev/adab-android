@@ -76,6 +76,8 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
             finish();
         }
 
+        Log.d("ClassId", classId.toString());
+
         hasil = findViewById(R.id.textView);
         endSession = findViewById(R.id.button_end_session);
         pauseSession = findViewById(R.id.button_pause_session);

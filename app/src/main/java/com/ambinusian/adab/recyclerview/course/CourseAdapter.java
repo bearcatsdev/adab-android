@@ -3,6 +3,7 @@ package com.ambinusian.adab.recyclerview.course;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -244,10 +245,11 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseHolder> {
         holder.mainLinearLayout.setOnClickListener(view -> {
             Intent intent = new Intent(holder.itemView.getContext(), ActivityLive.class);
             int classId = item.getClassId();
+            Log.d("wkwkwk", String.valueOf(classId));
 
             //set all data to bundle
             Bundle bundle = new Bundle();
-            bundle.putInt("class_id", classId);
+            bundle.putInt("session_id", classId);
 
             //set bundle to the intent
             intent.putExtras(bundle);

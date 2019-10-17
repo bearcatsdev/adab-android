@@ -52,6 +52,8 @@ public class ActivityLive extends AppCompatActivity{
 
         if (sessionId == null) finish();
 
+        Log.d("ClassId", sessionId.toString());
+
         toolbar = findViewById(R.id.toolbar);
         className = findViewById(R.id.tv_class_name);
         classSession = findViewById(R.id.tv_class_session);
@@ -96,11 +98,11 @@ public class ActivityLive extends AppCompatActivity{
                     } catch (Exception e) { }
 
                     if (Calendar.getInstance().getTime().before(endDate)) {
-                        textLiveNow.setVisibility(View.VISIBLE);
                         connectSocket();
                         toolbarTitle.setText(R.string.live_class_transcribe);
                     } else {
                         toolbarTitle.setText(R.string.class_transcribe_history);
+                        contentLoadingLayout.setVisibility(View.GONE);
                     }
 
                     loadingLayout.setVisibility(View.GONE);
@@ -111,7 +113,7 @@ public class ActivityLive extends AppCompatActivity{
 
             @Override
             public void onError(int errorCode, String errorReason) {
-
+                Log.e("Error", errorReason);
             }
         });
     }
@@ -140,10 +142,18 @@ public class ActivityLive extends AppCompatActivity{
 
         socket.on("message", args -> {
             runOnUiThread(() -> {
-                textContent.append(args[0].toString());
+                textContent.append(args[0].toString() + " ");
                 scrollViewMain.fullScroll(View.FOCUS_DOWN);
                 Log.d("message",args[0].toString());
             });
+        });
+
+        socket.on("start_talking", args -> {
+            runOnUiThread(() -> textLiveNow.setVisibility(View.VISIBLE));
+        });
+
+        socket.on("stop_talking", args -> {
+            runOnUiThread(() -> textLiveNow.setVisibility(View.INVISIBLE));
         });
     }
 
