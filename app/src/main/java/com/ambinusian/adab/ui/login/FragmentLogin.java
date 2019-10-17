@@ -144,24 +144,38 @@ public class FragmentLogin extends Fragment {
             public void onResponse(Boolean success, Map<String, Object>[] userClasses) {
                 if(success){
                     Log.d("HORE", "CELAN");
-//                    int len = userClasses.length;
-//                    for(int i=0;i<len;i++){
-//                        int transaction_id = Integer.valueOf(userClasses[i].get("transaction_Id").toString());
-//                        String course_code = userClasses[i].get("course_code").toString();
-//                        String course_name = userClasses[i].get("course_name").toString();
-//                        String language = userClasses[i].get("language").toString();
-//                        String class_code = userClasses[i].get("class_code").toString();
-//                        String class_type = userClasses[i].get("class_type").toString();
-//                        int class_icon = (int) userClasses[i].get("class_icon");
-//                        String session = userClasses[i].get("session").toString();
-//                        String topic = userClasses[i].get("topic").toString();
-//                        String transaction_date = userClasses[i].get("transaction_date").toString();
-//                        String transaction_time = userClasses[i].get("transaction_time").toString();
-//                        int is_live = (int) userClasses[i].get("is_live");
-//                        int is_done = (int) userClasses[i].get("is_done");
-//
+                    int len = userClasses.length;
+                    for (int i=0;i<len;i++) {
+                        // untuk masuk ke live streaming pake session_id
+                        int sessionId = (int) userClasses[i].get("session_id");
+                        // course_id -> EEEK2222
+                        String courseId = (String) userClasses[i].get("course_id");
+                        // course_name -> Introduction to Art of Manipulation
+                        String courseName = (String) userClasses[i].get("course_name");
+                        // session_th -> session ke berapa
+                        int sessionTh = (int) userClasses[i].get("session_th");
+                        // session_mode -> LEC, CL, LAB, blablabla
+                        String sessionMode = (String) userClasses[i].get("session_mode");
+                        // class_name -> LA88
+                        String className = (String) userClasses[i].get("class_name");
+                        // topic_title -> How to manipulate someone's mind with ease
+                        String topicTitle = (String) userClasses[i].get("topic_title");
+                        // topic_description -> deskripsi singkat tentang topik yang bersangkutan
+                        String topicDescription = (String) userClasses[i].get("topic_description");
+                        // session_campus -> Anggrek, Kijang, Syahdan, blablabla
+                        String sessionCampus = (String) userClasses[i].get("session_campus");
+                        // session_room -> 400
+                        String sessionRoom = (String) userClasses[i].get("session_room");
+                        // lecturer_id -> D8888
+                        String lecturerId = (String) userClasses[i].get("lecturer_id");
+                        // lectuer_name -> Felik Orange
+                        String lecturerName = (String) userClasses[i].get("lecturer_name");
+                        // session_startdate -> waktu mulai
+                        String sessionStartDate = (String) userClasses[i].get("session_startdate");
+                        // session_enddate -> waktu selesai
+                        String sessionEndDate = (String) userClasses[i].get("session_enddate");
 //                        insertData(new ClassEntity(transaction_id,course_code,course_name,language,class_code,class_type,class_icon,session, topic, transaction_date,transaction_time,is_live, is_done));
-//                    }
+                    }
                 }
             }
 

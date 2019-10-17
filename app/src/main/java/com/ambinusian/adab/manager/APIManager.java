@@ -62,20 +62,15 @@ public class APIManager {
     }
 
     public void getUserClasses(String tokenId, NetworkHelper.getUserClasses callback) {
-        String API_PATH = "api/v1/user/classes";
+        String API_PATH = "api/v1/user/sessions";
 
         NetworkManager networkManager = new NetworkManager(context);
 
-        HashMap<String, String> params = new HashMap<>();
-        params.put("token_id", tokenId);
-
-        JSONObject jsonBody = new JSONObject(params);
-
-        networkManager.doPostRequest(context, tokenId, jsonBody, API_PATH, (response -> {
+        networkManager.doGetRequest(context, tokenId, API_PATH, (response -> {
             // OK
             Log.d(TAG, response.toString());
             if (response.getString("status").equals("200")) {
-                JSONArray userClassesJson = response.getJSONArray("response");
+                JSONArray userClassesJson = response.getJSONArray("values");
                 Map<String, Object>[] userClasses = new HashMap[userClassesJson.length()];
 
                 for (int x=0; x<userClassesJson.length(); ++x) {
