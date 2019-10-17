@@ -1,37 +1,27 @@
 package com.ambinusian.adab.ui.student;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.media.AudioManager;
-import android.speech.RecognitionListener;
-import android.speech.RecognizerIntent;
-import android.speech.SpeechRecognizer;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
-import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 public class ActivityLive extends AppCompatActivity{
@@ -49,7 +39,7 @@ public class ActivityLive extends AppCompatActivity{
     private RelativeLayout contentLoadingLayout;
     private ScrollView scrollViewMain;
     private UserPreferences userPreferences;
-    private Integer classId;
+    private Integer sessionId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +48,9 @@ public class ActivityLive extends AppCompatActivity{
 
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
-        classId = bundle.getInt("class_id");
+        sessionId = bundle.getInt("session_id");
 
-        if (classId == null) finish();
+        if (sessionId == null) finish();
 
         toolbar = findViewById(R.id.toolbar);
         className = findViewById(R.id.tv_class_name);
@@ -86,19 +76,26 @@ public class ActivityLive extends AppCompatActivity{
 
         APIManager apiManager = new APIManager(this);
         userPreferences = new UserPreferences(this);
-        apiManager.getClassDetails(userPreferences.getUserToken(), classId, new NetworkHelper.getClassDetails() {
+        apiManager.getClassDetails(userPreferences.getUserToken(), sessionId, new NetworkHelper.getClassDetails() {
             @Override
             public void onResponse(Boolean success, Map<String, Object> classDetails) {
                 if (success) {
-                    String courseTitleText = (String) classDetails.get("topic");
+                    String courseTitleText = (String) classDetails.get("topic_title");
                     String classNameText = (String) classDetails.get("course_name");
-                    String sessionText = getString(R.string.class_session) + " " + classDetails.get("session");
+                    String sessionText = getString(R.string.class_session) + " " + classDetails.get("session_th");
+                    String content = (String) classDetails.get("content");
 
                     courseTitle.setText(courseTitleText);
                     className.setText(classNameText);
                     classSession.setText(sessionText);
+                    textContent.setText(content);
 
-                    if ((int) classDetails.get("is_live") == 1 ) {
+                    Date endDate = null;
+                    try {
+                        endDate = new SimpleDateFormat("yy-MM-dd HH:mm").parse((String) classDetails.get("session_enddate"));
+                    } catch (Exception e) { }
+
+                    if (Calendar.getInstance().getTime().before(endDate)) {
                         textLiveNow.setVisibility(View.VISIBLE);
                         connectSocket();
                         toolbarTitle.setText(R.string.live_class_transcribe);
@@ -121,7 +118,7 @@ public class ActivityLive extends AppCompatActivity{
 
     private void connectSocket() {
         try {
-            socket = IO.socket("https://adabapi.bancet.cf");
+            socket = IO.socket("https://adab2.bearcats.dev");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -132,7 +129,7 @@ public class ActivityLive extends AppCompatActivity{
         }
 
         // ganti "1" jadi transactionId tapi convert ke string pake String.valueOf(transactionId)
-        socket.emit("join room", String.valueOf(classId));
+        socket.emit("join_room", String.valueOf(sessionId));
 
         if (socket.connected()) {
             Log.d("Socket.io", "oke bang sudah konek");

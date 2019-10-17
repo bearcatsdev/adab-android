@@ -131,14 +131,13 @@ public class APIManager {
         }));
     }
 
-    public void getClassDetails(String tokenId, int transactionId, NetworkHelper.getClassDetails callback) {
-        String API_PATH = "/user/class/details";
+    public void getClassDetails(String tokenId, int sessionId, NetworkHelper.getClassDetails callback) {
+        String API_PATH = "api/v1/session/details";
 
         NetworkManager networkManager = new NetworkManager(context);
 
         HashMap<String, Object> params = new HashMap<>();
-        params.put("token_id", tokenId);
-        params.put("transaction_id", transactionId);
+        params.put("session_id", sessionId);
 
         JSONObject jsonBody = new JSONObject(params);
 
@@ -146,7 +145,7 @@ public class APIManager {
             // OK
             Log.d(TAG, response.toString());
             if (response.getString("status").equals("200")) {
-                JSONObject userJson = response.getJSONObject("response");
+                JSONObject userJson = response.getJSONObject("values");
                 Map<String, Object> classDetails = JsonHelper.toMap(userJson);
 
                 callback.onResponse(true, classDetails);
