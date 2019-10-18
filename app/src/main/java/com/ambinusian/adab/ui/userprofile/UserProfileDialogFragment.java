@@ -80,10 +80,10 @@ public class UserProfileDialogFragment extends DialogFragment {
                     @Override
                     protected void onPostExecute(Long status) {
 
+                        getActivity().startActivity(new Intent(getContext(), ActivityLogin.class));
+                        getActivity().finish();
                     }
                 }.execute();
-                getActivity().startActivity(new Intent(getContext(), ActivityLogin.class));
-                getActivity().finish();
             }
         });
 
