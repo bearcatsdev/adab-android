@@ -68,7 +68,7 @@ public class NetworkManager {
                         if (error.networkResponse.statusCode == 404) {
                             Log.e(TAG, "Not found????");
 
-                        } else if (error.networkResponse.statusCode == 403) {
+                        } else if (error.networkResponse.statusCode == 401) {
                             Log.e(TAG, "Unauthorized");
                             try {
                                 callback.onResponse(new JSONObject(new String(error.networkResponse.data)));
@@ -111,7 +111,7 @@ public class NetworkManager {
                         if (error.networkResponse.statusCode == 404) {
                             Log.e(TAG, "Not found????");
 
-                        } else if (error.networkResponse.statusCode == 403) {
+                        } else if (error.networkResponse.statusCode == 401) {
                             Log.e(TAG, "Unauthorized");
                             try {
                                 callback.onResponse(new JSONObject(new String(error.networkResponse.data)));
