@@ -126,7 +126,7 @@ public class FragmentHome extends Fragment {
                 if(liveClass == null){
                     welcomeLayout.setVisibility(View.VISIBLE);
                     liveLayout.setVisibility(View.GONE);
-                    welcomeTitle.setText(getString(R.string.welcome_title, TextUtility.toTitleCase(userPreferences.getUserName().toUpperCase())));
+//                    welcomeTitle.setText(getString(R.string.welcome_title, TextUtility.toTitleCase(userPreferences.getUserName().toUpperCase())));
                 }
                 else{
                     liveLayout.setVisibility(View.VISIBLE);

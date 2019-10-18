@@ -98,13 +98,12 @@ public class ActivityLive extends AppCompatActivity{
                     } catch (Exception e) { }
 
                     if (Calendar.getInstance().getTime().before(endDate)) {
-                        connectSocket();
                         toolbarTitle.setText(R.string.live_class_transcribe);
                     } else {
                         toolbarTitle.setText(R.string.class_transcribe_history);
-                        contentLoadingLayout.setVisibility(View.GONE);
                     }
 
+                    connectSocket();
                     loadingLayout.setVisibility(View.GONE);
                     toolbarTitle.setVisibility(View.VISIBLE);
                     scrollViewMain.setVisibility(View.VISIBLE);
