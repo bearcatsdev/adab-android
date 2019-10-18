@@ -20,7 +20,6 @@ import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -31,12 +30,9 @@ import com.ambinusian.adab.R;
 import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
-import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 import com.google.android.material.button.MaterialButton;
-
-import org.json.HTTP;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -44,10 +40,10 @@ import java.util.Map;
 
 public class ActivityLive extends AppCompatActivity implements RecognitionListener {
 
-    private TextView hasil;
+    private TextView textContent;
     private MaterialButton endSession,pauseSession,resumeSession;
-    private Integer classId;
-    private Socket mSocket;
+    private Integer sessionId;
+    private Socket socket;
     private Toolbar toolbar;
     private RelativeLayout loadingLayout;
     private RelativeLayout contentLoadingLayout;
@@ -71,14 +67,14 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            classId = bundle.getInt("class_id");
+            sessionId = bundle.getInt("session_id");
         } else {
             finish();
         }
 
-        Log.d("ClassId", classId.toString());
+        Log.d("ClassId", sessionId.toString());
 
-        hasil = findViewById(R.id.textView);
+        textContent = findViewById(R.id.textView);
         endSession = findViewById(R.id.button_end_session);
         pauseSession = findViewById(R.id.button_pause_session);
         resumeSession = findViewById(R.id.button_resume_session);
@@ -93,6 +89,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         pauseStatus = findViewById(R.id.pause_status);
 
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+        requestAudioPermissions();
 
         setSupportActionBar(toolbar);
 
@@ -102,23 +99,25 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         toolbarTitle.setVisibility(View.GONE);
         scrollViewMain.setVisibility(View.GONE);
 
-        hasil.setMovementMethod(new ScrollingMovementMethod());
+        textContent.setMovementMethod(new ScrollingMovementMethod());
 
         connectSocket();
 
         APIManager apiManager = new APIManager(this);
         userPreferences = new UserPreferences(this);
-        apiManager.getClassDetails(userPreferences.getUserToken(), classId, new NetworkHelper.getClassDetails() {
+        apiManager.getClassDetails(userPreferences.getUserToken(), sessionId, new NetworkHelper.getClassDetails() {
             @Override
             public void onResponse(Boolean success, Map<String, Object> classDetails) {
                 if (success) {
-                    String courseTitleText = (String) classDetails.get("topic");
+                    String courseTitleText = (String) classDetails.get("topic_title");
                     String classNameText = (String) classDetails.get("course_name");
-                    String sessionText = getString(R.string.class_session) + " " + classDetails.get("session");
+                    String sessionText = getString(R.string.class_session) + " " + classDetails.get("session_th");
+                    String content = (String) classDetails.get("content");
 
                     courseTitle.setText(courseTitleText);
                     className.setText(classNameText);
                     classSession.setText(sessionText);
+                    textContent.setText(content);
 
                     //connect to the socket
                     connectSocket();
@@ -152,7 +151,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 kalimat = kalimat+kalimatSementara;
-                                hasil.setText(kalimat);
+                                textContent.setText(kalimat);
                                 resetSpeechRecognizer();
                                 pauseStatus.setVisibility(View.VISIBLE);
                                 pauseSession.setVisibility(View.GONE);
@@ -180,7 +179,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
                 resumeSession.setVisibility(View.GONE);
 
                 String listening = "<font color='#EE0000'>Listening...</font>";
-                hasil.setText(Html.fromHtml(kalimat+" "+listening));
+                textContent.setText(Html.fromHtml(kalimat+" "+listening));
             }
         });
 
@@ -192,7 +191,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                apiManager.endSession(userPreferences.getUserToken(), classId, new NetworkHelper.endSession() {
+                                apiManager.endSession(userPreferences.getUserToken(), sessionId, new NetworkHelper.endSession() {
                                     @Override
                                     public void onResponse(Boolean success, Map<String, Object> endSession) {
                                         if (success) {
@@ -225,57 +224,44 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
 
     private void connectSocket() {
         try {
-            mSocket = IO.socket("https://adabapi.bancet.cf");  // kalo gbs pake "http://adab.bancet.cf:3000"
+            socket = IO.socket("https://adab2.bearcats.dev");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
+        socket.connect();
 
-        mSocket.connect();
-
-        while(!mSocket.connected()) {
+        while (!socket.connected()) {
             Log.d("Socket.io", "connecting...");
         }
 
-        mSocket.emit("join room",classId);
+        // ganti "1" jadi transactionId tapi convert ke string pake String.valueOf(transactionId)
+        socket.emit("join_room", String.valueOf(sessionId));
 
-        if (mSocket.connected()) {
+        if (socket.connected()) {
             Log.d("Socket.io", "oke bang sudah konek");
             contentLoadingLayout.setVisibility(View.GONE);
-            // start speech recognizer
-            requestAudioPermissions();
-            resetSpeechRecognizer();
-            speechRecognizer.startListening(intent);
-
-            String listening = "<font color='#EE0000'>Listening...</font>";
-            hasil.setText(Html.fromHtml(listening));
-
         } else {
             Log.d("Socket.io", "error");
         }
 
-        boolean theFirstTime = true;
-
-        mSocket.on("message", args -> {
-            String msg = (String) args[0]; // msg itu dari dosen, coba tes tampilin aja kalo mau
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if(hasil.getText().toString().equals("")){
-                        Log.d("message", msg);
-                        String listening = "<font color='#EE0000'>Listening...</font>";
-                        kalimat = msg;
-                        hasil.setText(Html.fromHtml(  kalimat+ " " + listening));
-
-                        scrollViewMain.fullScroll(View.FOCUS_DOWN);
-                    }
-                }
+        socket.on("message", args -> {
+            runOnUiThread(() -> {
+                textContent.append(args[0].toString() + " ");
+                scrollViewMain.fullScroll(View.FOCUS_DOWN);
+                Log.d("message",args[0].toString());
             });
+        });
+
+        socket.on("start_talking", args -> {
+        });
+
+        socket.on("stop_talking", args -> {
         });
     }
 
     private void emitToSocket(String text) {
         Log.d("emit",text);
-        mSocket.emit("message", text); // ini nnt server socket bakalan terima variabel `text`, trus di emit lagi ke semua client yang konek ke room socket.io yang sama
+        socket.emit("message", text); // ini nnt server socket bakalan terima variabel `text`, trus di emit lagi ke semua client yang konek ke room socket.io yang sama
     }
     private void setIntentandAudio(){
         intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -399,7 +385,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         kalimat = kalimat + kalimatSementara + questionMark + " / ";
         kalimatSementara="";
         String listening = "<font color='#EE0000'>Listening...</font>";
-        hasil.setText(Html.fromHtml(kalimat+" "+listening));
+        textContent.setText(Html.fromHtml(kalimat+" "+listening));
         speechRecognizer.startListening(intent);
     }
 
@@ -413,7 +399,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
 
         if(matches != null){
             String listening = "<font color='#EE0000'>Listening...</font>";
-            hasil.setText(Html.fromHtml(kalimat + " " +kalimatSementara + " " + listening));
+            textContent.setText(Html.fromHtml(kalimat + " " +kalimatSementara + " " + listening));
         }
 
     }

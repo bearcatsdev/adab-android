@@ -140,7 +140,7 @@ public class FragmentHome extends Fragment {
                     liveLayout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(getContext(), com.ambinusian.adab.ui.student.ActivityLive.class);
+                            Intent intent = new Intent(getContext(), com.ambinusian.adab.ui.lecturer.ActivityLive.class);
                             int sessionId = liveClass.getSessionId();
 
                             //set all data to bundle
