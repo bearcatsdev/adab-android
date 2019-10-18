@@ -36,7 +36,7 @@ public class SplashActivity extends AppCompatActivity {
             APIManager apiManager = new APIManager(SplashActivity.this);
 
                 if(userPreferences.getUserPrivilege() == 1){
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    startActivity(new Intent(SplashActivity.this, com.ambinusian.adab.ui.lecturer.MainActivity.class));
                     finish();
                 } else {
                     startActivity(new Intent(SplashActivity.this, com.ambinusian.adab.ui.student.MainActivity.class));

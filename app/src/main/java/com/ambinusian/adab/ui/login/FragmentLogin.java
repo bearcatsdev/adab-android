@@ -123,6 +123,8 @@ public class FragmentLogin extends Fragment {
                     userPreferences.setUserUsername(username);
                     userPreferences.setUserName(name);
                     userPreferences.setUserPrivilege(privilege);
+                    userPreferences.setUserDepartement((String) userProfile.get("department"));
+                    userPreferences.setUserPrivilege((int) userProfile.get("is_staff"));
 
                     getUserClasses();
 
