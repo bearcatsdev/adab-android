@@ -100,7 +100,7 @@ public class FragmentHome extends Fragment {
         coursesRecyclerView = view.findViewById(R.id.rv_latest_class);
 
         ////Set Welcome Text
-        welcomeTitle.setText(getString(R.string.welcome_title, userPreferences.getUserName()));
+        welcomeTitle.setText(getContext().getString(R.string.welcome_title, userPreferences.getUserName()));
 
         ////Your Next Schedule
         db.classDAO().getAllClass().observe(getActivity(), new Observer<List<ClassEntity>>() {
