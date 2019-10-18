@@ -46,9 +46,9 @@ public class APIManager {
             } else {
                 // Not OK
 
-                if (response.getString("status").equals("403")) {
+                if (response.getString("status").equals("401")) {
                     // unauthorized
-                    callback.onError(403, "Unauthorized");
+                    callback.onError(401, "Unauthorized");
 
                 } else if (response.getString("status").equals("400")) {
                     // server error
@@ -82,10 +82,10 @@ public class APIManager {
             } else {
                 // Not OK
 
-                if (response.getString("status").equals("403")) {
+                if (response.getString("status").equals("401")) {
                     // unauthorized, tell user to re-login
                     reLoginUser(context);
-                    callback.onError(403, "Unauthorized");
+                    callback.onError(401, "Unauthorized");
 
                 } else if (response.getString("status").equals("400")) {
                     // server error

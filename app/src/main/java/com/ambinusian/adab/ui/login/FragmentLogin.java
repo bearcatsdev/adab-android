@@ -98,7 +98,7 @@ public class FragmentLogin extends Fragment {
 
                 @Override
                 public void onError(int errorCode, String errorReason) {
-                    if (errorCode == 403) {
+                    if (errorCode == 401) {
                         inputNim.setError(getString(R.string.username_or_password_invalid));
                         inputPassword.setError(getString(R.string.username_or_password_invalid));
                         inputNim.requestFocus();
