@@ -24,7 +24,7 @@ android {
 
             versionProps['VERSION_CODE']=code.toString()
             versionProps.store(versionPropsFile.newWriter(), null)
-            
+
             versionCode code
 
             if (isRunningOnCI) {
@@ -41,13 +41,18 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         beta {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             versionNameSuffix "-beta"
+        }
+        alpha {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            versionNameSuffix "-alpha"
         }
     }
     compileOptions {
