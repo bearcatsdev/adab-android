@@ -24,16 +24,15 @@ android {
 
             versionProps['VERSION_CODE']=code.toString()
             versionProps.store(versionPropsFile.newWriter(), null)
-
-            if (!isRunningOnCI) {
-                versionName name
-            } else {
-                versionName name + "-" + System.getenv("TRAVIS_COMMIT").substring(0, 6)
-            }
-
+            
             versionCode code
 
-            versionNameSuffix "-" + getDate()
+            if (isRunningOnCI) {
+                def travisCommit = System.getenv("TRAVIS_COMMIT").substring(0, 6)
+                versionName "${name}-${travisCommit}-${getDate()}"
+            } else {
+                versionName "${name}-${getDate()}"
+            }
 
         } else {
             throw new GradleException("Could not read version.properties!")
@@ -44,6 +43,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        beta {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            versionNameSuffix "-beta"
         }
     }
     compileOptions {
@@ -56,9 +60,7 @@ android {
 }
 
 static def getDate() {
-    def date = new Date()
-    def formattedDate = date.format('yyyyMMddHHmmss')
-    return formattedDate
+    return new Date().format('yyyyMMddHHmmss')
 }
 
 dependencies {
