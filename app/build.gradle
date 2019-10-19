@@ -5,17 +5,36 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    def versionPropsFile = file('version.properties')
     def isRunningOnCI = System.getenv("CI") == "true"
-    compileSdkVersion 28
+
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.ambinusian.adab"
         minSdkVersion 22
-        targetSdkVersion 28
-        versionCode 1
-        if (!isRunningOnCI) {
-            versionName "1.0.1"
+        targetSdkVersion 29
+
+        if (versionPropsFile.canRead()) {
+            Properties versionProps = new Properties()
+
+            versionProps.load(new FileInputStream(versionPropsFile))
+
+            def code = versionProps['VERSION_CODE'].toInteger() + 1
+            def name = versionProps['VERSION_NAME']
+
+            versionProps['VERSION_CODE']=code.toString()
+            versionProps.store(versionPropsFile.newWriter(), null)
+
+            if (!isRunningOnCI) {
+                versionName name
+            } else {
+                versionName name + System.getenv("TRAVIS_COMMIT").substring(0, 6)
+            }
+
+            versionCode code
+
         } else {
-            versionName "1.0.1." + System.getenv("TRAVIS_COMMIT").substring(0, 6)
+            throw new GradleException("Could not read version.properties!")
         }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
