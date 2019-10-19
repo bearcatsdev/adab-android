@@ -12,6 +12,8 @@ import android.speech.SpeechRecognizer;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
+import com.google.android.material.button.MaterialButton;
 
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
@@ -34,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ActivityLive extends AppCompatActivity{
 
@@ -52,6 +56,8 @@ public class ActivityLive extends AppCompatActivity{
     private UserPreferences userPreferences;
     private Integer sessionId;
     private Integer canTalk;
+    private MaterialButton talkButton;
+    private LinearLayout layoutButtons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +83,8 @@ public class ActivityLive extends AppCompatActivity{
         contentLoadingLayout = findViewById(R.id.layout_loading_content);
         scrollViewMain = findViewById(R.id.scrollview_main);
         liveContent = findViewById(R.id.tv_content);
+        talkButton = findViewById(R.id.button_talk);
+        layoutButtons = findViewById(R.id.layout_buttons);
 
         setSupportActionBar(toolbar);
 
@@ -146,18 +154,20 @@ public class ActivityLive extends AppCompatActivity{
         socket.emit("join_room", String.valueOf(sessionId));
 
         if (socket.connected()) {
+            AtomicReference<Boolean> currentlyTalking = new AtomicReference<>(false);
+
             Log.d("Socket.io", "oke bang sudah konek");
             contentLoadingLayout.setVisibility(View.GONE);
 
             // speech recognizer for lecturer
             if (canTalk == 1) {
+                layoutButtons.setVisibility(View.VISIBLE);
                 checkPermission();
                 final SpeechRecognizer mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
                 final Intent mSpeechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
                 mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                         RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
                 mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"id-ID");
-                mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
 
                 mSpeechRecognizer.setRecognitionListener(new RecognitionListener() {
                     @Override
@@ -167,7 +177,7 @@ public class ActivityLive extends AppCompatActivity{
 
                     @Override
                     public void onBeginningOfSpeech() {
-
+                        socket.emit("start_talking");
                     }
 
                     @Override
@@ -182,7 +192,7 @@ public class ActivityLive extends AppCompatActivity{
 
                     @Override
                     public void onEndOfSpeech() {
-
+                        socket.emit("stop_talking");
                     }
 
                     @Override
@@ -201,7 +211,9 @@ public class ActivityLive extends AppCompatActivity{
                             socket.emit("message", matches.get(0));
 
                         // listening again
-                        mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
+                        if (currentlyTalking.get()) {
+                            mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
+                        }
                     }
 
                     @Override
@@ -212,6 +224,24 @@ public class ActivityLive extends AppCompatActivity{
                     @Override
                     public void onEvent(int i, Bundle bundle) {
 
+                    }
+                });
+
+                talkButton.setOnClickListener(v -> {
+                    if (!currentlyTalking.get()) {
+                        currentlyTalking.set(true);
+                        mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
+                        talkButton.setText("Stop Talking");
+
+                        // don't let the device go to sleep
+                        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                    } else {
+                        currentlyTalking.set(false);
+                        mSpeechRecognizer.stopListening();
+                        talkButton.setText("Start Talking");
+
+                        // let the device go to sleep
+                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                     }
                 });
             }
