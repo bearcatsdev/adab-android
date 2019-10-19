@@ -117,7 +117,6 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
                     courseTitle.setText(courseTitleText);
                     className.setText(classNameText);
                     classSession.setText(sessionText);
-                    textContent.setText(content);
 
                     //connect to the socket
                     connectSocket();
@@ -270,7 +269,8 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
         intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
 
         AudioManager amanager=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
-        amanager.setStreamMute(AudioManager.STREAM_MUSIC, true);
+//        amanager.setStreamMute(AudioManager.STREAM_MUSIC, true);
+        speechRecognizer.startListening(intent);
     }
 
     private void resetSpeechRecognizer() {
@@ -326,6 +326,8 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
 
             //Go ahead with recording audio now
             setIntentandAudio();
+            resetSpeechRecognizer();
+            speechRecognizer.startListening(intent);
         }
     }
 
@@ -338,8 +340,12 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     setIntentandAudio();
+                    resetSpeechRecognizer();
+                    speechRecognizer.startListening(intent);
+
                 } else {
                     Toast.makeText(this, "Permissions Denied to record audio", Toast.LENGTH_LONG).show();
+                    finish();
                 }
                 return;
             }
@@ -354,7 +360,7 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
 
     @Override
     public void onBeginningOfSpeech() {
-        kalimatSementara = "";
+//        kalimatSementara = "";
     }
 
     @Override
@@ -381,26 +387,29 @@ public class ActivityLive extends AppCompatActivity implements RecognitionListen
     @Override
     public void onResults(Bundle bundle) {
         String questionMark = Validasi( kalimatSementara);
-        emitToSocket(questionMark+" / ");
-        kalimat = kalimat + kalimatSementara + questionMark + " / ";
-        kalimatSementara="";
-        String listening = "<font color='#EE0000'>Listening...</font>";
-        textContent.setText(Html.fromHtml(kalimat+" "+listening));
+        ArrayList<String> matches =  bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+
+//        emitToSocket(questionMark+" / ");
+                emitToSocket(matches.get(0)+" / ");
+//        kalimat = kalimat + kalimatSementara + questionMark + " / ";
+//        kalimatSementara="";
+//        String listening = "<font color='#EE0000'>Listening...</font>";
+//        textContent.setText(Html.fromHtml(kalimat+" "+listening));
         speechRecognizer.startListening(intent);
     }
 
     @Override
     public void onPartialResults(Bundle bundle) {
         ArrayList<String> matches =  bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-        emitToSocket(matches.get(0).replace(kalimatSementara,""));
-        kalimatSementara = matches.get(0);
+//        emitToSocket(matches.get(0).replace(kalimatSementara,""));
+//        kalimatSementara = matches.get(0);
 
         scrollViewMain.fullScroll(View.FOCUS_DOWN);
 
-        if(matches != null){
-            String listening = "<font color='#EE0000'>Listening...</font>";
-            textContent.setText(Html.fromHtml(kalimat + " " +kalimatSementara + " " + listening));
-        }
+//        if(matches != null){
+//            String listening = "<font color='#EE0000'>Listening...</font>";
+//            textContent.setText(Html.fromHtml(kalimat + " " +kalimatSementara + " " + listening));
+//        }
 
     }
 
