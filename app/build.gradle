@@ -33,6 +33,8 @@ android {
 
             versionCode code
 
+            versionNameSuffix "-" + getDate()
+
         } else {
             throw new GradleException("Could not read version.properties!")
         }
@@ -51,6 +53,12 @@ android {
     lintOptions {
         abortOnError false
     }
+}
+
+static def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMddHHmmss')
+    return formattedDate
 }
 
 dependencies {
