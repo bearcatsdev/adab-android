@@ -28,7 +28,7 @@ android {
             if (!isRunningOnCI) {
                 versionName name
             } else {
-                versionName name + System.getenv("TRAVIS_COMMIT").substring(0, 6)
+                versionName name + "-" + System.getenv("TRAVIS_COMMIT").substring(0, 6)
             }
 
             versionCode code
