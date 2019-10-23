@@ -21,6 +21,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.ambinusian.adab.R;
@@ -58,6 +59,7 @@ public class ActivityLive extends AppCompatActivity{
     private Integer canTalk;
     private MaterialButton talkButton;
     private LinearLayout layoutButtons;
+    private String courseLanguage = "id-ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +108,7 @@ public class ActivityLive extends AppCompatActivity{
                     String classNameText = (String) classDetails.get("course_name");
                     String sessionText = getString(R.string.class_session) + " " + classDetails.get("session_th");
                     String content = (String) classDetails.get("content");
+                    courseLanguage = (String) classDetails.get("course_lang");
                     canTalk = (int) classDetails.get("can_talk");
 
                     courseTitle.setText(courseTitleText);
@@ -167,7 +170,7 @@ public class ActivityLive extends AppCompatActivity{
                 final Intent mSpeechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
                 mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                         RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-                mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"id-ID");
+                mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, courseLanguage);
 
                 mSpeechRecognizer.setRecognitionListener(new RecognitionListener() {
                     @Override
@@ -197,7 +200,10 @@ public class ActivityLive extends AppCompatActivity{
 
                     @Override
                     public void onError(int i) {
-
+                        // listening again
+                        if (currentlyTalking.get()) {
+                            mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
+                        }
                     }
 
                     @Override
@@ -276,11 +282,30 @@ public class ActivityLive extends AppCompatActivity{
 
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED)) {
-                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                        Uri.parse("package:" + getPackageName()));
-                startActivity(intent);
-                finish();
+            // Here, thisActivity is the current activity
+            if (ContextCompat.checkSelfPermission(ActivityLive.this,
+                    Manifest.permission.RECORD_AUDIO)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                // Permission is not granted
+                // Should we show an explanation?
+                if (ActivityCompat.shouldShowRequestPermissionRationale(ActivityLive.this,
+                        Manifest.permission.RECORD_AUDIO)) {
+                    // Show an explanation to the user *asynchronously* -- don't block
+                    // this thread waiting for the user's response! After the user
+                    // sees the explanation, try again to request the permission.
+                } else {
+                    // No explanation needed; request the permission
+                    ActivityCompat.requestPermissions(ActivityLive.this,
+                            new String[]{Manifest.permission.RECORD_AUDIO},
+                            69);
+
+                    // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                    // app-defined int constant. The callback method gets the
+                    // result of the request.
+                }
+            } else {
+                // Permission has already been granted
             }
         }
     }
