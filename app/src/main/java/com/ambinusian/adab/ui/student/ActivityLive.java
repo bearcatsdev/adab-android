@@ -1,5 +1,6 @@
 package com.ambinusian.adab.ui.student;
 
+import android.content.Intent;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
@@ -33,7 +34,6 @@ public class ActivityLive extends AppCompatActivity{
     private TextView textLiveNow;
     private TextView courseTitle;
     private TextView toolbarTitle;
-    private TextView liveContent;
     private Socket socket;
     private RelativeLayout loadingLayout;
     private RelativeLayout contentLoadingLayout;
@@ -64,7 +64,6 @@ public class ActivityLive extends AppCompatActivity{
         toolbarTitle = findViewById(R.id.toolbar_title);
         contentLoadingLayout = findViewById(R.id.layout_loading_content);
         scrollViewMain = findViewById(R.id.scrollview_main);
-        liveContent = findViewById(R.id.tv_content);
 
         setSupportActionBar(toolbar);
 
@@ -74,7 +73,7 @@ public class ActivityLive extends AppCompatActivity{
         scrollViewMain.setVisibility(View.GONE);
 
         //scroll always to bottom
-        liveContent.setMovementMethod(new ScrollingMovementMethod());
+        textContent.setMovementMethod(new ScrollingMovementMethod());
 
         APIManager apiManager = new APIManager(this);
         userPreferences = new UserPreferences(this);
@@ -86,6 +85,23 @@ public class ActivityLive extends AppCompatActivity{
                     String classNameText = (String) classDetails.get("course_name");
                     String sessionText = getString(R.string.class_session) + " " + classDetails.get("session_th");
                     String content = (String) classDetails.get("content");
+                    int canTalk = (int) classDetails.get("can_talk");
+
+                    if (canTalk == 1) {
+                        Intent intent = new Intent(ActivityLive.this, com.ambinusian.adab.ui.lecturer.ActivityLive.class);
+
+                        //set all data to bundle
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("session_id", sessionId);
+
+                        //set bundle to the intent
+                        intent.putExtras(bundle);
+
+                        //go to ActivityLive
+                        startActivity(intent);
+
+                        finish();
+                    }
 
                     courseTitle.setText(courseTitleText);
                     className.setText(classNameText);
@@ -133,7 +149,7 @@ public class ActivityLive extends AppCompatActivity{
         socket.emit("join_room", String.valueOf(sessionId));
 
         if (socket.connected()) {
-            Log.d("Socket.io", "oke bang sudah konek");
+            Log.d("Socket.io", "oke bang sudah konek from students");
             contentLoadingLayout.setVisibility(View.GONE);
         } else {
             Log.d("Socket.io", "error");
