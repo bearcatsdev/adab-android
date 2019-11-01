@@ -1,11 +1,11 @@
 <resources>
     <!--Login-->
-    <string name="login_welcome">Hi, there!\nWelcome to ADAB</string>
+    <string name="login_welcome">Hi, there!\nWelcome to adab</string>
     <string name="login_input_credential">Before we move on,\n please input your credential below</string>
     <string name="button_letsgo">Let\'s Go</string>
 
     <!--Home-->
-    <string name="app_name">BINUS Adab</string>
+    <string name="app_name">adab</string>
     <string name="home_title"><b>BINUS</b> Adab</string>
     <string name="home_category_live">Live Now</string>
     <string name="home_category_all">All Classes</string>
