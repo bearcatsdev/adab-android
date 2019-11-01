@@ -121,11 +121,13 @@ public class ActivityLive extends AppCompatActivity{
                         endDate = new SimpleDateFormat("yy-MM-dd HH:mm").parse((String) classDetails.get("session_enddate"));
                     } catch (Exception e) { }
 
-                    if (Calendar.getInstance().getTime().before(endDate)) {
-                        toolbarTitle.setText(R.string.live_class_transcribe);
-                    } else {
-                        toolbarTitle.setText(R.string.class_transcribe_history);
-                    }
+                    toolbarTitle.setText(R.string.live_class_transcribe);
+
+//                    if (Calendar.getInstance().getTime().before(endDate)) {
+//                        toolbarTitle.setText(R.string.live_class_transcribe);
+//                    } else {
+//                        toolbarTitle.setText(R.string.class_transcribe_history);
+//                    }
 
                     connectSocket();
                     loadingLayout.setVisibility(View.GONE);
@@ -163,94 +165,94 @@ public class ActivityLive extends AppCompatActivity{
             contentLoadingLayout.setVisibility(View.GONE);
 
             // speech recognizer for lecturer
-            if (canTalk == 1) {
-                layoutButtons.setVisibility(View.VISIBLE);
-                checkPermission();
-                final SpeechRecognizer mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
-                final Intent mSpeechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-                mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-                mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, courseLanguage);
+            layoutButtons.setVisibility(View.VISIBLE);
+            checkPermission();
+            final SpeechRecognizer mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+            final Intent mSpeechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, courseLanguage);
 
-                mSpeechRecognizer.setRecognitionListener(new RecognitionListener() {
-                    @Override
-                    public void onReadyForSpeech(Bundle bundle) {
+            mSpeechRecognizer.setRecognitionListener(new RecognitionListener() {
+                @Override
+                public void onReadyForSpeech(Bundle bundle) {
 
-                    }
+                }
 
-                    @Override
-                    public void onBeginningOfSpeech() {
-                        socket.emit("start_talking");
-                    }
+                @Override
+                public void onBeginningOfSpeech() {
+                    socket.emit("start_talking");
+                }
 
-                    @Override
-                    public void onRmsChanged(float v) {
+                @Override
+                public void onRmsChanged(float v) {
 
-                    }
+                }
 
-                    @Override
-                    public void onBufferReceived(byte[] bytes) {
+                @Override
+                public void onBufferReceived(byte[] bytes) {
 
-                    }
+                }
 
-                    @Override
-                    public void onEndOfSpeech() {
-                        socket.emit("stop_talking");
-                    }
+                @Override
+                public void onEndOfSpeech() {
+                    socket.emit("stop_talking");
+                }
 
-                    @Override
-                    public void onError(int i) {
-                        // listening again
-                        if (currentlyTalking.get()) {
-                            mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
-                        }
-                    }
-
-                    @Override
-                    public void onResults(Bundle bundle) {
-                        //getting all the matches
-                        ArrayList<String> matches = bundle
-                                .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-
-                        //displaying the first match
-                        if (matches != null)
-                            socket.emit("message", matches.get(0));
-
-                        // listening again
-                        if (currentlyTalking.get()) {
-                            mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
-                        }
-                    }
-
-                    @Override
-                    public void onPartialResults(Bundle bundle) {
-
-                    }
-
-                    @Override
-                    public void onEvent(int i, Bundle bundle) {
-
-                    }
-                });
-
-                talkButton.setOnClickListener(v -> {
-                    if (!currentlyTalking.get()) {
-                        currentlyTalking.set(true);
+                @Override
+                public void onError(int i) {
+                    // listening again
+                    if (currentlyTalking.get()) {
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
-                        talkButton.setText("Stop Talking");
-
-                        // don't let the device go to sleep
-                        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                    } else {
-                        currentlyTalking.set(false);
-                        mSpeechRecognizer.stopListening();
-                        talkButton.setText("Start Talking");
-
-                        // let the device go to sleep
-                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                     }
-                });
-            }
+                }
+
+                @Override
+                public void onResults(Bundle bundle) {
+                    //getting all the matches
+                    ArrayList<String> matches = bundle
+                            .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+
+                    //displaying the first match
+                    if (matches != null)
+                        socket.emit("message", matches.get(0));
+
+                    // listening again
+                    if (currentlyTalking.get()) {
+                        mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
+                    }
+                }
+
+                @Override
+                public void onPartialResults(Bundle bundle) {
+
+                }
+
+                @Override
+                public void onEvent(int i, Bundle bundle) {
+
+                }
+            });
+
+            talkButton.setOnClickListener(v -> {
+                if (!currentlyTalking.get()) {
+                    currentlyTalking.set(true);
+                    mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
+                    talkButton.setText("Stop Talking");
+
+                    // don't let the device go to sleep
+                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                } else {
+                    currentlyTalking.set(false);
+                    mSpeechRecognizer.stopListening();
+                    talkButton.setText("Start Talking");
+
+                    // let the device go to sleep
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                }
+            });
+//            if (canTalk == 1) {
+//            }
 
 
         } else {
