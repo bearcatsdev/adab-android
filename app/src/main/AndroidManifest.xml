@@ -19,7 +19,6 @@
         <activity android:name=".ui.lecturer.ActivityClassStarted" />
         <activity android:name=".ui.lecturer.CourseDetail" />
         <activity android:name=".ui.lecturer.MainActivity" />
-        <activity android:name=".ui.student.ActivityLive" />
         <activity
             android:name=".ui.splash.SplashActivity"
             android:theme="@style/Theme.Adab.Launcher">

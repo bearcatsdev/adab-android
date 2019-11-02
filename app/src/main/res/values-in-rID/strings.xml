@@ -66,7 +66,7 @@
 
     <!--Other-->
     <string name="hello_blank_fragment">Halo fragment kosong</string>
-    <string name="hint_username">NIM / Kode Dosen</string>
+    <string name="hint_email">Email</string>
     <string name="hint_password">Kata Sandi</string>
     <string name="action_login">Masuk</string>
     <string name="error_nim_invalid">Format nama pengguna tidak valid</string>

@@ -138,10 +138,14 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 if(userPreferences.getUserPrivilege() == 1){
-                    startActivity(new Intent(SplashActivity.this, com.ambinusian.adab.ui.lecturer.MainActivity.class));
+                    Intent intent = new Intent(SplashActivity.this, com.ambinusian.adab.ui.lecturer.MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                     finish();
                 } else {
-                    startActivity(new Intent(SplashActivity.this, com.ambinusian.adab.ui.student.MainActivity.class));
+                    Intent intent = new Intent(SplashActivity.this, com.ambinusian.adab.ui.student.MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                     finish();
                 }
                 super.onPostExecute(aVoid);
