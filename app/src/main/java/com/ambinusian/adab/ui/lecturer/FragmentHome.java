@@ -1,38 +1,31 @@
 package com.ambinusian.adab.ui.lecturer;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ambinusian.adab.R;
-import com.ambinusian.adab.manager.APIManager;
-import com.ambinusian.adab.manager.NetworkHelper;
+import com.ambinusian.adab.all.ActivityLive;
 import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.recyclerview.course.CourseAdapter;
 import com.ambinusian.adab.recyclerview.course.CourseModel;
-import com.ambinusian.adab.recyclerview.discussion.DiscussionAdapter;
 import com.ambinusian.adab.recyclerview.discussion.DiscussionModel;
 import com.ambinusian.adab.room.ClassDatabase;
 import com.ambinusian.adab.room.ClassEntity;
 import com.ambinusian.adab.ui.student.NextClassActivity;
-import com.ambinusian.adab.utility.TextUtility;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 
@@ -42,8 +35,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 public class FragmentHome extends Fragment {
     private ArrayList<DiscussionModel> discussionList;
@@ -140,7 +131,7 @@ public class FragmentHome extends Fragment {
                     liveLayout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(getContext(), com.ambinusian.adab.ui.lecturer.ActivityLive.class);
+                            Intent intent = new Intent(getContext(), ActivityLive.class);
                             int sessionId = liveClass.getSessionId();
 
                             //set all data to bundle

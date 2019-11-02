@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ambinusian.adab.R;
-import com.ambinusian.adab.ui.student.ActivityLive;
+import com.ambinusian.adab.all.ActivityLive;
 
 import java.util.ArrayList;
 

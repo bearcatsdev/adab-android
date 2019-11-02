@@ -38,8 +38,6 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClasslListHolder> {
     public void onBindViewHolder(@NonNull ClasslListHolder holder, int position) {
         ClassListModel item = lists.get(position);
 
-
-
         holder.classTopic.setText(item.getClassTopic());
         holder.meeting.setText(item.getMeeting());
         holder.time.setText(item.getTime());

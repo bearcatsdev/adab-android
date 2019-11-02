@@ -14,7 +14,7 @@
         <activity android:name=".ui.student.LatestClassActivity" />
         <!-- IDK, but we need to work on Google App Index Warning -->
         <activity android:name=".ui.student.NextClassActivity" />
-        <activity android:name=".ui.lecturer.ActivityLive" />
+        <activity android:name=".all.ActivityLive" />
         <activity android:name=".ui.student.CourseDetail" />
         <activity android:name=".ui.lecturer.ActivityClassStarted" />
         <activity android:name=".ui.lecturer.CourseDetail" />
