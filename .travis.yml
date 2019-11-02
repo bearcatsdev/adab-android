@@ -49,20 +49,20 @@ before_script:
     - 'echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"'
     - 'echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"'
     - 'openssl aes-256-cbc -K $encrypted_e9faaac40923_key -iv $encrypted_e9faaac40923_iv -in default.jks.enc -out default.jks -d'
-    - 'chmod +x gradlew assembleBeta'
+    - 'chmod +x gradlew'
     - 'chmod +x scripts/tag.sh'
     # - './gradlew dependencies || true'
 
 script:
-    - ./gradlew clean build
+    - ./gradlew clean assembleBeta 
     - scripts/tag.sh
 
 before_deploy:
     - 'cp $TRAVIS_BUILD_DIR/default.jks $HOME'
-    - 'cd app/build/outputs/apk/release'
-    - 'jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/default.jks -storepass $newstorepass -keypass $newstorepass app-release-unsigned.apk stanley'
-    - 'jarsigner -verify app-release-unsigned.apk'
-    - '${ANDROID_HOME}/build-tools/$ANDROID_BUILD_TOOLS_VERSION/zipalign -v 4 app-release-unsigned.apk BINUSAdab-latest.apk'
+    - 'cd app/build/outputs/apk/beta'
+    - 'jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/default.jks -storepass $newstorepass -keypass $newstorepass app-beta-unsigned.apk stanley'
+    - 'jarsigner -verify app-beta-unsigned.apk'
+    - '${ANDROID_HOME}/build-tools/$ANDROID_BUILD_TOOLS_VERSION/zipalign -v 4 app-beta-unsigned.apk BINUSAdab-latest.apk'
 deploy:
     provider: releases
     tag_name: latest
