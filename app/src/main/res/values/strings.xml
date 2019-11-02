@@ -65,7 +65,7 @@
 
     <!--Other-->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="hint_username">NIM/Lecturer Code</string>
+    <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="action_login">Login</string>
     <string name="error_nim_invalid">Username format invalid</string>
