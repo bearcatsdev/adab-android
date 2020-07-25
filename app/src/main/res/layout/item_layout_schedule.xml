@@ -1,77 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_schedule_classTime"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/time"
-        tools:text="11:20-13:00"/>
-
-    <Space
-        android:layout_width="16dp"
-        android:layout_height="match_parent"/>
+    android:layout_height="wrap_content"
+    android:padding="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
+        android:layout_height="wrap_content">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_schedule_classTitle"
-            android:textSize="@dimen/text_caption"
-            android:fontFamily="@font/interstate_bold"
-            android:textColor="@android:color/black"
-            tools:text="Storage"/>
+            android:id="@+id/tv_schedule_classTime"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/time"
+            tools:text="11:20-13:00"/>
 
-        <TextView
-            android:id="@+id/tv_schedule_course"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Mobile Object Oriented Programming" />
-
-        <androidx.legacy.widget.Space
-            android:layout_width="match_parent"
-            android:layout_height="12dp"/>
+        <Space
+            android:layout_width="16dp"
+            android:layout_height="match_parent"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
             <TextView
-                android:id="@+id/tv_schedule_classRoom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="711A" />
+                android:id="@+id/tv_schedule_classTitle"
+                android:textSize="@dimen/text_caption"
+                android:fontFamily="@font/interstate_bold"
+                android:textColor="@color/textPrimary"
+                tools:text="Storage"/>
+
+            <TextView
+                android:id="@+id/tv_schedule_course"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Mobile Object Oriented Programming" />
 
             <androidx.legacy.widget.Space
-                android:layout_width="12dp"
-                android:layout_height="match_parent"/>
+                android:layout_width="match_parent"
+                android:layout_height="12dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_schedule_courseCode"
-                tools:text="MOBI009"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <androidx.legacy.widget.Space
-                android:layout_width="12dp"
-                android:layout_height="match_parent"/>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_schedule_courseCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:fontFamily="@font/interstate"
+                    android:gravity="center"
+                    android:textSize="@dimen/text_chip"
+                    android:clickable="false"
+                    style="@style/Chip"
+                    tools:text="MOBI6002" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_schedule_classType"
-                tools:text="LEC"/>
+                <androidx.legacy.widget.Space
+                    android:layout_width="12dp"
+                    android:layout_height="match_parent"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_schedule_classCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:fontFamily="@font/interstate"
+                    android:gravity="center"
+                    android:clickable="false"
+                    style="@style/Chip"
+                    tools:text="LB03" />
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="12dp"
+                    android:layout_height="match_parent"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_schedule_classType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:fontFamily="@font/interstate"
+                    android:gravity="center"
+                    android:clickable="false"
+                    style="@style/Chip"
+                    tools:text="LEC" />
+            </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
-
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16sp"
+        android:background="#F5F5F5" />
 </LinearLayout>

@@ -34,7 +34,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleHolder> {
         holder.scheduleClassTitle.setText(item.getClassTitle());
         holder.scheduleCourse.setText(item.getCourse());
         holder.scheduleCourseCode.setText(item.getCourseCode());
-        holder.scheduleClassRoom.setText(item.getClassRoom());
+        holder.scheduleClassCode.setText(item.getClassRoom());
         holder.scheduleClassTime.setText(item.getClassTime());
     }
 

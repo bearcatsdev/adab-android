@@ -160,11 +160,11 @@ public class MainActivity extends AppCompatActivity {
             }
             else if(groupPosition == 1){
                 if(!expandableListViewLecturer.isGroupExpanded(1) && expandableListViewLecturer.getCheckedItemPosition() > 2){
-                    parent.setItemChecked(expandableListViewLecturer.getCheckedItemPosition()+7,true);
+                    parent.setItemChecked(expandableListViewLecturer.getCheckedItemPosition()+courseSubject.size(),true);
                 } else if(!expandableListViewLecturer.isGroupExpanded(1) && expandableListViewLecturer.getCheckedItemPosition() < 0){
                     parent.setItemChecked(expandableListViewLecturer.getCheckedItemPosition()+100,true);
                 } else if(expandableListViewLecturer.isGroupExpanded(1) && expandableListViewLecturer.getCheckedItemPosition() > courseSubject.size()+2 ){
-                    parent.setItemChecked(expandableListViewLecturer.getCheckedItemPosition()-7,true);
+                    parent.setItemChecked(expandableListViewLecturer.getCheckedItemPosition()-courseSubject.size(),true);
                 }  else if(expandableListViewLecturer.isGroupExpanded(1) && (expandableListViewLecturer.getCheckedItemPosition() >= 3 && expandableListViewLecturer.getCheckedItemPosition() <= courseSubject.size()+2)) {
                     parent.setItemChecked(expandableListViewLecturer.getCheckedItemPosition()- 100, true);
                 }

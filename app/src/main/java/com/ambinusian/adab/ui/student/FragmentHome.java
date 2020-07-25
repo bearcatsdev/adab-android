@@ -1,6 +1,7 @@
 package com.ambinusian.adab.ui.student;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,28 +48,26 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class FragmentHome extends Fragment {
 
     private RecyclerView coursesRecyclerView, discussionRecyclerView;
     private ArrayList<CourseModel> coursesList;
     private ArrayList<DiscussionModel> discussionList;
-    private LinearLayout welcomeLayout;
+    private LinearLayout welcomeLayout, yourNextClassLayout, latestClassLayout;
     private CardView liveLayout;
     private ImageView liveClassIcon;
     private LinearLayoutManager linearLayoutManager;
-    private TextView liveClassTitle, liveCourse, liveClassMeeting;
-    private TextView welcomeTitle;
     private ImageView nextClassIcon;
-    private TextView nextClassTime, nextClassTitle, nextCourse, nextClassSession;
+    private TextView liveClassTitle, liveCourse, liveClassMeeting, welcomeTitle, nextClassTime, nextClassTitle, nextCourse, nextClassSession;
     private Chip nextCourseCode, nextClassCode, nextClassType;
     private Boolean hasLiveClass;
     private MaterialButton seeAllLatestClass, seeAllNextClass, seeAllDiscussion;
-    private LinearLayout yourNextClassLayout;
-    private LinearLayout latestClassLayout;
     private ClassDatabase db;
     private UserPreferences userPreferences;
     private ClassEntity liveClass;
+    private Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -104,11 +103,12 @@ public class FragmentHome extends Fragment {
         seeAllDiscussion = view.findViewById(R.id.see_all_discussion);
         yourNextClassLayout = view.findViewById(R.id.your_next_class_layout);
         latestClassLayout = view.findViewById(R.id.latest_class);
-        db = ClassDatabase.getDatabase(getContext());
+        context = getContext();
+        db = ClassDatabase.getDatabase(context);
         coursesList = new ArrayList<>();
         discussionList = new ArrayList<>();
         hasLiveClass = false;
-        userPreferences = new UserPreferences(getContext());
+        userPreferences = new UserPreferences(context);
 
         // set visibility gone
         coursesRecyclerView.setVisibility(View.GONE);
@@ -137,21 +137,21 @@ public class FragmentHome extends Fragment {
                 if(liveClass == null){
                     welcomeLayout.setVisibility(View.VISIBLE);
                     liveLayout.setVisibility(View.GONE);
-                    welcomeTitle.setText(getString(R.string.welcome_title, TextUtility.toTitleCase(userPreferences.getUserName().toUpperCase())));
+                    welcomeTitle.setText(context.getString(R.string.welcome_title, TextUtility.toTitleCase(userPreferences.getUserName().toUpperCase())));
                 }
                 else{
                     liveLayout.setVisibility(View.VISIBLE);
                     welcomeLayout.setVisibility(View.GONE);
-                    liveClassIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_class_59_pencilpaper));
+                    liveClassIcon.setImageResource(R.drawable.ic_class_59_pencilpaper);
                     liveClassTitle.setText((String) liveClass.getTopicTitle());
                     liveCourse.setText((String) liveClass.getCourseName());
-                    String meeting = getString(R.string.class_session) + " " + liveClass.getSessionTh();
+                    String meeting = context.getString(R.string.class_session) + " " + liveClass.getSessionTh();
                     liveClassMeeting.setText(meeting);
 
                     liveLayout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(getContext(), ActivityLive.class);
+                            Intent intent = new Intent(context, ActivityLive.class);
                             int sessionId = liveClass.getSessionId();
 
                             //set all data to bundle
@@ -190,8 +190,9 @@ public class FragmentHome extends Fragment {
                 }
                 else {
                     //Next Class
+                    yourNextClassLayout.setVisibility(View.VISIBLE);
                     ClassEntity next_class_info = classEntities.get(nextClass);
-                    nextClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_class_56_pencilnote));
+                    nextClassIcon.setImageResource(R.drawable.ic_class_56_pencilnote);
                     nextClassTime.setText(new SimpleDateFormat("EEEE, d MMMM YYYY H:MM").format(date));
                     nextClassTitle.setText(next_class_info.getTopicTitle());
                     nextCourse.setText(next_class_info.getCourseName());
@@ -206,6 +207,7 @@ public class FragmentHome extends Fragment {
                     latestClassLayout.setVisibility(View.GONE);
                 }
                 else {
+                    latestClassLayout.setVisibility(View.VISIBLE);
                     for (int i = nextClass - 1; i >= 0; i--) {
                         Date class_date = null;
                         try {
@@ -218,7 +220,7 @@ public class FragmentHome extends Fragment {
                                 new SimpleDateFormat("EEEE, d MMMM YYYY h:mm").format(class_date),
                                 classEntities.get(i).getTopicTitle(),
                                 classEntities.get(i).getCourseName(),
-                                getString(R.string.class_session) + " " + classEntities.get(i).getSessionTh(),
+                                context.getString(R.string.class_session) + " " + classEntities.get(i).getSessionTh(),
                                 classEntities.get(i).getCourseId(),
                                 classEntities.get(i).getClassName(),
                                 classEntities.get(i).getSessionMode()
@@ -226,9 +228,8 @@ public class FragmentHome extends Fragment {
                     }
 
                     //set adapter for recycler view
-                    coursesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                    coursesRecyclerView.setAdapter(new CourseAdapter(getContext(), coursesList));
-                    //set visible
+                    coursesRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+                    coursesRecyclerView.setAdapter(new CourseAdapter(context, coursesList));
                     coursesRecyclerView.setVisibility(View.VISIBLE);
                 }
             }
@@ -265,9 +266,5 @@ public class FragmentHome extends Fragment {
         seeAllDiscussion.setOnClickListener(view1 -> {
             // show fragment discussion
         });
-
-
     }
-
-
 }

@@ -43,7 +43,7 @@ public class NextClassActivity extends AppCompatActivity {
             for (ClassEntity  classEntity : classEntities) {
                 Date classDate = null;
                 try {
-                    classDate = new SimpleDateFormat("yy-MM-dd HH:mm").parse(classEntity.getSessionStartDate());
+                    classDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(classEntity.getSessionStartDate());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -57,7 +57,7 @@ public class NextClassActivity extends AppCompatActivity {
                                 classEntity.getTopicTitle(),
                                 "Session "+classEntity.getSessionTh(),
                                 classEntity.getSessionRoom(),
-                                (new SimpleDateFormat("yy-MM-dd HH:mm").parse(classEntity.getSessionStartDate())).toString(),
+                                new SimpleDateFormat("yyyy-MM-dd HH:mm").format(classDate),
                                ""
                         ));
                     } catch (Exception e) {}
@@ -70,13 +70,14 @@ public class NextClassActivity extends AppCompatActivity {
             for(int i = 0; i<listSize-1;i++){
                 for(int j = i+1; j<listSize;j++){
                     try {
-                        date1 = new SimpleDateFormat("yy-MM-dd HH:mm").parse(nextClassList.get(i).getTime());
-                        date2 = new SimpleDateFormat("yy-MM-dd HH:mm").parse(nextClassList.get(j).getTime());
+                        date1 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(nextClassList.get(i).getTime());
+                        date2 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(nextClassList.get(j).getTime());
+
+                        if(date2.before(date1)){
+                            Collections.swap(nextClassList,i,j);
+                        }
                     } catch (ParseException e) {
                         e.printStackTrace();
-                    }
-                    if(date2.before(date1)){
-                        Collections.swap(nextClassList,i,j);
                     }
                 }
             }
@@ -86,40 +87,46 @@ public class NextClassActivity extends AppCompatActivity {
             Date dateTemp = null;
             Date dateIterator = null;
 
-            if(nextClassList.size() == 0){
-                //a
-            }
-            else{
+            Log.d("size",nextClassList.size()+"");
+
+            if(nextClassList.size() != 0){
                 int i = 0;
                 while(i < nextClassList.size()){
                     try {
-                        dateTemp = new SimpleDateFormat("yy-MM-dd").parse(nextClassList.get(i).getTime());
+                        dateTemp = new SimpleDateFormat("yyyy-MM-dd").parse(nextClassList.get(i).getTime());
+                        if(i == 0){
+                            dateIterator = dateTemp;
+                            nextClassList.add(i, new NextOrLatestClassModel(1,
+                                    nextClassList.get(i).getClassId(),
+                                    nextClassList.get(i).getClassTopic(),
+                                    nextClassList.get(i).getSession(),
+                                    nextClassList.get(i).getRoom(),
+                                    nextClassList.get(i).getTime(),
+                                    new SimpleDateFormat("EEEE, d MMMM YYYY").format(dateIterator)));
+                            i+=2;
+                        }else if(!dateIterator.equals(dateTemp)){
+                            dateIterator = dateTemp;
+                            nextClassList.add(i, new NextOrLatestClassModel(1,
+                                    nextClassList.get(i).getClassId(),
+                                    nextClassList.get(i).getClassTopic(),
+                                    nextClassList.get(i).getSession(),
+                                    nextClassList.get(i).getRoom(),
+                                    nextClassList.get(i).getTime(),
+                                    new SimpleDateFormat("EEEE, d MMMM YYYY").format(dateIterator)));
+                            i+= 2;
+                        }
+                        else
+                        {
+                            i++;
+                        }
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    ;
-                    if(i == 0 || !dateIterator.equals(dateTemp)){
-                        dateIterator = dateTemp;
-
-                        if (dateIterator != null) {
-                            nextClassList.add(i, new NextOrLatestClassModel(1, nextClassList.get(i).getClassId(), nextClassList.get(i).getClassTopic(), nextClassList.get(i).getSession(), nextClassList.get(i).getRoom(), nextClassList.get(i).getTime(), new SimpleDateFormat("EEEE, d MM YYYY").format(dateIterator)));
-                        }
-
-                        i+= 2;
-                    }
-                    else
-                    {
-                        i++;
-                    }
-
-                    nextClassRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-                    NextOrLatestClassAdapter adapter = new NextOrLatestClassAdapter(this,nextClassList);
-                    nextClassRecyclerView.setAdapter(adapter);
                 }
+                nextClassRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+                NextOrLatestClassAdapter adapter = new NextOrLatestClassAdapter(this,nextClassList);
+                nextClassRecyclerView.setAdapter(adapter);
             }
-
-
-
         });
 
         //add dummies data
@@ -129,7 +136,6 @@ public class NextClassActivity extends AppCompatActivity {
 //        nextClassList.add(new NextOrLatestClassModel(1,1,"Introduction to Ubiquitous","Session 11","501 - LB03","2019-09-30 14:00",""));
 //        nextClassList.add(new NextOrLatestClassModel(1,1,"Introduction to Ubiquitous","Session 11","501 - LB03","2019-09-29 15:00",""));
 //        nextClassList.add(new NextOrLatestClassModel(1,1,"Introduction to Ubiquitous","Session 11","501 - LB03","2019-09-29 16:00",""));
-
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);

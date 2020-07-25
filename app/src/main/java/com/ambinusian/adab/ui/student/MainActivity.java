@@ -1,6 +1,7 @@
 package com.ambinusian.adab.ui.student;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -105,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void prepareMenuData(){
         //set course Subject
-
         db.classDAO().getAllClass().observe(MainActivity.this, new Observer<List<ClassEntity>>() {
             @Override
             public void onChanged(List<ClassEntity> classEntities) {
@@ -164,11 +164,11 @@ public class MainActivity extends AppCompatActivity {
             }
             else if(groupPosition == 1){
                 if(!expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() > 2){
-                    parent.setItemChecked(expandableListView.getCheckedItemPosition()+7,true);
+                    parent.setItemChecked(expandableListView.getCheckedItemPosition()+courseSubject.size(),true);
                 } else if(!expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() < 0){
                     parent.setItemChecked(expandableListView.getCheckedItemPosition()+100,true);
                 } else if(expandableListView.isGroupExpanded(1) && expandableListView.getCheckedItemPosition() > courseSubject.size()+2 ){
-                        parent.setItemChecked(expandableListView.getCheckedItemPosition()-7,true);
+                    parent.setItemChecked(expandableListView.getCheckedItemPosition()-courseSubject.size(),true);
                 }  else if(expandableListView.isGroupExpanded(1) && (expandableListView.getCheckedItemPosition() >= 3 && expandableListView.getCheckedItemPosition() <= courseSubject.size()+2)) {
                     parent.setItemChecked(expandableListView.getCheckedItemPosition()- 100, true);
                 }
@@ -207,6 +207,5 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
     }
-
 }
 

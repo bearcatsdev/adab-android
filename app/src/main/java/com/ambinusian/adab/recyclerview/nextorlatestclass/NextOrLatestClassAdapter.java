@@ -45,7 +45,6 @@ public class NextOrLatestClassAdapter extends RecyclerView.Adapter<RecyclerView.
         NextOrLatestClassModel item = lists.get(position);
 
         if(holder.getItemViewType() == 0){
-            ;
             ((NextOrLatestClassHolder)holder).classTopic.setText(item.getClassTopic());
             ((NextOrLatestClassHolder)holder).session.setText(item.getSession());
             ((NextOrLatestClassHolder)holder).room.setText(item.getRoom());
