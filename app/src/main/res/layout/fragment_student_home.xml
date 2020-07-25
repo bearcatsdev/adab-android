@@ -57,21 +57,20 @@
            <androidx.cardview.widget.CardView
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               app:cardCornerRadius="10dp"
-               app:cardElevation="2dp"
-               app:cardPreventCornerOverlap="false"
                android:visibility="gone"
-               android:layout_marginHorizontal="2dp"
-               android:layout_marginTop="2dp"
-               android:id="@+id/liveLayout">
+               android:layout_margin="10dp"
+               android:id="@+id/liveLayout"
+               app:cardCornerRadius="10dp"
+               app:cardElevation="5dp"
+               app:cardPreventCornerOverlap="false">
 
                <LinearLayout
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:gravity="center"
                    android:padding="8dp"
-                   android:orientation="vertical"
-                  >
+                   android:background="?attr/selectableItemBackground"
+                   android:orientation="vertical">
 
                    <com.ambinusian.adab.customcomponent.HeadlineView
                        android:layout_width="wrap_content"
@@ -87,7 +86,6 @@
                        android:layout_height="match_parent"
                        android:orientation="vertical"
                        android:gravity="center"
-                       android:background="?attr/selectableItemBackground"
                        android:layout_marginStart="16dp"
                        android:layout_marginEnd="16dp"
                        android:paddingTop="5dp"
@@ -145,6 +143,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:visibility="gone"
                     android:id="@+id/your_next_class_layout">
 
                     <LinearLayout
@@ -297,6 +296,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:visibility="gone"
                     android:id="@+id/latest_class">
                     <LinearLayout
                         android:layout_width="match_parent"

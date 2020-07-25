@@ -54,74 +54,81 @@
                 </LinearLayout>
 
 
-                <LinearLayout
-                    android:id="@+id/lecturerLiveLayout"
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:clickable="true"
                     android:visibility="visible"
-                    android:orientation="vertical">
-                    <com.ambinusian.adab.customcomponent.HeadlineView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:headlineTitle="Ongoing Class" />
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="11dp" />
+                    android:layout_margin="10dp"
+                    android:id="@+id/liveLayout"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
+                    app:cardPreventCornerOverlap="false">
 
                     <LinearLayout
+                        android:id="@+id/lecturerLiveLayout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
                         android:gravity="center"
                         android:background="?attr/selectableItemBackground"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp">
+                        android:visibility="visible"
+                        android:orientation="vertical">
 
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/lecturerLiveClassIcon"
-                            android:layout_width="96dp"
-                            android:layout_height="96dp"
-                            tools:src="@tools:sample/avatars" />
-
-                        <TextView
-                            android:id="@+id/tv_lecturerLiveClassTitle"
-                            android:layout_width="match_parent"
+                        <com.ambinusian.adab.customcomponent.HeadlineView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:textColor="@color/textPrimary"
-                            android:textSize="@dimen/text_caption"
-                            android:textStyle="bold"
-                            tools:text="@tools:sample/lorem" />
-
+                            app:headlineTitle="Ongoing Class" />
                         <Space
                             android:layout_width="match_parent"
-                            android:layout_height="8dp" />
+                            android:layout_height="11dp" />
 
-                        <TextView
-                            android:id="@+id/tv_lecturerLiveCourse"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            tools:text="Mobile Creative Design" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp">
 
-                        <TextView
-                            android:id="@+id/tv_lecturerLiveClassMeeting"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            tools:text="Session 12" />
 
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/lecturerLiveClassIcon"
+                                android:layout_width="96dp"
+                                android:layout_height="96dp"
+                                tools:src="@tools:sample/avatars" />
+
+                            <TextView
+                                android:id="@+id/tv_lecturerLiveClassTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAlignment="center"
+                                android:textColor="@color/textPrimary"
+                                android:textSize="@dimen/text_caption"
+                                android:textStyle="bold"
+                                tools:text="@tools:sample/lorem" />
+
+                            <Space
+                                android:layout_width="match_parent"
+                                android:layout_height="8dp" />
+
+                            <TextView
+                                android:id="@+id/tv_lecturerLiveCourse"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="Mobile Creative Design" />
+
+                            <TextView
+                                android:id="@+id/tv_lecturerLiveClassMeeting"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="Session 12" />
+
+                        </LinearLayout>
                     </LinearLayout>
 
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="35dp" />
-
-                </LinearLayout>
-
+                </androidx.cardview.widget.CardView>
 
                 <Space
                     android:layout_width="match_parent"

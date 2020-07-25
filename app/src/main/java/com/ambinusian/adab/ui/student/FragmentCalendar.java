@@ -1,6 +1,9 @@
 package com.ambinusian.adab.ui.student;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -54,6 +57,7 @@ public class FragmentCalendar extends Fragment {
     LinearLayout emptyClass;
     HorizontalCalendar.Builder builder;
     ClassDatabase db;
+    Activity mainActivity;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -65,8 +69,10 @@ public class FragmentCalendar extends Fragment {
         allClassSchedule = new ArrayList<>();
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         db = ClassDatabase.getDatabase(getContext());
+        mainActivity = getActivity();
 
         db.classDAO().getAllClass().observe(getActivity(), new Observer<List<ClassEntity>>() {
+            @SuppressLint("SimpleDateFormat")
             @Override
             public void onChanged(List<ClassEntity> classEntities) {
                 Date temp = null;
@@ -86,15 +92,15 @@ public class FragmentCalendar extends Fragment {
                             new SimpleDateFormat("hh:mm").format(temp)));
                 }
 
-                /* starts before 1 month from now */
+                /* starts before 10 years from now */
                 Calendar startDate = Calendar.getInstance();
                 startDate.add(Calendar.YEAR, -10);
 
-                /* ends after 1 month from now */
+                /* ends after 10 years from now */
                 Calendar endDate = Calendar.getInstance();
                 endDate.add(Calendar.YEAR, 10);
 
-                builder = new HorizontalCalendar.Builder(getActivity(), R.id.calendarView).range(startDate, endDate)
+                builder = new HorizontalCalendar.Builder(mainActivity, R.id.calendarView).range(startDate, endDate)
                         .datesNumberOnScreen(5);
                 HorizontalCalendar horizontalCalendar = builder.addEvents(new CalendarEventsPredicate() {
                     @Override
@@ -122,8 +128,7 @@ public class FragmentCalendar extends Fragment {
                         }
                         return events;
                     }
-                })
-                        .build();
+                }).build();
 
 
                 horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
@@ -137,7 +142,7 @@ public class FragmentCalendar extends Fragment {
                         Date date2 = null;
 
                         try {
-                            date2 = new SimpleDateFormat("yyyy-MM-dd").parse(currentYear + "-" + currentMonth + "-" + currentDate);
+                            date2 = dateFormat.parse(currentYear + "-" + currentMonth + "-" + currentDate);
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
@@ -210,29 +215,27 @@ public class FragmentCalendar extends Fragment {
         int currentMonth = calendar.getTime().getMonth() + 1;
         int currentYear = calendar.getTime().getYear() + 1900;
 
-        Date date2 = null;
+        Date date = null;
 
         try {
-            date2 = new SimpleDateFormat("yyyy-MM-dd").parse(currentYear + "-" + currentMonth + "-" + currentDate);
+            date = dateFormat.parse(currentYear + "-" + currentMonth + "-" + currentDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        selectedDate.setText(new SimpleDateFormat("EEEE, d MMMM yyyy").format(date2));
+        selectedDate.setText(new SimpleDateFormat("EEEE, d MMMM yyyy").format(date));
 
         //Searching the classes at selected date
         ArrayList<ScheduleModel> selectedDateClasses = new ArrayList<>();
         for (int i = 0; i < allClassSchedule.size(); i++) {
-            Calendar selectedDateCalendar = Calendar.getInstance();
             try {
-                selectedDateCalendar.setTime(dateFormat.parse(allClassSchedule.get(i).getClassDate()));
+                Date date2 = dateFormat.parse(allClassSchedule.get(i).getClassDate());
+                if (date2.equals(date)) {
+                    ScheduleModel item = allClassSchedule.get(i);
+                    selectedDateClasses.add(item);
+                }
             } catch (ParseException e) {
                 e.printStackTrace();
-            }
-
-            if (selectedDateCalendar.equals(calendar)) {
-                ScheduleModel item = allClassSchedule.get(i);
-                selectedDateClasses.add(item);
             }
         }
 

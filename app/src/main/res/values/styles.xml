@@ -14,14 +14,13 @@
 
         <!--System Navigation Bar-->
         <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
-        <item name="android:statusBarColor" tools:targetApi="27">@color/background</item>
+        <item name="android:statusBarColor" tools:targetApi="27">@color/statusBarColor</item>
         <item name="android:navigationBarColor" tools:targetApi="27">@color/background</item>
     </style>
 
     <!--Toolbar-->
     <style name="Widget.Adab.Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:background">@color/background</item>
-        <item name="android:theme">@style/Theme.AppCompat.Light</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
@@ -123,7 +122,5 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">8dp</item>
     </style>
-
-
 
 </resources>

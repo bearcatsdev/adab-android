@@ -49,8 +49,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_email"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:boxStrokeColor="@color/colorPrimary"
-                    >
+                    app:boxStrokeColor="@color/colorPrimary">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_nim"

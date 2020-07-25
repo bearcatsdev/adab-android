@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Theme Color -->
     <color name="colorPrimary">#428DFC</color>
     <color name="colorPrimaryDark">#0060C8</color>
@@ -7,6 +7,9 @@
 
     <!-- Background -->
     <color name="background">#FFF</color>
+
+    <!--StatusBar Color -->
+    <color name="statusBarColor">#FFF</color>
 
     <!-- Text -->
     <color name="textPrimary">#000</color>
@@ -16,6 +19,16 @@
     <!-- Divider -->
     <color name="divider">#E5E5E5</color>
 
-    <!-- Navigation Bar-->
+    <!-- Navigation Bar -->
     <color name="navigationbar">#FFFFFF</color>
+
+    <!-- Dialog background color -->
+    <color name="dialogBackgroundColor">#FFFFFF</color>
+
+    <!--  Calendar text and background color -->
+    <color name="calendarTextColor">#000</color>
+    <color name="calendarBackgroundColor">#FFF</color>
+
+    <!-- TextInputLayout background color -->
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#6B000000</color>
 </resources>

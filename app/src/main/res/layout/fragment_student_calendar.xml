@@ -17,7 +17,8 @@
                 android:id="@+id/calendarView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
+                android:background="@color/calendarBackgroundColor"
+                app:textColorNormal="@color/calendarTextColor"
                 app:selectedDateBackground="@color/colorPrimary"
                 app:sizeBottomText="0dp"
                 app:sizeMiddleText="20dp"
@@ -36,7 +37,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white"
             android:orientation="vertical">
 
             <LinearLayout
@@ -44,6 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:gravity="center"
                 android:visibility="gone">
 
                 <ImageView
@@ -71,9 +72,5 @@
                 android:layout_height="match_parent"
                 android:visibility="gone" />
         </LinearLayout>
-
-
     </LinearLayout>
-
-
 </FrameLayout>

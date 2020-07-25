@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarLayout"
@@ -12,19 +13,19 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
+            style="@style/Widget.Adab.Toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            style="@style/Widget.Adab.Toolbar"
             android:animateLayoutChanges="true"
             android:textAlignment="center">
 
             <TextView
                 android:id="@+id/toolbar_title"
-                android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/home_title"/>
+                android:text="@string/home_title"
+                android:textSize="20sp"/>
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -57,7 +58,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAppearance="@style/expanded_toolbar_title"
-                    android:text="Course Title"/>
+                    android:textColor="@color/textPrimary"
+                    tools:text="Course Title"/>
+
                 <TextView
                     android:id="@+id/tv_live_now"
                     android:layout_width="wrap_content"
@@ -196,7 +199,7 @@
             android:id="@+id/pb_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true" />
 
     </RelativeLayout>
 
