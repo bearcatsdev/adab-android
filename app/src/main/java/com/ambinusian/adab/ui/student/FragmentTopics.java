@@ -73,14 +73,14 @@ public class FragmentTopics extends Fragment {
                         ClassEntity classEntity = classEntities.get(i);
                         course_code = classEntity.getCourseId();
                         //format for date
-                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         Date date = null;
                         try {
                             date = format.parse(classEntity.getSessionStartDate());
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        classList.add(new ClassListModel(1,classEntity.getSessionId(), classEntity.getTopicTitle(),"Session "+classEntity.getSessionTh(),new SimpleDateFormat("EEEE, d MMMM YYYY H:mm").format(date)));
+                        classList.add(new ClassListModel(1,classEntity.getSessionId(), classEntity.getTopicTitle(),"Session "+classEntity.getSessionTh(),new SimpleDateFormat("EEEE, d MMMM YYYY, HH:mm").format(date)));
                     }
                 }
                 course.setText(course_name);
@@ -93,13 +93,13 @@ public class FragmentTopics extends Fragment {
                 Date date = null;
                 for(int i=0;i<classList.size();i++){
                     try {
-                        date = new SimpleDateFormat("EEEE,d MMMM YYYY H:mm").parse(classList.get(i).getTime());
+                        date = new SimpleDateFormat("EEEE, d MMMM YYYY, HH:mm").parse(classList.get(i).getTime());
+                        if(date.after(currentDate)){
+                            nextClass = i;
+                            break;
+                        }
                     } catch (ParseException e) {
                         e.printStackTrace();
-                    }
-                    if(date.after(currentDate)){
-                        nextClass = i;
-                        break;
                     }
                 }
 

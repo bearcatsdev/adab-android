@@ -122,8 +122,8 @@ public class FragmentHome extends Fragment {
                     Date date1 = null;
                     Date date2 = null;
                     try {
-                        date1 = new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(classEntity.getSessionStartDate());
-                        date2 = new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(classEntity.getSessionEndDate());
+                        date1 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(classEntity.getSessionStartDate());
+                        date2 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(classEntity.getSessionEndDate());
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -173,7 +173,7 @@ public class FragmentHome extends Fragment {
                 //set list data for recycler view
                 Date date = null;
                 for(nextClass=0;nextClass<classEntities.size();nextClass++){
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     try {
                         date = format.parse(classEntities.get(nextClass).getSessionStartDate());
                     } catch (ParseException e) {
@@ -193,7 +193,7 @@ public class FragmentHome extends Fragment {
                     yourNextClassLayout.setVisibility(View.VISIBLE);
                     ClassEntity next_class_info = classEntities.get(nextClass);
                     nextClassIcon.setImageResource(R.drawable.ic_class_56_pencilnote);
-                    nextClassTime.setText(new SimpleDateFormat("EEEE, d MMMM YYYY H:MM").format(date));
+                    nextClassTime.setText(new SimpleDateFormat("EEEE, d MMMM YYYY, HH:mm").format(date));
                     nextClassTitle.setText(next_class_info.getTopicTitle());
                     nextCourse.setText(next_class_info.getCourseName());
                     nextClassSession.setText("Session "+next_class_info.getSessionTh());
@@ -211,13 +211,13 @@ public class FragmentHome extends Fragment {
                     for (int i = nextClass - 1; i >= 0; i--) {
                         Date class_date = null;
                         try {
-                            class_date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(classEntities.get(i).getSessionStartDate());
+                            class_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(classEntities.get(i).getSessionStartDate());
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
                         coursesList.add(new CourseModel(classEntities.get(i).getSessionId(),
                                 1,
-                                new SimpleDateFormat("EEEE, d MMMM YYYY h:mm").format(class_date),
+                                new SimpleDateFormat("EEEE, d MMMM YYYY, HH:mm").format(class_date),
                                 classEntities.get(i).getTopicTitle(),
                                 classEntities.get(i).getCourseName(),
                                 context.getString(R.string.class_session) + " " + classEntities.get(i).getSessionTh(),

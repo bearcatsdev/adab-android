@@ -78,18 +78,18 @@ public class FragmentCalendar extends Fragment {
                 Date temp = null;
                 for(ClassEntity classEntity : classEntities){
                     try {
-                        temp = new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(classEntity.getSessionStartDate());
+                        temp = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(classEntity.getSessionStartDate());
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                     allClassSchedule.add(new ScheduleModel(
-                            new SimpleDateFormat("yyyy-MM-dd hh:mm").format(temp),
+                            new SimpleDateFormat("yyyy-MM-dd HH:mm").format(temp),
                             (String) classEntity.getSessionMode(),
                             (String) classEntity.getTopicTitle(),
                             (String) classEntity.getCourseName(),
                             (String) classEntity.getCourseId(),
                             (String) classEntity.getClassName(),
-                            new SimpleDateFormat("hh:mm").format(temp)));
+                            new SimpleDateFormat("HH:mm").format(temp)));
                 }
 
                 /* starts before 10 years from now */
