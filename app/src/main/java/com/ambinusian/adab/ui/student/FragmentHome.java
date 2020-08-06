@@ -1,10 +1,8 @@
 package com.ambinusian.adab.ui.student;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -12,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -24,31 +21,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ambinusian.adab.all.ActivityLive;
-import com.ambinusian.adab.manager.APIManager;
-import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.recyclerview.course.CourseAdapter;
 import com.ambinusian.adab.recyclerview.course.CourseModel;
 import com.ambinusian.adab.R;
-import com.ambinusian.adab.recyclerview.discussion.DiscussionAdapter;
 import com.ambinusian.adab.recyclerview.discussion.DiscussionModel;
-import com.ambinusian.adab.recyclerview.nextorlatestclass.NextOrLatestClassAdapter;
-import com.ambinusian.adab.recyclerview.nextorlatestclass.NextOrLatestClassModel;
 import com.ambinusian.adab.room.ClassDatabase;
 import com.ambinusian.adab.room.ClassEntity;
+import com.ambinusian.adab.utility.DateUtility;
 import com.ambinusian.adab.utility.TextUtility;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 public class FragmentHome extends Fragment {
 
@@ -62,7 +50,6 @@ public class FragmentHome extends Fragment {
     private ImageView nextClassIcon;
     private TextView liveClassTitle, liveCourse, liveClassMeeting, welcomeTitle, nextClassTime, nextClassTitle, nextCourse, nextClassSession;
     private Chip nextCourseCode, nextClassCode, nextClassType;
-    private Boolean hasLiveClass;
     private MaterialButton seeAllLatestClass, seeAllNextClass, seeAllDiscussion;
     private ClassDatabase db;
     private UserPreferences userPreferences;
@@ -107,7 +94,6 @@ public class FragmentHome extends Fragment {
         db = ClassDatabase.getDatabase(context);
         coursesList = new ArrayList<>();
         discussionList = new ArrayList<>();
-        hasLiveClass = false;
         userPreferences = new UserPreferences(context);
 
         // set visibility gone
@@ -118,19 +104,19 @@ public class FragmentHome extends Fragment {
             @Override
             public void onChanged(List<ClassEntity> classEntities) {
                 liveClass = null;
+                Date date1 = null;
+                Date date2 = null;
                 for(ClassEntity classEntity : classEntities){
-                    Date date1 = null;
-                    Date date2 = null;
                     try {
-                        date1 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(classEntity.getSessionStartDate());
-                        date2 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(classEntity.getSessionEndDate());
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                        date1 = DateUtility.convertStringToDate(classEntity.getSessionStartDate());
+                        date2 = DateUtility.convertStringToDate(classEntity.getSessionEndDate());
 
-                    if(Calendar.getInstance().getTime().after(date1) && Calendar.getInstance().getTime().before(date2)){
-                        liveClass = classEntity;
-                        break;
+                        if(Calendar.getInstance().getTime().after(date1) && Calendar.getInstance().getTime().before(date2)){
+                            liveClass = classEntity;
+                            break;
+                        }
+                    } catch (NullPointerException e) {
+                        e.printStackTrace();
                     }
                 }
 
@@ -171,14 +157,8 @@ public class FragmentHome extends Fragment {
                 Date currentDate  = Calendar.getInstance().getTime();
 
                 //set list data for recycler view
-                Date date = null;
                 for(nextClass=0;nextClass<classEntities.size();nextClass++){
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    try {
-                        date = format.parse(classEntities.get(nextClass).getSessionStartDate());
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                    Date date = DateUtility.convertStringToDate(classEntities.get(nextClass).getSessionStartDate());
                     if(currentDate.before(date)) {
                         break;
                     }
@@ -193,7 +173,7 @@ public class FragmentHome extends Fragment {
                     yourNextClassLayout.setVisibility(View.VISIBLE);
                     ClassEntity next_class_info = classEntities.get(nextClass);
                     nextClassIcon.setImageResource(R.drawable.ic_class_56_pencilnote);
-                    nextClassTime.setText(new SimpleDateFormat("EEEE, d MMMM YYYY, HH:mm").format(date));
+                    nextClassTime.setText(DateUtility.convertToDateAndTimeFormat(next_class_info.getSessionStartDate()));
                     nextClassTitle.setText(next_class_info.getTopicTitle());
                     nextCourse.setText(next_class_info.getCourseName());
                     nextClassSession.setText("Session "+next_class_info.getSessionTh());
@@ -209,21 +189,16 @@ public class FragmentHome extends Fragment {
                 else {
                     latestClassLayout.setVisibility(View.VISIBLE);
                     for (int i = nextClass - 1; i >= 0; i--) {
-                        Date class_date = null;
-                        try {
-                            class_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(classEntities.get(i).getSessionStartDate());
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        coursesList.add(new CourseModel(classEntities.get(i).getSessionId(),
+                        ClassEntity classEntity = classEntities.get(i);
+                        coursesList.add(new CourseModel(classEntity.getSessionId(),
                                 1,
-                                new SimpleDateFormat("EEEE, d MMMM YYYY, HH:mm").format(class_date),
-                                classEntities.get(i).getTopicTitle(),
-                                classEntities.get(i).getCourseName(),
-                                context.getString(R.string.class_session) + " " + classEntities.get(i).getSessionTh(),
-                                classEntities.get(i).getCourseId(),
-                                classEntities.get(i).getClassName(),
-                                classEntities.get(i).getSessionMode()
+                                DateUtility.convertToDateAndTimeFormat(classEntity.getSessionStartDate()),
+                                classEntity.getTopicTitle(),
+                                classEntity.getCourseName(),
+                                context.getString(R.string.class_session) + " " + classEntity.getSessionTh(),
+                                classEntity.getCourseId(),
+                                classEntity.getClassName(),
+                                classEntity.getSessionMode()
                         ));
                     }
 

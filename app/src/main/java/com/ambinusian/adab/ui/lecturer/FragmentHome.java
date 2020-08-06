@@ -1,5 +1,6 @@
 package com.ambinusian.adab.ui.lecturer;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -26,6 +27,7 @@ import com.ambinusian.adab.recyclerview.discussion.DiscussionModel;
 import com.ambinusian.adab.room.ClassDatabase;
 import com.ambinusian.adab.room.ClassEntity;
 import com.ambinusian.adab.ui.student.NextClassActivity;
+import com.ambinusian.adab.utility.DateUtility;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 
@@ -53,6 +55,7 @@ public class FragmentHome extends Fragment {
     private LinearLayout yourNextClassLayout, latestClassLayout;
     private ArrayList<CourseModel> coursesList;
     private RecyclerView coursesRecyclerView;
+    private Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -81,36 +84,37 @@ public class FragmentHome extends Fragment {
         liveClassTitle = view.findViewById(R.id.tv_lecturerLiveClassTitle);
         liveCourse  = view.findViewById(R.id.tv_lecturerLiveCourse);
         liveClassMeeting = view.findViewById(R.id.tv_lecturerLiveClassMeeting);
-        discussionList = new ArrayList<>();
-        userPreferences = new UserPreferences(getContext());
         seeAllNextSchedule = view.findViewById(R.id.see_all_next_schedule);
         yourNextClassLayout = view.findViewById(R.id.your_next_class_layout);
         latestClassLayout = view.findViewById(R.id.latest_class_layout);
-        db = ClassDatabase.getDatabase(getContext());
+        context = getContext();
+        userPreferences = new UserPreferences(context);
+        db = ClassDatabase.getDatabase(context);
         coursesList = new ArrayList<>();
+        discussionList = new ArrayList<>();
         coursesRecyclerView = view.findViewById(R.id.rv_latest_class);
 
         ////Set Welcome Text
-        welcomeTitle.setText(getContext().getString(R.string.welcome_title, userPreferences.getUserName()));
+        welcomeTitle.setText(context.getString(R.string.welcome_title, userPreferences.getUserName()));
 
         ////Your Next Schedule
         db.classDAO().getAllClass().observe(getActivity(), new Observer<List<ClassEntity>>() {
             @Override
             public void onChanged(List<ClassEntity> classEntities) {
                 liveClass = null;
+                Date date1 = null;
+                Date date2 = null;
                 for(ClassEntity classEntity : classEntities){
-                    Date date1 = null;
-                    Date date2 = null;
                     try {
-                        date1 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(classEntity.getSessionStartDate());
-                        date2 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(classEntity.getSessionEndDate());
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                        date1 = DateUtility.convertStringToDate(classEntity.getSessionStartDate());
+                        date2 = DateUtility.convertStringToDate(classEntity.getSessionEndDate());
 
-                    if(Calendar.getInstance().getTime().after(date1) && Calendar.getInstance().getTime().before(date2)){
-                        liveClass = classEntity;
-                        break;
+                        if(Calendar.getInstance().getTime().after(date1) && Calendar.getInstance().getTime().before(date2)){
+                            liveClass = classEntity;
+                            break;
+                        }
+                    } catch (NullPointerException e) {
+                        e.printStackTrace();
                     }
                 }
 
@@ -131,7 +135,7 @@ public class FragmentHome extends Fragment {
                     liveLayout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(getContext(), ActivityLive.class);
+                            Intent intent = new Intent(context, ActivityLive.class);
                             int sessionId = liveClass.getSessionId();
 
                             //set all data to bundle
@@ -151,14 +155,8 @@ public class FragmentHome extends Fragment {
                 Date currentDate  = Calendar.getInstance().getTime();
 
                 //set list data for recycler view
-                Date date = null;
                 for(nextClass=0;nextClass<classEntities.size();nextClass++){
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    try {
-                        date = format.parse(classEntities.get(nextClass).getSessionStartDate());
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                    Date date = DateUtility.convertStringToDate(classEntities.get(nextClass).getSessionStartDate());
                     if(currentDate.before(date)) {
                         break;
                     }
@@ -172,7 +170,7 @@ public class FragmentHome extends Fragment {
                     //Next Class
                     ClassEntity next_class_info = classEntities.get(nextClass);
                     nextScheduleIcon.setImageResource(R.drawable.ic_class_56_pencilnote);
-                    nextScheduleTime.setText(new SimpleDateFormat("EEEE, d MMMM YYYY, HH:mm").format(date));
+                    nextScheduleTime.setText(DateUtility.convertToDateAndTimeFormat(next_class_info.getSessionStartDate()));
                     nextScheduleClassTitle.setText(next_class_info.getTopicTitle());
                     nextScheduleCourse.setText(next_class_info.getCourseName());
                     nextScheduleSession.setText("Session "+next_class_info.getSessionTh());
@@ -187,27 +185,22 @@ public class FragmentHome extends Fragment {
                 }
                 else {
                     for (int i = nextClass - 1; i >= 0; i--) {
-                        Date class_date = null;
-                        try {
-                            class_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(classEntities.get(i).getSessionStartDate());
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        coursesList.add(new CourseModel(classEntities.get(i).getSessionId(),
+                        ClassEntity classEntity = classEntities.get(i);
+                        coursesList.add(new CourseModel(classEntity.getSessionId(),
                                 1,
-                                new SimpleDateFormat("EEEE, d MMMM YYYY, HH:mm").format(class_date),
-                                classEntities.get(i).getTopicTitle(),
-                                classEntities.get(i).getCourseName(),
-                                "Session " + classEntities.get(i).getSessionTh(),
-                                classEntities.get(i).getCourseId(),
-                                classEntities.get(i).getClassName(),
-                                classEntities.get(i).getSessionMode()
+                                DateUtility.convertToDateAndTimeFormat(classEntity.getSessionStartDate()),
+                                classEntity.getTopicTitle(),
+                                classEntity.getCourseName(),
+                                context.getString(R.string.class_session) + " " + classEntity.getSessionTh(),
+                                classEntity.getCourseId(),
+                                classEntity.getClassName(),
+                                classEntity.getSessionMode()
                         ));
                     }
 
                     //set adapter for recycler view
-                    coursesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                    coursesRecyclerView.setAdapter(new CourseAdapter(getContext(), coursesList));
+                    coursesRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+                    coursesRecyclerView.setAdapter(new CourseAdapter(context, coursesList));
                     //set visible
                     coursesRecyclerView.setVisibility(View.VISIBLE);
                 }
