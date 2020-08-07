@@ -22,6 +22,7 @@ import com.ambinusian.adab.recyclerview.classlist.ClassListAdapter;
 import com.ambinusian.adab.recyclerview.classlist.ClassListModel;
 import com.ambinusian.adab.room.ClassDatabase;
 import com.ambinusian.adab.room.ClassEntity;
+import com.ambinusian.adab.utility.DateUtility;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -72,15 +73,11 @@ public class FragmentTopics extends Fragment {
                     if(classEntities.get(i).getCourseName().equals(course_name)){
                         ClassEntity classEntity = classEntities.get(i);
                         course_code = classEntity.getCourseId();
-                        //format for date
-                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
-                        Date date = null;
-                        try {
-                            date = format.parse(classEntity.getSessionStartDate());
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        classList.add(new ClassListModel(1,classEntity.getSessionId(), classEntity.getTopicTitle(),"Session "+classEntity.getSessionTh(),new SimpleDateFormat("EEEE, d MMMM YYYY H:mm").format(date)));
+                        classList.add(new ClassListModel(1,
+                                classEntity.getSessionId(),
+                                classEntity.getTopicTitle(),
+                                "Session "+classEntity.getSessionTh(),
+                                DateUtility.convertToDateAndTimeFormat(classEntity.getSessionStartDate())));
                     }
                 }
                 course.setText(course_name);
@@ -93,13 +90,13 @@ public class FragmentTopics extends Fragment {
                 Date date = null;
                 for(int i=0;i<classList.size();i++){
                     try {
-                        date = new SimpleDateFormat("EEEE,d MMMM YYYY H:mm").parse(classList.get(i).getTime());
-                    } catch (ParseException e) {
+                        date = DateUtility.convertStringToDate(classList.get(i).getTime());
+                        if (date != null && date.after(currentDate)) {
+                            nextClass = i;
+                            break;
+                        }
+                    } catch (NullPointerException e) {
                         e.printStackTrace();
-                    }
-                    if(date.after(currentDate)){
-                        nextClass = i;
-                        break;
                     }
                 }
 
