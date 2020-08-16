@@ -1,5 +1,5 @@
 # ADAB - Ayo Dengar Ayo Bicara (Let's Hear & Talk) for Android
-[![Build Status](https://travis-ci.com/ambinusian/adab.svg?branch=master)](https://travis-ci.com/ambinusian/adab)
+[![Build Status](https://travis-ci.com/bearcatsdev/adab-android.svg?branch=master)](https://travis-ci.com/ambinusian/adab)
 
 An open-source web and mobile application to help hearing-impaired students in the all-online world. We develop this app mainly to help our friends at [Binus University](http://binus.ac.id/), but we hope to be also used outside. There's a [paper](https://www.online-journals.org/index.php/i-jet/article/view/12147) about this project if you like to learn more.
 
