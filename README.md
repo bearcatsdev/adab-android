@@ -7,7 +7,7 @@ An open-source web and mobile application to help hearing-impaired students in t
 To check the full documentation visit [this site](https://bearcatsdev.github.io/docs/adab/guide/).
 
 ## Issues, bugs, and requests
-We welcome contributions and feedback! Please file a request in our [issue tracker](https://github.com/bearcatsdev/adab-web/issues) and we'll take a look.
+We welcome contributions and feedback! Please file a request in our [issue tracker](https://github.com/bearcatsdev/adab-android/issues) and we'll take a look.
 
 For simple changes (such as to CSS and text), you probably don't need to build this site. Often you can make changes using the GitHub UI.
 
