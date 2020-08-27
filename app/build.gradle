@@ -11,7 +11,7 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.ambinusian.adab"
-        minSdkVersion 29
+        minSdkVersion 22
         targetSdkVersion 29
 
         if (versionPropsFile.canRead()) {
