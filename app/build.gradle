@@ -8,11 +8,11 @@ android {
     def versionPropsFile = file('version.properties')
     def isRunningOnCI = System.getenv("CI") == "true"
 
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.ambinusian.adab"
         minSdkVersion 22
-        targetSdkVersion 28
+        targetSdkVersion 29
 
         if (versionPropsFile.canRead()) {
             Properties versionProps = new Properties()
