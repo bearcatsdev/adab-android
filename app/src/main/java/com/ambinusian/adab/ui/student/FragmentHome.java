@@ -3,6 +3,7 @@ package com.ambinusian.adab.ui.student;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,6 +22,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ambinusian.adab.all.ActivityLive;
+import com.ambinusian.adab.customcomponent.HeadlineView;
+import com.ambinusian.adab.customcomponent.SectionView;
 import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.recyclerview.course.CourseAdapter;
 import com.ambinusian.adab.recyclerview.course.CourseModel;
@@ -48,7 +51,9 @@ public class FragmentHome extends Fragment {
     private ImageView liveClassIcon;
     private LinearLayoutManager linearLayoutManager;
     private ImageView nextClassIcon;
-    private TextView liveClassTitle, liveCourse, liveClassMeeting, welcomeTitle, nextClassTime, nextClassTitle, nextCourse, nextClassSession;
+    private TextView liveClassTitle, liveCourse, liveClassMeeting, welcomeTitle, welcomeSubtitle, nextClassTime, nextClassTitle, nextCourse, nextClassSession;
+    private HeadlineView ongoingClass;
+    private SectionView nextClass, latestClass;
     private Chip nextCourseCode, nextClassCode, nextClassType;
     private MaterialButton seeAllLatestClass, seeAllNextClass, seeAllDiscussion;
     private ClassDatabase db;
@@ -76,6 +81,7 @@ public class FragmentHome extends Fragment {
         liveClassMeeting = view.findViewById(R.id.tv_liveClassMeeting);
         welcomeLayout = view.findViewById(R.id.welcomeLayout);
         welcomeTitle = view.findViewById(R.id.tv_welcomeTitle);
+        welcomeSubtitle = view.findViewById(R.id.tv_welcomeSubtitle);
         nextClassIcon = view.findViewById(R.id.nextClassIcon);
         nextClassTime = view.findViewById(R.id.tv_nextClassTime);
         nextClassTitle = view.findViewById(R.id.tv_nextClassTitle);
@@ -90,6 +96,9 @@ public class FragmentHome extends Fragment {
         seeAllDiscussion = view.findViewById(R.id.see_all_discussion);
         yourNextClassLayout = view.findViewById(R.id.your_next_class_layout);
         latestClassLayout = view.findViewById(R.id.latest_class);
+        ongoingClass = view.findViewById(R.id.hv_ongoingClass);
+        nextClass = view.findViewById(R.id.sv_nextClass);
+        latestClass = view.findViewById(R.id.sv_latestClass);
         context = getContext();
         db = ClassDatabase.getDatabase(context);
         coursesList = new ArrayList<>();
@@ -98,6 +107,9 @@ public class FragmentHome extends Fragment {
 
         // set visibility gone
         coursesRecyclerView.setVisibility(View.GONE);
+
+        //set text size based on sharedPreferences text size value
+        setTextSize();
 
         // get classes data
         db.classDAO().getAllClass().observe(getActivity(), new Observer<List<ClassEntity>>() {
@@ -241,5 +253,27 @@ public class FragmentHome extends Fragment {
         seeAllDiscussion.setOnClickListener(view1 -> {
             // show fragment discussion
         });
+    }
+
+    private void setTextSize(){
+        //multiple of text size
+        float textSize = userPreferences.getTextSize();
+        //set text size for each text view
+        welcomeTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,welcomeTitle.getTextSize()*textSize);
+        welcomeSubtitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,welcomeSubtitle.getTextSize()*textSize);
+        ongoingClass.headlineTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,ongoingClass.headlineTitle.getTextSize()*textSize);
+        liveClassTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,liveClassTitle.getTextSize()*textSize);
+        liveCourse.setTextSize(TypedValue.COMPLEX_UNIT_PX,liveCourse.getTextSize()*textSize);
+        liveClassMeeting.setTextSize(TypedValue.COMPLEX_UNIT_PX,liveClassMeeting.getTextSize()*textSize);
+        nextClassTime.setTextSize(TypedValue.COMPLEX_UNIT_PX,nextClassTime.getTextSize()*textSize);
+        nextClassTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,nextClassTime.getTextSize()*textSize);
+        nextCourse.setTextSize(TypedValue.COMPLEX_UNIT_PX,nextCourse.getTextSize()*textSize);
+        nextClassSession.setTextSize(TypedValue.COMPLEX_UNIT_PX,nextClassSession.getTextSize()*textSize);
+        nextClass.sectionTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,nextClass.sectionTitle.getTextSize()*textSize);
+        nextClass.sectionSubtitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,nextClass.sectionSubtitle.getTextSize()*textSize);
+        latestClass.sectionTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,latestClass.sectionTitle.getTextSize()*textSize);
+        latestClass.sectionSubtitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,latestClass.sectionSubtitle.getTextSize()*textSize);
+        seeAllLatestClass.setTextSize(TypedValue.COMPLEX_UNIT_PX, seeAllLatestClass.getTextSize()*textSize);
+        seeAllNextClass.setTextSize(TypedValue.COMPLEX_UNIT_PX, seeAllNextClass.getTextSize()*textSize);
     }
 }

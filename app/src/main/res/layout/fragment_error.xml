@@ -16,10 +16,11 @@
             android:src="@drawable/dev" />
 
         <TextView
+            android:id="@+id/tv_error_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
             android:text="@string/error_fragment_title"
+            android:textAlignment="center"
             android:textSize="@dimen/text_caption"
             android:textStyle="bold" />
 
@@ -28,10 +29,11 @@
             android:layout_height="8dp"/>
 
         <TextView
+            android:id="@+id/tv_error_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="@string/error_fragment_subtitle" />
+            android:text="@string/error_fragment_subtitle"
+            android:textAlignment="center" />
     </LinearLayout>
 
 </FrameLayout>

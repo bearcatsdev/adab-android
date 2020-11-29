@@ -12,8 +12,8 @@ import com.ambinusian.adab.R;
 
 public class SectionView extends RelativeLayout {
 
-    TextView sectionTitle;
-    TextView sectionSubtitle;
+    public TextView sectionTitle;
+    public TextView sectionSubtitle;
 
     public SectionView(Context context) {
         super(context);

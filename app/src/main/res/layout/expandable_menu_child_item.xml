@@ -31,6 +31,8 @@
         android:gravity="left"
         android:textAlignment="gravity"
         android:textColor="@drawable/drawer_icon_text_effect"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:id="@+id/child_menu_name"/>
 
 </LinearLayout>

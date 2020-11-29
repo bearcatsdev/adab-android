@@ -11,14 +11,15 @@
         android:layout_centerHorizontal="true"
         app:cardCornerRadius="20dp"
         app:cardBackgroundColor="@color/colorPrimary">
+
         <TextView
             android:id="@+id/headline_title"
             style="@style/TextTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:layout_marginVertical="8dp"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/text_caption"
             tools:text="Ongoing Class" />
     </androidx.cardview.widget.CardView>

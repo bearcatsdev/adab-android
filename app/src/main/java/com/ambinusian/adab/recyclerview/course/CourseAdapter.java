@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.all.ActivityLive;
+import com.ambinusian.adab.preferences.UserPreferences;
 
 import java.util.ArrayList;
 
@@ -19,10 +21,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseHolder> {
 
     private Context context;
     private ArrayList<CourseModel> list;
+    private UserPreferences userPreferences;
 
     public CourseAdapter(Context context, ArrayList<CourseModel> list){
         this.context = context;
         this.list = list;
+        userPreferences = new UserPreferences(context);
     }
 
     @Override
@@ -49,6 +53,9 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseHolder> {
         holder.courseCode.setText(item.getCourseCode());
         holder.classCode.setText(item.getClassCode());
         holder.classType.setText(item.getClassType());
+
+        //set text size for all text
+        setTextSize(holder);
 
         int classIcon = item.getClassIcon();
         //set classIcon
@@ -257,5 +264,20 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseHolder> {
             //go to ActivityLive
             holder.itemView.getContext().startActivity(intent);
         });
+    }
+
+    private void setTextSize(CourseHolder holder){
+        //multiple of text size
+        float textSize = userPreferences.getTextSize();
+
+        holder.classTime.setTextSize(TypedValue.COMPLEX_UNIT_PX, holder.classTime.getTextSize() * textSize);
+        holder.classTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, holder.classTitle.getTextSize() * textSize);
+        holder.courses.setTextSize(TypedValue.COMPLEX_UNIT_PX, holder.courses.getTextSize() * textSize);
+        holder.classMeeting.setTextSize(TypedValue.COMPLEX_UNIT_PX, holder.classMeeting.getTextSize() * textSize);
+
+        //Chip
+        holder.courseCode.setTextSize(TypedValue.COMPLEX_UNIT_PX, holder.courseCode.getTextSize() * textSize);
+        holder.classCode.setTextSize(TypedValue.COMPLEX_UNIT_PX, holder.classCode.getTextSize() * textSize);
+        holder.classType.setTextSize(TypedValue.COMPLEX_UNIT_PX, holder.classType.getTextSize() * textSize);
     }
 }

@@ -21,11 +21,13 @@
             app:lottie_speed="0.5"
             tools:src="@mipmap/splash_logo"
             tools:padding="40dp"/>
+
         <TextView
+            android:id="@+id/tv_hi_there"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="@string/login_welcome"/>
+            android:text="@string/login_welcome"
+            android:textAlignment="center" />
         <Space
             android:layout_width="match_parent"
             android:layout_height="32dp"/>
