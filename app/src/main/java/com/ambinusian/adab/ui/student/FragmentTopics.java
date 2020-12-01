@@ -3,6 +3,7 @@ package com.ambinusian.adab.ui.student;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,6 +19,8 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ambinusian.adab.R;
+import com.ambinusian.adab.customcomponent.SectionView;
+import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.recyclerview.classlist.ClassListAdapter;
 import com.ambinusian.adab.recyclerview.classlist.ClassListModel;
 import com.ambinusian.adab.room.ClassDatabase;
@@ -40,27 +43,40 @@ public class FragmentTopics extends Fragment {
     }
 
     String course_name="", course_code="", class_room="";
+    RecyclerView classListRecyclerView;
+    TextView course;
+    TextView courseCode;
+    TextView classRoom;
+    TextView nextClassTitle;
+    TextView nextClassSession;
+    TextView nextClassTime;
+    ImageView courseIcon;
+    ImageView nextClassIcon;
+    SectionView svClassList;
+    ClassDatabase db;
+    ArrayList<ClassListModel> classList;
     LinearLayout nextClassLayout;
+    UserPreferences userPreferences;
 
     @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RecyclerView classListRecyclerView = view.findViewById(R.id.rv_classList);
-        TextView course = view.findViewById(R.id.tv_topic_course);
-        TextView courseCode= view.findViewById(R.id.tv_topic_CourseCode);
-        TextView classRoom = view.findViewById(R.id.tv_topic_ClassRoom);
-        TextView nextClassTitle = view.findViewById(R.id.tv_topic_nextClassTitle);
-        TextView nextClassSession = view.findViewById(R.id.tv_topic_nextClassSession);
-        TextView nextClassTime = view.findViewById(R.id.tv_topic_nextClassTime);
-        ImageView courseIcon = view.findViewById(R.id.courseIcon);
-        ImageView nextClassIcon = view.findViewById(R.id.topic_nextClassIcon);
-        ClassDatabase db = ClassDatabase.getDatabase(getContext());
-        ArrayList<ClassListModel> classList = new ArrayList<>();
+        classListRecyclerView = view.findViewById(R.id.rv_classList);
+        course = view.findViewById(R.id.tv_topic_course);
+        courseCode= view.findViewById(R.id.tv_topic_CourseCode);
+        classRoom = view.findViewById(R.id.tv_topic_ClassRoom);
+        nextClassTitle = view.findViewById(R.id.tv_topic_nextClassTitle);
+        nextClassSession = view.findViewById(R.id.tv_topic_nextClassSession);
+        nextClassTime = view.findViewById(R.id.tv_topic_nextClassTime);
+        courseIcon = view.findViewById(R.id.courseIcon);
+        nextClassIcon = view.findViewById(R.id.topic_nextClassIcon);
+        svClassList = view.findViewById(R.id.sv_class_list);
+        db = ClassDatabase.getDatabase(getContext());
+        classList = new ArrayList<>();
         nextClassLayout = view.findViewById(R.id.next_class_layout);
-
-
+        userPreferences = new UserPreferences(getContext());
 
         if(getArguments() != null) {
             course_name = getArguments().getString("topic_name");
@@ -108,6 +124,8 @@ public class FragmentTopics extends Fragment {
                     nextClassSession.setText("Session "+next_class_info.getMeeting());
                     nextClassTime.setText(next_class_info.getTime());
                 }
+                //set text view size
+                setTextSize();
 
                 //Set Layout Manager For Recycler View
                 classListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -119,12 +137,19 @@ public class FragmentTopics extends Fragment {
                 courseIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_class_56_pencilnote));
             }
         });
+    }
 
-        //Set Information About the Next Class
-
-
-        //Show The Sorted Course
-
-
+    private void setTextSize(){
+        //multiple of text size
+        float textSize = userPreferences.getTextSize();
+        //set text size for each text view
+        course.setTextSize(TypedValue.COMPLEX_UNIT_PX,course.getTextSize()*textSize);
+        courseCode.setTextSize(TypedValue.COMPLEX_UNIT_PX,courseCode.getTextSize()*textSize);
+        classRoom.setTextSize(TypedValue.COMPLEX_UNIT_PX, classRoom.getTextSize()*textSize);
+        nextClassTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, nextClassTitle.getTextSize()*textSize);
+        nextClassSession.setTextSize(TypedValue.COMPLEX_UNIT_PX, nextClassSession.getTextSize()*textSize);
+        nextClassTime.setTextSize(TypedValue.COMPLEX_UNIT_PX, nextClassTime.getTextSize()*textSize);
+        svClassList.sectionTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, svClassList.sectionTitle.getTextSize()*textSize);
+        svClassList.sectionSubtitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, svClassList.sectionSubtitle.getTextSize()*textSize);
     }
 }

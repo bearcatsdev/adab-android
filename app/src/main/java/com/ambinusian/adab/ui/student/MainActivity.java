@@ -1,11 +1,15 @@
 package com.ambinusian.adab.ui.student;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 
+import android.view.ViewGroup;
 import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,15 +24,21 @@ import com.ambinusian.adab.all.ErrorFragment;
 import com.ambinusian.adab.expandablenavigationdrawer.ExpandableListAdapter;
 import com.ambinusian.adab.expandablenavigationdrawer.MenuModel;
 import com.ambinusian.adab.R;
+import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.room.ClassDatabase;
 import com.ambinusian.adab.room.ClassEntity;
+import com.ambinusian.adab.ui.bottomSheet.LowVisionBottomSheetDialog;
+import com.ambinusian.adab.ui.bottomSheet.SaveButtonListener;
 import com.ambinusian.adab.ui.userprofile.UserProfileDialogFragment;
 import com.google.android.material.navigation.NavigationView;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     NavigationView mNavigationView;
     ExpandableListView expandableListView;
     ExpandableListAdapter expandableListAdapter;
+    CircleImageView ivLowVision;
+    TextView binusAdab,version;
     List<MenuModel> groupList;
     List<MenuModel> courseSubject;
     HashMap<MenuModel,List<MenuModel>> childList;
@@ -46,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     LottieAnimationView profilePicture;
     ClassDatabase db;
     List<ClassEntity> classList;
+    UserPreferences userPreferences;
 
     @SuppressLint("InflateParams")
     @Override
@@ -61,12 +74,18 @@ public class MainActivity extends AppCompatActivity {
         mNavigationView = findViewById(R.id.nv_adab);
         expandableListView = findViewById(R.id.expandableListView);
         profilePicture = findViewById(R.id.circle_image_profile_picture);
+        ivLowVision = findViewById(R.id.iv_low_vision);
         groupList = new ArrayList<>();
         childList = new HashMap<>();
         courseSubject = new ArrayList<>();
         listSemester = new ArrayList<>();
-        db = ClassDatabase.getDatabase(getApplicationContext());
         headerView = getLayoutInflater().inflate(R.layout.adab_nav_header_layout,null);
+        SpinnerListSemester = headerView.findViewById(R.id.spinner_list_semesters);
+        binusAdab = headerView.findViewById(R.id.tv_binus_adab);
+        version = headerView.findViewById(R.id.tv_version);
+        userPreferences = new UserPreferences(this);
+        db = ClassDatabase.getDatabase(getApplicationContext());
+
 
         // set toolbar
         setSupportActionBar(toolbar);
@@ -79,13 +98,26 @@ public class MainActivity extends AppCompatActivity {
             showUserProfileDialog();
         });
 
+        // low vision icon onclick
+        ivLowVision.setOnClickListener(view -> {
+            SaveButtonListener saveButtonListener = new SaveButtonListener() {
+                @Override
+                public void onClick() {
+                    //reload activity
+                    finish();
+                    startActivity(getIntent());
+                }
+            };
+            LowVisionBottomSheetDialog bottomSheetDialog = new LowVisionBottomSheetDialog(saveButtonListener);
+            bottomSheetDialog.show(getSupportFragmentManager(),"LowVisionBottomSheet");
+        });
+
         //add headerView to expandableListView
         expandableListView.addHeaderView(headerView);
 
         //set up spinner
-        SpinnerListSemester = headerView.findViewById(R.id.spinner_list_semesters);
         listSemester.add("2019 Semester 1");
-        SpinnerListSemester.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,listSemester));
+        SpinnerListSemester.setAdapter(new SpinnerAdapter(this, android.R.layout.simple_spinner_item, listSemester));
 
         //icon menu clicked
         toolbar.setNavigationOnClickListener(view -> mDrawerLayout.openDrawer(GravityCompat.START));
@@ -96,6 +128,8 @@ public class MainActivity extends AppCompatActivity {
         //set expandable navigation drawer
         prepareMenuData();
 
+        //set text size
+        setTextSize();
     }
 
     private void showUserProfileDialog() {
@@ -206,6 +240,74 @@ public class MainActivity extends AppCompatActivity {
 
             return false;
         });
+    }
+
+    private void setTextSize(){
+        //multiple of text size
+        float textSize = userPreferences.getTextSize();
+        //set text size for each text view
+        binusAdab.setTextSize(TypedValue.COMPLEX_UNIT_PX,binusAdab.getTextSize()*textSize);
+        version.setTextSize(TypedValue.COMPLEX_UNIT_PX,version.getTextSize()*textSize);
+    }
+
+    private class SpinnerAdapter extends ArrayAdapter<String> {
+        Context context;
+        ArrayList<String> items;
+        float defaultTextSize = -1;
+
+        public SpinnerAdapter(final Context context,
+                              final int textViewResourceId, final ArrayList<String> objects) {
+            super(context, textViewResourceId, objects);
+            this.items = objects;
+            this.context = context;
+
+        }
+
+        @Override
+        public View getView(int position, View convertView,
+                                    ViewGroup parent) {
+
+            if (convertView == null) {
+                LayoutInflater inflater = LayoutInflater.from(context);
+                convertView = inflater.inflate(
+                        android.R.layout.simple_spinner_item, parent, false);
+            }
+
+            TextView tv = (TextView) convertView
+                    .findViewById(android.R.id.text1);
+            tv.setText(items.get(position));
+
+            if (defaultTextSize == -1) {
+                defaultTextSize = tv.getTextSize();
+            }
+
+            //set text for spinner
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, defaultTextSize*userPreferences.getTextSize());
+            return convertView;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView,
+                            ViewGroup parent) {
+
+            if (convertView == null) {
+                LayoutInflater inflater = LayoutInflater.from(context);
+                convertView = inflater.inflate(
+                        android.R.layout.simple_spinner_item, parent, false);
+            }
+
+            TextView tv = (TextView) convertView
+                    .findViewById(android.R.id.text1);
+            tv.setText(items.get(position));
+
+            if (defaultTextSize == -1) {
+                defaultTextSize = tv.getTextSize();
+            }
+
+            //set text for spinner
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, defaultTextSize*userPreferences.getTextSize());
+            return convertView;
+        }
     }
 }
 

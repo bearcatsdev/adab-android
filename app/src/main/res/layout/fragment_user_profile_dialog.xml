@@ -47,10 +47,11 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_account_details"
-            android:layout_below="@id/circle_image_profile_picture"
+            android:layout_below="@id/tv_user_department"
             android:layout_alignStart="@id/tv_user_department"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/show_account_details"
@@ -98,11 +99,12 @@
             android:src="@drawable/ic_clock"/>
 
         <TextView
+            android:id="@+id/tv_accessibility_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:text="Accessibility Mode"/>
+            android:text="Accessibility Mode" />
 
     </LinearLayout>
 
@@ -124,11 +126,12 @@
             android:src="@drawable/ic_clock"/>
 
         <TextView
+            android:id="@+id/tv_sign_out"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:text="Sign out"/>
+            android:text="Sign out" />
 
     </LinearLayout>
 

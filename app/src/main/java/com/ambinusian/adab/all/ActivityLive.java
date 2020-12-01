@@ -9,6 +9,7 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -26,6 +27,7 @@ import com.ambinusian.adab.R;
 import com.ambinusian.adab.manager.APIManager;
 import com.ambinusian.adab.manager.NetworkHelper;
 import com.ambinusian.adab.preferences.UserPreferences;
+import com.ambinusian.adab.recyclerview.course.CourseHolder;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 import com.google.android.material.button.MaterialButton;
@@ -82,6 +84,8 @@ public class ActivityLive extends AppCompatActivity{
         scrollViewMain = findViewById(R.id.scrollview_main);
         talkButton = findViewById(R.id.button_talk);
         layoutButtons = findViewById(R.id.layout_buttons);
+        APIManager apiManager = new APIManager(this);
+        userPreferences = new UserPreferences(this);
 
         setSupportActionBar(toolbar);
 
@@ -93,8 +97,9 @@ public class ActivityLive extends AppCompatActivity{
         //scroll always to bottom
         textContent.setMovementMethod(new ScrollingMovementMethod());
 
-        APIManager apiManager = new APIManager(this);
-        userPreferences = new UserPreferences(this);
+        //set all Text Size
+        setTextSize();
+
         apiManager.getClassDetails(userPreferences.getUserToken(), sessionId, new NetworkHelper.getClassDetails() {
             @Override
             public void onResponse(Boolean success, Map<String, Object> classDetails) {
@@ -308,5 +313,16 @@ public class ActivityLive extends AppCompatActivity{
                 // Permission has already been granted
             }
         }
+    }
+
+    private void setTextSize(){
+        //multiple of text size
+        float textSize = userPreferences.getTextSize();
+        className.setTextSize(TypedValue.COMPLEX_UNIT_PX, className.getTextSize() * textSize);
+        classSession.setTextSize(TypedValue.COMPLEX_UNIT_PX, classSession.getTextSize() * textSize);
+        textContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, textContent.getTextSize() * textSize);
+        textLiveNow.setTextSize(TypedValue.COMPLEX_UNIT_PX, textLiveNow.getTextSize() * textSize);
+        courseTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, courseTitle.getTextSize() * textSize);
+        toolbarTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, toolbarTitle.getTextSize() * textSize);
     }
 }

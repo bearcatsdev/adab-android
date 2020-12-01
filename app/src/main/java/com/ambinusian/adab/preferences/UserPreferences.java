@@ -13,6 +13,7 @@ public class UserPreferences {
     private static final String KEY_USER_PRIVILEGE = "user_privilege";
     private static final String KEY_USER_DEPARTMENT = "user_departement"; //TODO: Bang, ini "department"
     private static final String KEY_PREF_NIGHT = "pref_night";
+    private static final String KEY_TEXT_SIZE = "text_size";
 
     private static Context context = null;
 
@@ -102,4 +103,15 @@ public class UserPreferences {
     public int getPrefNight() {
         return getSharedPreference().getInt(KEY_PREF_NIGHT,0);
     }
+
+    public void setTextSize(float textSize){
+        SharedPreferences.Editor editor = getSharedPreference().edit();
+        editor.putFloat(KEY_TEXT_SIZE, textSize);
+        editor.apply();
+    }
+
+    public float getTextSize(){
+        return getSharedPreference().getFloat(KEY_TEXT_SIZE,1f);
+    }
+
 }

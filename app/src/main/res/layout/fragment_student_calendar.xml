@@ -58,6 +58,7 @@
                     android:layout_height="24dp" />
 
                 <TextView
+                    android:id="@+id/tv_no_class"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/no_class_today"
