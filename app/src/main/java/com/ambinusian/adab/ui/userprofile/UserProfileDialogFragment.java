@@ -2,6 +2,7 @@ package com.ambinusian.adab.ui.userprofile;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -70,7 +71,9 @@ public class UserProfileDialogFragment extends DialogFragment {
         textUserDepartment.setText(userPreferences.getUserDepartement());
         db = ClassDatabase.getDatabase(getContext());
 
+        // set text attributes
         setTextSize();
+        setTextTypeface();
 
         layoutLogout.setOnClickListener(v -> {
             userPreferences.clearLoggedInUser();
@@ -112,5 +115,17 @@ public class UserProfileDialogFragment extends DialogFragment {
         textMessage.setTextSize(TypedValue.COMPLEX_UNIT_PX, textMessage.getTextSize()*textSize);
         textAccessibilityMode.setTextSize(TypedValue.COMPLEX_UNIT_PX, textAccessibilityMode.getTextSize()*textSize);
         textSignOut.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSignOut.getTextSize()*textSize);
+    }
+
+    private void setTextTypeface(){
+        //get font type
+        Typeface textTypeface = userPreferences.getTextTypeface();
+        //set font type for each text view
+        textUserName.setTypeface(textTypeface);
+        textUserDepartment.setTypeface(textTypeface);
+        buttonAccountDetails.setTypeface(textTypeface);
+        textMessage.setTypeface(textTypeface);
+        textAccessibilityMode.setTypeface(textTypeface);
+        textSignOut.setTypeface(textTypeface);
     }
 }

@@ -2,6 +2,7 @@ package com.ambinusian.adab.ui.login;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -66,7 +67,9 @@ public class FragmentLogin extends Fragment {
         apiManager = new APIManager(getContext());
         db = ClassDatabase.getDatabase(getContext());
 
+        //set text attributes
         setTextSize();
+        setTextTypeface();
 
         ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -219,5 +222,15 @@ public class FragmentLogin extends Fragment {
         inputNim.setTextSize(TypedValue.COMPLEX_UNIT_PX,inputNim.getTextSize()*textSize);
         inputPassword.setTextSize(TypedValue.COMPLEX_UNIT_PX,inputPassword.getTextSize()*textSize);
         btnLogin.setTextSize(TypedValue.COMPLEX_UNIT_PX,btnLogin.getTextSize()*textSize);
+    }
+
+    private void setTextTypeface(){
+        //get font type
+        Typeface textTypeface = userPreferences.getTextTypeface();
+        //set font type for each text view
+        loginMessage.setTypeface(textTypeface);
+        inputNim.setTypeface(textTypeface);
+        inputPassword.setTypeface(textTypeface);
+        btnLogin.setTypeface(textTypeface);
     }
 }

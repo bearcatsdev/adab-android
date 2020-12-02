@@ -1,6 +1,7 @@
 package com.ambinusian.adab.expandablenavigationdrawer;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.util.TypedValue;
@@ -23,6 +24,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     HashMap<MenuModel,List<MenuModel>> childList;
     UserPreferences userPreferences;
     float defaultMenuTextSize = -1;
+    Typeface defaultMenuTextTypeface = null;
 
     public ExpandableListAdapter(Context context, List<MenuModel> groupList, HashMap<MenuModel, List<MenuModel>> childList) {
         this.context = context;
@@ -111,6 +113,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         mMenuName.setText(menuName);
         getDefaultMenuTextSize(mMenuName);
         mMenuName.setTextSize(TypedValue.COMPLEX_UNIT_PX,defaultMenuTextSize*userPreferences.getTextSize());
+        getDefaultMenuTextTypeface(mMenuName);
+        mMenuName.setTypeface(userPreferences.getTextTypeface());
+
 
         if(i != 1){
             indicatorIcon.setVisibility(View.GONE);
@@ -155,6 +160,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public void getDefaultMenuTextSize(TextView menu){
         if(defaultMenuTextSize == -1){
             defaultMenuTextSize = menu.getTextSize();
+        }
+    }
+
+    public void getDefaultMenuTextTypeface(TextView menu){
+        if(defaultMenuTextTypeface == null){
+            defaultMenuTextTypeface = menu.getTypeface();
         }
     }
 }

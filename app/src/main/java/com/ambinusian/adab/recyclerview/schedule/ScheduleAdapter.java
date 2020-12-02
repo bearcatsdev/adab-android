@@ -1,6 +1,7 @@
 package com.ambinusian.adab.recyclerview.schedule;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,8 +43,9 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleHolder> {
         holder.scheduleClassCode.setText(item.getClassRoom());
         holder.scheduleClassTime.setText(item.getClassTime());
 
-        //set text size to all text view
+        //set text attributes
         setTextSize(holder);
+        setTextTypeface(holder);
     }
 
     @Override
@@ -61,5 +63,17 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleHolder> {
         holder.scheduleCourseCode.setTextSize(TypedValue.COMPLEX_UNIT_PX, holder.scheduleCourseCode.getTextSize() * textSize);
         holder.scheduleClassCode.setTextSize(TypedValue.COMPLEX_UNIT_PX, holder.scheduleClassCode.getTextSize() * textSize);
         holder.scheduleClassTime.setTextSize(TypedValue.COMPLEX_UNIT_PX, holder.scheduleClassTime.getTextSize() * textSize);
+    }
+
+    private void setTextTypeface(ScheduleHolder holder){
+        //get font type
+        Typeface textTypeface = userPreferences.getTextTypeface();
+        //set font type for each text view
+        holder.scheduleClassType.setTypeface(textTypeface);
+        holder.scheduleClassTitle.setTypeface(textTypeface);
+        holder.scheduleCourse.setTypeface(textTypeface);
+        holder.scheduleCourseCode.setTypeface(textTypeface);
+        holder.scheduleClassCode.setTypeface(textTypeface);
+        holder.scheduleClassTime.setTypeface(textTypeface);
     }
 }

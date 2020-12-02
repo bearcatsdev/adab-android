@@ -1,5 +1,6 @@
 package com.ambinusian.adab.ui.login;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -37,7 +38,9 @@ public class FragmentWelcome extends Fragment {
         tvHiThere = view.findViewById(R.id.tv_hi_there);
         userPreferences = new UserPreferences(getContext());
 
+        //set text attributes
         setTextSize();
+        setTextTypeface();
 
         letsgo.setOnClickListener(view1 -> {
             FragmentChangeListener fc = (FragmentChangeListener) getActivity();
@@ -52,5 +55,13 @@ public class FragmentWelcome extends Fragment {
         //set text size for each text view
         tvHiThere.setTextSize(TypedValue.COMPLEX_UNIT_PX,tvHiThere.getTextSize()*textSize);
         letsgo.setTextSize(TypedValue.COMPLEX_UNIT_PX,letsgo.getTextSize()*textSize);
+    }
+
+    private void setTextTypeface(){
+        //get font type
+        Typeface textTypeface = userPreferences.getTextTypeface();
+        //set font type for each text view
+        tvHiThere.setTypeface(textTypeface);
+        letsgo.setTypeface(textTypeface);
     }
 }

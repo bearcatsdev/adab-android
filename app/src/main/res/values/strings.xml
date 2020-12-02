@@ -108,4 +108,11 @@
     <string name="dialog_end_session_question">Do you want to end this session?</string>
     <string name="save_text">Save</string>
 
+    <!--Font Name-->
+    <string-array name="typeface_types">
+        <item>Default</item>
+        <item>Serif</item>
+        <item>Sans-Serif</item>
+        <item>Monospace</item>
+    </string-array>
 </resources>

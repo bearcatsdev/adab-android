@@ -1,0 +1,109 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.ambinusian.adab"
+4    android:versionCode="307"
+5    android:versionName="1.0.1-20201203011332" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="22"
+8-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+11-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:34:5-71
+11-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:34:22-68
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:35:5-67
+12-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:35:22-64
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:36:5-78
+13-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:36:22-76
+14    <uses-permission android:name="android.permission.WAKE_LOCK" />
+14-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:37:5-68
+14-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:37:22-65
+15
+16    <application
+16-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:6:5-33:19
+17        android:allowBackup="true"
+17-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:7:9-35
+18        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+18-->[androidx.core:core:1.3.1] C:\Users\Dragna\.gradle\caches\transforms-2\files-2.1\93f50ea2e24d1b757b22f98dc1feeeda\core-1.3.1\AndroidManifest.xml:24:18-86
+19        android:debuggable="true"
+20        android:icon="@mipmap/ic_launcher"
+20-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:8:9-43
+21        android:label="@string/app_name"
+21-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:9:9-41
+22        android:roundIcon="@mipmap/ic_launcher_round"
+22-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:10:9-54
+23        android:supportsRtl="true"
+23-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:11:9-35
+24        android:testOnly="true"
+25        android:theme="@style/Theme.Adab" >
+25-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:12:9-42
+26        <activity android:name="com.ambinusian.adab.ui.student.LatestClassActivity" />
+26-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:14:9-68
+26-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:14:19-65
+27        <!-- IDK, but we need to work on Google App Index Warning -->
+28        <activity android:name="com.ambinusian.adab.ui.student.NextClassActivity" />
+28-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:16:9-66
+28-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:16:19-63
+29        <activity android:name="com.ambinusian.adab.all.ActivityLive" />
+29-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:17:9-54
+29-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:17:19-51
+30        <activity android:name="com.ambinusian.adab.ui.student.CourseDetail" />
+30-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:18:9-61
+30-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:18:19-58
+31        <activity android:name="com.ambinusian.adab.ui.lecturer.ActivityClassStarted" />
+31-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:19:9-70
+31-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:19:19-67
+32        <activity android:name="com.ambinusian.adab.ui.lecturer.CourseDetail" />
+32-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:20:9-62
+32-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:20:19-59
+33        <activity android:name="com.ambinusian.adab.ui.lecturer.MainActivity" />
+33-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:21:9-62
+33-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:21:19-59
+34        <activity
+34-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:22:9-30:20
+35            android:name="com.ambinusian.adab.ui.splash.SplashActivity"
+35-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:23:13-53
+36            android:theme="@style/Theme.Adab.Launcher" >
+36-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:24:13-55
+37            <intent-filter>
+37-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:25:13-29:29
+38                <action android:name="android.intent.action.MAIN" />
+38-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:26:17-69
+38-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:26:25-66
+39
+40                <category android:name="android.intent.category.LAUNCHER" />
+40-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:28:17-77
+40-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:28:27-74
+41            </intent-filter>
+42        </activity>
+43        <activity android:name="com.ambinusian.adab.ui.login.ActivityLogin" />
+43-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:31:9-60
+43-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:31:19-57
+44        <activity android:name="com.ambinusian.adab.ui.student.MainActivity" />
+44-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:32:9-61
+44-->D:\FILES\Dev\Android Studio\adab-android\app\src\main\AndroidManifest.xml:32:19-58
+45
+46        <service
+46-->[androidx.room:room-runtime:2.2.0-rc01] C:\Users\Dragna\.gradle\caches\transforms-2\files-2.1\4862d944e9a46515c6fd849313c0f2d2\room-runtime-2.2.0-rc01\AndroidManifest.xml:25:9-27:40
+47            android:name="androidx.room.MultiInstanceInvalidationService"
+47-->[androidx.room:room-runtime:2.2.0-rc01] C:\Users\Dragna\.gradle\caches\transforms-2\files-2.1\4862d944e9a46515c6fd849313c0f2d2\room-runtime-2.2.0-rc01\AndroidManifest.xml:26:13-74
+48            android:exported="false" />
+48-->[androidx.room:room-runtime:2.2.0-rc01] C:\Users\Dragna\.gradle\caches\transforms-2\files-2.1\4862d944e9a46515c6fd849313c0f2d2\room-runtime-2.2.0-rc01\AndroidManifest.xml:27:13-37
+49
+50        <provider
+50-->[androidx.lifecycle:lifecycle-process:2.2.0-alpha03] C:\Users\Dragna\.gradle\caches\transforms-2\files-2.1\51e6edd492f901c233c9d5e18e31e249\jetified-lifecycle-process-2.2.0-alpha03\AndroidManifest.xml:25:9-29:43
+51            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+51-->[androidx.lifecycle:lifecycle-process:2.2.0-alpha03] C:\Users\Dragna\.gradle\caches\transforms-2\files-2.1\51e6edd492f901c233c9d5e18e31e249\jetified-lifecycle-process-2.2.0-alpha03\AndroidManifest.xml:26:13-79
+52            android:authorities="com.ambinusian.adab.lifecycle-process"
+52-->[androidx.lifecycle:lifecycle-process:2.2.0-alpha03] C:\Users\Dragna\.gradle\caches\transforms-2\files-2.1\51e6edd492f901c233c9d5e18e31e249\jetified-lifecycle-process-2.2.0-alpha03\AndroidManifest.xml:27:13-69
+53            android:exported="false"
+53-->[androidx.lifecycle:lifecycle-process:2.2.0-alpha03] C:\Users\Dragna\.gradle\caches\transforms-2\files-2.1\51e6edd492f901c233c9d5e18e31e249\jetified-lifecycle-process-2.2.0-alpha03\AndroidManifest.xml:28:13-37
+54            android:multiprocess="true" />
+54-->[androidx.lifecycle:lifecycle-process:2.2.0-alpha03] C:\Users\Dragna\.gradle\caches\transforms-2\files-2.1\51e6edd492f901c233c9d5e18e31e249\jetified-lifecycle-process-2.2.0-alpha03\AndroidManifest.xml:29:13-40
+55    </application>
+56
+57</manifest>

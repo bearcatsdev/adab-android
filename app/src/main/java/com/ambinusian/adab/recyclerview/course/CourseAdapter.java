@@ -2,6 +2,7 @@ package com.ambinusian.adab.recyclerview.course;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.all.ActivityLive;
 import com.ambinusian.adab.preferences.UserPreferences;
+import com.ambinusian.adab.recyclerview.classlist.ClasslListHolder;
 
 import java.util.ArrayList;
 
@@ -54,8 +56,9 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseHolder> {
         holder.classCode.setText(item.getClassCode());
         holder.classType.setText(item.getClassType());
 
-        //set text size for all text
+        //set text attributes
         setTextSize(holder);
+        setTextTypeface(holder);
 
         int classIcon = item.getClassIcon();
         //set classIcon
@@ -279,5 +282,18 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseHolder> {
         holder.courseCode.setTextSize(TypedValue.COMPLEX_UNIT_PX, holder.courseCode.getTextSize() * textSize);
         holder.classCode.setTextSize(TypedValue.COMPLEX_UNIT_PX, holder.classCode.getTextSize() * textSize);
         holder.classType.setTextSize(TypedValue.COMPLEX_UNIT_PX, holder.classType.getTextSize() * textSize);
+    }
+
+    private void setTextTypeface(CourseHolder holder){
+        //get font type
+        Typeface textTypeface = userPreferences.getTextTypeface();
+        //set font type for each text view
+        holder.classTime.setTypeface(textTypeface);
+        holder.classTitle.setTypeface(textTypeface);
+        holder.courses.setTypeface(textTypeface);
+        holder.classMeeting.setTypeface(textTypeface);
+        holder.courseCode.setTypeface(textTypeface);
+        holder.classCode.setTypeface(textTypeface);
+        holder.classType.setTypeface(textTypeface);
     }
 }

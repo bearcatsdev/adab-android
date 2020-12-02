@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "applicationId": "com.ambinusian.adab",
+  "variantType": "BASE_APK",
+  "elements": [
+    {
+      "outputType": {
+        "type": "BUNDLE_MANIFEST"
+      },
+      "apkData": {
+        "type": "MAIN",
+        "splits": [],
+        "versionCode": 307,
+        "versionName": "1.0.1-20201203011332",
+        "outputFile": "app-debug.apk",
+        "fullName": "debug",
+        "baseName": "debug",
+        "dirName": ""
+      },
+      "path": "AndroidManifest.xml",
+      "properties": {
+        "packageId": "com.ambinusian.adab",
+        "split": "",
+        "minSdkVersion": "22"
+      }
+    }
+  ]
+}

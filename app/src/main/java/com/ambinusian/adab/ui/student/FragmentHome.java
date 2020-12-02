@@ -2,6 +2,7 @@ package com.ambinusian.adab.ui.student;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.widget.ImageView;
@@ -108,8 +109,9 @@ public class FragmentHome extends Fragment {
         // set visibility gone
         coursesRecyclerView.setVisibility(View.GONE);
 
-        //set text size based on sharedPreferences text size value
+        //set text attributes
         setTextSize();
+        setTextTypeface();
 
         // get classes data
         db.classDAO().getAllClass().observe(getActivity(), new Observer<List<ClassEntity>>() {
@@ -275,5 +277,27 @@ public class FragmentHome extends Fragment {
         latestClass.sectionSubtitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,latestClass.sectionSubtitle.getTextSize()*textSize);
         seeAllLatestClass.setTextSize(TypedValue.COMPLEX_UNIT_PX, seeAllLatestClass.getTextSize()*textSize);
         seeAllNextClass.setTextSize(TypedValue.COMPLEX_UNIT_PX, seeAllNextClass.getTextSize()*textSize);
+    }
+
+    private void setTextTypeface(){
+        //get font type
+        Typeface textTypeface = userPreferences.getTextTypeface();
+        //set font type for each text view
+        welcomeTitle.setTypeface(textTypeface);
+        welcomeSubtitle.setTypeface(textTypeface);
+        ongoingClass.headlineTitle.setTypeface(textTypeface);
+        liveClassTitle.setTypeface(textTypeface);
+        liveCourse.setTypeface(textTypeface);
+        liveClassMeeting.setTypeface(textTypeface);
+        nextClassTime.setTypeface(textTypeface);
+        nextClassTitle.setTypeface(textTypeface);
+        nextCourse.setTypeface(textTypeface);
+        nextClassSession.setTypeface(textTypeface);
+        nextClass.sectionTitle.setTypeface(textTypeface);
+        nextClass.sectionSubtitle.setTypeface(textTypeface);
+        latestClass.sectionTitle.setTypeface(textTypeface);
+        latestClass.sectionSubtitle.setTypeface(textTypeface);
+        seeAllLatestClass.setTypeface(textTypeface);
+        seeAllNextClass.setTypeface(textTypeface);
     }
 }

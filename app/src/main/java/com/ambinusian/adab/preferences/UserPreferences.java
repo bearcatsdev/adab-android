@@ -2,7 +2,9 @@ package com.ambinusian.adab.preferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class UserPreferences {
 
@@ -14,6 +16,8 @@ public class UserPreferences {
     private static final String KEY_USER_DEPARTMENT = "user_departement"; //TODO: Bang, ini "department"
     private static final String KEY_PREF_NIGHT = "pref_night";
     private static final String KEY_TEXT_SIZE = "text_size";
+    private static final String KEY_TEXT_FAMILY = "text_family";
+    private static final String KEY_TEXT_STYLE = "text_style";
 
     private static Context context = null;
 
@@ -114,4 +118,44 @@ public class UserPreferences {
         return getSharedPreference().getFloat(KEY_TEXT_SIZE,1f);
     }
 
+    public void setTextTypeface(int typefaceFamily, int typefaceStyle){
+        SharedPreferences.Editor editor = getSharedPreference().edit();
+        editor.putInt(KEY_TEXT_FAMILY, typefaceFamily);
+        editor.putInt(KEY_TEXT_STYLE, typefaceStyle);
+        editor.apply();
+    }
+
+    public Typeface getTextTypeface(){
+        int typefaceFamily = getSharedPreference().getInt(KEY_TEXT_FAMILY,0);
+        int typefaceStyle = getSharedPreference().getInt(KEY_TEXT_STYLE,0);
+
+        Typeface typeface;
+
+//        pilih font family
+        switch (typefaceFamily) {
+            case 1:
+                typeface = Typeface.create(Typeface.SERIF, Typeface.NORMAL);
+                break;
+            case 2:
+                typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.NORMAL);
+                break;
+            case 3:
+                typeface = Typeface.create(Typeface.MONOSPACE, Typeface.NORMAL);
+                break;
+            default:
+                typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL);
+                break;
+        }
+
+//        pilih font style
+        switch (typefaceStyle) {
+            case 1:
+                typeface = Typeface.create(typeface, Typeface.BOLD);
+                break;
+            default:
+                typeface = Typeface.create(typeface, Typeface.NORMAL);
+                break;
+        }
+        return typeface;
+    }
 }

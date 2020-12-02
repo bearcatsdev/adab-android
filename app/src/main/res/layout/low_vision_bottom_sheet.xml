@@ -42,6 +42,15 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"/>
 
+    <Spinner
+        android:id="@+id/text_typeface_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_save"
         android:layout_width="match_parent"

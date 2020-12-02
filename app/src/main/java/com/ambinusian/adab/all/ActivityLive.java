@@ -3,6 +3,7 @@ package com.ambinusian.adab.all;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
@@ -97,8 +98,9 @@ public class ActivityLive extends AppCompatActivity{
         //scroll always to bottom
         textContent.setMovementMethod(new ScrollingMovementMethod());
 
-        //set all Text Size
+        // set text attributes
         setTextSize();
+        setTextTypeface();
 
         apiManager.getClassDetails(userPreferences.getUserToken(), sessionId, new NetworkHelper.getClassDetails() {
             @Override
@@ -324,5 +326,17 @@ public class ActivityLive extends AppCompatActivity{
         textLiveNow.setTextSize(TypedValue.COMPLEX_UNIT_PX, textLiveNow.getTextSize() * textSize);
         courseTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, courseTitle.getTextSize() * textSize);
         toolbarTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, toolbarTitle.getTextSize() * textSize);
+    }
+
+    private void setTextTypeface(){
+        //get font type
+        Typeface textTypeface = userPreferences.getTextTypeface();
+        //set font type for each text view
+        className.setTypeface(textTypeface);
+        classSession.setTypeface(textTypeface);
+        textContent.setTypeface(textTypeface);
+        textLiveNow.setTypeface(textTypeface);
+        courseTitle.setTypeface(textTypeface);
+        toolbarTitle.setTypeface(textTypeface);
     }
 }
