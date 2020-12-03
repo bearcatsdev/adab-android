@@ -2,6 +2,7 @@ package com.ambinusian.adab.ui.student;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.widget.ImageView;
@@ -108,8 +109,9 @@ public class FragmentHome extends Fragment {
         // set visibility gone
         coursesRecyclerView.setVisibility(View.GONE);
 
-        //set text size based on sharedPreferences text size value
+        //set text attributes
         setTextSize();
+        setTextTypeface();
 
         // get classes data
         db.classDAO().getAllClass().observe(getActivity(), new Observer<List<ClassEntity>>() {
@@ -275,5 +277,27 @@ public class FragmentHome extends Fragment {
         latestClass.sectionSubtitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,latestClass.sectionSubtitle.getTextSize()*textSize);
         seeAllLatestClass.setTextSize(TypedValue.COMPLEX_UNIT_PX, seeAllLatestClass.getTextSize()*textSize);
         seeAllNextClass.setTextSize(TypedValue.COMPLEX_UNIT_PX, seeAllNextClass.getTextSize()*textSize);
+    }
+
+    private void setTextTypeface(){
+        //get font type
+        Typeface textTypeface = userPreferences.getTextTypeface();
+        //set font type for each text view
+        welcomeTitle.setTypeface(textTypeface, welcomeTitle.getTypeface().getStyle());
+        welcomeSubtitle.setTypeface(textTypeface, welcomeSubtitle.getTypeface().getStyle());
+        ongoingClass.headlineTitle.setTypeface(textTypeface, ongoingClass.headlineTitle.getTypeface().getStyle());
+        liveClassTitle.setTypeface(textTypeface, liveClassTitle.getTypeface().getStyle());
+        liveCourse.setTypeface(textTypeface, liveCourse.getTypeface().getStyle());
+        liveClassMeeting.setTypeface(textTypeface, liveClassMeeting.getTypeface().getStyle());
+        nextClassTime.setTypeface(textTypeface, nextClassTime.getTypeface().getStyle());
+        nextClassTitle.setTypeface(textTypeface, nextClassTitle.getTypeface().getStyle());
+        nextCourse.setTypeface(textTypeface, nextCourse.getTypeface().getStyle());
+        nextClassSession.setTypeface(textTypeface, nextClassSession.getTypeface().getStyle());
+        nextClass.sectionTitle.setTypeface(textTypeface, nextClass.sectionTitle.getTypeface().getStyle());
+        nextClass.sectionSubtitle.setTypeface(textTypeface, nextClass.sectionSubtitle.getTypeface().getStyle());
+        latestClass.sectionTitle.setTypeface(textTypeface, latestClass.sectionTitle.getTypeface().getStyle());
+        latestClass.sectionSubtitle.setTypeface(textTypeface, latestClass.sectionSubtitle.getTypeface().getStyle());
+        seeAllLatestClass.setTypeface(textTypeface, seeAllLatestClass.getTypeface().getStyle());
+        seeAllNextClass.setTypeface(textTypeface, seeAllNextClass.getTypeface().getStyle());
     }
 }

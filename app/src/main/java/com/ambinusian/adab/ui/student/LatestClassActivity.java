@@ -6,10 +6,14 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
+import android.widget.TextView;
 
 import com.ambinusian.adab.R;
+import com.ambinusian.adab.preferences.UserPreferences;
 import com.ambinusian.adab.recyclerview.nextorlatestclass.NextOrLatestClassAdapter;
 import com.ambinusian.adab.recyclerview.nextorlatestclass.NextOrLatestClassModel;
 import com.ambinusian.adab.room.ClassDatabase;
@@ -30,6 +34,8 @@ public class LatestClassActivity extends AppCompatActivity {
     private RecyclerView latestClassRecyclerView;
     private ArrayList<NextOrLatestClassModel> latestClassList;
     private Date date1, date2;
+    private TextView latestClass;
+    private UserPreferences userPreferences;
     private ClassDatabase db;
 
     @Override
@@ -37,10 +43,16 @@ public class LatestClassActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_latest_class);
 
+        userPreferences = new UserPreferences(this);
         toolbar = findViewById(R.id.latest_class_toolbar);
+        latestClass = findViewById(R.id.tv_latest_class);
         latestClassRecyclerView  = findViewById(R.id.latest_class_recycler_view);
         latestClassList = new ArrayList<>();
         db = ClassDatabase.getDatabase(getApplicationContext());
+
+        //set text attributes
+        setTextSize();
+        setTextTypeface();
 
         db.classDAO().getAllClass().observe(LatestClassActivity.this, new Observer<List<ClassEntity>>() {
             @Override
@@ -130,5 +142,19 @@ public class LatestClassActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    private void setTextSize(){
+        //multiple of text size
+        float textSize = userPreferences.getTextSize();
+        //set text size for each text view
+        latestClass.setTextSize(TypedValue.COMPLEX_UNIT_PX,latestClass.getTextSize()*textSize);
+    }
+
+    private void setTextTypeface(){
+        //get font type
+        Typeface textTypeface = userPreferences.getTextTypeface();
+        //set font type for each text view
+        latestClass.setTypeface(textTypeface, latestClass.getTypeface().getStyle());
     }
 }

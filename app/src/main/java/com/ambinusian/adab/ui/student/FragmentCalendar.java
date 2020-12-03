@@ -2,6 +2,7 @@ package com.ambinusian.adab.ui.student;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -72,8 +73,9 @@ public class FragmentCalendar extends Fragment {
         mainActivity = getActivity();
         userPreferences = new UserPreferences(getContext());
 
-        //set text size
+        //set text attributes
         setTextSize();
+        setTextTypeface();
 
         db.classDAO().getAllClass().observe(getActivity(), new Observer<List<ClassEntity>>() {
             @SuppressLint("SimpleDateFormat")
@@ -210,5 +212,13 @@ public class FragmentCalendar extends Fragment {
         //set text size for each text view
         selectedDate.setTextSize(TypedValue.COMPLEX_UNIT_PX,selectedDate.getTextSize()*textSize);
         noClass.setTextSize(TypedValue.COMPLEX_UNIT_PX,noClass.getTextSize()*textSize);
+    }
+
+    private void setTextTypeface(){
+        //get font type
+        Typeface textTypeface = userPreferences.getTextTypeface();
+        //set font type for each text view
+        selectedDate.setTypeface(textTypeface, selectedDate.getTypeface().getStyle());
+        noClass.setTypeface(textTypeface, noClass.getTypeface().getStyle());
     }
 }

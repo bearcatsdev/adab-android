@@ -1,6 +1,7 @@
 package com.ambinusian.adab.ui.student;
 
 import android.annotation.SuppressLint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -124,8 +125,10 @@ public class FragmentTopics extends Fragment {
                     nextClassSession.setText("Session "+next_class_info.getMeeting());
                     nextClassTime.setText(next_class_info.getTime());
                 }
-                //set text view size
+
+                //set text attributes
                 setTextSize();
+                setTextTypeface();
 
                 //Set Layout Manager For Recycler View
                 classListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -151,5 +154,19 @@ public class FragmentTopics extends Fragment {
         nextClassTime.setTextSize(TypedValue.COMPLEX_UNIT_PX, nextClassTime.getTextSize()*textSize);
         svClassList.sectionTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, svClassList.sectionTitle.getTextSize()*textSize);
         svClassList.sectionSubtitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, svClassList.sectionSubtitle.getTextSize()*textSize);
+    }
+
+    private void setTextTypeface(){
+        //get font type
+        Typeface textTypeface = userPreferences.getTextTypeface();
+        //set font type for each text view
+        course.setTypeface(textTypeface, course.getTypeface().getStyle());
+        courseCode.setTypeface(textTypeface, courseCode.getTypeface().getStyle());
+        classRoom.setTypeface(textTypeface, classRoom.getTypeface().getStyle());
+        nextClassTitle.setTypeface(textTypeface, nextClassTitle.getTypeface().getStyle());
+        nextClassSession.setTypeface(textTypeface, nextClassSession.getTypeface().getStyle());
+        nextClassTime.setTypeface(textTypeface, nextClassTime.getTypeface().getStyle());
+        svClassList.sectionTitle.setTypeface(textTypeface, svClassList.sectionTitle.getTypeface().getStyle());
+        svClassList.sectionSubtitle.setTypeface(textTypeface, svClassList.sectionSubtitle.getTypeface().getStyle());
     }
 }

@@ -1,6 +1,7 @@
 package com.ambinusian.adab.recyclerview.classlist;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +47,9 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClasslListHolder> {
         holder.meeting.setText(item.getMeeting());
         holder.time.setText(item.getTime());
 
+        //set text attributes
         setTextSize(holder);
+        setTextTypeface(holder);
 
         //set classIcon
         int classIcon = item.getClassIcon();
@@ -252,5 +255,14 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClasslListHolder> {
         holder.classTopic.setTextSize(TypedValue.COMPLEX_UNIT_PX,holder.classTopic.getTextSize()*textSize);
         holder.meeting.setTextSize(TypedValue.COMPLEX_UNIT_PX,holder.meeting.getTextSize()*textSize);
         holder.time.setTextSize(TypedValue.COMPLEX_UNIT_PX,holder.time.getTextSize()*textSize);
+    }
+
+    private void setTextTypeface(ClasslListHolder holder){
+        //get font type
+        Typeface textTypeface = userPreferences.getTextTypeface();
+        //set font type for each text view
+        holder.classTopic.setTypeface(textTypeface, holder.classTopic.getTypeface().getStyle());
+        holder.meeting.setTypeface(textTypeface, holder.meeting.getTypeface().getStyle());
+        holder.time.setTypeface(textTypeface, holder.time.getTypeface().getStyle());
     }
 }

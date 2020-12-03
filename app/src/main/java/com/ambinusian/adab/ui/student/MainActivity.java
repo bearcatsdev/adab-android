@@ -2,6 +2,7 @@ package com.ambinusian.adab.ui.student;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -128,8 +129,9 @@ public class MainActivity extends AppCompatActivity {
         //set expandable navigation drawer
         prepareMenuData();
 
-        //set text size
+        //set text attributes
         setTextSize();
+        setTextTypeface();
     }
 
     private void showUserProfileDialog() {
@@ -248,6 +250,14 @@ public class MainActivity extends AppCompatActivity {
         //set text size for each text view
         binusAdab.setTextSize(TypedValue.COMPLEX_UNIT_PX,binusAdab.getTextSize()*textSize);
         version.setTextSize(TypedValue.COMPLEX_UNIT_PX,version.getTextSize()*textSize);
+    }
+
+    private void setTextTypeface(){
+        //get font type
+        Typeface textTypeface = userPreferences.getTextTypeface();
+        //set font type for each text view
+        binusAdab.setTypeface(textTypeface, binusAdab.getTypeface().getStyle());
+        version.setTypeface(textTypeface, version.getTypeface().getStyle());
     }
 
     private class SpinnerAdapter extends ArrayAdapter<String> {
