@@ -14,12 +14,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:textSize="@dimen/text_caption"
+            android:id="@+id/tv_binus_adab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/home_title" />
+            android:text="@string/home_title"
+            android:textSize="@dimen/text_caption" />
 
         <TextView
+            android:id="@+id/tv_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/nav_head_build" />

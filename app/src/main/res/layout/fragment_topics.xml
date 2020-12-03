@@ -155,10 +155,11 @@
             <Space style="@style/Space16"/>
 
             <com.ambinusian.adab.customcomponent.SectionView
+                android:id="@+id/sv_class_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:sectionTitle="@string/lecturer_class_list_title"
-                app:sectionSubtitle="@string/lecturer_class_list_subtitle"/>
+                app:sectionSubtitle="@string/lecturer_class_list_subtitle"
+                app:sectionTitle="@string/lecturer_class_list_title" />
 
             <androidx.legacy.widget.Space
                 android:layout_width="match_parent"

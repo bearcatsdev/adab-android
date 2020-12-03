@@ -2,13 +2,16 @@ package com.ambinusian.adab.ui.login;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,6 +41,8 @@ public class FragmentLogin extends Fragment {
 
     private TextInputEditText inputNim;
     private TextInputEditText inputPassword;
+    private TextView loginMessage;
+    private MaterialButton btnLogin;
     private APIManager apiManager;
     private UserPreferences userPreferences;
     private ClassDatabase db;
@@ -53,14 +58,18 @@ public class FragmentLogin extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        MaterialButton btnLogin = view.findViewById(R.id.btn_login);
         Toolbar toolbar = view.findViewById(R.id.toolbar);
+        btnLogin = view.findViewById(R.id.btn_login);
         inputNim = view.findViewById(R.id.input_nim);
         inputPassword = view.findViewById(R.id.input_password);
+        loginMessage = view.findViewById(R.id.tv_login_message);
         userPreferences = new UserPreferences(getContext());
         apiManager = new APIManager(getContext());
         db = ClassDatabase.getDatabase(getContext());
 
+        //set text attributes
+        setTextSize();
+        setTextTypeface();
 
         ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -203,5 +212,25 @@ public class FragmentLogin extends Fragment {
                 super.onPostExecute(aVoid);
             }
         }.execute();
+    }
+
+    private void setTextSize(){
+        //multiple of text size
+        float textSize = userPreferences.getTextSize();
+        //set text size for each text view
+        loginMessage.setTextSize(TypedValue.COMPLEX_UNIT_PX,loginMessage.getTextSize()*textSize);
+        inputNim.setTextSize(TypedValue.COMPLEX_UNIT_PX,inputNim.getTextSize()*textSize);
+        inputPassword.setTextSize(TypedValue.COMPLEX_UNIT_PX,inputPassword.getTextSize()*textSize);
+        btnLogin.setTextSize(TypedValue.COMPLEX_UNIT_PX,btnLogin.getTextSize()*textSize);
+    }
+
+    private void setTextTypeface(){
+        //get font type
+        Typeface textTypeface = userPreferences.getTextTypeface();
+        //set font type for each text view
+        loginMessage.setTypeface(textTypeface, loginMessage.getTypeface().getStyle());
+        inputNim.setTypeface(textTypeface, inputNim.getTypeface().getStyle());
+        inputPassword.setTypeface(textTypeface, inputPassword.getTypeface().getStyle());
+        btnLogin.setTypeface(textTypeface, btnLogin.getTypeface().getStyle());
     }
 }

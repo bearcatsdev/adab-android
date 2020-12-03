@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_title_example"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/textSecondary"
+        android:textSize="@dimen/text_caption"
+        android:textStyle="bold"
+        android:text="ABCDEFGHIJK"/>
+
+    <TextView
+        android:id="@+id/tv_subtitle_example"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/textPrimaryLight"
+        android:textSize="@dimen/text_body"
+        android:textStyle="bold"
+        android:text="abjdefghij"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/text_size_slider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stepSize="0.1"
+        android:valueFrom="1"
+        android:valueTo="1.5"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <Spinner
+        android:id="@+id/text_typeface_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:fontFamily="@font/interstate_bold"
+        android:text="@string/save_text"
+        app:cornerRadius="20dp"/>
+
+</LinearLayout>

@@ -45,8 +45,15 @@
                     app:lottie_autoPlay="true"
                     tools:padding="12dp"
                     tools:src="@mipmap/splash_logo"
-                    app:lottie_speed="0.5"
-                    />
+                    app:lottie_speed="0.5"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_low_vision"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="end"
+                    android:src="@drawable/ic_baseline_accessibility_new_24" />
+
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>

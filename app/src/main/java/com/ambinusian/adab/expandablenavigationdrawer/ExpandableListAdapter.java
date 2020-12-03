@@ -1,8 +1,10 @@
 package com.ambinusian.adab.expandablenavigationdrawer;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.ambinusian.adab.R;
+import com.ambinusian.adab.preferences.UserPreferences;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,11 +22,15 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     Context context;
     List<MenuModel> groupList;
     HashMap<MenuModel,List<MenuModel>> childList;
+    UserPreferences userPreferences;
+    float defaultMenuTextSize = -1;
+    Typeface defaultMenuTextTypeface = null;
 
     public ExpandableListAdapter(Context context, List<MenuModel> groupList, HashMap<MenuModel, List<MenuModel>> childList) {
         this.context = context;
         this.groupList = groupList;
         this.childList = childList;
+        userPreferences = new UserPreferences(context);
     }
 
     @Override
@@ -80,7 +87,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 view.findViewById(R.id.indicator);
         TextView mMenuName = (TextView) view.findViewById(R.id.group_menu_name);
 
-
         if(menuIcon == 0){
             mMenuIcon.setImageResource(R.drawable.round_view_stream_24px);
         }
@@ -105,6 +111,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             mMenuIcon.setImageResource(R.drawable.round_settings_24px);
         }
         mMenuName.setText(menuName);
+        getDefaultMenuTextSize(mMenuName);
+        mMenuName.setTextSize(TypedValue.COMPLEX_UNIT_PX,defaultMenuTextSize*userPreferences.getTextSize());
+        getDefaultMenuTextTypeface(mMenuName);
+        mMenuName.setTypeface(userPreferences.getTextTypeface());
+
 
         if(i != 1){
             indicatorIcon.setVisibility(View.GONE);
@@ -114,9 +125,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             indicatorIcon.setImageDrawable(view.getContext().getResources().getDrawable(R.drawable.ic_round_keyboard_arrow_up_24px));
         else
             indicatorIcon.setImageDrawable(view.getContext().getResources().getDrawable(R.drawable.ic_round_keyboard_arrow_down_24px));
-
-        TextView name = view.findViewById(R.id.group_menu_name);
-        Log.e("debug",name.getText().toString());
 
         return view;
     }
@@ -134,10 +142,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         ImageView mMenuIcon = view.findViewById(R.id.child_menu_icon);
         TextView mMenuName = view.findViewById(R.id.child_menu_name);
+        getDefaultMenuTextSize(mMenuName);
+        mMenuName.setTextSize(TypedValue.COMPLEX_UNIT_PX, defaultMenuTextSize*userPreferences.getTextSize());
 
         if(menuIcon == 6)
         mMenuIcon.setImageResource(R.drawable.ic_outline_book_24px);
         mMenuName.setText(menuName);
+
         return view;
     }
 
@@ -146,5 +157,15 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
+    public void getDefaultMenuTextSize(TextView menu){
+        if(defaultMenuTextSize == -1){
+            defaultMenuTextSize = menu.getTextSize();
+        }
+    }
 
+    public void getDefaultMenuTextTypeface(TextView menu){
+        if(defaultMenuTextTypeface == null){
+            defaultMenuTextTypeface = menu.getTypeface();
+        }
+    }
 }

@@ -2,8 +2,10 @@ package com.ambinusian.adab.ui.student;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -42,21 +44,20 @@ import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
 
 public class FragmentCalendar extends Fragment {
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_student_calendar, container, false);
     }
 
-    TextView selectedDate;
+    TextView selectedDate, noClass;
     ArrayList<ScheduleModel> allClassSchedule;
     RecyclerView scheduleList;
     Date time;
     LinearLayout emptyClass;
     HorizontalCalendar.Builder builder;
     ClassDatabase db;
+    UserPreferences userPreferences;
     Activity mainActivity;
 
     @Override
@@ -64,11 +65,17 @@ public class FragmentCalendar extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         selectedDate = view.findViewById(R.id.tv_selectedDate);
+        noClass = view.findViewById(R.id.tv_no_class);
         scheduleList = view.findViewById(R.id.rv_schedule);
         emptyClass = view.findViewById(R.id.empty_class_layout);
         allClassSchedule = new ArrayList<>();
         db = ClassDatabase.getDatabase(getContext());
         mainActivity = getActivity();
+        userPreferences = new UserPreferences(getContext());
+
+        //set text attributes
+        setTextSize();
+        setTextTypeface();
 
         db.classDAO().getAllClass().observe(getActivity(), new Observer<List<ClassEntity>>() {
             @SuppressLint("SimpleDateFormat")
@@ -197,5 +204,21 @@ public class FragmentCalendar extends Fragment {
             ScheduleAdapter adapter = new ScheduleAdapter(getContext(), selectedDateClasses);
             scheduleList.setAdapter(adapter);
         }
+    }
+
+    private void setTextSize(){
+        //multiple of text size
+        float textSize = userPreferences.getTextSize();
+        //set text size for each text view
+        selectedDate.setTextSize(TypedValue.COMPLEX_UNIT_PX,selectedDate.getTextSize()*textSize);
+        noClass.setTextSize(TypedValue.COMPLEX_UNIT_PX,noClass.getTextSize()*textSize);
+    }
+
+    private void setTextTypeface(){
+        //get font type
+        Typeface textTypeface = userPreferences.getTextTypeface();
+        //set font type for each text view
+        selectedDate.setTypeface(textTypeface, selectedDate.getTypeface().getStyle());
+        noClass.setTypeface(textTypeface, noClass.getTypeface().getStyle());
     }
 }

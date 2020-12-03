@@ -11,11 +11,11 @@ import com.ambinusian.adab.R;
 
 public class HeadlineView extends RelativeLayout {
 
-    TextView headlineTitle;
+    public TextView headlineTitle;
 
     public HeadlineView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(context,attrs);
+        init(context, attrs);
     }
 
     public void init(Context context, AttributeSet attrs){

@@ -2,9 +2,11 @@ package com.ambinusian.adab.ui.userprofile;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +28,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UserProfileDialogFragment extends DialogFragment {
 
     private CircleImageView circleImageView;
-    private TextView textUserName;
-    private TextView textUserDepartment;
+    private TextView textUserName, textUserDepartment, textAccessibilityMode, textSignOut, textMessage;
     private MaterialButton buttonAccountDetails;
     private LinearLayout layoutLogout;
     private LinearLayout layoutDark;
     private ClassDatabase db;
+    private UserPreferences userPreferences;
 
     public UserProfileDialogFragment() {
         // Constructor kosong diperlukan untuk DialogFragment.
@@ -54,17 +56,24 @@ public class UserProfileDialogFragment extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        UserPreferences userPreferences = new UserPreferences(getContext());
+        userPreferences = new UserPreferences(getContext());
 
         circleImageView = getView().findViewById(R.id.circle_image_profile_picture);
         textUserName = getView().findViewById(R.id.tv_user_name);
         textUserDepartment = getView().findViewById(R.id.tv_user_department);
+        textMessage = getView().findViewById(R.id.tv_message);
+        textAccessibilityMode = getView().findViewById(R.id.tv_accessibility_mode);
+        textSignOut = getView().findViewById(R.id.tv_sign_out);
         buttonAccountDetails = getView().findViewById(R.id.button_account_details);
         layoutLogout = getView().findViewById(R.id.layout_logout);
         layoutDark = getView().findViewById(R.id.layout_profile_dialog_dark);
         textUserName.setText(userPreferences.getUserName());
         textUserDepartment.setText(userPreferences.getUserDepartement());
         db = ClassDatabase.getDatabase(getContext());
+
+        // set text attributes
+        setTextSize();
+        setTextTypeface();
 
         layoutLogout.setOnClickListener(v -> {
             userPreferences.clearLoggedInUser();
@@ -94,5 +103,29 @@ public class UserProfileDialogFragment extends DialogFragment {
             userPreferences.setPrefNight(mode);
             AppCompatDelegate.setDefaultNightMode(mode);
         });
+    }
+
+    private void setTextSize(){
+        //multiple of text size
+        float textSize = userPreferences.getTextSize();
+        //set text size for each text view
+        textUserName.setTextSize(TypedValue.COMPLEX_UNIT_PX,textUserName.getTextSize()*textSize);
+        textUserDepartment.setTextSize(TypedValue.COMPLEX_UNIT_PX,textUserDepartment.getTextSize()*textSize);
+        buttonAccountDetails.setTextSize(TypedValue.COMPLEX_UNIT_PX, buttonAccountDetails.getTextSize()*textSize);
+        textMessage.setTextSize(TypedValue.COMPLEX_UNIT_PX, textMessage.getTextSize()*textSize);
+        textAccessibilityMode.setTextSize(TypedValue.COMPLEX_UNIT_PX, textAccessibilityMode.getTextSize()*textSize);
+        textSignOut.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSignOut.getTextSize()*textSize);
+    }
+
+    private void setTextTypeface(){
+        //get font type
+        Typeface textTypeface = userPreferences.getTextTypeface();
+        //set font type for each text view
+        textUserName.setTypeface(textTypeface, textUserName.getTypeface().getStyle());
+        textUserDepartment.setTypeface(textTypeface, textUserDepartment.getTypeface().getStyle());
+        buttonAccountDetails.setTypeface(textTypeface, buttonAccountDetails.getTypeface().getStyle());
+        textMessage.setTypeface(textTypeface, textMessage.getTypeface().getStyle());
+        textAccessibilityMode.setTypeface(textTypeface, textAccessibilityMode.getTypeface().getStyle());
+        textSignOut.setTypeface(textTypeface, textSignOut.getTypeface().getStyle());
     }
 }

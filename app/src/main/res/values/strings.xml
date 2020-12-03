@@ -106,5 +106,11 @@
     <!--Dialog-->
     <string name="dialog_pause_session_question">Do you want to pause this session?</string>
     <string name="dialog_end_session_question">Do you want to end this session?</string>
+    <string name="save_text">Save</string>
 
+    <!--Font Name-->
+    <string-array name="typeface_types">
+        <item>Default</item>
+        <item>OpenDyslexic</item>
+    </string-array>
 </resources>

@@ -28,6 +28,8 @@
         android:gravity="left"
         android:textAlignment="gravity"
         android:textColor="@drawable/drawer_icon_text_effect"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:id="@+id/group_menu_name"/>
 
     <Space

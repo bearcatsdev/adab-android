@@ -40,13 +40,15 @@
                         tools:text="Welcome back, Kyle Wisely!" />
 
                 <TextView
+                    android:id="@+id/tv_welcomeSubtitle"
                     android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/welcome_subtitle" />
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="@string/welcome_subtitle" />
 
                 <androidx.slidingpanelayout.widget.SlidingPaneLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="16dp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -73,6 +75,7 @@
                    android:orientation="vertical">
 
                    <com.ambinusian.adab.customcomponent.HeadlineView
+                       android:id="@+id/hv_ongoingClass"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        app:headlineTitle="Ongoing Class" />
@@ -150,6 +153,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <com.ambinusian.adab.customcomponent.SectionView
+                            android:id="@+id/sv_nextClass"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -302,6 +306,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <com.ambinusian.adab.customcomponent.SectionView
+                            android:id="@+id/sv_latestClass"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"

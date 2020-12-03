@@ -15,6 +15,7 @@
             style="@style/Widget.Adab.Toolbar"
             android:id="@+id/latest_class_toolbar">
             <TextView
+                android:id="@+id/tv_latest_class"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
