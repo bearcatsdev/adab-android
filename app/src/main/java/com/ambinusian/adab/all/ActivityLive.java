@@ -58,7 +58,7 @@ public class ActivityLive extends AppCompatActivity{
     private Integer canTalk;
     private MaterialButton talkButton;
     private LinearLayout layoutButtons;
-    private String courseLanguage = "id-ID";
+    private String courseLanguage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
