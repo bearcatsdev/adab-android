@@ -6,6 +6,12 @@ import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import androidx.core.content.res.ResourcesCompat;
+
+import com.ambinusian.adab.R;
+
+import java.lang.reflect.Type;
+
 public class UserPreferences {
 
     private static final String KEY_USER_USERNAME = "user_username";
@@ -118,44 +124,48 @@ public class UserPreferences {
         return getSharedPreference().getFloat(KEY_TEXT_SIZE,1f);
     }
 
-    public void setTextTypeface(int typefaceFamily, int typefaceStyle){
+    public void setTextTypeface(int typefaceFamily){
         SharedPreferences.Editor editor = getSharedPreference().edit();
         editor.putInt(KEY_TEXT_FAMILY, typefaceFamily);
-        editor.putInt(KEY_TEXT_STYLE, typefaceStyle);
         editor.apply();
     }
 
     public Typeface getTextTypeface(){
         int typefaceFamily = getSharedPreference().getInt(KEY_TEXT_FAMILY,0);
-        int typefaceStyle = getSharedPreference().getInt(KEY_TEXT_STYLE,0);
 
         Typeface typeface;
 
 //        pilih font family
         switch (typefaceFamily) {
             case 1:
-                typeface = Typeface.create(Typeface.SERIF, Typeface.NORMAL);
-                break;
-            case 2:
-                typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.NORMAL);
-                break;
-            case 3:
-                typeface = Typeface.create(Typeface.MONOSPACE, Typeface.NORMAL);
+                typeface = ResourcesCompat.getFont(context, R.font.opendyslexic);
                 break;
             default:
-                typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL);
+                typeface = ResourcesCompat.getFont(context, R.font.interstate);
                 break;
         }
 
-//        pilih font style
-        switch (typefaceStyle) {
+        return typeface;
+    }
+
+    public Typeface getTextTypeface(int typefaceFamily){
+
+        Typeface typeface;
+
+//        pilih font family
+        switch (typefaceFamily) {
             case 1:
-                typeface = Typeface.create(typeface, Typeface.BOLD);
+                typeface = ResourcesCompat.getFont(context, R.font.opendyslexic);
                 break;
             default:
-                typeface = Typeface.create(typeface, Typeface.NORMAL);
+                typeface = ResourcesCompat.getFont(context, R.font.interstate);
                 break;
         }
+
         return typeface;
+    }
+
+    public int getTextTypefaceFamilyID() {
+        return getSharedPreference().getInt(KEY_TEXT_FAMILY, 0);
     }
 }

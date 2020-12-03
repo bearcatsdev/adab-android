@@ -86,7 +86,7 @@ public class LowVisionBottomSheetDialog extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
                 userPreferences.setTextSize(textSizeSlider.getValue());
-                userPreferences.setTextTypeface(selectedTypefaceID, 0);
+                userPreferences.setTextTypeface(selectedTypefaceID);
                 saveButtonListener.onClick();
             }
         });
@@ -98,9 +98,10 @@ public class LowVisionBottomSheetDialog extends BottomSheetDialogFragment {
                 //set
                 if (viewJustLoaded){
                     viewJustLoaded = false;
+                    spinner.setSelection(userPreferences.getTextTypefaceFamilyID());
                 } else {
                     selectedTypefaceID = position;
-                    setTextTypeface(userPreferences.getTextTypeface());
+                    setTextTypeface(userPreferences.getTextTypeface(position));
                 }
             }
 

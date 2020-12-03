@@ -111,8 +111,6 @@
     <!--Font Name-->
     <string-array name="typeface_types">
         <item>Default</item>
-        <item>Serif</item>
-        <item>Sans-Serif</item>
-        <item>Monospace</item>
+        <item>OpenDyslexic</item>
     </string-array>
 </resources>
