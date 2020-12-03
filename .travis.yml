@@ -74,7 +74,7 @@ deploy:
     file: BINUSAdab-latest.apk
     on:
         branch: master
-        repo: ambinusian/adab
+        repo: bearcatsdev/adab-android
 
 after_failure:
   # dumps the log then exits
