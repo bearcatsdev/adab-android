@@ -283,21 +283,21 @@ public class FragmentHome extends Fragment {
         //get font type
         Typeface textTypeface = userPreferences.getTextTypeface();
         //set font type for each text view
-        welcomeTitle.setTypeface(textTypeface);
-        welcomeSubtitle.setTypeface(textTypeface);
-        ongoingClass.headlineTitle.setTypeface(textTypeface);
-        liveClassTitle.setTypeface(textTypeface);
-        liveCourse.setTypeface(textTypeface);
-        liveClassMeeting.setTypeface(textTypeface);
-        nextClassTime.setTypeface(textTypeface);
-        nextClassTitle.setTypeface(textTypeface);
-        nextCourse.setTypeface(textTypeface);
-        nextClassSession.setTypeface(textTypeface);
-        nextClass.sectionTitle.setTypeface(textTypeface);
-        nextClass.sectionSubtitle.setTypeface(textTypeface);
-        latestClass.sectionTitle.setTypeface(textTypeface);
-        latestClass.sectionSubtitle.setTypeface(textTypeface);
-        seeAllLatestClass.setTypeface(textTypeface);
-        seeAllNextClass.setTypeface(textTypeface);
+        welcomeTitle.setTypeface(textTypeface, welcomeTitle.getTypeface().getStyle());
+        welcomeSubtitle.setTypeface(textTypeface, welcomeSubtitle.getTypeface().getStyle());
+        ongoingClass.headlineTitle.setTypeface(textTypeface, ongoingClass.headlineTitle.getTypeface().getStyle());
+        liveClassTitle.setTypeface(textTypeface, liveClassTitle.getTypeface().getStyle());
+        liveCourse.setTypeface(textTypeface, liveCourse.getTypeface().getStyle());
+        liveClassMeeting.setTypeface(textTypeface, liveClassMeeting.getTypeface().getStyle());
+        nextClassTime.setTypeface(textTypeface, nextClassTime.getTypeface().getStyle());
+        nextClassTitle.setTypeface(textTypeface, nextClassTitle.getTypeface().getStyle());
+        nextCourse.setTypeface(textTypeface, nextCourse.getTypeface().getStyle());
+        nextClassSession.setTypeface(textTypeface, nextClassSession.getTypeface().getStyle());
+        nextClass.sectionTitle.setTypeface(textTypeface, nextClass.sectionTitle.getTypeface().getStyle());
+        nextClass.sectionSubtitle.setTypeface(textTypeface, nextClass.sectionSubtitle.getTypeface().getStyle());
+        latestClass.sectionTitle.setTypeface(textTypeface, latestClass.sectionTitle.getTypeface().getStyle());
+        latestClass.sectionSubtitle.setTypeface(textTypeface, latestClass.sectionSubtitle.getTypeface().getStyle());
+        seeAllLatestClass.setTypeface(textTypeface, seeAllLatestClass.getTypeface().getStyle());
+        seeAllNextClass.setTypeface(textTypeface, seeAllNextClass.getTypeface().getStyle());
     }
 }

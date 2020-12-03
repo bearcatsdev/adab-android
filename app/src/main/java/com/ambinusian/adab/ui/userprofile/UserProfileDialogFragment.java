@@ -121,11 +121,11 @@ public class UserProfileDialogFragment extends DialogFragment {
         //get font type
         Typeface textTypeface = userPreferences.getTextTypeface();
         //set font type for each text view
-        textUserName.setTypeface(textTypeface);
-        textUserDepartment.setTypeface(textTypeface);
-        buttonAccountDetails.setTypeface(textTypeface);
-        textMessage.setTypeface(textTypeface);
-        textAccessibilityMode.setTypeface(textTypeface);
-        textSignOut.setTypeface(textTypeface);
+        textUserName.setTypeface(textTypeface, textUserName.getTypeface().getStyle());
+        textUserDepartment.setTypeface(textTypeface, textUserDepartment.getTypeface().getStyle());
+        buttonAccountDetails.setTypeface(textTypeface, buttonAccountDetails.getTypeface().getStyle());
+        textMessage.setTypeface(textTypeface, textMessage.getTypeface().getStyle());
+        textAccessibilityMode.setTypeface(textTypeface, textAccessibilityMode.getTypeface().getStyle());
+        textSignOut.setTypeface(textTypeface, textSignOut.getTypeface().getStyle());
     }
 }

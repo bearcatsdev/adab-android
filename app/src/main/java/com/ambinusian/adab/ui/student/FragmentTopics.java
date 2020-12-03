@@ -160,13 +160,13 @@ public class FragmentTopics extends Fragment {
         //get font type
         Typeface textTypeface = userPreferences.getTextTypeface();
         //set font type for each text view
-        course.setTypeface(textTypeface);
-        courseCode.setTypeface(textTypeface);
-        classRoom.setTypeface(textTypeface);
-        nextClassTitle.setTypeface(textTypeface);
-        nextClassSession.setTypeface(textTypeface);
-        nextClassTime.setTypeface(textTypeface);
-        svClassList.sectionTitle.setTypeface(textTypeface);
-        svClassList.sectionSubtitle.setTypeface(textTypeface);
+        course.setTypeface(textTypeface, course.getTypeface().getStyle());
+        courseCode.setTypeface(textTypeface, courseCode.getTypeface().getStyle());
+        classRoom.setTypeface(textTypeface, classRoom.getTypeface().getStyle());
+        nextClassTitle.setTypeface(textTypeface, nextClassTitle.getTypeface().getStyle());
+        nextClassSession.setTypeface(textTypeface, nextClassSession.getTypeface().getStyle());
+        nextClassTime.setTypeface(textTypeface, nextClassTime.getTypeface().getStyle());
+        svClassList.sectionTitle.setTypeface(textTypeface, svClassList.sectionTitle.getTypeface().getStyle());
+        svClassList.sectionSubtitle.setTypeface(textTypeface, svClassList.sectionSubtitle.getTypeface().getStyle());
     }
 }

@@ -228,9 +228,9 @@ public class FragmentLogin extends Fragment {
         //get font type
         Typeface textTypeface = userPreferences.getTextTypeface();
         //set font type for each text view
-        loginMessage.setTypeface(textTypeface);
-        inputNim.setTypeface(textTypeface);
-        inputPassword.setTypeface(textTypeface);
-        btnLogin.setTypeface(textTypeface);
+        loginMessage.setTypeface(textTypeface, loginMessage.getTypeface().getStyle());
+        inputNim.setTypeface(textTypeface, inputNim.getTypeface().getStyle());
+        inputPassword.setTypeface(textTypeface, inputPassword.getTypeface().getStyle());
+        btnLogin.setTypeface(textTypeface, btnLogin.getTypeface().getStyle());
     }
 }

@@ -155,6 +155,6 @@ public class LatestClassActivity extends AppCompatActivity {
         //get font type
         Typeface textTypeface = userPreferences.getTextTypeface();
         //set font type for each text view
-        latestClass.setTypeface(textTypeface);
+        latestClass.setTypeface(textTypeface, latestClass.getTypeface().getStyle());
     }
 }

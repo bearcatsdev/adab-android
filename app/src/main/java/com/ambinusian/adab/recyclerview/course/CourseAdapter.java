@@ -288,12 +288,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseHolder> {
         //get font type
         Typeface textTypeface = userPreferences.getTextTypeface();
         //set font type for each text view
-        holder.classTime.setTypeface(textTypeface);
-        holder.classTitle.setTypeface(textTypeface);
-        holder.courses.setTypeface(textTypeface);
-        holder.classMeeting.setTypeface(textTypeface);
-        holder.courseCode.setTypeface(textTypeface);
-        holder.classCode.setTypeface(textTypeface);
-        holder.classType.setTypeface(textTypeface);
+        holder.classTime.setTypeface(textTypeface, holder.classTime.getTypeface().getStyle());
+        holder.classTitle.setTypeface(textTypeface, holder.classTitle.getTypeface().getStyle());
+        holder.courses.setTypeface(textTypeface, holder.courses.getTypeface().getStyle());
+        holder.classMeeting.setTypeface(textTypeface, holder.classMeeting.getTypeface().getStyle());
+        holder.courseCode.setTypeface(textTypeface, holder.courseCode.getTypeface().getStyle());
+        holder.classCode.setTypeface(textTypeface, holder.classCode.getTypeface().getStyle());
+        holder.classType.setTypeface(textTypeface, holder.classType.getTypeface().getStyle());
     }
 }

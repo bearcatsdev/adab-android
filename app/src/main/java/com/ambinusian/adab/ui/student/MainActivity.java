@@ -256,8 +256,8 @@ public class MainActivity extends AppCompatActivity {
         //get font type
         Typeface textTypeface = userPreferences.getTextTypeface();
         //set font type for each text view
-        binusAdab.setTypeface(textTypeface);
-        version.setTypeface(textTypeface);
+        binusAdab.setTypeface(textTypeface, binusAdab.getTypeface().getStyle());
+        version.setTypeface(textTypeface, version.getTypeface().getStyle());
     }
 
     private class SpinnerAdapter extends ArrayAdapter<String> {

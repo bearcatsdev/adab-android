@@ -121,7 +121,7 @@ public class LowVisionBottomSheetDialog extends BottomSheetDialogFragment {
     }
 
     private void setTextTypeface(Typeface textTypeface){
-        tvTitleExample.setTypeface(textTypeface);
-        tvSubtitleExample.setTypeface(textTypeface);
+        tvTitleExample.setTypeface(textTypeface, tvTitleExample.getTypeface().getStyle());
+        tvSubtitleExample.setTypeface(textTypeface, tvSubtitleExample.getTypeface().getStyle());
     }
 }

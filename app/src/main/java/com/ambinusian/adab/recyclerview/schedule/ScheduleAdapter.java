@@ -69,11 +69,11 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleHolder> {
         //get font type
         Typeface textTypeface = userPreferences.getTextTypeface();
         //set font type for each text view
-        holder.scheduleClassType.setTypeface(textTypeface);
-        holder.scheduleClassTitle.setTypeface(textTypeface);
-        holder.scheduleCourse.setTypeface(textTypeface);
-        holder.scheduleCourseCode.setTypeface(textTypeface);
-        holder.scheduleClassCode.setTypeface(textTypeface);
-        holder.scheduleClassTime.setTypeface(textTypeface);
+        holder.scheduleClassType.setTypeface(textTypeface, holder.scheduleClassType.getTypeface().getStyle());
+        holder.scheduleClassTitle.setTypeface(textTypeface, holder.scheduleClassTitle.getTypeface().getStyle());
+        holder.scheduleCourse.setTypeface(textTypeface, holder.scheduleCourse.getTypeface().getStyle());
+        holder.scheduleCourseCode.setTypeface(textTypeface, holder.scheduleCourseCode.getTypeface().getStyle());
+        holder.scheduleClassCode.setTypeface(textTypeface, holder.scheduleClassCode.getTypeface().getStyle());
+        holder.scheduleClassTime.setTypeface(textTypeface, holder.scheduleClassTime.getTypeface().getStyle());
     }
 }

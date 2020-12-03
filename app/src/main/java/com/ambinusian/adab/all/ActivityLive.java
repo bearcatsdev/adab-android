@@ -332,11 +332,11 @@ public class ActivityLive extends AppCompatActivity{
         //get font type
         Typeface textTypeface = userPreferences.getTextTypeface();
         //set font type for each text view
-        className.setTypeface(textTypeface);
-        classSession.setTypeface(textTypeface);
-        textContent.setTypeface(textTypeface);
-        textLiveNow.setTypeface(textTypeface);
-        courseTitle.setTypeface(textTypeface);
-        toolbarTitle.setTypeface(textTypeface);
+        className.setTypeface(textTypeface, className.getTypeface().getStyle());
+        classSession.setTypeface(textTypeface, classSession.getTypeface().getStyle());
+        textContent.setTypeface(textTypeface, textContent.getTypeface().getStyle());
+        textLiveNow.setTypeface(textTypeface, textLiveNow.getTypeface().getStyle());
+        courseTitle.setTypeface(textTypeface, courseTitle.getTypeface().getStyle());
+        toolbarTitle.setTypeface(textTypeface, toolbarTitle.getTypeface().getStyle());
     }
 }

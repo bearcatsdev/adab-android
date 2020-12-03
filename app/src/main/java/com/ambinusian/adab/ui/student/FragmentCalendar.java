@@ -218,7 +218,7 @@ public class FragmentCalendar extends Fragment {
         //get font type
         Typeface textTypeface = userPreferences.getTextTypeface();
         //set font type for each text view
-        selectedDate.setTypeface(textTypeface);
-        noClass.setTypeface(textTypeface);
+        selectedDate.setTypeface(textTypeface, selectedDate.getTypeface().getStyle());
+        noClass.setTypeface(textTypeface, noClass.getTypeface().getStyle());
     }
 }

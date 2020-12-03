@@ -261,8 +261,8 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClasslListHolder> {
         //get font type
         Typeface textTypeface = userPreferences.getTextTypeface();
         //set font type for each text view
-        holder.classTopic.setTypeface(textTypeface);
-        holder.meeting.setTypeface(textTypeface);
-        holder.time.setTypeface(textTypeface);
+        holder.classTopic.setTypeface(textTypeface, holder.classTopic.getTypeface().getStyle());
+        holder.meeting.setTypeface(textTypeface, holder.meeting.getTypeface().getStyle());
+        holder.time.setTypeface(textTypeface, holder.time.getTypeface().getStyle());
     }
 }

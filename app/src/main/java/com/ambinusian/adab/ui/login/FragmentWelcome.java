@@ -61,7 +61,7 @@ public class FragmentWelcome extends Fragment {
         //get font type
         Typeface textTypeface = userPreferences.getTextTypeface();
         //set font type for each text view
-        tvHiThere.setTypeface(textTypeface);
-        letsgo.setTypeface(textTypeface);
+        tvHiThere.setTypeface(textTypeface, tvHiThere.getTypeface().getStyle());
+        letsgo.setTypeface(textTypeface, letsgo.getTypeface().getStyle());
     }
 }
