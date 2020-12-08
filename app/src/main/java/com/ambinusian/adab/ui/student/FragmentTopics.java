@@ -126,6 +126,11 @@ public class FragmentTopics extends Fragment {
                     nextClassTime.setText(next_class_info.getTime());
                 }
 
+                //set high contast
+                if(userPreferences.getHighContrast()){
+                    setHighConstrastTheme();
+                }
+
                 //set text attributes
                 setTextSize();
                 setTextTypeface();
@@ -140,6 +145,11 @@ public class FragmentTopics extends Fragment {
                 courseIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_class_56_pencilnote));
             }
         });
+    }
+
+    private void setHighConstrastTheme() {
+        svClassList.sectionTitle.setTextColor(getResources().getColor(android.R.color.white));
+        svClassList.findViewById(R.id.divider_thick).setBackgroundColor(getResources().getColor(android.R.color.white));
     }
 
     private void setTextSize(){

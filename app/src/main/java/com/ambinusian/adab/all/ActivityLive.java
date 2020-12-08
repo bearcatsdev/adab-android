@@ -98,6 +98,11 @@ public class ActivityLive extends AppCompatActivity{
         //scroll always to bottom
         textContent.setMovementMethod(new ScrollingMovementMethod());
 
+        //set high contrast if enabled
+        if(userPreferences.getHighContrast()){
+            setHighConstrastTheme();
+        }
+
         // set text attributes
         setTextSize();
         setTextTypeface();
@@ -315,6 +320,14 @@ public class ActivityLive extends AppCompatActivity{
                 // Permission has already been granted
             }
         }
+    }
+
+    private void setHighConstrastTheme() {
+        getTheme().applyStyle(R.style.Theme_Adab_HighContrast,true);
+        toolbar.setBackgroundTintList(getResources().getColorStateList(android.R.color.black));
+        findViewById(R.id.live_session_background).setBackgroundColor(getResources().getColor(android.R.color.black));
+        courseTitle.setTextColor(getResources().getColorStateList(R.color.buttonColor));
+        textContent.setTextColor(getResources().getColor(android.R.color.white));
     }
 
     private void setTextSize(){

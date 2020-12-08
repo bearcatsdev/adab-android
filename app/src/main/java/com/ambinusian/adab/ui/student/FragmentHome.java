@@ -47,7 +47,7 @@ public class FragmentHome extends Fragment {
     private RecyclerView coursesRecyclerView, discussionRecyclerView;
     private ArrayList<CourseModel> coursesList;
     private ArrayList<DiscussionModel> discussionList;
-    private LinearLayout welcomeLayout, yourNextClassLayout, latestClassLayout;
+    private LinearLayout welcomeLayout, yourNextClassLayout, latestClassLayout, onGoingClassBackground;
     private CardView liveLayout;
     private ImageView liveClassIcon;
     private LinearLayoutManager linearLayoutManager;
@@ -100,6 +100,7 @@ public class FragmentHome extends Fragment {
         ongoingClass = view.findViewById(R.id.hv_ongoingClass);
         nextClass = view.findViewById(R.id.sv_nextClass);
         latestClass = view.findViewById(R.id.sv_latestClass);
+        onGoingClassBackground = view.findViewById(R.id.ongoing_class_background);
         context = getContext();
         db = ClassDatabase.getDatabase(context);
         coursesList = new ArrayList<>();
@@ -112,6 +113,10 @@ public class FragmentHome extends Fragment {
         //set text attributes
         setTextSize();
         setTextTypeface();
+
+        if(userPreferences.getHighContrast()){
+            setHighConstrastTheme();
+        }
 
         // get classes data
         db.classDAO().getAllClass().observe(getActivity(), new Observer<List<ClassEntity>>() {
@@ -255,6 +260,29 @@ public class FragmentHome extends Fragment {
         seeAllDiscussion.setOnClickListener(view1 -> {
             // show fragment discussion
         });
+    }
+
+    private void setHighConstrastTheme() {
+        //ongoing class section
+        ((CardView) ongoingClass.findViewById(R.id.cv_headline)).setCardBackgroundColor(getResources().getColor(R.color.buttonColor));
+        ongoingClass.headlineTitle.setTextColor(getResources().getColor(android.R.color.black));
+        onGoingClassBackground.setBackgroundColor(getResources().getColor(R.color.button2Color));
+        //next class section
+        nextClass.sectionTitle.setTextColor(getResources().getColor(android.R.color.white));
+        nextClass.findViewById(R.id.divider_thick).setBackgroundColor(getResources().getColor(android.R.color.white));
+        seeAllNextClass.setBackgroundColor(getResources().getColor(R.color.buttonColor));
+        seeAllNextClass.setTextColor(getResources().getColor(android.R.color.black));
+        seeAllNextClass.setStrokeWidth(0);
+        nextCourseCode.setChipBackgroundColor(getResources().getColorStateList(R.color.button2Color));
+        nextClassCode.setChipBackgroundColor(getResources().getColorStateList(R.color.button2Color));
+        nextClassType.setChipBackgroundColor(getResources().getColorStateList(R.color.button2Color));
+        getView().findViewById(R.id.linear_layout_main).setBackgroundColor(getResources().getColor(R.color.button2Color));
+        //latest class section
+        latestClass.sectionTitle.setTextColor(getResources().getColor(android.R.color.white));
+        latestClass.findViewById(R.id.divider_thick).setBackgroundColor(getResources().getColor(android.R.color.white));
+        seeAllLatestClass.setBackgroundColor(getResources().getColor(R.color.buttonColor));
+        seeAllLatestClass.setTextColor(getResources().getColor(android.R.color.black));
+        seeAllLatestClass.setStrokeWidth(0);
     }
 
     private void setTextSize(){

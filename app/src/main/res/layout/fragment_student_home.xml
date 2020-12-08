@@ -25,10 +25,10 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                    <ImageView
-                        android:layout_width="@dimen/artwork_width"
-                        android:layout_height="@dimen/artwork_height"
-                        android:src="@drawable/welcome" />
+                <ImageView
+                    android:layout_width="245dp"
+                    android:layout_height="@dimen/artwork_height"
+                    android:src="@drawable/welcome" />
 
                     <TextView
                         android:id="@+id/tv_welcomeTitle"
@@ -67,11 +67,12 @@
                app:cardPreventCornerOverlap="false">
 
                <LinearLayout
+                   android:id="@+id/ongoing_class_background"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:gravity="center"
                    android:padding="8dp"
-                   android:background="?attr/selectableItemBackground"
+                   android:foreground="?attr/selectableItemBackground"
                    android:orientation="vertical">
 
                    <com.ambinusian.adab.customcomponent.HeadlineView
@@ -104,7 +105,7 @@
                        <TextView
                            android:id="@+id/tv_liveClassTitle"
                            android:layout_width="match_parent"
-                           android:layout_height="wrap_content"
+                           android:layout_height="5dp"
                            android:textAlignment="center"
                            android:textColor="@color/textPrimary"
                            android:textSize="@dimen/text_caption"
@@ -123,8 +124,8 @@
 
                        <TextView
                            android:id="@+id/tv_liveClassMeeting"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
+                           android:layout_width="65dp"
+                           android:layout_height="7dp"
                            tools:text="Session 12" />
 
                    </LinearLayout>
@@ -162,7 +163,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/see_all"
-                            android:textColor="@color/colorPrimary"
                             android:id="@+id/see_all_next_class"
                             style="@style/RoundedMaterialButton"/>
 
@@ -174,8 +174,9 @@
                         android:id="@+id/linear_layout_main"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:paddingTop="5dp">
+                        android:foreground="?attr/selectableItemBackground"
+                        android:paddingTop="5dp"
+                        style="@style/CardBackground">
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/nextClassIcon"
@@ -316,7 +317,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/see_all"
-                            android:textColor="@color/colorPrimary"
                             android:id="@+id/see_all_latest_class"
                             style="@style/RoundedMaterialButton" />
 

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:id="@+id/live_session_background"
     xmlns:tools="http://schemas.android.com/tools">
 
     <com.google.android.material.appbar.AppBarLayout

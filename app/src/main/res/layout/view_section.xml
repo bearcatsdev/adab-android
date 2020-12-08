@@ -23,6 +23,7 @@
 
     <View
         style="@style/DividerThick"
+        android:id="@+id/divider_thick"
         android:layout_below="@id/section_subtitle"
         android:layout_alignStart="@id/section_title"
         android:layout_alignEnd="@id/section_title"

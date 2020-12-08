@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -26,24 +27,20 @@ import java.util.Map;
 public class SplashActivity extends AppCompatActivity {
 
     private ClassDatabase db;
-    private UserPreferences userPreferences;
+    private final UserPreferences userPreferences = new UserPreferences(this);;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        //if high contrast turn on, force app to dark mode
+        if(userPreferences.getHighContrast()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        }
 
-//        try {
-//            Thread.sleep(500);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-
-        userPreferences = new UserPreferences(this);
         db = ClassDatabase.getDatabase(this);
 
-//        Handler handler = new Handler();
-//        handler.postDelayed(() -> {
         if (userPreferences.getUserLoggedIn()) {
             Boolean connected = null;
             ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -123,7 +120,6 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(new Intent(SplashActivity.this, ActivityLogin.class));
             finish();
         }
-//        }, 0);
     }
 
     private void insertData(final ClassEntity classList){

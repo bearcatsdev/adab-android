@@ -1,5 +1,6 @@
 package com.ambinusian.adab.expandablenavigationdrawer;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -12,6 +13,9 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
+
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.preferences.UserPreferences;
 
@@ -71,6 +75,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         return false;
     }
 
+    @SuppressLint("ResourceType")
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
         int menuIcon = groupList.get(i).menuIcon;
@@ -86,6 +91,18 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         ImageView indicatorIcon = (ImageView)
                 view.findViewById(R.id.indicator);
         TextView mMenuName = (TextView) view.findViewById(R.id.group_menu_name);
+
+
+        if(userPreferences.getHighContrast()){
+            //change to high contrast theme
+            view.setBackground(context.getDrawable(R.drawable.drawer_background_effect_high_contrast));
+            ((ImageView) view.findViewById(R.id.group_menu_icon)).setImageTintList(context.getResources().getColorStateList(R.drawable.drawer_icon_text_effect_high_contrast));
+            ((TextView) view.findViewById(R.id.group_menu_name)).setTextColor(context.getResources().getColorStateList(R.drawable.drawer_icon_text_effect_high_contrast));
+        }
+
+
+        //change text and icon to high contrast theme
+        //mMenuIcon.setBackground(context.getDrawable(R.drawable.drawer_icon_text_effect_high_contrast));
 
         if(menuIcon == 0){
             mMenuIcon.setImageResource(R.drawable.round_view_stream_24px);
@@ -129,6 +146,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         return view;
     }
 
+    @SuppressLint("ResourceType")
     @Override
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
         int menuIcon = childList.get(groupList.get(i)).get(i1).menuIcon;
@@ -138,6 +156,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             LayoutInflater infalInflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = infalInflater.inflate(R.layout.expandable_menu_child_item, null);
+        }
+
+        if(userPreferences.getHighContrast()){
+            //change to high contrast theme
+            view.setBackground(context.getDrawable(R.drawable.drawer_background_effect_high_contrast));
+            ((ImageView) view.findViewById(R.id.child_menu_icon)).setImageTintList(context.getResources().getColorStateList(R.drawable.drawer_icon_text_effect_high_contrast));
+            ((TextView) view.findViewById(R.id.child_menu_name)).setTextColor(context.getResources().getColorStateList(R.drawable.drawer_icon_text_effect_high_contrast));
         }
 
         ImageView mMenuIcon = view.findViewById(R.id.child_menu_icon);

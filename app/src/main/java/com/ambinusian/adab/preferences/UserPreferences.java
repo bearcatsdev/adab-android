@@ -23,6 +23,7 @@ public class UserPreferences {
     private static final String KEY_PREF_NIGHT = "pref_night";
     private static final String KEY_TEXT_SIZE = "text_size";
     private static final String KEY_TEXT_FAMILY = "text_family";
+    private static final String KEY_HIGH_CONTRAST = "high_contrast";
     private static final String KEY_TEXT_STYLE = "text_style";
 
     private static Context context = null;
@@ -167,5 +168,15 @@ public class UserPreferences {
 
     public int getTextTypefaceFamilyID() {
         return getSharedPreference().getInt(KEY_TEXT_FAMILY, 0);
+    }
+
+    public void setHighContrast(boolean highContrast){
+        SharedPreferences.Editor editor = getSharedPreference().edit();
+        editor.putBoolean(KEY_HIGH_CONTRAST, highContrast);
+        editor.apply();
+    }
+
+    public boolean getHighContrast(){
+        return getSharedPreference().getBoolean(KEY_HIGH_CONTRAST,false);
     }
 }

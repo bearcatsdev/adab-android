@@ -10,8 +10,9 @@
         android:id="@+id/linear_layout_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:paddingTop="5dp">
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingTop="5dp"
+        style="@style/CardBackground">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/classIcon"
@@ -76,13 +77,13 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_coursesCode"
+                    style="@style/Chip"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
+                    android:clickable="false"
                     android:fontFamily="@font/interstate"
                     android:gravity="center"
                     android:textSize="@dimen/text_chip"
-                    android:clickable="false"
-                    style="@style/Chip"
                     tools:text="MOBI6002" />
 
                 <Space
@@ -91,12 +92,12 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_classCode"
+                    style="@style/Chip"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
+                    android:clickable="false"
                     android:fontFamily="@font/interstate"
                     android:gravity="center"
-                    android:clickable="false"
-                    style="@style/Chip"
                     tools:text="LB03" />
 
                 <Space
@@ -105,12 +106,12 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_classType"
+                    style="@style/Chip"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
+                    android:clickable="false"
                     android:fontFamily="@font/interstate"
                     android:gravity="center"
-                    android:clickable="false"
-                    style="@style/Chip"
                     tools:text="LEC" />
             </LinearLayout>
         </LinearLayout>

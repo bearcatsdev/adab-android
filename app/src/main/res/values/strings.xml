@@ -107,6 +107,9 @@
     <string name="dialog_pause_session_question">Do you want to pause this session?</string>
     <string name="dialog_end_session_question">Do you want to end this session?</string>
     <string name="save_text">Save</string>
+    <string name="font_size_text">Font Size</string>
+    <string name="font_style_text">Font Style</string>
+    <string name="high_contrast_text">High Contrast</string>
 
     <!--Font Name-->
     <string-array name="typeface_types">
