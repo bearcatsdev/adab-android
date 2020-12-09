@@ -71,6 +71,11 @@ public class UserProfileDialogFragment extends DialogFragment {
         textUserDepartment.setText(userPreferences.getUserDepartement());
         db = ClassDatabase.getDatabase(getContext());
 
+        //set high contrast if enabled
+        if(userPreferences.getHighContrast()){
+            setHighConstrastTheme();
+        }
+
         // set text attributes
         setTextSize();
         setTextTypeface();
@@ -103,6 +108,12 @@ public class UserProfileDialogFragment extends DialogFragment {
             userPreferences.setPrefNight(mode);
             AppCompatDelegate.setDefaultNightMode(mode);
         });
+    }
+
+    private void setHighConstrastTheme() {
+        buttonAccountDetails.setBackgroundColor(getResources().getColor(R.color.buttonColor));
+        buttonAccountDetails.setTextColor(getResources().getColor(android.R.color.black));
+        buttonAccountDetails.setStrokeWidth(0);
     }
 
     private void setTextSize(){

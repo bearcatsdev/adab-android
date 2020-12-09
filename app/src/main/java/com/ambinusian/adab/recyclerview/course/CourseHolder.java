@@ -1,5 +1,6 @@
 package com.ambinusian.adab.recyclerview.course;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ambinusian.adab.R;
+import com.ambinusian.adab.preferences.UserPreferences;
 import com.google.android.material.chip.Chip;
 
 public class CourseHolder extends RecyclerView.ViewHolder {
@@ -29,5 +31,15 @@ public class CourseHolder extends RecyclerView.ViewHolder {
         classType = itemView.findViewById(R.id.chip_classType);
 
         mainLinearLayout = itemView.findViewById(R.id.linear_layout_main);
+
+        Context context = itemView.getContext();
+        UserPreferences userPreferences = new UserPreferences(context);
+
+        if(userPreferences.getHighContrast()){
+            mainLinearLayout.setBackgroundColor(context.getResources().getColor(R.color.button2Color));
+            courseCode.setChipBackgroundColor(context.getResources().getColorStateList(R.color.button2Color));
+            classCode.setChipBackgroundColor(context.getResources().getColorStateList(R.color.button2Color));
+            classType.setChipBackgroundColor(context.getResources().getColorStateList(R.color.button2Color));
+        }
     }
 }

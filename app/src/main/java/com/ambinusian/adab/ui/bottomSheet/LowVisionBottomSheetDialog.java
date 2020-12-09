@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
 
 import com.ambinusian.adab.R;
 import com.ambinusian.adab.preferences.UserPreferences;
@@ -23,6 +24,7 @@ import com.ambinusian.adab.ui.student.MainActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.slider.Slider;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import org.w3c.dom.Text;
 
@@ -35,10 +37,9 @@ public class LowVisionBottomSheetDialog extends BottomSheetDialogFragment {
     Slider textSizeSlider;
     Spinner textTypefaceSpinner;
     MaterialButton btnSave;
-    TextView tvTitleExample;
-    TextView tvSubtitleExample;
-    float defaultTitleSize;
-    float defaultSubtitleSize;
+    TextView tvTitleExample, tvSubtitleExample, tvFontSize, tvFontStyle, tvHighContrast;
+    SwitchMaterial swHighContrast;
+    float defaultTitleSize, defaultSubtitleSize;
 
     int selectedTypefaceID;
     boolean viewJustLoaded = true;
@@ -58,11 +59,17 @@ public class LowVisionBottomSheetDialog extends BottomSheetDialogFragment {
         btnSave = v.findViewById(R.id.btn_save);
         tvTitleExample = v.findViewById(R.id.tv_title_example);
         tvSubtitleExample = v.findViewById(R.id.tv_subtitle_example);
+        tvFontSize = v.findViewById(R.id.tv_font_size);
+        tvFontStyle = v.findViewById(R.id.tv_font_style);
+        tvHighContrast = v.findViewById(R.id.tv_high_contrast);
+        swHighContrast = v.findViewById(R.id.sw_high_contrast);
+
         defaultTitleSize = tvTitleExample.getTextSize();
         defaultSubtitleSize = tvSubtitleExample.getTextSize();
 
         userPreferences = new UserPreferences(v.getContext());
         textSizeSlider.setValue(userPreferences.getTextSize());
+        swHighContrast.setChecked(userPreferences.getHighContrast());
 
         // edit font family using this spinner
         Spinner spinner = (Spinner) v.findViewById(R.id.text_typeface_spinner);
@@ -71,6 +78,11 @@ public class LowVisionBottomSheetDialog extends BottomSheetDialogFragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+        //set high contrast if enabled
+        if(userPreferences.getHighContrast()){
+            setHighConstrastTheme();
+        }
+
         //set text attributes
         setTextSize(userPreferences.getTextSize());
         setTextTypeface(userPreferences.getTextTypeface());
@@ -78,7 +90,7 @@ public class LowVisionBottomSheetDialog extends BottomSheetDialogFragment {
         textSizeSlider.addOnChangeListener(new Slider.OnChangeListener() {
             @Override
             public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
-                setTextSize(value);
+                changeTextSize(value);
             }
         });
 
@@ -87,6 +99,7 @@ public class LowVisionBottomSheetDialog extends BottomSheetDialogFragment {
             public void onClick(View view) {
                 userPreferences.setTextSize(textSizeSlider.getValue());
                 userPreferences.setTextTypeface(selectedTypefaceID);
+                userPreferences.setHighContrast(swHighContrast.isChecked());
                 saveButtonListener.onClick();
             }
         });
@@ -115,7 +128,24 @@ public class LowVisionBottomSheetDialog extends BottomSheetDialogFragment {
         return v;
     }
 
+    private void setHighConstrastTheme() {
+        tvHighContrast.setTextColor(getResources().getColor(android.R.color.white));
+        tvFontStyle.setTextColor(getResources().getColor(android.R.color.white));
+        tvFontSize.setTextColor(getResources().getColor(android.R.color.white));
+        tvTitleExample.setTextColor(getResources().getColor(R.color.buttonColor));
+        tvSubtitleExample.setTextColor(getResources().getColor(android.R.color.white));
+        btnSave.setBackgroundColor(getResources().getColor(R.color.buttonColor));
+    }
+
     private void setTextSize(float textSize){
+        tvTitleExample.setTextSize(TypedValue.COMPLEX_UNIT_PX,defaultTitleSize*textSize);
+        tvSubtitleExample.setTextSize(TypedValue.COMPLEX_UNIT_PX,defaultSubtitleSize*textSize);
+        tvFontSize.setTextSize(TypedValue.COMPLEX_UNIT_PX,tvFontSize.getTextSize()*textSize);
+        tvFontStyle.setTextSize(TypedValue.COMPLEX_UNIT_PX,tvFontStyle.getTextSize()*textSize);
+        tvHighContrast.setTextSize(TypedValue.COMPLEX_UNIT_PX,tvHighContrast.getTextSize()*textSize);
+    }
+
+    private void changeTextSize(float textSize){
         tvTitleExample.setTextSize(TypedValue.COMPLEX_UNIT_PX,defaultTitleSize*textSize);
         tvSubtitleExample.setTextSize(TypedValue.COMPLEX_UNIT_PX,defaultSubtitleSize*textSize);
     }
@@ -123,5 +153,8 @@ public class LowVisionBottomSheetDialog extends BottomSheetDialogFragment {
     private void setTextTypeface(Typeface textTypeface){
         tvTitleExample.setTypeface(textTypeface, tvTitleExample.getTypeface().getStyle());
         tvSubtitleExample.setTypeface(textTypeface, tvSubtitleExample.getTypeface().getStyle());
+        tvHighContrast.setTypeface(textTypeface, tvHighContrast.getTypeface().getStyle());
+        tvFontSize.setTypeface(textTypeface, tvFontSize.getTypeface().getStyle());
+        tvFontStyle.setTypeface(textTypeface, tvFontStyle.getTypeface().getStyle());
     }
 }

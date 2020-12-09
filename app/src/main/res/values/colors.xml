@@ -31,4 +31,11 @@
 
     <!-- TextInputLayout background color -->
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#6B000000</color>
+
+    <!-- backround color for sample text-->
+    <color name="sampleTextBackgroundColor" tools:override="true">#f7f7f7</color>
+
+    <!-- Color for high contrast-->
+    <color name="buttonColor">#CEA222</color>
+    <color name="button2Color">#61514A</color>
 </resources>

@@ -4,31 +4,57 @@
     android:layout_height="match_parent"
     android:padding="20dp"
     android:orientation="vertical"
+    android:background="@color/navigationbar"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/tv_title_example"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/textSecondary"
-        android:textSize="@dimen/text_caption"
-        android:textStyle="bold"
-        android:text="ABCDEFGHIJK"/>
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_high_contrast"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/textPrimaryLight"
+            android:textSize="@dimen/text_body"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical"
+            android:text="@string/high_contrast_text"/>
 
-    <TextView
-        android:id="@+id/tv_subtitle_example"
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="match_parent"/>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/sw_high_contrast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:padding="5dp"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:theme="@style/Theme.ToggleTheme"/>
+    </LinearLayout>
+
+
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/textPrimaryLight"
-        android:textSize="@dimen/text_body"
-        android:textStyle="bold"
-        android:text="abjdefghij"/>
+        android:layout_height="10dp"/>
+
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_font_size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textPrimaryLight"
+        android:textSize="@dimen/text_body"
+        android:textStyle="bold"
+        android:text="@string/font_size_text"/>
 
     <com.google.android.material.slider.Slider
         android:id="@+id/text_size_slider"
@@ -42,10 +68,62 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"/>
 
+    <TextView
+        android:id="@+id/tv_font_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textPrimaryLight"
+        android:textSize="@dimen/text_body"
+        android:textStyle="bold"
+        android:text="@string/font_style_text"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
     <Spinner
         android:id="@+id/text_typeface_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="30dp"
+            android:orientation="vertical"
+            style="@style/SampleTextBackground">
+
+            <TextView
+                android:id="@+id/tv_title_example"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/textSecondary"
+                android:textSize="@dimen/text_caption"
+                android:textStyle="bold"
+                android:text="SAMPLE TITLE"/>
+
+            <TextView
+                android:id="@+id/tv_subtitle_example"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/textPrimaryLight"
+                android:textSize="@dimen/text_body"
+                android:textStyle="bold"
+                android:text="sample content"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <Space
         android:layout_width="match_parent"

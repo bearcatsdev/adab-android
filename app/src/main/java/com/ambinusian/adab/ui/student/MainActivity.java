@@ -2,6 +2,8 @@ package com.ambinusian.adab.ui.student;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -94,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
         // remove title
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
+        //set high contrast if enabled
+        if(userPreferences.getHighContrast()){
+            setHighConstrastTheme();
+        }
+
         // profile picture onclick
         profilePicture.setOnClickListener(v -> {
             showUserProfileDialog();
@@ -104,9 +111,12 @@ public class MainActivity extends AppCompatActivity {
             SaveButtonListener saveButtonListener = new SaveButtonListener() {
                 @Override
                 public void onClick() {
-                    //reload activity
-                    finish();
-                    startActivity(getIntent());
+                    //reload application
+                    Intent intent = getBaseContext().getPackageManager().getLaunchIntentForPackage(
+                            getBaseContext().getPackageName() );
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }
             };
             LowVisionBottomSheetDialog bottomSheetDialog = new LowVisionBottomSheetDialog(saveButtonListener);
@@ -132,6 +142,12 @@ public class MainActivity extends AppCompatActivity {
         //set text attributes
         setTextSize();
         setTextTypeface();
+    }
+
+    private void setHighConstrastTheme() {
+        getTheme().applyStyle(R.style.Theme_Adab_HighContrast,true);
+        toolbar.setBackgroundTintList(getResources().getColorStateList(android.R.color.black));
+        mDrawerLayout.setBackgroundColor(getResources().getColor(android.R.color.black));
     }
 
     private void showUserProfileDialog() {
