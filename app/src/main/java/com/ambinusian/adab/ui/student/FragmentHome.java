@@ -207,7 +207,8 @@ public class FragmentHome extends Fragment {
                 }
                 else {
                     latestClassLayout.setVisibility(View.VISIBLE);
-                    for (int i = nextClass - 1; i >= 0; i--) {
+                    //add maximal 10 latest class to the coursesList
+                    for (int i = nextClass - 1; i >= 0 && i >= nextClass-10; i--) {
                         ClassEntity classEntity = classEntities.get(i);
                         coursesList.add(new CourseModel(classEntity.getSessionId(),
                                 1,

@@ -14,7 +14,7 @@ public interface ClassDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertClass(ClassEntity entity);
 
-    @Query("SELECT * FROM classentity")
+    @Query("SELECT * FROM classentity ORDER BY datetime(sessionStartDate) ASC")
     LiveData<List<ClassEntity>> getAllClass();
 
     @Query("DELETE FROM classentity")
