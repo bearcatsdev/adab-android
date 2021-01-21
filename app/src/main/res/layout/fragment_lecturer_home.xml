@@ -27,7 +27,7 @@
                     android:gravity="center"
                     android:id="@+id/lecturerWelcomeLayout"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="240dp"
@@ -57,7 +57,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:layout_margin="10dp"
                     android:id="@+id/liveLayout"
                     app:cardCornerRadius="10dp"
@@ -132,7 +132,7 @@
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="16dp" />
+                    android:layout_height="35dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -144,7 +144,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/your_next_class_layout"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -281,25 +283,20 @@
                                             tools:text="LEC" />
                                     </LinearLayout>
                                 </LinearLayout>
-
                             </LinearLayout>
-
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="16sp"
+                                android:layout_marginBottom="16sp"
+                                android:background="#F5F5F5" />
                         </LinearLayout>
-
                     </LinearLayout>
-
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="16sp"
-                        android:layout_marginBottom="16sp"
-                        android:background="#F5F5F5" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         android:orientation="vertical"
                         android:id="@+id/latest_class_layout">
                         <LinearLayout
