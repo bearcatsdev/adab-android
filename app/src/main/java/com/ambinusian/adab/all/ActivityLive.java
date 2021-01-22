@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.os.Handler;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -59,6 +60,7 @@ public class ActivityLive extends AppCompatActivity{
     private MaterialButton talkButton;
     private LinearLayout layoutButtons;
     private String courseLanguage;
+    private Boolean singleResult = true; //keep that the speech recognizer just return single result, not double
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,18 +220,29 @@ public class ActivityLive extends AppCompatActivity{
 
                     @Override
                     public void onResults(Bundle bundle) {
-                        //getting all the matches
-                        ArrayList<String> matches = bundle
-                                .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                        if (singleResult){
+                            //getting all the matches
+                            ArrayList<String> matches = bundle
+                                    .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
-                        //displaying the first match
-                        if (matches != null)
-                            socket.emit("message", matches.get(0));
+                            //displaying the first match
+                            if (matches != null)
+                                socket.emit("message", matches.get(0));
 
-                        // listening again
-                        if (currentlyTalking.get()) {
-                            mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
+                            // listening again
+                            if (currentlyTalking.get()) {
+                                mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
+                            }
+                            singleResult = false;
                         }
+
+                        //after 100 ms, set back singleResult to true
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                singleResult = true;
+                            }
+                        },100);
                     }
 
                     @Override
