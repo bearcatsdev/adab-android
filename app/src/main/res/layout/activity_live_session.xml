@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/live_session_background"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -30,8 +31,6 @@
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
-
-
 
     <ScrollView
         android:id="@+id/scrollview_main"
@@ -140,7 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="10dp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/tv_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -149,6 +148,7 @@
                 android:lineSpacingExtra="5dp"
                 android:scrollbars="vertical"
                 android:gravity="bottom"
+                android:background="@null"
                 android:text=""/>
 
             <RelativeLayout
@@ -177,17 +177,64 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/layout_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:id="@+id/layout_buttons"
         android:layout_alignParentBottom="true"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:padding="4dp">
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_talk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Start Talking"
+            style="@style/RoundedMaterialButton" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Edit Transcript"
+            android:textColor="@color/colorAccent"
+            app:strokeColor="@color/colorAccent"
+            app:icon="@drawable/edit_icon"
+            app:iconTint="@color/colorAccent"
+            app:iconPadding="5dp"
+            style="@style/RoundedMaterialButton" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_buttons_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:padding="4dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:textColor="@android:color/holo_red_light"
+            app:strokeColor="@android:color/holo_red_light"
+            app:icon="@drawable/cancel_icon"
+            app:iconTint="@android:color/holo_red_light"
+            app:iconPadding="5dp"
+            style="@style/RoundedMaterialButton" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Save"
+            app:icon="@drawable/check_icon"
+            app:iconPadding="5dp"
             style="@style/RoundedMaterialButton" />
     </LinearLayout>
 

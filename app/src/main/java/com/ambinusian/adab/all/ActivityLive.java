@@ -1,10 +1,12 @@
 package com.ambinusian.adab.all;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.os.Handler;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -13,6 +15,8 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -45,10 +49,10 @@ public class ActivityLive extends AppCompatActivity{
     private Toolbar toolbar;
     private TextView className;
     private TextView classSession;
-    private TextView textContent;
     private TextView textLiveNow;
     private TextView courseTitle;
     private TextView toolbarTitle;
+    private EditText textContent;
     private Socket socket;
     private RelativeLayout loadingLayout;
     private RelativeLayout contentLoadingLayout;
@@ -56,9 +60,10 @@ public class ActivityLive extends AppCompatActivity{
     private UserPreferences userPreferences;
     private Integer sessionId;
     private Integer canTalk;
-    private MaterialButton talkButton;
-    private LinearLayout layoutButtons;
+    private MaterialButton talkButton, editButton, cancelButton, saveButton;
+    private LinearLayout layoutButtons, layoutButtonsEdit;
     private String courseLanguage;
+    private Boolean singleResult = true; //keep that the speech recognizer just return single result, not double
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +89,11 @@ public class ActivityLive extends AppCompatActivity{
         contentLoadingLayout = findViewById(R.id.layout_loading_content);
         scrollViewMain = findViewById(R.id.scrollview_main);
         talkButton = findViewById(R.id.button_talk);
+        editButton = findViewById(R.id.button_edit);
+        cancelButton = findViewById(R.id.button_cancel);
+        saveButton = findViewById(R.id.button_save);
         layoutButtons = findViewById(R.id.layout_buttons);
+        layoutButtonsEdit = findViewById(R.id.layout_buttons_edit);
         APIManager apiManager = new APIManager(this);
         userPreferences = new UserPreferences(this);
 
@@ -107,6 +116,9 @@ public class ActivityLive extends AppCompatActivity{
         setTextSize();
         setTextTypeface();
 
+        //the first time, set content to not editable
+        textContent.setEnabled(false);
+
         apiManager.getClassDetails(userPreferences.getUserToken(), sessionId, new NetworkHelper.getClassDetails() {
             @Override
             public void onResponse(Boolean success, Map<String, Object> classDetails) {
@@ -122,19 +134,6 @@ public class ActivityLive extends AppCompatActivity{
                     className.setText(classNameText);
                     classSession.setText(sessionText);
                     textContent.setText(content);
-
-                    Date endDate = null;
-                    try {
-                        endDate = new SimpleDateFormat("yy-MM-dd HH:mm").parse((String) classDetails.get("session_enddate"));
-                    } catch (Exception e) { }
-
-
-
-//                    if (Calendar.getInstance().getTime().before(endDate)) {
-//                        toolbarTitle.setText(R.string.live_class_transcribe);
-//                    } else {
-//                        toolbarTitle.setText(R.string.class_transcribe_history);
-//                    }
 
                     connectSocket();
                     loadingLayout.setVisibility(View.GONE);
@@ -218,18 +217,29 @@ public class ActivityLive extends AppCompatActivity{
 
                     @Override
                     public void onResults(Bundle bundle) {
-                        //getting all the matches
-                        ArrayList<String> matches = bundle
-                                .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                        if (singleResult){
+                            //getting all the matches
+                            ArrayList<String> matches = bundle
+                                    .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
-                        //displaying the first match
-                        if (matches != null)
-                            socket.emit("message", matches.get(0));
+                            //displaying the first match
+                            if (matches != null)
+                                socket.emit("message", matches.get(0));
 
-                        // listening again
-                        if (currentlyTalking.get()) {
-                            mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
+                            // listening again
+                            if (currentlyTalking.get()) {
+                                mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
+                            }
+                            singleResult = false;
                         }
+
+                        //after 100 ms, set back singleResult to true
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                singleResult = true;
+                            }
+                        },100);
                     }
 
                     @Override
@@ -249,6 +259,9 @@ public class ActivityLive extends AppCompatActivity{
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
                         talkButton.setText("Stop Talking");
 
+                        //don't show edit transcript button
+                        editButton.setVisibility(View.GONE);
+
                         // don't let the device go to sleep
                         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                     } else {
@@ -256,8 +269,38 @@ public class ActivityLive extends AppCompatActivity{
                         mSpeechRecognizer.stopListening();
                         talkButton.setText("Start Talking");
 
+                        //show edit transcript button
+                        editButton.setVisibility(View.VISIBLE);
+
                         // let the device go to sleep
                         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                    }
+                });
+
+                editButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //save current content before edit
+                        String buffer = textContent.getText().toString();
+                        setupEditMode();
+
+                        //listener for cancel button
+                        cancelButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                textContent.setText(buffer);
+                                setupTalkMode();
+                            }
+                        });
+
+                        //listener for save button
+                        saveButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                socket.emit("edit",textContent.getText().toString());
+                                setupTalkMode();
+                            }
+                        });
                     }
                 });
             }else{
@@ -320,6 +363,47 @@ public class ActivityLive extends AppCompatActivity{
                 // Permission has already been granted
             }
         }
+    }
+
+    private void setupEditMode(){
+        //show layout button for edit
+        layoutButtons.setVisibility(View.GONE);
+        layoutButtonsEdit.setVisibility(View.VISIBLE);
+
+        //enable textContent
+        textContent.setEnabled(true);
+        textContent.setSelection(0);
+        textContent.requestFocus();
+
+        //show soft keyboard
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(textContent, InputMethodManager.SHOW_IMPLICIT);
+
+        //set new layout param for scrollViewMain
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        lp.addRule(RelativeLayout.ABOVE,layoutButtonsEdit.getId());
+        lp.addRule(RelativeLayout.BELOW,R.id.appbarLayout);
+        scrollViewMain.setLayoutParams(lp);
+    }
+
+    private void setupTalkMode(){
+        //show layout buttons
+        layoutButtons.setVisibility(View.VISIBLE);
+        layoutButtonsEdit.setVisibility(View.GONE);
+
+        //disable textContent
+        textContent.setEnabled(false);
+        textContent.clearFocus();
+
+        //set new layout param for scrollViewMain
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        lp.addRule(RelativeLayout.ABOVE,layoutButtons.getId());
+        lp.addRule(RelativeLayout.BELOW,R.id.appbarLayout);
+        scrollViewMain.setLayoutParams(lp);
     }
 
     private void setHighConstrastTheme() {
